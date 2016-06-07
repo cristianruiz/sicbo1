@@ -1,1 +1,1 @@
-# sicbo1
+# sicbo v3.0
