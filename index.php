@@ -1,1 +1,3 @@
-dididid
+<?php 
+ phpinfo();
+?>
