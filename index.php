@@ -20,7 +20,7 @@
 	<div class="container">
 	 <form class="form-inline" name="form1" method="post">
 	 	<div>
-	 		<p><h4>Orden de atencióh4></p>
+	 		<p><h4>Orden de atenció</h4></p>
 	 	</div>
 	 	<div class="panel panel-info">
 	 	  <div class="panel-body">
