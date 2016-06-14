@@ -3,7 +3,7 @@
 	 * Object represents table 'oa_cargo'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2016-06-14 16:18	 
+     	 * @date: 2016-06-14 16:58	 
 	 */
 	class OaCargo{
 		
