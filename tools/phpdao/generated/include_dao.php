@@ -9,17 +9,17 @@
 	require_once('class/core/ArrayList.class.php');
 	require_once('class/dao/DAOFactory.class.php');
  	
-	require_once('class/dao/CargoDAO.class.php');
-	require_once('class/dto/Cargo.class.php');
-	require_once('class/mysql/CargoMySqlDAO.class.php');
-	require_once('class/mysql/ext/CargoMySqlExtDAO.class.php');
-	require_once('class/dao/DetallecargoDAO.class.php');
-	require_once('class/dto/Detallecargo.class.php');
-	require_once('class/mysql/DetallecargoMySqlDAO.class.php');
-	require_once('class/mysql/ext/DetallecargoMySqlExtDAO.class.php');
-	require_once('class/dao/ServiciosDAO.class.php');
-	require_once('class/dto/Servicio.class.php');
-	require_once('class/mysql/ServiciosMySqlDAO.class.php');
-	require_once('class/mysql/ext/ServiciosMySqlExtDAO.class.php');
+	require_once('class/dao/OaCargoDAO.class.php');
+	require_once('class/dto/OaCargo.class.php');
+	require_once('class/mysql/OaCargoMySqlDAO.class.php');
+	require_once('class/mysql/ext/OaCargoMySqlExtDAO.class.php');
+	require_once('class/dao/OaDetallecargoDAO.class.php');
+	require_once('class/dto/OaDetallecargo.class.php');
+	require_once('class/mysql/OaDetallecargoMySqlDAO.class.php');
+	require_once('class/mysql/ext/OaDetallecargoMySqlExtDAO.class.php');
+	require_once('class/dao/OaServiciosDAO.class.php');
+	require_once('class/dto/OaServicio.class.php');
+	require_once('class/mysql/OaServiciosMySqlDAO.class.php');
+	require_once('class/mysql/ext/OaServiciosMySqlExtDAO.class.php');
 
 ?>

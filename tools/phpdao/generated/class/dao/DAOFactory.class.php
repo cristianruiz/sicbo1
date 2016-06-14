@@ -8,24 +8,24 @@
 class DAOFactory{
 	
 	/**
-	 * @return CargoDAO
+	 * @return OaCargoDAO
 	 */
-	public static function getCargoDAO(){
-		return new CargoMySqlExtDAO();
+	public static function getOaCargoDAO(){
+		return new OaCargoMySqlExtDAO();
 	}
 
 	/**
-	 * @return DetallecargoDAO
+	 * @return OaDetallecargoDAO
 	 */
-	public static function getDetallecargoDAO(){
-		return new DetallecargoMySqlExtDAO();
+	public static function getOaDetallecargoDAO(){
+		return new OaDetallecargoMySqlExtDAO();
 	}
 
 	/**
-	 * @return ServiciosDAO
+	 * @return OaServiciosDAO
 	 */
-	public static function getServiciosDAO(){
-		return new ServiciosMySqlExtDAO();
+	public static function getOaServiciosDAO(){
+		return new OaServiciosMySqlExtDAO();
 	}
 
 
