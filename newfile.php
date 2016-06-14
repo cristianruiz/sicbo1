@@ -1,9 +1,10 @@
 <?php
 
 include 'include_dao.php';
-$combo = new OaServicio()
-//$res= $combo->queryAll();
-//print_r($res);
-$res= $combo->
+include './drivers/servicios.php';
+$r=new Servicios();
+print_r($r->get_all());
+
+
 
 ?>
