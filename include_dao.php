@@ -9,6 +9,10 @@
 	require_once('class/core/ArrayList.class.php');
 	require_once('class/dao/DAOFactory.class.php');
  	
+	require_once('class/dao/GlbMedicosDAO.class.php');
+	require_once('class/dto/GlbMedico.class.php');
+	require_once('class/mysql/GlbMedicosMySqlDAO.class.php');
+	require_once('class/mysql/ext/GlbMedicosMySqlExtDAO.class.php');
 	require_once('class/dao/OaCargoDAO.class.php');
 	require_once('class/dto/OaCargo.class.php');
 	require_once('class/mysql/OaCargoMySqlDAO.class.php');

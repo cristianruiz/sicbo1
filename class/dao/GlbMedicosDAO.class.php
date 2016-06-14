@@ -5,13 +5,13 @@
  * @author: http://phpdao.com
  * @date: 2016-06-14 21:36
  */
-interface OaServiciosDAO{
+interface GlbMedicosDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @Return OaServicios 
+	 * @Return GlbMedicos 
 	 */
 	public function load($id);
 
@@ -28,45 +28,37 @@ interface OaServiciosDAO{
 	
 	/**
  	 * Delete record from table
- 	 * @param oaServicio primary key
+ 	 * @param glbMedico primary key
  	 */
-	public function delete($codigoservicio);
+	public function delete($rut_num);
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param OaServicios oaServicio
+ 	 * @param GlbMedicos glbMedico
  	 */
-	public function insert($oaServicio);
+	public function insert($glbMedico);
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param OaServicios oaServicio
+ 	 * @param GlbMedicos glbMedico
  	 */
-	public function update($oaServicio);	
+	public function update($glbMedico);	
 
 	/**
 	 * Delete all rows
 	 */
 	public function clean();
 
-	public function queryByGrupo($value);
+	public function queryByName($value);
 
-	public function queryByDescripcion($value);
-
-	public function queryByCodigoseccion($value);
-
-	public function queryByVigente($value);
+	public function queryByLastname($value);
 
 
-	public function deleteByGrupo($value);
+	public function deleteByName($value);
 
-	public function deleteByDescripcion($value);
-
-	public function deleteByCodigoseccion($value);
-
-	public function deleteByVigente($value);
+	public function deleteByLastname($value);
 
 
 }

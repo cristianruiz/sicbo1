@@ -1,7 +1,7 @@
 <?php
 class Servicios extends OaServiciosMySqlDAO{
 	public function get_all(){
-		$datos = new ServiciosMySqlDAO();
+		$datos = new OaServiciosMySqlDAO();
 		$res = $datos->queryAll();
 		
 		return $res;

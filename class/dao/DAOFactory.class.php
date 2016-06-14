@@ -8,6 +8,13 @@
 class DAOFactory{
 	
 	/**
+	 * @return GlbMedicosDAO
+	 */
+	public static function getGlbMedicosDAO(){
+		return new GlbMedicosMySqlExtDAO();
+	}
+
+	/**
 	 * @return OaCargoDAO
 	 */
 	public static function getOaCargoDAO(){
