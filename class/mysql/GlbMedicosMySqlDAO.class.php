@@ -3,7 +3,7 @@
  * Class that operate on table 'glb_medicos'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2016-06-14 21:36
+ * @date: 2016-06-14 21:44
  */
 class GlbMedicosMySqlDAO implements GlbMedicosDAO{
 
@@ -14,7 +14,7 @@ class GlbMedicosMySqlDAO implements GlbMedicosDAO{
 	 * @return GlbMedicosMySql 
 	 */
 	public function load($id){
-		$sql = 'SELECT * FROM glb_medicos WHERE rut_num = ?';
+		$sql = 'SELECT * FROM glb_medicos WHERE rutnum = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->getRow($sqlQuery);
@@ -44,10 +44,10 @@ class GlbMedicosMySqlDAO implements GlbMedicosDAO{
  	 * Delete record from table
  	 * @param glbMedico primary key
  	 */
-	public function delete($rut_num){
-		$sql = 'DELETE FROM glb_medicos WHERE rut_num = ?';
+	public function delete($rutnum){
+		$sql = 'DELETE FROM glb_medicos WHERE rutnum = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($rut_num);
+		$sqlQuery->setNumber($rutnum);
 		return $this->executeUpdate($sqlQuery);
 	}
 	
@@ -57,14 +57,14 @@ class GlbMedicosMySqlDAO implements GlbMedicosDAO{
  	 * @param GlbMedicosMySql glbMedico
  	 */
 	public function insert($glbMedico){
-		$sql = 'INSERT INTO glb_medicos (name, lastname) VALUES (?, ?)';
+		$sql = 'INSERT INTO glb_medicos (nombre, apellido) VALUES (?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($glbMedico->name);
-		$sqlQuery->set($glbMedico->lastname);
+		$sqlQuery->set($glbMedico->nombre);
+		$sqlQuery->set($glbMedico->apellido);
 
 		$id = $this->executeInsert($sqlQuery);	
-		$glbMedico->rutNum = $id;
+		$glbMedico->rutnum = $id;
 		return $id;
 	}
 	
@@ -74,13 +74,13 @@ class GlbMedicosMySqlDAO implements GlbMedicosDAO{
  	 * @param GlbMedicosMySql glbMedico
  	 */
 	public function update($glbMedico){
-		$sql = 'UPDATE glb_medicos SET name = ?, lastname = ? WHERE rut_num = ?';
+		$sql = 'UPDATE glb_medicos SET nombre = ?, apellido = ? WHERE rutnum = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($glbMedico->name);
-		$sqlQuery->set($glbMedico->lastname);
+		$sqlQuery->set($glbMedico->nombre);
+		$sqlQuery->set($glbMedico->apellido);
 
-		$sqlQuery->setNumber($glbMedico->rutNum);
+		$sqlQuery->setNumber($glbMedico->rutnum);
 		return $this->executeUpdate($sqlQuery);
 	}
 
@@ -93,30 +93,30 @@ class GlbMedicosMySqlDAO implements GlbMedicosDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function queryByName($value){
-		$sql = 'SELECT * FROM glb_medicos WHERE name = ?';
+	public function queryByNombre($value){
+		$sql = 'SELECT * FROM glb_medicos WHERE nombre = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByLastname($value){
-		$sql = 'SELECT * FROM glb_medicos WHERE lastname = ?';
+	public function queryByApellido($value){
+		$sql = 'SELECT * FROM glb_medicos WHERE apellido = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 
-	public function deleteByName($value){
-		$sql = 'DELETE FROM glb_medicos WHERE name = ?';
+	public function deleteByNombre($value){
+		$sql = 'DELETE FROM glb_medicos WHERE nombre = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByLastname($value){
-		$sql = 'DELETE FROM glb_medicos WHERE lastname = ?';
+	public function deleteByApellido($value){
+		$sql = 'DELETE FROM glb_medicos WHERE apellido = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
@@ -132,9 +132,9 @@ class GlbMedicosMySqlDAO implements GlbMedicosDAO{
 	protected function readRow($row){
 		$glbMedico = new GlbMedico();
 		
-		$glbMedico->name = $row['name'];
-		$glbMedico->lastname = $row['lastname'];
-		$glbMedico->rutNum = $row['rut_num'];
+		$glbMedico->nombre = $row['nombre'];
+		$glbMedico->apellido = $row['apellido'];
+		$glbMedico->rutnum = $row['rutnum'];
 
 		return $glbMedico;
 	}

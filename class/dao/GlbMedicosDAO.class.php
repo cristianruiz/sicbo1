@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2016-06-14 21:36
+ * @date: 2016-06-14 21:44
  */
 interface GlbMedicosDAO{
 
@@ -30,7 +30,7 @@ interface GlbMedicosDAO{
  	 * Delete record from table
  	 * @param glbMedico primary key
  	 */
-	public function delete($rut_num);
+	public function delete($rutnum);
 	
 	/**
  	 * Insert record to table
@@ -51,14 +51,14 @@ interface GlbMedicosDAO{
 	 */
 	public function clean();
 
-	public function queryByName($value);
+	public function queryByNombre($value);
 
-	public function queryByLastname($value);
+	public function queryByApellido($value);
 
 
-	public function deleteByName($value);
+	public function deleteByNombre($value);
 
-	public function deleteByLastname($value);
+	public function deleteByApellido($value);
 
 
 }

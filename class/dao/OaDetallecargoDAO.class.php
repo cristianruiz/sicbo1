@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2016-06-14 21:36
+ * @date: 2016-06-14 21:44
  */
 interface OaDetallecargoDAO{
 
