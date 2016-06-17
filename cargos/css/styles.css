@@ -1,18 +1,18 @@
-				#wrapper
-				{
-				    width: 1200px;
-				    background-color: white;
-				    margin: 0 auto;
-				    padding: 10px;
-				    border: 5px solid #dedede;
+#wrapper
+{
+	width: 1200px;
+	background-color: white;
+	 margin: 0 auto;
+	padding: 10px;
+	border: 5px solid #dedede;
 				    
-				}
-				html{
-					font-size: 10px;
-				}
-				.input{
-					height: 25px;
-				}
-				.fuente_btn{
-					font-size: 11px;
-				}
+}
+html{
+	font-size: 10px;
+}
+.input{
+	height: 25px;
+}
+.fuente_btn{
+	font-size: 11px;
+}

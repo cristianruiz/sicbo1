@@ -12,6 +12,8 @@
 			<!-- Optional theme -->
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
+			<link rel="stylesheet" type="text/css" href="css/styles_tabMenu.css">
+			<link rel="stylesheet" type="text/css" href="css/styles.css">
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
 			<!-- Latest compiled and minified JavaScript -->
@@ -19,27 +21,6 @@
 
 			<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 
-			<style type="text/css">
-				#wrapper
-				{
-				    width: 1200px;
-				    background-color: white;
-				    margin: 0 auto;
-				    padding: 10px;
-				    border: 5px solid #dedede;
-				    
-				}
-				html{
-					font-size: 10px;
-				}
-				.input{
-					height: 25px;
-				}
-				.fuente_btn{
-					font-size: 11px;
-				}
-
-			</style>
 			 
 	</head>
 	<body>
