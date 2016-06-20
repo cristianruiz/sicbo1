@@ -16,3 +16,9 @@ html{
 .fuente_btn{
 	font-size: 11px;
 }
+
+.input_admision{
+	width: 250px;
+	margin: 0px;
+	margin-right: 0px;
+}
