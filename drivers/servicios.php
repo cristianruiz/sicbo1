@@ -7,4 +7,8 @@ class Servicios extends OaServiciosMySqlDAO{
 		return $res;
 	}
 	
+
+	public function guardaServicio(){
+		
+	}
 }

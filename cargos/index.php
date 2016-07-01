@@ -49,6 +49,7 @@ $result = $med->getAll($col);
     border-bottom-color: transparent;
 }
 </style>
+
 <div class="container">
              <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -65,7 +66,7 @@ $result = $med->getAll($col);
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab1">
                         	<h4>Admision de pacientes</h4>
-
+ 
                         	<form id="form2" method="post">
                         		<div class="panel panel-info">
                         			<div class="panel-body">
@@ -141,7 +142,7 @@ $result = $med->getAll($col);
 								        <br><br>
 								        <div class="form-group">
 								        	<div class="col-xs-3">
-								        		<input type="submit" class="btn btn-primary" id="btnkPac" value="Guardar"></input>
+								        		<input type="submit" class="btn btn-primary" id="btnkPac" value="Guardar" onclick="guarda_pac()"></input>
 								        	</div>
 								        </div>
 								    </div>
@@ -311,18 +312,10 @@ $result = $med->getAll($col);
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-	        <button type="button" id="btnModalOk" class="btn btn-primary">Aceptar</button>
+	        <button type="button" id="btnModalOk" class="btn btn-primary" onclick="return confirm('OK');">Aceptar</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-
-<?php 
-
-if (isset($_POST['btnModalOk'])) {
-	echo 'modal cerrado';
-}
-?>
-
  
 </div>
