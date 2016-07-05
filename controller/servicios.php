@@ -6,7 +6,7 @@ class Servicios extends MaeServiciosMySqlDAO{
 		$sqlQuery=new SqlQuery($sql);
 		
 
-		return $this->getList($sql);
+		return $this->getList($sqlQuery);
 	}
 
 
