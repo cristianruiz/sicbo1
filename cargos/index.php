@@ -72,7 +72,7 @@ $result = $med->getAll($col);
                         			<div class="panel-body">
                         				<div class="form-group">
                         					<div class="col-xs-2">
-                        						<input type="text" class="form-control" id="txtRutNum2" placeholder="Rut" maxlength="8"></input>
+                        						<input type="text" class="form-control" id="txtRutNum2" onkeypress="return isNumber(event)" placeholder="Rut" maxlength="8"></input>
                         					</div>
                         					<div class="col-xs-1">
                         						<input type="text" class="form-control" id="txtRutVer2" maxlength="1" disabled="true"></input>
@@ -103,7 +103,7 @@ $result = $med->getAll($col);
 
 								        <div class="form-group">
 								        	<div class="col-xs-1">
-								        		<input type="text" class="form-control" id="txtEdad" placeholder="Edad"></input>
+								        		<input type="text" class="form-control" id="txtEdad" onkeypress="return isNumber(event)" placeholder="Edad"></input>
 								        	</div>
 								        	<div class="col-xs-1">
 								        		<input type="radio" id="rdEdad" name="edad" value="1">Años</input>
