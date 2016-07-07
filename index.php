@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="">
 	<head>
@@ -15,8 +16,14 @@
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+		
+		<link rel="stylesheet" href="./gui/js/jqw/jqwidgets/styles/jqx.base.css" type="text/css" />
+		
+		
+	
 	</head>
 	<body>
+	<div id='content'>
 	<div class="container">
 	 <form class="form-inline" name="form1" method="post">
 	 	<div>
@@ -50,33 +57,73 @@
 	    	<div class="panel-body">
 	    		<div class="form-group">
 	    			<label>Centro Costo</label>
-	    			<select id="cboCosto" name="cboCosto" class="form-control">
-	    				<option>LABORATORIO</option>
-	    				<option>KINE</option>
-	    			</select>
-
-	    			<select id="cboTipCuenta" name="cboTipCuenta" class="form-control">
-	    				<option>TIPO CUENTA</option>
-	    			</select>
-	    			<input type="text" id="txtnroCuenta" name="txtnroCta" placeholder="N° Cuenta" class="form-control"></input>
+	    			<input id="jqxInput" />
+	    			<label style="font-family: Verdana; font-size: 10px;">ex: Ana</label>
+         <div style="font-family: Verdana; font-size: 13px;" id='selectionlog'>
+        </div>
+	    			
 	    		</div>
-	    		<br><br>
-	    		<div class="form-group">
-	    			<label>Clasificaciólabel>
-	    			<select name="cboClasifica" id="cboClasifica" class="form-control">
-	    				<option>PACIENTE</option>
-	    			</select>
-	    		</div>
+	    		
 	    	</div>
 	    </div>
 	</form>
  </div>	
 
-		<!-- jQuery -->
+		
+ 		
+	</div>
+	
+	<!-- jQuery -->
 		<script src="//code.jquery.com/jquery.js"></script>
 		<!-- Bootstrap JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
- 		<script src="Hello World"></script>
+		
+		<!--  REFERENCIAS AL FRAMEWORK JQW -->
+		
+    	<script type="text/javascript" src="./gui/js/jqw/scripts/demos.js"></script>
+    	<script type="text/javascript" src="/gui/js/jqw/jqwidgets/jqxcore.js"></script>
+    	<script type="text/javascript" src="/gui/js/jqw/jqwidgets/jqxdata.js"></script>
+    	<script type="text/javascript" src="/gui/js/jqw/jqwidgets/jqxinput.js"></script>
+		<!-- ==============cruiz=============== -->
+			<!-- CODIGO JS  -->
+		<script type="text/javascript">
+            $(document).ready(function () {
+                
+
+                var url = "./common/dibuja_servicios_json.php";
+
+                // prepare the data
+                var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'codigoservicio' },
+                        { name: 'descripcion' }
+                    ],
+                    url: url
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+
+                // Create a jqxInput
+                $("#jqxInput").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Servicios/Prestaciones:", displayMember: "descripcion", valueMember: "codigoservicio", width: 600, height: 25});
+                $("#jqxInput").on('select', function (event) {
+                    if (event.args) {
+                        var item = event.args.item;
+                        if (item) {
+                            var valueelement = $("<div></div>");
+                            valueelement.text("Value: " + item.value);
+                            var labelelement = $("<div></div>");
+                            labelelement.text("Label: " + item.label);
+
+                            $("#selectionlog").children().remove();
+                            $("#selectionlog").append(labelelement);
+                            $("#selectionlog").append(valueelement);
+                        }
+                    }
+                });
+            });
+        </script>
+		<!-- =================fin codigo JS cruiz====================== -->
 	</body>
 </html>
