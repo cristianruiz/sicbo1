@@ -1,54 +1,15 @@
 <?php 
 include('../include_dao.php');
 include("template/header.php");
-include('../drivers/medicos.php'); 
+include('../drivers/medicos.php');
+include('../drivers/servicios.php');
+date_default_timezone_set("America/New_York");
 
 $med = new Medicos();
 $col = 'apellido';
 $result = $med->getAll($col);
 
 ?>
-<style type="text/css">
-		/*Panel tabs*/
-.panel-tabs {
-    position: relative;
-    bottom: 30px;
-    clear:both;
-    border-bottom: 1px solid transparent;
-}
-
-.panel-tabs > li {
-    float: left;
-    margin-bottom: -1px;
-}
-
-.panel-tabs > li > a {
-    margin-right: 2px;
-    margin-top: 4px;
-    line-height: .85;
-    border: 1px solid transparent;
-    border-radius: 4px 4px 0 0;
-    color: #ffffff;
-}
-
-.panel-tabs > li > a:hover {
-    border-color: transparent;
-    color: #ffffff;
-    background-color: transparent;
-}
-
-.panel-tabs > li.active > a,
-.panel-tabs > li.active > a:hover,
-.panel-tabs > li.active > a:focus {
-    color: #fff;
-    cursor: default;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    background-color: rgba(255,255,255, .23);
-    border-bottom-color: transparent;
-}
-</style>
 
 <div class="container">
              <div class="panel panel-primary">
@@ -64,7 +25,7 @@ $result = $med->getAll($col);
                 </div>
                 <div class="panel-body">
                     <div class="tab-content">
-                        <div class="tab-pane active" id="tab1">
+                        <div class="tab-pane" id="tab1">
                         	<h4>Admision de pacientes</h4>
  
                         	<form id="form2" method="post">
@@ -150,9 +111,9 @@ $result = $med->getAll($col);
                         	</form>
 
                         </div>
-                        <div class="tab-pane" id="tab2">
+          <div class="tab-pane active" id="tab2">
                         	
-                        	<form class="form-inline" name="form1" method="post" action="http://localhost/oa/public/home/getSerById">
+             <form class="form-inline" name="form1" method="post">
 			 	
 						 	<div class="panel panel-info with-nav-tabs">
 						 	  <div class="panel-body">
@@ -173,7 +134,7 @@ $result = $med->getAll($col);
 							    <div class="form-group">
 							    	<label>Fecha</label>
 							    	<input type="date" required id="txtfecha" name="txtfecha" class="form-control input" value="<?php echo date("Y-m-d"); ?>"></input>
-							    	<input type="time" required id="txthora" name="txthora" class="form-control input" value="<?php echo time("HH:mm"); ?>"></input>
+							    	<input type="time" required id="txthora" name="txthora" class="form-control input" value="<?php echo date("H:i"); ?>"></input>
 							    </div>
 							  </div>
 						   </div>
@@ -191,7 +152,7 @@ $result = $med->getAll($col);
 			    			<select id="cboTipCuenta" name="cboTipCuenta" class="form-control input fuente_btn">
 			    				<option>TIPO CUENTA</option>
 			    			</select>
-			    			<input type="text" id="txtnroCuenta" name="txtnroCta" placeholder="N° Cuenta" class="form-control input"></input>
+			    			<input type="text" id="txtnroCuenta" name="txtnroCta" onkeypress="return isNumber(event)" placeholder="N° Cuenta" class="form-control input"></input>
 			    		</div>
 			    		<br><br>
 			    		<div class="form-group">
@@ -244,26 +205,73 @@ $result = $med->getAll($col);
 			    	<div class="panel-body">
 			    		<div class="row">
 			    			<div class="form-group">
-			    				<input type="number" id="txtCodServ" name="txtCodServ" class="form-control input" style="width: 120px;"></input>
+			    				<input type="text" id="txtCodServ" name="txtCodServ" onkeypress="return isNumber(event)" class="form-control input" style="width: 120px;"></input>
 
 			    				<input type="text" id="txtNomServ" name="txtNomServ" class="form-control input" disabled="true"></input>
 
-			    				<input type="number" id="txtCantServ" name="txtCantServ" class="form-control input" style="width: 60px;"></input>
+			    				<input type="text" id="txtCantServ" name="txtCantServ" onkeypress="return
+			    				 isNumber(event)" class="form-control input" style="width: 60px;"></input>
 
-			    				<input type="submit" value="Ok" class="btn btn-primary input fuente_btn" id="btnOKserv"></input>
+			    				<input type="button" value="Ok" class="btn btn-primary input fuente_btn" id="btnOKserv"></input>
 			    				<label><h4>Servicios</h4></label>
 		
 			    			</div>
 			    		</div>
+			    		<div class="row">
+			    			<table class="table table-hover">
+			    				<tr>
+			    					<th>Codigo</th>
+			    					<th>Descripción</th>
+			    				</tr>
+			    				<script type="text/javascript">
+			    					$('#btnOKserv').click(function(){
+			    						var  ser = $('#txtCodServ').val();
+			    						if ($.trim(name) != '') {
+			    							$.post('./drivers/servicios.php', {cod: ser}, function(data){
+			    								alert(data);
+			    							});
+			    						}
+			    					});
+			    				</script>
+
+			    				<?php 
+									/*
+			    				if (isset($_POST['btnOKserv'])) {
+			    					$serv = new Servicios();
+			    					$cod = $_POST["txtCodServ"];
+			    					$data = $serv->getServByCod($cod);
+			    					$var = '';
+
+			    					if(!empty($data)){
+										foreach ($data as $i=>$v) { ?>
+										  <tr>
+										  	<?php $var .= "<td>".$v."</td>";
+										  	 ?>
+
+										  </tr>
+										<?php
+											}
+											echo "<tr>".$var."</tr>";
+										 ?>
+								</table>
+								<?php
+								}else{
+									echo 'No hay resultados.';
+									}
+									echo "click";
+								}*/
+								?>
+			    		</div>
+			    		
 			    	</div>
 			    </div>
 			</form>
 
-                        </div>
+         </div>
                         
-                    </div>
                 </div>
             </div>
+        </div>
  </div>   
   <!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
