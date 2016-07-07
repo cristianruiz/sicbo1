@@ -106,7 +106,7 @@
                 var dataAdapter = new $.jqx.dataAdapter(source);
 
                 // Create a jqxInput
-                $("#jqxInput").jqxInput({ source: dataAdapter, placeHolder: "Contact Name:", displayMember: "descripcion", valueMember: "codigoservicio", width: 200, height: 25});
+                $("#jqxInput").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Servicios/Prestaciones:", displayMember: "descripcion", valueMember: "codigoservicio", width: 600, height: 25});
                 $("#jqxInput").on('select', function (event) {
                     if (event.args) {
                         var item = event.args.item;

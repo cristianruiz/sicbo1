@@ -1,7 +1,7 @@
 <?php
 class Serv extends MaeServiciosMySqlDAO{
 	public function json_buscador_servicios(){
-		$sql="select codigoservicio,descripcion
+		$sql="select codigoservicio,concat(codigoservicio,'->',descripcion)  as descripcion
 				from mae_servicios";
 		$sqlQuery=new SqlQuery($sql);
 		
