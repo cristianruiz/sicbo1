@@ -82,9 +82,9 @@
 		<!--  REFERENCIAS AL FRAMEWORK JQW -->
 		
     	<script type="text/javascript" src="./gui/js/jqw/scripts/demos.js"></script>
-    	<script type="text/javascript" src="/gui/js/jqw/jqwidgets/jqxcore.js"></script>
-    	<script type="text/javascript" src="/gui/js/jqw/jqwidgets/jqxdata.js"></script>
-    	<script type="text/javascript" src="/gui/js/jqw/jqwidgets/jqxinput.js"></script>
+    	<script type="text/javascript" src="./gui/js/jqw/jqwidgets/jqxcore.js"></script>
+    	<script type="text/javascript" src="./gui/js/jqw/jqwidgets/jqxdata.js"></script>
+    	<script type="text/javascript" src="./gui/js/jqw/jqwidgets/jqxinput.js"></script>
 		<!-- ==============cruiz=============== -->
 			<!-- CODIGO JS  -->
 		<script type="text/javascript">
