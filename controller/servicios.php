@@ -1,12 +1,22 @@
 <?php
-class Servicios extends MaeServiciosMySqlDAO{
+class Serv extends MaeServiciosMySqlDAO{
 	public function json_buscador_servicios(){
 		$sql="select codigoservicio,descripcion
 				from mae_servicios";
 		$sqlQuery=new SqlQuery($sql);
 		
 
-		return $this->getList($sqlQuery);
+		 $arr=$this->execute($sqlQuery);$ret = Array();
+		 
+		 foreach($arr as &$t){
+		 	$f= array(
+		 			"codigoservicio"=>$t["codigoservicio"],
+		 			"descripcion"=>$t["descripcion"],
+		 	);
+		 	array_push($ret,$f);
+		 }
+		 
+		 return(json_encode($ret)); 
 	}
 
 

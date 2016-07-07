@@ -2,7 +2,7 @@
 
 include('include_dao.php');
 include('./controller/servicios.php');
-$srv= new Servicios();
+$srv= new Serv();
 print_r($srv->json_buscador_servicios());
 
 
