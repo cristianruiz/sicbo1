@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2016-07-08 20:53
+ * @date: 2016-07-08 21:06
  */
 interface MaePacienteDAO{
 
@@ -30,7 +30,7 @@ interface MaePacienteDAO{
  	 * Delete record from table
  	 * @param maePaciente primary key
  	 */
-	public function delete($rutpaciente);
+	public function delete($id);
 	
 	/**
  	 * Insert record to table
@@ -51,6 +51,8 @@ interface MaePacienteDAO{
 	 */
 	public function clean();
 
+	public function queryByRutpaciente($value);
+
 	public function queryByRutver($value);
 
 	public function queryByNombre($value);
@@ -69,6 +71,8 @@ interface MaePacienteDAO{
 
 	public function queryByCodigociudad($value);
 
+
+	public function deleteByRutpaciente($value);
 
 	public function deleteByRutver($value);
 

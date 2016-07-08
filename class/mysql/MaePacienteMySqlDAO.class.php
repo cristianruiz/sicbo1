@@ -3,7 +3,7 @@
  * Class that operate on table 'mae_paciente'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2016-07-08 20:53
+ * @date: 2016-07-08 21:06
  */
 class MaePacienteMySqlDAO implements MaePacienteDAO{
 
@@ -14,7 +14,7 @@ class MaePacienteMySqlDAO implements MaePacienteDAO{
 	 * @return MaePacienteMySql 
 	 */
 	public function load($id){
-		$sql = 'SELECT * FROM mae_paciente WHERE rutpaciente = ?';
+		$sql = 'SELECT * FROM mae_paciente WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->getRow($sqlQuery);
@@ -44,10 +44,10 @@ class MaePacienteMySqlDAO implements MaePacienteDAO{
  	 * Delete record from table
  	 * @param maePaciente primary key
  	 */
-	public function delete($rutpaciente){
-		$sql = 'DELETE FROM mae_paciente WHERE rutpaciente = ?';
+	public function delete($id){
+		$sql = 'DELETE FROM mae_paciente WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($rutpaciente);
+		$sqlQuery->setNumber($id);
 		return $this->executeUpdate($sqlQuery);
 	}
 	
@@ -57,9 +57,10 @@ class MaePacienteMySqlDAO implements MaePacienteDAO{
  	 * @param MaePacienteMySql maePaciente
  	 */
 	public function insert($maePaciente){
-		$sql = 'INSERT INTO mae_paciente (rutver, nombre, apellidopaterno, apellidomaterno, fechanacimiento, direccion, telefono, correlectronico, codigociudad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+		$sql = 'INSERT INTO mae_paciente (rutpaciente, rutver, nombre, apellidopaterno, apellidomaterno, fechanacimiento, direccion, telefono, correlectronico, codigociudad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
+		$sqlQuery->setNumber($maePaciente->rutpaciente);
 		$sqlQuery->set($maePaciente->rutver);
 		$sqlQuery->set($maePaciente->nombre);
 		$sqlQuery->set($maePaciente->apellidopaterno);
@@ -71,7 +72,7 @@ class MaePacienteMySqlDAO implements MaePacienteDAO{
 		$sqlQuery->setNumber($maePaciente->codigociudad);
 
 		$id = $this->executeInsert($sqlQuery);	
-		$maePaciente->rutpaciente = $id;
+		$maePaciente->id = $id;
 		return $id;
 	}
 	
@@ -81,9 +82,10 @@ class MaePacienteMySqlDAO implements MaePacienteDAO{
  	 * @param MaePacienteMySql maePaciente
  	 */
 	public function update($maePaciente){
-		$sql = 'UPDATE mae_paciente SET rutver = ?, nombre = ?, apellidopaterno = ?, apellidomaterno = ?, fechanacimiento = ?, direccion = ?, telefono = ?, correlectronico = ?, codigociudad = ? WHERE rutpaciente = ?';
+		$sql = 'UPDATE mae_paciente SET rutpaciente = ?, rutver = ?, nombre = ?, apellidopaterno = ?, apellidomaterno = ?, fechanacimiento = ?, direccion = ?, telefono = ?, correlectronico = ?, codigociudad = ? WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
+		$sqlQuery->setNumber($maePaciente->rutpaciente);
 		$sqlQuery->set($maePaciente->rutver);
 		$sqlQuery->set($maePaciente->nombre);
 		$sqlQuery->set($maePaciente->apellidopaterno);
@@ -94,7 +96,7 @@ class MaePacienteMySqlDAO implements MaePacienteDAO{
 		$sqlQuery->set($maePaciente->correlectronico);
 		$sqlQuery->setNumber($maePaciente->codigociudad);
 
-		$sqlQuery->setNumber($maePaciente->rutpaciente);
+		$sqlQuery->setNumber($maePaciente->id);
 		return $this->executeUpdate($sqlQuery);
 	}
 
@@ -105,6 +107,13 @@ class MaePacienteMySqlDAO implements MaePacienteDAO{
 		$sql = 'DELETE FROM mae_paciente';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function queryByRutpaciente($value){
+		$sql = 'SELECT * FROM mae_paciente WHERE rutpaciente = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
 	}
 
 	public function queryByRutver($value){
@@ -170,6 +179,13 @@ class MaePacienteMySqlDAO implements MaePacienteDAO{
 		return $this->getList($sqlQuery);
 	}
 
+
+	public function deleteByRutpaciente($value){
+		$sql = 'DELETE FROM mae_paciente WHERE rutpaciente = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
 
 	public function deleteByRutver($value){
 		$sql = 'DELETE FROM mae_paciente WHERE rutver = ?';
@@ -244,6 +260,7 @@ class MaePacienteMySqlDAO implements MaePacienteDAO{
 	protected function readRow($row){
 		$maePaciente = new MaePaciente();
 		
+		$maePaciente->id = $row['id'];
 		$maePaciente->rutpaciente = $row['rutpaciente'];
 		$maePaciente->rutver = $row['rutver'];
 		$maePaciente->nombre = $row['nombre'];

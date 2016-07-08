@@ -3,7 +3,7 @@
 	 * Object represents table 'oa_cargo'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2016-07-08 20:53	 
+     	 * @date: 2016-07-08 21:06	 
 	 */
 	class OaCargo{
 		
@@ -19,12 +19,12 @@
 		var $tipopago;
 		var $idtoth;
 		var $rutfinanciador;
-		var $rutpaciente;
 		var $codigoestadocargo;
 		var $codigoentidad;
 		var $rutoperador;
 		var $saldo;
 		var $totalcargo;
+		var $rutpaciente;
 		
 	}
 ?>

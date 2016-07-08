@@ -3,7 +3,7 @@
  * Class that operate on table 'oa_cargo'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2016-07-08 20:53
+ * @date: 2016-07-08 21:06
  */
 class OaCargoMySqlDAO implements OaCargoDAO{
 
@@ -57,7 +57,7 @@ class OaCargoMySqlDAO implements OaCargoDAO{
  	 * @param OaCargoMySql oaCargo
  	 */
 	public function insert($oaCargo){
-		$sql = 'INSERT INTO oa_cargo (nrocargo, codigoseccion, periodo, fecha, nroficha, hora, minuto, tipoventa, tipopago, idtoth, rutfinanciador, rutpaciente, codigoestadocargo, codigoentidad, rutoperador, saldo, totalcargo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+		$sql = 'INSERT INTO oa_cargo (nrocargo, codigoseccion, periodo, fecha, nroficha, hora, minuto, tipoventa, tipopago, idtoth, rutfinanciador, codigoestadocargo, codigoentidad, rutoperador, saldo, totalcargo, rutpaciente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->setNumber($oaCargo->nrocargo);
@@ -71,12 +71,12 @@ class OaCargoMySqlDAO implements OaCargoDAO{
 		$sqlQuery->setNumber($oaCargo->tipopago);
 		$sqlQuery->setNumber($oaCargo->idtoth);
 		$sqlQuery->setNumber($oaCargo->rutfinanciador);
-		$sqlQuery->setNumber($oaCargo->rutpaciente);
 		$sqlQuery->setNumber($oaCargo->codigoestadocargo);
 		$sqlQuery->setNumber($oaCargo->codigoentidad);
 		$sqlQuery->setNumber($oaCargo->rutoperador);
 		$sqlQuery->setNumber($oaCargo->saldo);
 		$sqlQuery->setNumber($oaCargo->totalcargo);
+		$sqlQuery->setNumber($oaCargo->rutpaciente);
 
 		$id = $this->executeInsert($sqlQuery);	
 		$oaCargo->folio = $id;
@@ -89,7 +89,7 @@ class OaCargoMySqlDAO implements OaCargoDAO{
  	 * @param OaCargoMySql oaCargo
  	 */
 	public function update($oaCargo){
-		$sql = 'UPDATE oa_cargo SET nrocargo = ?, codigoseccion = ?, periodo = ?, fecha = ?, nroficha = ?, hora = ?, minuto = ?, tipoventa = ?, tipopago = ?, idtoth = ?, rutfinanciador = ?, rutpaciente = ?, codigoestadocargo = ?, codigoentidad = ?, rutoperador = ?, saldo = ?, totalcargo = ? WHERE folio = ?';
+		$sql = 'UPDATE oa_cargo SET nrocargo = ?, codigoseccion = ?, periodo = ?, fecha = ?, nroficha = ?, hora = ?, minuto = ?, tipoventa = ?, tipopago = ?, idtoth = ?, rutfinanciador = ?, codigoestadocargo = ?, codigoentidad = ?, rutoperador = ?, saldo = ?, totalcargo = ?, rutpaciente = ? WHERE folio = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->setNumber($oaCargo->nrocargo);
@@ -103,12 +103,12 @@ class OaCargoMySqlDAO implements OaCargoDAO{
 		$sqlQuery->setNumber($oaCargo->tipopago);
 		$sqlQuery->setNumber($oaCargo->idtoth);
 		$sqlQuery->setNumber($oaCargo->rutfinanciador);
-		$sqlQuery->setNumber($oaCargo->rutpaciente);
 		$sqlQuery->setNumber($oaCargo->codigoestadocargo);
 		$sqlQuery->setNumber($oaCargo->codigoentidad);
 		$sqlQuery->setNumber($oaCargo->rutoperador);
 		$sqlQuery->setNumber($oaCargo->saldo);
 		$sqlQuery->setNumber($oaCargo->totalcargo);
+		$sqlQuery->setNumber($oaCargo->rutpaciente);
 
 		$sqlQuery->setNumber($oaCargo->folio);
 		return $this->executeUpdate($sqlQuery);
@@ -200,13 +200,6 @@ class OaCargoMySqlDAO implements OaCargoDAO{
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByRutpaciente($value){
-		$sql = 'SELECT * FROM oa_cargo WHERE rutpaciente = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($value);
-		return $this->getList($sqlQuery);
-	}
-
 	public function queryByCodigoestadocargo($value){
 		$sql = 'SELECT * FROM oa_cargo WHERE codigoestadocargo = ?';
 		$sqlQuery = new SqlQuery($sql);
@@ -237,6 +230,13 @@ class OaCargoMySqlDAO implements OaCargoDAO{
 
 	public function queryByTotalcargo($value){
 		$sql = 'SELECT * FROM oa_cargo WHERE totalcargo = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByRutpaciente($value){
+		$sql = 'SELECT * FROM oa_cargo WHERE rutpaciente = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
@@ -320,13 +320,6 @@ class OaCargoMySqlDAO implements OaCargoDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByRutpaciente($value){
-		$sql = 'DELETE FROM oa_cargo WHERE rutpaciente = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($value);
-		return $this->executeUpdate($sqlQuery);
-	}
-
 	public function deleteByCodigoestadocargo($value){
 		$sql = 'DELETE FROM oa_cargo WHERE codigoestadocargo = ?';
 		$sqlQuery = new SqlQuery($sql);
@@ -362,6 +355,13 @@ class OaCargoMySqlDAO implements OaCargoDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
+	public function deleteByRutpaciente($value){
+		$sql = 'DELETE FROM oa_cargo WHERE rutpaciente = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
 
 	
 	/**
@@ -384,12 +384,12 @@ class OaCargoMySqlDAO implements OaCargoDAO{
 		$oaCargo->tipopago = $row['tipopago'];
 		$oaCargo->idtoth = $row['idtoth'];
 		$oaCargo->rutfinanciador = $row['rutfinanciador'];
-		$oaCargo->rutpaciente = $row['rutpaciente'];
 		$oaCargo->codigoestadocargo = $row['codigoestadocargo'];
 		$oaCargo->codigoentidad = $row['codigoentidad'];
 		$oaCargo->rutoperador = $row['rutoperador'];
 		$oaCargo->saldo = $row['saldo'];
 		$oaCargo->totalcargo = $row['totalcargo'];
+		$oaCargo->rutpaciente = $row['rutpaciente'];
 
 		return $oaCargo;
 	}
