@@ -103,8 +103,15 @@ $result = $med->getAll($col);
 								        </div>
 								        <br><br>
 								        <div class="form-group">
-								        	<div class="col-xs-3">
-								        		<input type="submit" class="btn btn-primary" name="btnokPac" value="Guardar"></input>
+								        	<div class="col-xs-2">
+												<button type="submit" class="btn btn-primary" id="btnokPac" name="btnokPac">
+												    <span class="glyphicon glyphicon-floppy-saved"></span> Guardar
+												</button>
+								        	</div>
+								        	<div class="col-xs-2">
+												<button type="submit" class="btn btn-primary">
+												    <span class="glyphicon glyphicon-pencil"></span> Modificar
+												</button>
 								        	</div>
 								        </div>
 								    </div>

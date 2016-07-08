@@ -3,7 +3,7 @@
  * Class that operate on table 'mae_financiador'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2016-07-04 22:59
+ * @date: 2016-07-08 20:53
  */
 class MaeFinanciadorMySqlDAO implements MaeFinanciadorDAO{
 
