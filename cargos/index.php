@@ -29,7 +29,7 @@ $result = $med->getAll($col);
                         <div class="tab-pane active" id="tab1">
                         	<h4>Admision de pacientes</h4>
  
-                        	<form id="form2" method="post">
+                        	<form id="form2" name="form2" method="post">
                         		<div class="panel panel-info">
                         			<div class="panel-body">
                         				<div class="form-group">
@@ -37,7 +37,7 @@ $result = $med->getAll($col);
                         						<input type="text" class="form-control" name="txtRutNum2" onkeypress="return isNumber(event)" placeholder="Rut" maxlength="8"></input>
                         					</div>
                         					<div class="col-xs-1">
-                        						<input type="text" class="form-control" name="txtRutVer2" maxlength="1" disabled="true"></input>
+                        						<input type="text" class="form-control" name="txtRutVer2" maxlength="1"></input>
                         					</div>
                         				</div>
 
@@ -109,7 +109,7 @@ $result = $med->getAll($col);
 												</button>
 								        	</div>
 								        	<div class="col-xs-2">
-												<button type="submit" class="btn btn-primary">
+												<button type="submit" class="btn btn-primary" name="btnEditaPac">
 												    <span class="glyphicon glyphicon-pencil"></span> Modificar
 												</button>
 								        	</div>
@@ -125,7 +125,8 @@ $result = $med->getAll($col);
 										$p = new MaePaciente();
 										$pDriver = new Pacientes();
 
-										//$rutver = $_POST['txtRutVer2'];
+										$rutnum = $_POST['txtRutNum2'];
+										$rutver = $_POST['txtRutVer2'];
 										$nombre = $_POST['txtNomPac'];
 										$apat = $_POST['txtApat'];
 										$amat = $_POST['txtAmat'];
@@ -135,7 +136,9 @@ $result = $med->getAll($col);
 										$email = $_POST['txtEmail'];
 										$ciudad = $_POST['cboCiudad'];
 
-										//$p->rutver = $rutver;
+
+										$p->rutpaciente = $rutnum;
+										$p->rutver = $rutver;
 										$p->nombre = $nombre;
 										$p->apellidopaterno = $apat;
 										$p->apellidomaterno = $amat;
@@ -148,6 +151,37 @@ $result = $med->getAll($col);
 										$id = $pDriver->nuevoPaciente($p);
 										print_r($p);
 										//echo "<script>guarda_pac()</script>";
+									}
+
+									//edita paciente
+									if (isset($_POST['btnEditaPac'])) {
+										
+										$p = new MaePaciente();
+										$pDriver = new Pacientes();
+
+										$rutnum = $_POST['txtRutNum2'];
+										$rutver = $_POST['txtRutVer2'];
+										$nombre = $_POST['txtNomPac'];
+										$apat = $_POST['txtApat'];
+										$amat = $_POST['txtAmat'];
+										$f_nac = $_POST['txtFnac'];
+										$direccion = $_POST['txtDireccion'];
+										$telefono = $_POST['txtTelefono'];
+										$email = $_POST['txtEmail'];
+										$ciudad = $_POST['cboCiudad'];
+
+										$p->rutpaciente = $rutnum;
+										$p->rutver = $rutver;
+										$p->nombre = $nombre;
+										$p->apellidopaterno = $apat;
+										$p->apellidomaterno = $amat;
+										$p->fechanacimiento = $f_nac;
+										$p->direccion = $direccion;
+										$p->telefono = $telefono;
+										$p->correlectronico = $email;
+										$p->codigociudad = $ciudad;
+
+										$id = $objPac->editaPaciente($p);
 									}
 
                         		 ?>
@@ -328,11 +362,7 @@ $result = $med->getAll($col);
 	      </div>
 	    </div>
 	  </div>
-	</div>
- 
-
-
-	
+	</div>	
 			
 </body>
 </html>

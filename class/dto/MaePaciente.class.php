@@ -3,11 +3,12 @@
 	 * Object represents table 'mae_paciente'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2016-07-08 20:53	 
+     	 * @date: 2016-07-08 21:06	 
 	 */
 	class MaePaciente{
 		
-		var $rutpaciente;
+		var $id;
+		var $rutpaciente;
 		var $rutver;
 		var $nombre;
 		var $apellidopaterno;

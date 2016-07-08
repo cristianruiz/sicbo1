@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2016-07-08 20:53
+ * @date: 2016-07-08 21:06
  */
 interface OaCargoDAO{
 
@@ -73,8 +73,6 @@ interface OaCargoDAO{
 
 	public function queryByRutfinanciador($value);
 
-	public function queryByRutpaciente($value);
-
 	public function queryByCodigoestadocargo($value);
 
 	public function queryByCodigoentidad($value);
@@ -84,6 +82,8 @@ interface OaCargoDAO{
 	public function queryBySaldo($value);
 
 	public function queryByTotalcargo($value);
+
+	public function queryByRutpaciente($value);
 
 
 	public function deleteByNrocargo($value);
@@ -108,8 +108,6 @@ interface OaCargoDAO{
 
 	public function deleteByRutfinanciador($value);
 
-	public function deleteByRutpaciente($value);
-
 	public function deleteByCodigoestadocargo($value);
 
 	public function deleteByCodigoentidad($value);
@@ -119,6 +117,8 @@ interface OaCargoDAO{
 	public function deleteBySaldo($value);
 
 	public function deleteByTotalcargo($value);
+
+	public function deleteByRutpaciente($value);
 
 
 }
