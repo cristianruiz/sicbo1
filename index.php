@@ -82,9 +82,9 @@
 		<!--  REFERENCIAS AL FRAMEWORK JQW -->
 		
     	<script type="text/javascript" src="./gui/js/jqw/scripts/demos.js"></script>
-    	<script type="text/javascript" src="/gui/js/jqw/jqwidgets/jqxcore.js"></script>
-    	<script type="text/javascript" src="/gui/js/jqw/jqwidgets/jqxdata.js"></script>
-    	<script type="text/javascript" src="/gui/js/jqw/jqwidgets/jqxinput.js"></script>
+    	<script type="text/javascript" src="./gui/js/jqw/jqwidgets/jqxcore.js"></script>
+    	<script type="text/javascript" src="./gui/js/jqw/jqwidgets/jqxdata.js"></script>
+    	<script type="text/javascript" src="./gui/js/jqw/jqwidgets/jqxinput.js"></script>
 		<!-- ==============cruiz=============== -->
 			<!-- CODIGO JS  -->
 		<script type="text/javascript">
@@ -104,7 +104,7 @@
                     url: url
                 };
                 var dataAdapter = new $.jqx.dataAdapter(source);
-
+                
                 // Create a jqxInput
                 $("#jqxInput").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Servicios/Prestaciones:", displayMember: "descripcion", valueMember: "codigoservicio", width: 600, height: 25});
                 $("#jqxInput").on('select', function (event) {

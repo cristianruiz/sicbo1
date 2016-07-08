@@ -14,6 +14,9 @@
 
 			<link rel="stylesheet" type="text/css" href="css/style_tabMenu.css">
 			<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+			<link rel="stylesheet" href="../gui/js/jqw/jqwidgets/styles/jqx.base.css" type="text/css" />
+
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
 			<!-- Latest compiled and minified JavaScript -->
@@ -21,6 +24,52 @@
 
 			<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 			<script type="text/javascript" src="./js/script_venta.js"></script>
+
+			<!--  REFERENCIAS AL FRAMEWORK JQW -->
+			<script type="text/javascript" src="../gui/js/jqw/scripts/demos.js"></script>
+	    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxcore.js"></script>
+	    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxdata.js"></script>
+	    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxinput.js"></script>
+
+	    	<script type="text/javascript">
+            $(document).ready(function () {
+                
+
+                var url = "../common/dibuja_servicios_json.php";
+
+                // prepare the data
+                var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'codigoservicio' },
+                        { name: 'descripcion' }
+                    ],
+                    url: url
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+                
+                // Create a jqxInput
+                $("#jqxInput").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Servicios/Prestaciones:", displayMember: "descripcion", valueMember: "codigoservicio", width: 600, height: 25});
+                $("#jqxInput").on('select', function (event) {
+                    if (event.args) {
+                        var item = event.args.item;
+                        if (item) {
+                            var valueelement = $("<div></div>");
+                            valueelement.text("Value: " + item.value);
+                            var labelelement = $("<div></div>");
+                            labelelement.text("Label: " + item.label);
+
+                            $("#selectionlog").children().remove();
+                            $("#selectionlog").append(labelelement);
+                            $("#selectionlog").append(valueelement);
+                        }
+                       $('#jqxInput').on('select', 
+							function () { $('#jqxInput').val(''); });
+                    }
+                });
+            });
+        </script>
 			
 	</head>
 	<body>

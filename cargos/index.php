@@ -3,6 +3,7 @@ include('../include_dao.php');
 include("template/header.php");
 include('../drivers/medicos.php');
 include('../drivers/servicios.php');
+include('../drivers/pacientes.php');
 date_default_timezone_set("America/New_York");
 
 $med = new Medicos();
@@ -25,7 +26,7 @@ $result = $med->getAll($col);
                 </div>
                 <div class="panel-body">
                     <div class="tab-content">
-                        <div class="tab-pane" id="tab1">
+                        <div class="tab-pane active" id="tab1">
                         	<h4>Admision de pacientes</h4>
  
                         	<form id="form2" method="post">
@@ -33,10 +34,10 @@ $result = $med->getAll($col);
                         			<div class="panel-body">
                         				<div class="form-group">
                         					<div class="col-xs-2">
-                        						<input type="text" class="form-control" id="txtRutNum2" onkeypress="return isNumber(event)" placeholder="Rut" maxlength="8"></input>
+                        						<input type="text" class="form-control" name="txtRutNum2" onkeypress="return isNumber(event)" placeholder="Rut" maxlength="8"></input>
                         					</div>
                         					<div class="col-xs-1">
-                        						<input type="text" class="form-control" id="txtRutVer2" maxlength="1" disabled="true"></input>
+                        						<input type="text" class="form-control" name="txtRutVer2" maxlength="1" disabled="true"></input>
                         					</div>
                         				</div>
 
@@ -44,19 +45,19 @@ $result = $med->getAll($col);
                         				<div class="form-group">
 								            
 								            <div class="col-xs-3">
-								                <input type="text" class="form-control" placeholder="Nombres" id="txtNomPac" />
+								                <input type="text" class="form-control" placeholder="Nombres" name="txtNomPac" />
 								            </div>
 								            <div class="col-xs-3">
-								                <input type="text" class="form-control" placeholder="A. Paterno" id="txtApat" />
+								                <input type="text" class="form-control" placeholder="A. Paterno" name="txtApat" />
 								            </div>
 								            <div class="col-xs-3">
-								                <input type="text" class="form-control" placeholder="A. Materno" id="txtAmat" />
+								                <input type="text" class="form-control" placeholder="A. Materno" name="txtAmat" />
 								            </div>
 								            <div class="col-xs-1">
 								            	<label>Fecha nac:</label>
 								            </div>
 								            <div class="col-xs-2">
-								            	<input type="date" class="form-control" id="txtFnac"></input>
+								            	<input type="date" class="form-control" name="txtFnac"></input>
 								            </div>
 								        </div>
 
@@ -77,41 +78,76 @@ $result = $med->getAll($col);
 								        		<input type="radio" name="sexo" id="rdSexo" value="0">Femenino</input>
 								        	</div>
 								        	<div class="col-xs-3">
-								        		<input type="text" class="form-control" placeholder="Dirección" id="txtDireccion"></input>
+								        		<input type="text" class="form-control" placeholder="Dirección" name="txtDireccion"></input>
 								        	</div>
 								        	<div class="col-xs-3">
-								        		<input type="text" class="form-control" id="txtTelefono" placeholder="Teléfono"></input>
+								        		<input type="text" class="form-control" name="txtTelefono" placeholder="Teléfono"></input>
 								        	</div>
 								        </div>
 								        <br><br><br>
 								        <div class="form-group">
 								        	<div class="col-xs-3">
 								        		<strong>Cuidad</strong>
-								        		<select id="cboCiudad" class="form-control">
+								        		<select name="cboCiudad" class="form-control">
 								        			<option value="1">OSORNO</option>
 								        		    <option value="2">PUERTO MONTT</option>
 								        		    <option value="3">VALDIVIA</option>
 								        		</select>
 								        	</div><br>
 								        	<div class="col-xs-3">
-								        		<input type="text" id="txtActividad" class="form-control" placeholder="Actividad"></input>
+								        		<input type="text" name="txtActividad" class="form-control" placeholder="Actividad"></input>
 								        	</div>
 								        	<div class="col-xs-3">
-								        		<input type="text" id="txtEmail" class="form-control" placeholder="Email"></input>
+								        		<input type="text" name="txtEmail" class="form-control" placeholder="Email"></input>
 								        	</div>
 								        </div>
 								        <br><br>
 								        <div class="form-group">
 								        	<div class="col-xs-3">
-								        		<input type="submit" class="btn btn-primary" id="btnkPac" value="Guardar" onclick="guarda_pac()"></input>
+								        		<input type="submit" class="btn btn-primary" name="btnokPac" value="Guardar"></input>
 								        	</div>
 								        </div>
 								    </div>
                         		</div>
+
+                        		<?php 
+                        		//Guarda nuevo paciente
+
+									if (isset($_POST["btnokPac"])) {
+										
+										$p = new MaePaciente();
+										$pDriver = new Pacientes();
+
+										//$rutver = $_POST['txtRutVer2'];
+										$nombre = $_POST['txtNomPac'];
+										$apat = $_POST['txtApat'];
+										$amat = $_POST['txtAmat'];
+										$f_nac = $_POST['txtFnac'];
+										$direccion = $_POST['txtDireccion'];
+										$telefono = $_POST['txtTelefono'];
+										$email = $_POST['txtEmail'];
+										$ciudad = $_POST['cboCiudad'];
+
+										//$p->rutver = $rutver;
+										$p->nombre = $nombre;
+										$p->apellidopaterno = $apat;
+										$p->apellidomaterno = $amat;
+										$p->fechanacimiento = $f_nac;
+										$p->direccion = $direccion;
+										$p->telefono = $telefono;
+										$p->correlectronico = $email;
+										$p->codigociudad = $ciudad;
+
+										$id = $pDriver->nuevoPaciente($p);
+										print_r($p);
+										//echo "<script>guarda_pac()</script>";
+									}
+
+                        		 ?>
                         	</form>
 
                         </div>
-          <div class="tab-pane active" id="tab2">
+          <div class="tab-pane" id="tab2">
                         	
              <form class="form-inline" name="form1" method="post">
 			 	
@@ -127,7 +163,7 @@ $result = $med->getAll($col);
 
 							    <div class="form-group">
 							    	<label>Estado</label>
-							       <input type="text" class="form-control input" id="txtestado" disabled="true">
+							       <input type="text" class="form-control input" name="txtestado" disabled="true">
 							    </div>
 							    &nbsp;&nbsp;
 							    
@@ -212,55 +248,16 @@ $result = $med->getAll($col);
 			    				<input type="text" id="txtCantServ" name="txtCantServ" onkeypress="return
 			    				 isNumber(event)" class="form-control input" style="width: 60px;"></input>
 
-			    				<input type="button" value="Ok" class="btn btn-primary input fuente_btn" id="btnOKserv"></input>
+			    				<input type="button" value="Ok" class="btn btn-primary input fuente_btn" name="" id="btnOKserv"></input>
 			    				<label><h4>Servicios</h4></label>
 		
 			    			</div>
 			    		</div>
 			    		<div class="row">
-			    			<table class="table table-hover">
-			    				<tr>
-			    					<th>Codigo</th>
-			    					<th>Descripción</th>
-			    				</tr>
-			    				<script type="text/javascript">
-			    					$('#btnOKserv').click(function(){
-			    						var  ser = $('#txtCodServ').val();
-			    						if ($.trim(name) != '') {
-			    							$.post('./drivers/servicios.php', {cod: ser}, function(data){
-			    								alert(data);
-			    							});
-			    						}
-			    					});
-			    				</script>
-
-			    				<?php 
-									/*
-			    				if (isset($_POST['btnOKserv'])) {
-			    					$serv = new Servicios();
-			    					$cod = $_POST["txtCodServ"];
-			    					$data = $serv->getServByCod($cod);
-			    					$var = '';
-
-			    					if(!empty($data)){
-										foreach ($data as $i=>$v) { ?>
-										  <tr>
-										  	<?php $var .= "<td>".$v."</td>";
-										  	 ?>
-
-										  </tr>
-										<?php
-											}
-											echo "<tr>".$var."</tr>";
-										 ?>
-								</table>
-								<?php
-								}else{
-									echo 'No hay resultados.';
-									}
-									echo "click";
-								}*/
-								?>
+			    			<label>Servicio:</label>
+			    			<input id="jqxInput" />
+	    					<label style="font-family: Verdana; font-size: 10px;">Ejem: Hemograma</label>
+         					<div style="font-family: Verdana; font-size: 12px;" id='selectionlog'>
 			    		</div>
 			    		
 			    	</div>
@@ -326,4 +323,10 @@ $result = $med->getAll($col);
 	  </div>
 	</div>
  
-</div>
+
+
+	
+			
+</body>
+</html>
+</div>							
