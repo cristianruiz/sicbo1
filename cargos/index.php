@@ -4,14 +4,13 @@ include("template/header.php");
 include('../drivers/medicos.php');
 include('../drivers/servicios.php');
 include('../drivers/pacientes.php');
-date_default_timezone_set("America/New_York");
+date_default_timezone_set("Chile/Continental");
 
 $med = new Medicos();
 $col = 'apellido';
 $result = $med->getAll($col);
 
 ?>
-
 <div class="container">
              <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -34,10 +33,7 @@ $result = $med->getAll($col);
                         			<div class="panel-body">
                         				<div class="form-group">
                         					<div class="col-xs-2">
-                        						<input type="text" class="form-control" name="txtRutNum2" onkeypress="return isNumber(event)" placeholder="Rut" maxlength="8"></input>
-                        					</div>
-                        					<div class="col-xs-1">
-                        						<input type="text" class="form-control" name="txtRutVer2" maxlength="1"></input>
+                        						<input type="text" class="form-control" name="txtRutNum2" onkeypress="return isNumber(event)" placeholder="Rut" maxlength="10" id="txtRutNum2" oninput="checkRut(this)"></input>
                         					</div>
                         				</div>
 
@@ -104,7 +100,7 @@ $result = $med->getAll($col);
 								        <br><br>
 								        <div class="form-group">
 								        	<div class="col-xs-2">
-												<button type="submit" class="btn btn-primary" id="btnokPac" name="btnokPac">
+												<button type="submit" class="btn btn-primary" id="btnokPac" name="btnokPac" id="btnokPac">
 												    <span class="glyphicon glyphicon-floppy-saved"></span> Guardar
 												</button>
 								        	</div>
@@ -125,8 +121,8 @@ $result = $med->getAll($col);
 										$p = new MaePaciente();
 										$pDriver = new Pacientes();
 
-										$rutnum = $_POST['txtRutNum2'];
-										$rutver = $_POST['txtRutVer2'];
+										$rutnum = substr($_POST['txtRutNum2'], 0, -2);
+										$rutver = substr($_POST['txtRutNum2'], -1, 1);
 										$nombre = $_POST['txtNomPac'];
 										$apat = $_POST['txtApat'];
 										$amat = $_POST['txtAmat'];
@@ -135,7 +131,6 @@ $result = $med->getAll($col);
 										$telefono = $_POST['txtTelefono'];
 										$email = $_POST['txtEmail'];
 										$ciudad = $_POST['cboCiudad'];
-
 
 										$p->rutpaciente = $rutnum;
 										$p->rutver = $rutver;
@@ -160,7 +155,7 @@ $result = $med->getAll($col);
 										$pDriver = new Pacientes();
 
 										$rutnum = $_POST['txtRutNum2'];
-										$rutver = $_POST['txtRutVer2'];
+										//$rutver = $_POST['txtRutVer2'];
 										$nombre = $_POST['txtNomPac'];
 										$apat = $_POST['txtApat'];
 										$amat = $_POST['txtAmat'];
