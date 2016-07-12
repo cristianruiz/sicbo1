@@ -4,12 +4,45 @@ include("template/header.php");
 include('../drivers/medicos.php');
 include('../drivers/servicios.php');
 include('../drivers/pacientes.php');
+include('../controller/pacientes.php');
 date_default_timezone_set("Chile/Continental");
 
 $med = new Medicos();
 $col = 'apellido';
 $result = $med->getAll($col);
 
+
+/*
+//edita paciente
+if (isset($_POST['btnEditaPac'])) {
+										
+	$p = new MaePaciente();
+	$pDriver = new Pacientes();
+
+	$rutnum = $_POST['txtRutNum2'];
+	//$rutver = $_POST['txtRutVer2'];
+	$nombre = $_POST['txtNomPac'];
+	$apat = $_POST['txtApat'];
+	$amat = $_POST['txtAmat'];
+	$f_nac = $_POST['txtFnac'];
+	$direccion = $_POST['txtDireccion'];
+	$telefono = $_POST['txtTelefono'];
+	$email = $_POST['txtEmail'];
+	$ciudad = $_POST['cboCiudad'];
+
+	$p->rutpaciente = $rutnum;
+	$p->rutver = $rutver;
+	$p->nombre = $nombre;
+	$p->apellidopaterno = $apat;
+	$p->apellidomaterno = $amat;
+	$p->fechanacimiento = $f_nac;
+	$p->direccion = $direccion;
+	$p->telefono = $telefono;
+	$p->correlectronico = $email;
+	$p->codigociudad = $ciudad;
+	$id = $objPac->editaPaciente($p);
+}
+*/
 ?>
 <div class="container">
              <div class="panel panel-primary">
@@ -113,15 +146,21 @@ $result = $med->getAll($col);
 								    </div>
                         		</div>
 
-                        		<?php 
+                        	</form>
+                        	<?php 
                         		//Guarda nuevo paciente
 
-									if (isset($_POST["btnokPac"])) {
-										
+								if (isset($_POST["btnokPac"])) {
+																		
+									$rutnum = substr($_POST['txtRutNum2'], 0, -2);
+									$pac = new Pac();
+
+									if ($pac->verificaPaciente($rutnum) == "no") {
+										//echo "<script>alert('El rut está disponible.')</script>";
 										$p = new MaePaciente();
 										$pDriver = new Pacientes();
 
-										$rutnum = substr($_POST['txtRutNum2'], 0, -2);
+										//$rutnum = substr($_POST['txtRutNum2'], 0, -2);
 										$rutver = substr($_POST['txtRutNum2'], -1, 1);
 										$nombre = $_POST['txtNomPac'];
 										$apat = $_POST['txtApat'];
@@ -144,43 +183,15 @@ $result = $med->getAll($col);
 										$p->codigociudad = $ciudad;
 
 										$id = $pDriver->nuevoPaciente($p);
-										print_r($p);
-										//echo "<script>guarda_pac()</script>";
+										//print_r($p);
+										echo "<script>guarda_pac()</script>";
+																			
+										}else{
+											echo "<script>alert('El rut ya está registrado.')</script>";
+											echo "<script>$('#txtRutNum2').focus();</script>";
+										}									
 									}
-
-									//edita paciente
-									if (isset($_POST['btnEditaPac'])) {
-										
-										$p = new MaePaciente();
-										$pDriver = new Pacientes();
-
-										$rutnum = $_POST['txtRutNum2'];
-										//$rutver = $_POST['txtRutVer2'];
-										$nombre = $_POST['txtNomPac'];
-										$apat = $_POST['txtApat'];
-										$amat = $_POST['txtAmat'];
-										$f_nac = $_POST['txtFnac'];
-										$direccion = $_POST['txtDireccion'];
-										$telefono = $_POST['txtTelefono'];
-										$email = $_POST['txtEmail'];
-										$ciudad = $_POST['cboCiudad'];
-
-										$p->rutpaciente = $rutnum;
-										$p->rutver = $rutver;
-										$p->nombre = $nombre;
-										$p->apellidopaterno = $apat;
-										$p->apellidomaterno = $amat;
-										$p->fechanacimiento = $f_nac;
-										$p->direccion = $direccion;
-										$p->telefono = $telefono;
-										$p->correlectronico = $email;
-										$p->codigociudad = $ciudad;
-
-										$id = $objPac->editaPaciente($p);
-									}
-
-                        		 ?>
-                        	</form>
+                        	 ?>
 
                         </div>
           <div class="tab-pane" id="tab2">

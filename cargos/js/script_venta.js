@@ -88,3 +88,4 @@ function checkRut(rut) {
     rut.setCustomValidity('');
 }
 
+
