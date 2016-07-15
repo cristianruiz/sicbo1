@@ -15,6 +15,7 @@ class Pacientes extends MaePacienteMySqlDAO
 
 	public function buscaPac($rut){
 		$objPac = new MaePacienteMySqlDAO();
-		$id = $objPac->load($rut);
+		$resPac = $objPac->queryByRutpaciente($rut);
+		return $resPac;
 	}
 }

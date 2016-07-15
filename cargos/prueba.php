@@ -1,5 +1,8 @@
 <?php 
+include('../include_dao.php');
 include ('template/header.php');
+include('../drivers/pacientes.php');
+include('../controller/pacientes.php');
  ?>
 <!DOCTYPE html>
 <html>
@@ -7,28 +10,43 @@ include ('template/header.php');
 	<title></title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script type="text/javascript">
-$(document).ready(function(){
-  
-  var boton_rut;
-  
-  boton_rut = $('#btnok');
-  
-  boton_rut.on('click', function(){
-    
-     var valor_input, valor_rut;
-    
-    valor_input = $('#txtrut');
-    valor_rut = valor_input.val();
-    
-    if(valor_rut === ''){
-      alert('No tiene nada el input');
-      return false;
-    }else{
-      alert("Si tiene valor el input");
-    }
-    
-  }); 
-  
+    $(document).ready(function(){
+                                
+        var consulta;
+                                                                          
+         //hacemos focus al campo de búsqueda
+        $("#busqueda").focus();
+                                                                                                    
+        //comprobamos si se pulsa una tecla
+        $("#busqueda").keyup(function(e){
+                                     
+              //obtenemos el texto introducido en el campo de búsqueda
+              consulta = $("#busqueda").val();
+                                                                           
+              //hace la búsqueda
+                                                                                  
+              $.ajax({
+                    type: "POST",
+                    url: "../drivers/pacientes.php",
+                    data: "b="+consulta,
+                    dataType: "html",
+                    beforeSend: function(){
+                          //imagen de carga
+                          $("#resultado").html("<p align='center'><img src='ajax-loader.gif' /></p>");
+                    },
+                    error: function(){
+                          alert("error petición ajax");
+                    },
+                    success: function(data){                                                    
+                          $("#resultado").empty();
+                          $("#resultado").append(data);
+                                                             
+                    }
+              });
+                                                                                  
+                                                                           
+        });
+                                                                   
 });
 	</script>
 </head>
@@ -36,9 +54,10 @@ $(document).ready(function(){
 <div>
 	<form name="form1" method="post">
 		<div>
-			<input type="text" name="txtrut" id="txtrut"></input>
-			<button type="submit" id="btnok" name="btnok" onclick="validar()">OK</button>
+			<input type="text" name="busqueda" id="busqueda"></input>
+			<button type="submit" id="btnok" name="btnok">OK</button>
 		</div>
+    <div id="resultado"></div>
 	</form>
 </div>
 </body>

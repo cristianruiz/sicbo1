@@ -91,7 +91,7 @@
             $(document).ready(function () {
                 
 
-                var url = "./common/dibuja_servicios_json.php";
+                var url = "common/dibuja_servicios_json.php";
 
                 // prepare the data
                 var source =

@@ -45,7 +45,7 @@ if (isset($_POST['btnEditaPac'])) {
 */
 ?>
 <div class="container">
-             <div class="panel panel-primary">
+     	<div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Sicbo</h3>
                     <span class="pull-right">
@@ -193,7 +193,9 @@ if (isset($_POST['btnEditaPac'])) {
 									}
                         	 ?>
 
-                        </div>
+                </div>
+
+          <!--Panel 2: Cargo -->
           <div class="tab-pane" id="tab2">
                         	
              <form class="form-inline" name="form1" method="post">
@@ -248,16 +250,20 @@ if (isset($_POST['btnEditaPac'])) {
 
 			    			<label>Run Paciente</label>
 
-			    			<input type="text" id="txtNomPac" name="txtNomPac" class="form-control input" maxlength="8" style="width: 130px;"></input>
+			    			<input type="text" id="txtRutNum3" name="txtRutNum3" class="form-control input" maxlength="8" style="width: 130px;"></input>
 
-			    			<input type="text" id="txtRutVer" name="txtRutVer" class="form-control input" style="width: 50px;"></input>
+			    			<button data-user="" type="button" id="btnbuscaPac" name="btnbuscaPac" class="btn btn-primary input" >
+			    			<span class="glyphicon glyphicon-search"></span></button>
+			    			&nbsp;
 
 			    			<button type="button" class="btn btn-primary input fuente_btn" id="btnSinRut">No tiene Rut</button>
 			    			&nbsp;
-			    			<input type="text" id="txtnomPac" name="txtNomPac" class="form-control input" disabled="true" style="width: 250px;"></input>
+			    			<div id="response-container" style="float: right;"></div>
+			    			
 			    		</div>
 			    	</div>
 			    </div>
+			    
 
 			    <div class="panel panel-info">
 			    	<div class="panel-body">
@@ -297,24 +303,22 @@ if (isset($_POST['btnEditaPac'])) {
 
 			    				<input type="button" value="Ok" class="btn btn-primary input fuente_btn" name="" id="btnOKserv"></input>
 			    				<label><h4>Servicios</h4></label>
-		
+									
 			    			</div>
 			    		</div>
 			    		<div class="row">
-			    			<label>Servicio:</label>
-			    			<input id="jqxInput" />
-	    					<label style="font-family: Verdana; font-size: 10px;">Ejem: Hemograma</label>
-         					<div style="font-family: Verdana; font-size: 12px;" id='selectionlog'>
-			    		</div>
-			    		
-			    	</div>
-			    </div>
-			</form>
-
-         </div>
-                        
-                </div>
-            </div>
+			    			<div class="form-group">
+			    				<div class="form-group">
+					    			<label>Servicio</label>
+					    			<input id="jqxInput" />
+					    			<label style="font-family: Verdana; font-size: 10px;">ex: Hemograma</label>
+				        			<div style="font-family: Verdana; font-size: 13px;" id='selectionlog'></div>
+	    						</div>
+			    			</div>
+			    		</div>	
+               		</div>
+            	</div>
+          </form>
         </div>
  </div>   
   <!-- Modal -->

@@ -68,15 +68,6 @@
                 });
             });
 
-
-            $(document).ready(function(){
-            	$("#form2").submit(function(){
-            	if($("#txtRutNum2").val().length < 1) {
-					alert("El nombre es obligatorio");
-					return false;
-				}
-            	})
-            });
         </script>
 			
 	</head>
