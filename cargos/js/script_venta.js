@@ -23,7 +23,7 @@ $(document).ready(function(){
   }); 
   
 });
-
+//-------------------------------------------------------------------------
 function guarda_pac(){
 	alert("Paciente fue registrado!");
 }
@@ -37,7 +37,7 @@ function isNumber(evt){
 	else
 		return true;
 }
-
+//--------------------------------------------------------------------------
 //calcula digito verificador
 function checkRut(rut) {
     // Despejar Puntos
@@ -87,7 +87,7 @@ function checkRut(rut) {
     // Si todo sale bien, eliminar errores (decretar que es válido)
     rut.setCustomValidity('');
 }
-
+//--------------------------------------------------------------------------------
 
 //*******AJAX BUSQUEDA PACIENTES*********
 $(document).ready(function(){
@@ -116,7 +116,7 @@ $(document).ready(function(){
                     //recorremos los valores de cada usuario
                     $.each( value, function ( userkey, uservalue) {
                         //output += '<ul>';
-                        output += '<p>' + userkey + ': ' + uservalue + "</p>";
+                        output += '<p>' + userkey + ': ' + uservalue + '</p>';
                         //output += '</ul>';
                     });
                 });
@@ -129,17 +129,17 @@ $(document).ready(function(){
                 
                 } else {
                 //response.success no es true
-                $("#response-container").html('No ha habido suerte: ' + response.data.message);
+                $("#response-container").html('' + response.data.message);
             }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
-            $("#response-container").html("Algo ha fallado: " +  textStatus);
+            $("#response-container").html(". " +  textStatus);
         });
     });
 });
-//****************************************************************************
+//---------------------------------------------------------------------------
 // setea valor data-user a boton buscapacientes
-$(function() {
+/*$(function() {
   'use strict';
 
   var boton = $('#btnbuscaPac');
@@ -153,4 +153,38 @@ $(function() {
     resultado.text(boton.data('user'));
   });
 });
-//*****************************************************************************
+*/
+$(document).ready(function(){
+    $('#btnbuscaPac').on("click",function(){
+        var valor = $('#txtRutNum3').val();
+        var boton = $('#btnbuscaPac');
+        boton.data('user', valor);
+        resultado.text(boton.data('user'));
+    });
+});
+
+//---------------------------------------------------------------------------
+
+//-------------Evento al dar boton acptar en modal medicos-------------------
+$(document).ready(function(){
+    $('#btnModalOk').on("click",function() {
+        var medico = $('#txtNomMed2').val();
+        $('#txtNomMed').val(medico);
+        $('#myModal').modal('hide');
+    }); 
+});
+
+//------------------------------------------------------------------------
+
+
+$(document).keyup(function (e) {
+    if ($("#txtCantServ").is(":focus") && (e.keyCode == 13)) {
+        var cant = $('#txtCantServ').val();
+        $('#txtCantServ').val('');
+        console.log(cant);
+
+        $('#lblcant').text('Cantidad: '+ cant);
+    }
+});
+
+

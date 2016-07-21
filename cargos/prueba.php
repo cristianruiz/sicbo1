@@ -11,53 +11,49 @@ include('../controller/pacientes.php');
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script type="text/javascript">
     $(document).ready(function(){
-                                
-        var consulta;
-                                                                          
-         //hacemos focus al campo de búsqueda
-        $("#busqueda").focus();
-                                                                                                    
-        //comprobamos si se pulsa una tecla
-        $("#busqueda").keyup(function(e){
-                                     
-              //obtenemos el texto introducido en el campo de búsqueda
-              consulta = $("#busqueda").val();
-                                                                           
-              //hace la búsqueda
-                                                                                  
-              $.ajax({
-                    type: "POST",
-                    url: "../drivers/pacientes.php",
-                    data: "b="+consulta,
-                    dataType: "html",
-                    beforeSend: function(){
-                          //imagen de carga
-                          $("#resultado").html("<p align='center'><img src='ajax-loader.gif' /></p>");
-                    },
-                    error: function(){
-                          alert("error petición ajax");
-                    },
-                    success: function(data){                                                    
-                          $("#resultado").empty();
-                          $("#resultado").append(data);
-                                                             
-                    }
-              });
-                                                                                  
-                                                                           
-        });
-                                                                   
-});
+      $('#button').click(function(){
+        var rut = $('#txtrut').val();
+        var nom = $('#txtnombre').val();
+        var apat = $('#txtapat').val();
+        var amat = $('#txtamat').val();
+
+        JQuery.post("../drivers/pacientes.php", {
+          rutpaciente : rut,
+          nombre : nom,
+          apellidopaterno : apat,
+          apellidomaterno : amat
+          }, function(data, textStatus){
+            if(data == 1){
+  
+            $('#response').html("Registrado exitosamente!");
+              
+            $('#response').css('color','green');
+              
+            }else{
+              
+            $('#response').html("Error al guardar");
+              
+            $('#response').css('color','red');
+              
+            }
+          });
+      });
+    });
+
 	</script>
 </head>
 <body>
 <div>
-	<form name="form1" method="post">
+	<form>
 		<div>
-			<input type="text" name="busqueda" id="busqueda"></input>
-			<button type="submit" id="btnok" name="btnok">OK</button>
+    <input type="text"  id="txtrut" placeholder="rut"></input>
+      <input type="text"  id="txtnombre" placeholder="nombre"></input>
+      <input type="text"  id="txtapat" placeholder="paterno"></input>
+      <input type="text"  id="txtamat" placeholder="materno"></input>
+      <input type="button" id="button" value="Insert" />
 		</div>
-    <div id="resultado"></div>
+    <br>
+    <div id="response"></div>
 	</form>
 </div>
 </body>

@@ -56,13 +56,16 @@
                         var item = event.args.item;
                         if (item) {
                             var valueelement = $("<div></div>");
-                            valueelement.text("Value: " + item.value);
+                            valueelement.text("Codigo: " + item.value);
                             var labelelement = $("<div></div>");
-                            labelelement.text("Label: " + item.label);
+                            labelelement.text("Item: " + item.label);
 
                             $("#selectionlog").children().remove();
                             $("#selectionlog").append(labelelement);
                             $("#selectionlog").append(valueelement);
+
+                            $('#jqxinput').val('');
+                            $('#txtCantServ').focus();
                         }
                     }
                 });

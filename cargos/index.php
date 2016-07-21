@@ -4,12 +4,16 @@ include("template/header.php");
 include('../drivers/medicos.php');
 include('../drivers/servicios.php');
 include('../drivers/pacientes.php');
+include('../drivers/ciudad.php');
 include('../controller/pacientes.php');
 date_default_timezone_set("Chile/Continental");
 
 $med = new Medicos();
 $col = 'apellido';
 $result = $med->getAll($col);
+
+$ciu = new Ciudad();
+$res_ciu = $ciu->getCiudades();
 
 
 /*
@@ -118,9 +122,10 @@ if (isset($_POST['btnEditaPac'])) {
 								        	<div class="col-xs-3">
 								        		<strong>Cuidad</strong>
 								        		<select name="cboCiudad" class="form-control">
-								        			<option value="1">OSORNO</option>
-								        		    <option value="2">PUERTO MONTT</option>
-								        		    <option value="3">VALDIVIA</option>
+								        		<?php foreach ($res_ciu as $item) {
+								        			echo '<option value="'.$item->codigociudad.'">'.$item->nombreciudad.'</option>';
+								        		}
+								        		 ?>
 								        		</select>
 								        	</div><br>
 								        	<div class="col-xs-3">
@@ -198,7 +203,7 @@ if (isset($_POST['btnEditaPac'])) {
           <!--Panel 2: Cargo -->
           <div class="tab-pane" id="tab2">
                         	
-             <form class="form-inline" name="form1" method="post">
+             <form class="form-inline" name="form1">
 			 	
 						 	<div class="panel panel-info with-nav-tabs">
 						 	  <div class="panel-body">
@@ -206,8 +211,8 @@ if (isset($_POST['btnEditaPac'])) {
 							        <input type="text" class="form-control input" placeholder="Nro" style="width: 60px;">
 							    </div>
 							    
-							    <button type="submit" class="btn btn-primary fuente_btn input">?</button>
-							    <button type="submit" class="btn btn-primary fuente_btn input">Buscar</button>
+							    <button type="button" class="btn btn-primary fuente_btn input">?</button>
+							    <button type="button" class="btn btn-primary fuente_btn input">Buscar</button>
 							    &nbsp;
 
 							    <div class="form-group">
@@ -250,13 +255,13 @@ if (isset($_POST['btnEditaPac'])) {
 
 			    			<label>Run Paciente</label>
 
-			    			<input type="text" id="txtRutNum3" name="txtRutNum3" class="form-control input" maxlength="8" style="width: 130px;"></input>
+			    			<input type="text" id="txtRutNum3" name="txtRutNum3" onkeypress="return isNumber(event)" class="form-control input" maxlength="8" style="width: 130px;"></input>
 
 			    			<button data-user="" type="button" id="btnbuscaPac" name="btnbuscaPac" class="btn btn-primary input" >
 			    			<span class="glyphicon glyphicon-search"></span></button>
 			    			&nbsp;
 
-			    			<button type="button" class="btn btn-primary input fuente_btn" id="btnSinRut">No tiene Rut</button>
+			    			<button type="button" class="btn btn-primary input fuente_btn" name="btnSinRut" id="btnSinRut">No tiene Rut</button>
 			    			&nbsp;
 			    			<div id="response-container" style="float: right;"></div>
 			    			
@@ -294,25 +299,17 @@ if (isset($_POST['btnEditaPac'])) {
 			    	<div class="panel-body">
 			    		<div class="row">
 			    			<div class="form-group">
-			    				<input type="text" id="txtCodServ" name="txtCodServ" onkeypress="return isNumber(event)" class="form-control input" style="width: 120px;"></input>
-
-			    				<input type="text" id="txtNomServ" name="txtNomServ" class="form-control input" disabled="true"></input>
-
-			    				<input type="text" id="txtCantServ" name="txtCantServ" onkeypress="return
-			    				 isNumber(event)" class="form-control input" style="width: 60px;"></input>
-
-			    				<input type="button" value="Ok" class="btn btn-primary input fuente_btn" name="" id="btnOKserv"></input>
-			    				<label><h4>Servicios</h4></label>
-									
-			    			</div>
-			    		</div>
-			    		<div class="row">
-			    			<div class="form-group">
 			    				<div class="form-group">
 					    			<label>Servicio</label>
 					    			<input id="jqxInput" />
-					    			<label style="font-family: Verdana; font-size: 10px;">ex: Hemograma</label>
+					    			<label style="font-family: Verdana; font-size: 10px;">ej: Hemograma</label>
+
+					    			&nbsp;&nbsp;
+					    			<label>Cantidad</label>
+					    			<input type="text" id="txtCantServ" name="txtCantServ" onkeypress="return
+			    				 		isNumber(event)" class="form-control input" style="width: 60px;"></input>
 				        			<div style="font-family: Verdana; font-size: 13px;" id='selectionlog'></div>
+				        			<label id="lblcant"></label>
 	    						</div>
 			    			</div>
 			    		</div>	
@@ -333,7 +330,7 @@ if (isset($_POST['btnEditaPac'])) {
 	        <div class="row">
 			  <div class="form-group">
 				<div class="col-lg-3">
-					<input type="text" id="txtNomMed" name="txtNomMed" class="form-control" placeholder="Nombre medico"></input>
+					<input type="text" id="txtNomMed2" name="txtNomMed2" class="form-control" placeholder="Nombre medico"></input>
 				</div>
 
 			  </div>
@@ -368,7 +365,7 @@ if (isset($_POST['btnEditaPac'])) {
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-	        <button type="button" id="btnModalOk" class="btn btn-primary" onclick="return confirm('OK');">Aceptar</button>
+	        <button type="button" class="btn btn-primary" id="btnModalOk">Aceptar</button>
 	      </div>
 	    </div>
 	  </div>
