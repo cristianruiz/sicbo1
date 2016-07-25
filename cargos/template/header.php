@@ -31,10 +31,9 @@
 	    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxdata.js"></script>
 	    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxinput.js"></script>
 
-	    	<script type="text/javascript">
+            <script type="text/javascript">
+                //--------AUTOCOMPLETAR  BUSCADOR DE SERVICIOS----------------------------------
             $(document).ready(function () {
-                
-
                 var url = "../common/dibuja_servicios_json.php";
 
                 // prepare the data
@@ -42,36 +41,37 @@
                 {
                     datatype: "json",
                     datafields: [
-                        { name: 'codigoservicio' },
-                        { name: 'descripcion' }
+                     { name: 'codigoservicio' },
+                     { name: 'descripcion' }
                     ],
                     url: url
                 };
                 var dataAdapter = new $.jqx.dataAdapter(source);
-                
+                            
                 // Create a jqxInput
                 $("#jqxInput").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Servicios/Prestaciones:", displayMember: "descripcion", valueMember: "codigoservicio", width: 600, height: 25});
                 $("#jqxInput").on('select', function (event) {
-                    if (event.args) {
-                        var item = event.args.item;
-                        if (item) {
-                            var valueelement = $("<div></div>");
-                            valueelement.text("Codigo: " + item.value);
-                            var labelelement = $("<div></div>");
-                            labelelement.text("Item: " + item.label);
+                if (event.args) {
+                    var item = event.args.item;
+                    if (item) {
+                    var valueelement = $("<div></div>");
+                    valueelement.text("Codigo: " + item.value);
+                    var labelelement = $("<div></div>");
+                    labelelement.text("Item: " + item.label);
 
-                            $("#selectionlog").children().remove();
-                            $("#selectionlog").append(labelelement);
-                            $("#selectionlog").append(valueelement);
+                    $("#selectionlog").children().remove();
+                    $("#selectionlog").append(labelelement);
+                    $("#selectionlog").append(valueelement);
 
-                            $('#jqxinput').val('');
-                            $('#txtCantServ').focus();
-                        }
+                    $('#jqxinput').val('');
+                    $('#txtCantServ').focus();
                     }
+                }
                 });
             });
+            //---------------------------------------------------------------
 
-        </script>
+            </script>
 			
 	</head>
 	<body>

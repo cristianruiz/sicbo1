@@ -6,6 +6,7 @@ include('../drivers/servicios.php');
 include('../drivers/pacientes.php');
 include('../drivers/ciudad.php');
 include('../controller/pacientes.php');
+include('../controller/cargos_controller.php');
 date_default_timezone_set("Chile/Continental");
 
 $med = new Medicos();
@@ -200,18 +201,18 @@ if (isset($_POST['btnEditaPac'])) {
 
                 </div>
 
+
           <!--Panel 2: Cargo -->
           <div class="tab-pane" id="tab2">
                         	
-             <form class="form-inline" name="form1">
+             <form class="form-inline" name="form1" method="post">
 			 	
 						 	<div class="panel panel-info with-nav-tabs">
 						 	  <div class="panel-body">
 							    <div class="form-group">
-							        <input type="text" class="form-control input" placeholder="Nro" style="width: 60px;">
+							    	<input type="text" id="txtnrooa" name="txtnrooa" placeholder="Nro" class="form-control input" style="width: 50px;" onkeypress="return isNumber(event)"></input>
 							    </div>
 							    
-							    <button type="button" class="btn btn-primary fuente_btn input">?</button>
 							    <button type="button" class="btn btn-primary fuente_btn input">Buscar</button>
 							    &nbsp;
 
@@ -220,7 +221,6 @@ if (isset($_POST['btnEditaPac'])) {
 							       <input type="text" class="form-control input" name="txtestado" disabled="true">
 							    </div>
 							    &nbsp;&nbsp;
-							    
 							    <div class="form-group">
 							    	<label>Fecha</label>
 							    	<input type="date" required id="txtfecha" name="txtfecha" class="form-control input" value="<?php echo date("Y-m-d"); ?>"></input>
@@ -301,7 +301,7 @@ if (isset($_POST['btnEditaPac'])) {
 			    			<div class="form-group">
 			    				<div class="form-group">
 					    			<label>Servicio</label>
-					    			<input id="jqxInput" />
+					    			<input type="text" name="jqxinput" id="jqxInput" />
 					    			<label style="font-family: Verdana; font-size: 10px;">ej: Hemograma</label>
 
 					    			&nbsp;&nbsp;
