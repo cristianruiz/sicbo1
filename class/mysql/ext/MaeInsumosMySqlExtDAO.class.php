@@ -3,7 +3,7 @@
  * Class that operate on table 'mae_insumos'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2016-07-08 21:06
+ * @date: 2016-08-04 17:01
  */
 class MaeInsumosMySqlExtDAO extends MaeInsumosMySqlDAO{
 

@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2016-07-08 21:06
+ * @date: 2016-08-04 17:01
  */
 interface MaeInsumosDAO{
 

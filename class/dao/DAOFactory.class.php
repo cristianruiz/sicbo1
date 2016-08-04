@@ -71,6 +71,62 @@ class DAOFactory{
 	}
 
 	/**
+	 * @return HmDetallehonorariossicboDAO
+	 */
+	public static function getHmDetallehonorariossicboDAO(){
+		return new HmDetallehonorariossicboMySqlExtDAO();
+	}
+
+	/**
+	 * @return HmEstadohonorarioDAO
+	 */
+	public static function getHmEstadohonorarioDAO(){
+		return new HmEstadohonorarioMySqlExtDAO();
+	}
+
+	/**
+	 * @return HmHomocodigosformulasDAO
+	 */
+	public static function getHmHomocodigosformulasDAO(){
+		return new HmHomocodigosformulasMySqlExtDAO();
+	}
+
+	/**
+	 * @return HmHonorarioconsolidadoDAO
+	 */
+	public static function getHmHonorarioconsolidadoDAO(){
+		return new HmHonorarioconsolidadoMySqlExtDAO();
+	}
+
+	/**
+	 * @return HmHonorariossicboDAO
+	 */
+	public static function getHmHonorariossicboDAO(){
+		return new HmHonorariossicboMySqlExtDAO();
+	}
+
+	/**
+	 * @return HmPersonanaturalDAO
+	 */
+	public static function getHmPersonanaturalDAO(){
+		return new HmPersonanaturalMySqlExtDAO();
+	}
+
+	/**
+	 * @return HmSociedadDAO
+	 */
+	public static function getHmSociedadDAO(){
+		return new HmSociedadMySqlExtDAO();
+	}
+
+	/**
+	 * @return HmSociosmiembrosDAO
+	 */
+	public static function getHmSociosmiembrosDAO(){
+		return new HmSociosmiembrosMySqlExtDAO();
+	}
+
+	/**
 	 * @return MaeBancosDAO
 	 */
 	public static function getMaeBancosDAO(){
