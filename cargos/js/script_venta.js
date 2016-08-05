@@ -180,7 +180,7 @@ $(document).keyup(function (e) {
 
 //------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
+//------------------Buscar cargo--------------------------------
 $(document).keyup(function (e){
     if ($("#txtnrooa").is(":focus") && (e.keyCode == 13)) {
         var nrocargo = $('#txtnrooa').val();
@@ -195,10 +195,89 @@ $(document).keyup(function (e){
             },
             success: function(data){
                 //$('#response-container').append(data);
-                console.log(data);
-                //alert(data);
+                data = JSON.parse(data);
+                if (data.length > 0) {
+                    $('#txtnroCta').val(data[0].nroficha);
+                    $('#txtRutNum3').val(data[0].rutpaciente);
+                    console.log(data);
+                }else{
+                    data = [];
+                    $('#txtnroCta').val('');
+                    $('#txtRutNum3').val('');
+                    alert('No hay datos.');
+                    $('#txtnrooa').focus();
+                }
             }
         });
     };
 });
-//---------------------------------------------------------------
+//------------------Busca detalle cargo-------------------------------
+
+$(document).keyup(function(e){
+    if ($('#txtnrooa').is(":focus") && (e.keyCode == 13)) {
+        var nrocargo = $('#txtnrooa').val();
+        $.ajax({
+            type: "POST",
+            url: '../common/dibuja_det_cargo.php',
+            data: {"nrocargo":nrocargo},
+
+            error: function(){
+                alert('Error petición ajax');
+            },
+            success: function(data){
+                 $.each(data, function(index, value){
+                        $('#servicio-result').append("<tr><td>" + value.codigodetalle + "</td><td>"+ value.cantidadentregada +"</td><td>"+ value.preciounitario +"</td></tr>");
+                    });
+                console.log(data);
+            }
+        });
+    }
+});
+
+
+$(document).keyup(function(e){
+    if($('#txtRutNum3').is(":focus") && (e.keyCode == 13)){
+        var id = $('#txtRutNum3').val();
+        var getdetails = function(id){
+        return $.getJSON( "../common/dibuja_paciente.php", { "id" : id });
+    }
+
+        //Detenemos el comportamiento normal del evento click sobre el elemento clicado
+        e.preventDefault();
+        //Mostramos texto de que la solicitud está en curso
+        $("#response-container").html("<p>Buscando...</p>");
+        //this hace referencia al elemento que ha lanzado el evento click
+        //con el método .data('user') obtenemos el valor del atributo data-user de dicho elemento y lo pasamos a la función getdetails definida anteriormente
+        getdetails($(this).data(id))
+        .done( function( response ) {
+            //done() es ejecutada cuándo se recibe la respuesta del servidor. response es el objeto JSON recibido
+            if( response.success ) {
+                
+                var output = "";
+                //recorremos cada usuario
+                $.each(response.data.users, function( key, value ) {
+                    //output += "<h2>Detalles del usuario " + value['ID'] + "</h2>";
+                    //recorremos los valores de cada usuario
+                    $.each( value, function ( userkey, uservalue) {
+                        //output += '<ul>';
+                        output += '<p>' + userkey + ': ' + uservalue + '</p>';
+                        //output += '</ul>';
+                    });
+                });
+                
+                //Actualizamos el HTML del elemento con id="#response-container"
+                $("#response-container").html(output);
+
+                var obj = JSON.parse(output);
+                $('#txtnomPac').attr('value', obj.output[1].uservalue);
+                
+                } else {
+                //response.success no es true
+                $("#response-container").html('' + response.data.message);
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            $("#response-container").html(". " +  textStatus);
+        });
+    }
+});

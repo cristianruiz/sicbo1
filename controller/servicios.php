@@ -11,15 +11,13 @@ class Serv extends MaeServiciosMySqlDAO{
 		 foreach($arr as &$t){
 		 	$f= array(
 		 			"codigoservicio"=>$t["codigoservicio"],
-		 			"descripcion"=>$t["descripcion"],
+		 			"descripcion"=>utf8_encode($t["descripcion"]),
 		 	);
 		 	array_push($ret,$f);
 		 }
 		 
 		 return(json_encode($ret)); 
 	}
-
-
 
 
 }

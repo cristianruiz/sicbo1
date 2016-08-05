@@ -71,27 +71,27 @@ if (isset($_POST['btnEditaPac'])) {
                         			<div class="panel-body">
                         				<div class="form-group">
                         					<div class="col-xs-2">
-                        						<input type="text" class="form-control" name="txtRutNum2" onkeypress="return isNumber(event)" placeholder="Rut" maxlength="10" id="txtRutNum2" oninput="checkRut(this)"></input>
+                        						<input type="text" class="form-control input-sm" name="txtRutNum2" onkeypress="return isNumber(event)" placeholder="Rut" maxlength="10" id="txtRutNum2" oninput="checkRut(this)"></input>
                         					</div>
                         				</div>
 
-                        				<br><br>
+                        				<br>
                         				<div class="form-group">
 								            
 								            <div class="col-xs-3">
-								                <input type="text" class="form-control" placeholder="Nombres" name="txtNomPac" />
+								                <input type="text" class="form-control input-sm" placeholder="Nombres" name="txtNomPac" />
 								            </div>
 								            <div class="col-xs-3">
-								                <input type="text" class="form-control" placeholder="A. Paterno" name="txtApat" />
+								                <input type="text" class="form-control input-sm" placeholder="A. Paterno" name="txtApat" />
 								            </div>
 								            <div class="col-xs-3">
-								                <input type="text" class="form-control" placeholder="A. Materno" name="txtAmat" />
+								                <input type="text" class="form-control input-sm" placeholder="A. Materno" name="txtAmat" />
 								            </div>
 								            <div class="col-xs-1">
-								            	<label>Fecha nac:</label>
+								            	<label class="input-sm">Fecha nac:</label>
 								            </div>
 								            <div class="col-xs-2">
-								            	<input type="date" class="form-control" name="txtFnac"></input>
+								            	<input type="date" class="form-control input-sm" name="txtFnac"></input>
 								            </div>
 								        </div>
 
@@ -99,30 +99,31 @@ if (isset($_POST['btnEditaPac'])) {
 
 								        <div class="form-group">
 								        	<div class="col-xs-1">
-								        		<input type="text" class="form-control" id="txtEdad" onkeypress="return isNumber(event)" placeholder="Edad"></input>
+								        		<input type="text" class="form-control input-sm" id="txtEdad" onkeypress="return isNumber(event)" placeholder="Edad"></input>
 								        	</div>
 								        	<div class="col-xs-1">
-								        		<input type="radio" id="rdEdad" name="edad" value="1">Años</input>
-								        		<input type="radio" id="rdEdad" name="edad" value="2">Meses</input>
-								        		<input type="radio" id="rdEdad" name="edad" value="3">Dias</input>
+								        		<strong class="input-sm">Edad:</strong><br>
+								        		<input type="radio" id="rdEdad" name="edad" value="1" >Años</input>
+								        		<input type="radio" id="rdEdad" name="edad" value="2" >Meses</input>
+								        		<input type="radio" id="rdEdad" name="edad" value="3" >Dias</input>
 								        	</div>
 								        	<div class="col-xs-3">
-								        		<strong>Sexo:</strong><br>
+								        		<strong class="input-sm">Sexo:</strong><br>
 								        		<input type="radio" name="sexo" id="rdSexo" value="1">Masculino</input>
 								        		<input type="radio" name="sexo" id="rdSexo" value="0">Femenino</input>
 								        	</div>
 								        	<div class="col-xs-3">
-								        		<input type="text" class="form-control" placeholder="Dirección" name="txtDireccion"></input>
+								        		<input type="text" class="form-control input-sm" placeholder="Dirección" name="txtDireccion"></input>
 								        	</div>
 								        	<div class="col-xs-3">
-								        		<input type="text" class="form-control" name="txtTelefono" placeholder="Teléfono"></input>
+								        		<input type="text" class="form-control input-sm" name="txtTelefono" placeholder="Teléfono"></input>
 								        	</div>
 								        </div>
 								        <br><br><br>
 								        <div class="form-group">
 								        	<div class="col-xs-3">
-								        		<strong>Cuidad</strong>
-								        		<select name="cboCiudad" class="form-control">
+								        		<strong class="input-sm">Cuidad</strong>
+								        		<select name="cboCiudad" class="form-control input-sm">
 								        		<?php foreach ($res_ciu as $item) {
 								        			echo '<option value="'.$item->codigociudad.'">'.$item->nombreciudad.'</option>';
 								        		}
@@ -130,21 +131,21 @@ if (isset($_POST['btnEditaPac'])) {
 								        		</select>
 								        	</div><br>
 								        	<div class="col-xs-3">
-								        		<input type="text" name="txtActividad" class="form-control" placeholder="Actividad"></input>
+								        		<input type="text" name="txtActividad" class="form-control input-sm" placeholder="Actividad"></input>
 								        	</div>
 								        	<div class="col-xs-3">
-								        		<input type="text" name="txtEmail" class="form-control" placeholder="Email"></input>
+								        		<input type="text" name="txtEmail" class="form-control input-sm" placeholder="Email"></input>
 								        	</div>
 								        </div>
 								        <br><br>
 								        <div class="form-group">
 								        	<div class="col-xs-2">
-												<button type="submit" class="btn btn-primary" id="btnokPac" name="btnokPac" id="btnokPac">
+												<button type="submit" class="btn btn-primary btn-sm" id="btnokPac" name="btnokPac" id="btnokPac">
 												    <span class="glyphicon glyphicon-floppy-saved"></span> Guardar
 												</button>
 								        	</div>
 								        	<div class="col-xs-2">
-												<button type="submit" class="btn btn-primary" name="btnEditaPac">
+												<button type="submit" class="btn btn-primary btn-sm" name="btnEditaPac">
 												    <span class="glyphicon glyphicon-pencil"></span> Modificar
 												</button>
 								        	</div>
@@ -242,7 +243,7 @@ if (isset($_POST['btnEditaPac'])) {
 			    			<select id="cboTipCuenta" name="cboTipCuenta" class="form-control input fuente_btn">
 			    				<option>TIPO CUENTA</option>
 			    			</select>
-			    			<input type="text" id="txtnroCuenta" name="txtnroCta" onkeypress="return isNumber(event)" placeholder="N° Cuenta" class="form-control input"></input>
+			    			<input type="text" id="txtnroCta" name="txtnroCta" onkeypress="return isNumber(event)" placeholder="N° Cuenta" class="form-control input" style="width: 100px;"></input>
 			    		</div>
 			    		<br><br>
 			    		<div class="form-group">
@@ -255,7 +256,7 @@ if (isset($_POST['btnEditaPac'])) {
 
 			    			<label>Run Paciente</label>
 
-			    			<input type="text" id="txtRutNum3" name="txtRutNum3" onkeypress="return isNumber(event)" class="form-control input" maxlength="8" style="width: 130px;"></input>
+			    			<input type="text" id="txtRutNum3" name="txtRutNum3"  onkeypress="return isNumber(event)" class="form-control input" maxlength="8" style="width: 130px;"></input>
 
 			    			<button data-user="" type="button" id="btnbuscaPac" name="btnbuscaPac" class="btn btn-primary input" >
 			    			<span class="glyphicon glyphicon-search"></span></button>
@@ -314,6 +315,10 @@ if (isset($_POST['btnEditaPac'])) {
 			    			</div>
 			    		</div>	
                		</div>
+            	</div>
+
+            	<div id="servicio-result">
+            		
             	</div>
           </form>
         </div>
