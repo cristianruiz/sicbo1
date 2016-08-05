@@ -91,7 +91,7 @@
             $(document).ready(function () {
                 
 
-                var url = "./common/dibuja_servicios_json.php";
+                var url = "common/dibuja_servicios_json.php";
 
                 // prepare the data
                 var source =
@@ -104,7 +104,7 @@
                     url: url
                 };
                 var dataAdapter = new $.jqx.dataAdapter(source);
-
+                
                 // Create a jqxInput
                 $("#jqxInput").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Servicios/Prestaciones:", displayMember: "descripcion", valueMember: "codigoservicio", width: 600, height: 25});
                 $("#jqxInput").on('select', function (event) {

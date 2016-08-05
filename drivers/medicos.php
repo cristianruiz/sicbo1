@@ -1,8 +1,8 @@
 <?php 
 
-class Medicos extends GlbMedicosMySqlDAO{
+class Medicos extends ZglbMedicosMySqlDAO{
 	public function getAll($col){
-		$datos = new GlbMedicosMySqlDAO();
+		$datos = new ZglbMedicosMySqlDAO();
 		$res = $datos->queryAllOrderBy($col);
 		return $res;
 	}

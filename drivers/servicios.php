@@ -1,15 +1,17 @@
 <?php
-class Servicios extends OaServiciosMySqlDAO{
+class Servicios extends ZoaServiciosMySqlDAO{
 	public function get_all(){
-		$datos = new OaServiciosMySqlDAO();
+		$datos = new ZoaServiciosMySqlDAO();
 		$res = $datos->queryAll();
 		
 		return $res;
 	}
 	
 
-	public function guardaServicio(){
-		
+	public function getServByCod($cod){
+		$s = new ZoaServiciosMySqlDAO();
+		$res = $s->load($cod);
+		return $res;
 	}
 	
 	

@@ -12,8 +12,11 @@
 			<!-- Optional theme -->
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-			<link rel="stylesheet" type="text/css" href="css/styles_tabMenu.css">
+			<link rel="stylesheet" type="text/css" href="css/style_tabMenu.css">
 			<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+			<link rel="stylesheet" href="../gui/js/jqw/jqwidgets/styles/jqx.base.css" type="text/css" />
+
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
 			<!-- Latest compiled and minified JavaScript -->
@@ -21,54 +24,55 @@
 
 			<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 			<script type="text/javascript" src="./js/script_venta.js"></script>
-			<script type="text/javascript">
-				function validar1(formulario) { 
-				var rut1 = formulario.rut1.value; 
-				var count = 0; 
-				var count2 = 0; 
-				var factor = 2; 
-				var suma = 0; 
-				var sum = 0; 
-				var digito = 0; 
-				count2 = rut1.length - 1; 
-				while(count < rut1.length) { 
 
-				sum = factor * (parseInt(rut1.substr(count2,1))); 
-				suma = suma + sum; 
-				sum = 0; 
+			<!--  REFERENCIAS AL FRAMEWORK JQW -->
+			<script type="text/javascript" src="../gui/js/jqw/scripts/demos.js"></script>
+	    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxcore.js"></script>
+	    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxdata.js"></script>
+	    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxinput.js"></script>
 
-				count = count + 1; 
-				count2 = count2 - 1; 
-				factor = factor + 1; 
+	    	<script type="text/javascript">
+            $(document).ready(function () {
+                
 
-				if(factor > 7) { 
-				factor=2; 
-				} 
+                var url = "../common/dibuja_servicios_json.php";
 
-				} 
-				digito = 11 - (suma % 11); 
+                // prepare the data
+                var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'codigoservicio' },
+                        { name: 'descripcion' }
+                    ],
+                    url: url
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+                
+                // Create a jqxInput
+                $("#jqxInput").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Servicios/Prestaciones:", displayMember: "descripcion", valueMember: "codigoservicio", width: 600, height: 25});
+                $("#jqxInput").on('select', function (event) {
+                    if (event.args) {
+                        var item = event.args.item;
+                        if (item) {
+                            var valueelement = $("<div></div>");
+                            valueelement.text("Codigo: " + item.value);
+                            var labelelement = $("<div></div>");
+                            labelelement.text("Item: " + item.label);
 
-				if (digito == 11) { 
-				digito = 0; 
-				} 
-				if (digito == 10) { 
-				digito = "k"; 
-				} 
-				form.dv1.value = digito; 
-				} 
+                            $("#selectionlog").children().remove();
+                            $("#selectionlog").append(labelelement);
+                            $("#selectionlog").append(valueelement);
 
-				function mis_datos(){ 
-				var key=window.event.keyCode; 
-				if (key < 48 || key > 57){ 
-				window.event.keyCode=0; 
-				}} 
+                            $('#jqxinput').val('');
+                            $('#txtCantServ').focus();
+                        }
+                    }
+                });
+            });
 
-				function vaciar(control) 
-				{ 
-				control.value=''; 
-				} 
-			</script>
-			 
+        </script>
+			
 	</head>
 	<body>
 	<div id="wrapper">

@@ -2,7 +2,7 @@
 {
 	width: 1200px;
 	background-color: white;
-	 margin: 0 auto;
+	margin: 0 auto;
 	padding: 10px;
 	border: 5px solid #dedede;
 				    
@@ -21,4 +21,9 @@ html{
 	width: 250px;
 	margin: 0px;
 	margin-right: 0px;
+}
+
+#response-container{
+	font-size: 14px;
+	font-weight: bold;
 }
