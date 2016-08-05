@@ -7,7 +7,7 @@ switch ($action) {
 		$params= array("ano"=>$ano,"mes"=>$mes);
 		print_r($params);
 		$client=new SoapClient('http://192.168.1.51:8080/cbows/admision?wsdl');
-		echo( $client->honorariosPad($params)->return);
+		echo( $client->honorarios_pad($params)->return);
 
 
 		break;
