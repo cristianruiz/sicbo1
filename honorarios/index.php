@@ -27,7 +27,7 @@
 	<div class="container">
 	 <form class="form-inline" name="form1" method="post">
 	 	<div>
-	 		<p><h4>Orden de atenció</h4></p>
+	 		<p><h4>GENERACIÓN DE HONORARIOS PAD</h4></p>
 	 	</div>
 	 	<div class="panel panel-info">
 	 	  <div class="panel-body">
@@ -39,7 +39,7 @@
 		        <label>Año:</label>
 		        <div class="form-group" id="comboAno"></div> 
 		    	<!--  <button type="button" class="btn btn-xs" >Buscar</button>-->
-		    	<input type="button" value="Buscar" id='btnBuscar' /> <br>
+		    	<input type="button" value="Buscar" id='btnBuscar' /><label id="lblstatus">Año:</label> <br>
 		    	<div class="form-group" id="grillaSicbo"></div>
 		        
 		    
@@ -98,7 +98,9 @@
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.grouping.js"></script>
     	
 		<!-- ==============cruiz=============== -->
+		<script type="text/javascript" src="../gui/js/util.js"></script>
 		<script type="text/javascript" src="./js/fn_principal.js"></script>
+		
 		
 			<!-- CODIGO JS  -->
 		<script type="text/javascript">

@@ -11,7 +11,9 @@ switch ($action) {
 
 
 		break;
-
+	case "estadoperiodo" :
+		echo("OK");
+		break;
 	default:
 		break;
 }
