@@ -3,6 +3,32 @@
  */
 var ano, mes=0;
 function buscar(){
+	document.getElementById('lblstatus').innerHTML="hols";
+	var hilo = new newAjax();
+    var url= "../controller/honorarios.php?action=estadoperiodo";
+    hilo.open("GET",url,true);
+    console.log("abriendo");
+    hilo.onreadystatechange=function(){
+        if (hilo.readyState == 1){
+        	console.log("aki 1");
+       	 document.getElementById('lblstatus').innerHTML="CArgandoa";
+        }
+        if (hilo.readyState == 4){
+        	console.log("aki 2");
+           /*jsonObject = JSON.parse(hilo.responseText);
+
+           document.getElementById('td_conductor').innerHTML=jsonObject[0].nombre;
+            document.getElementById('td_colegio').innerHTML=jsonObject[0].colegio;
+
+        } */
+       	// alert("HOLA: "+hilo.responseText);
+    }
+    hilo.send(null);
+    
+    }
+    console.log("HOLA loooooo");
+}    
+function __buscar(){
 	document.getElementById('lblstatus').innedrHTML="";
 	 var hilo = new newAjax();
      var url= "../controller/honorarios.php?action=estadoperiodo";

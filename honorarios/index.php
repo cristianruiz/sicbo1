@@ -98,7 +98,7 @@
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.grouping.js"></script>
     	
 		<!-- ==============cruiz=============== -->
-		<script type="text/javascript" src="../gui/js/util.js"></script>
+		  <script type="text/javascript" src="../gui/js/util.js"></script> 
 		<script type="text/javascript" src="./js/fn_principal.js"></script>
 		
 		

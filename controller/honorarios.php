@@ -12,6 +12,7 @@ switch ($action) {
 
 		break;
 	case "estadoperiodo" :
+		error_log("llamando...");
 		echo("OK");
 		break;
 	default:
