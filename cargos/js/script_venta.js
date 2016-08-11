@@ -1,3 +1,4 @@
+
 //Valida que se ingrese rut en panel admision paciente
 $(document).ready(function(){
   
@@ -138,22 +139,7 @@ $(document).ready(function(){
     });
 });
 //---------------------------------------------------------------------------
-// setea valor data-user a boton buscapacientes
-/*$(function() {
-  'use strict';
 
-  var boton = $('#btnbuscaPac');
-  var resultado = $('#valor');
-  var input = $('#txtRutNum3');
-
-  boton.on('click', function() {
-    var valor = input.val()
-    boton.data('user', valor);
-
-    resultado.text(boton.data('user'));
-  });
-});
-*/
 $(document).ready(function(){
     $('#btnbuscaPac').on("click",function(){
         var valor = $('#txtRutNum3').val();
@@ -165,7 +151,7 @@ $(document).ready(function(){
 
 //---------------------------------------------------------------------------
 
-//-------------Evento al dar boton acptar en modal medicos-------------------
+//-------------Evento al dar boton aceptar en modal medicos-------------------
 $(document).ready(function(){
     $('#btnModalOk').on("click",function() {
         var medico = $('#txtNomMed2').val();
@@ -176,15 +162,83 @@ $(document).ready(function(){
 
 //------------------------------------------------------------------------
 
-
+//------------Evento al dar ENTER sobre txt cantidad de servicios---------
 $(document).keyup(function (e) {
     if ($("#txtCantServ").is(":focus") && (e.keyCode == 13)) {
         var cant = $('#txtCantServ').val();
-        $('#txtCantServ').val('');
-        console.log(cant);
 
-        $('#lblcant').text('Cantidad: '+ cant);
+        if (cant > 0) {
+            $('#txtCantServ').val('');
+                console.log(cant);
+                $('#lblcant').text('Cantidad: '+ cant);
+                $('#jqxinput').focus();
+            }else{
+                alert('Ingrese cantidad.');
+            }
     }
 });
 
+//------------------------------------------------------------------------
 
+//------------------Buscar cargo--------------------------------
+$(document).keyup(function (e){
+    if ($("#txtnrooa").is(":focus") && (e.keyCode == 13)) {
+        var nrocargo = $('#txtnrooa').val();
+        var cod_sec = $('#txtcodsec').val();
+
+        $.ajax({
+            type: "POST",
+            url: '../common/dibuja_cargo.php',                                                                               
+            data: {'nrocargo': nrocargo, 'cod_sec': cod_sec},
+
+            error: function(){
+                alert("error peticion ajax");
+            },
+            success: function(data){
+                //$('#response-container').append(data);
+                data = JSON.parse(data);
+                if (data.length > 0) {
+                    $('#txtnroCta').val(data[0].nroficha);
+                    $('#txtRutNum3').val(data[0].rutpaciente);
+                    
+                }else{
+                    data = [];
+                    $('#txtnroCta').val('');
+                    $('#txtRutNum3').val('');
+                    alert('No hay datos.');
+                    $('#txtnrooa').focus();
+                }
+                console.log(data);
+            }
+        });
+    };
+});
+//------------------Busca detalle cargo-------------------------------
+
+$(document).keyup(function(e){
+    if ($('#txtnrooa').is(":focus") && (e.keyCode == 13)) {
+        var nrocargo = $('#txtnrooa').val();
+        var cod_sec = $('#txtcodsec').val();
+        $.ajax({
+            type: "POST",
+            url: '../common/dibuja_det_cargo.php',
+            data: {"nrocargo":nrocargo, 'cod_sec': cod_sec},
+
+            error: function(){
+                alert('Error petición ajax');
+            },
+            success: function(data){
+                 $.each(data, function(index, value){
+                        $('#servicio-result').append("<tr><td>" + value.codigodetalle + "</td><td>"+ value.cantidadentregada +"</td><td>"+ value.preciounitario +"</td></tr>");
+                    });
+                console.log(data);
+            }
+        });
+    }
+});
+
+$(document).keyup(function(e){
+    if ($('#txtcodsec').is(":focus") && (e.keyCode == 13)) {
+        $('#txtnrooa').focus();
+    }
+});
