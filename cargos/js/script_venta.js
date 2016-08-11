@@ -184,31 +184,45 @@ $(document).keyup(function (e) {
 $(document).keyup(function (e){
     if ($("#txtnrooa").is(":focus") && (e.keyCode == 13)) {
         var nrocargo = $('#txtnrooa').val();
+        var cod_sec = $('#txtcodsec').val();
+
         $.ajax({
             type: "POST",
             url: '../common/dibuja_cargo.php',                                                                               
-            data: {'nrocargo': nrocargo},
+            data: {'nrocargo': nrocargo, 'cod_sec': cod_sec},
 
             error: function(){
                 alert("error peticion ajax");
             },
             success: function(data){
                 //$('#response-container').append(data);
-                //data = JSON.parse(data);
+                data = JSON.parse(data);
+                if (data.length > 0) {
+                    $('#txtnroCta').val(data[0].nroficha);
+                    $('#txtRutNum3').val(data[0].rutpaciente);
+                    
+                }else{
+                    data = [];
+                    $('#txtnroCta').val('');
+                    $('#txtRutNum3').val('');
+                    alert('No hay datos.');
+                    $('#txtnrooa').focus();
+                }
                 console.log(data);
             }
         });
     };
 });
 //------------------Busca detalle cargo-------------------------------
-/*
+
 $(document).keyup(function(e){
     if ($('#txtnrooa').is(":focus") && (e.keyCode == 13)) {
         var nrocargo = $('#txtnrooa').val();
+        var cod_sec = $('#txtcodsec').val();
         $.ajax({
             type: "POST",
             url: '../common/dibuja_det_cargo.php',
-            data: {"nrocargo":nrocargo},
+            data: {"nrocargo":nrocargo, 'cod_sec': cod_sec},
 
             error: function(){
                 alert('Error petición ajax');
@@ -222,7 +236,7 @@ $(document).keyup(function(e){
         });
     }
 });
-*/
+
 $(document).keyup(function(e){
     if ($('#txtcodsec').is(":focus") && (e.keyCode == 13)) {
         $('#txtnrooa').focus();
