@@ -211,6 +211,10 @@ if (isset($_POST['btnEditaPac'])) {
 						 	<div class="panel panel-info with-nav-tabs">
 						 	  <div class="panel-body">
 							    <div class="form-group">
+							    	<input type="text" id="txtcodsec" name="txtcodsec" placeholder="Sec." class="form-control input" style="width: 50px;" onkeypress="return isNumber(event)" ></input>
+							    	
+							    	&nbsp;
+
 							    	<input type="text" id="txtnrooa" name="txtnrooa" placeholder="Nro" class="form-control input" style="width: 50px;" onkeypress="return isNumber(event)"></input>
 							    </div>
 							    
