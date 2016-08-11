@@ -1,9 +1,10 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title id='Description'>With jqxGrid, you can export your data to Excel, XML, CSV, TSV, JSON and HTML.</title>
+    <title id='Description'>With jqxGrid, you can export your data to Excel, XML, CSV, TSV, JSON, PDF and HTML.</title>
+	<meta name="description" content="jQuery Grid Data Export to Excel, PDF, XML, CSV, TSV, JSON and HTML" /> 	
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
@@ -60,12 +61,13 @@
                 ]
             });
 
-            $("#excelExport").jqxButton({ theme: theme });
-            $("#xmlExport").jqxButton({ theme: theme });
-            $("#csvExport").jqxButton({ theme: theme });
-            $("#tsvExport").jqxButton({ theme: theme });
-            $("#htmlExport").jqxButton({ theme: theme });
-            $("#jsonExport").jqxButton({ theme: theme });
+            $("#excelExport").jqxButton();
+            $("#xmlExport").jqxButton();
+            $("#csvExport").jqxButton();
+            $("#tsvExport").jqxButton();
+            $("#htmlExport").jqxButton();
+            $("#jsonExport").jqxButton();
+            $("#pdfExport").jqxButton();
 
             $("#excelExport").click(function () {
                 $("#jqxgrid").jqxGrid('exportdata', 'xls', 'jqxGrid');           
@@ -84,6 +86,9 @@
             });
             $("#jsonExport").click(function () {
                 $("#jqxgrid").jqxGrid('exportdata', 'json', 'jqxGrid');
+            });
+            $("#pdfExport").click(function () {
+                $("#jqxgrid").jqxGrid('exportdata', 'pdf', 'jqxGrid');
             });
         });
     </script>
@@ -106,6 +111,9 @@
                 <input type="button" value="Export to HTML" id='htmlExport' />
                 <br /><br />
                 <input type="button" value="Export to JSON" id='jsonExport' />
+            </div>
+            <div style='margin-left: 10px; float: left;'>
+                <input type="button" value="Export to PDF" id='pdfExport' />
             </div>
         </div>
     </div>

@@ -1,40 +1,53 @@
 <?php
-#Include the connect.php file
-include('connect.php');
-#Connect to the database
-//connection String
-$connect = mysql_connect($hostname, $username, $password)
-or die('Could not connect: ' . mysql_error());
-//Select The database
-$bool = mysql_select_db($database, $connect);
-if ($bool === False){
-   print "can't find $database";
-}
-// get data and store in a json array
-$query = "SELECT * FROM Employees";
+// Include the connect.php file
+include ('connect.php');
 
-if (isset($_POST['update']))
-{
-	// UPDATE COMMAND 
-	$update_query = "UPDATE `Employees` SET `FirstName`='".mysql_real_escape_string($_POST['FirstName'])."',
-	`LastName`='".mysql_real_escape_string($_POST['LastName'])."',
-	`Title`='".mysql_real_escape_string($_POST['Title'])."' WHERE `EmployeeID`='".mysql_real_escape_string($_POST['EmployeeID'])."'";
-	 $result = mysql_query($update_query) or die("SQL Error 1: " . mysql_error());
-     echo $result;
-}
-else
-{
-    // SELECT COMMAND
-	$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-		$employees[] = array(
-			'EmployeeID' => $row['EmployeeID'],
-			'FirstName' => $row['FirstName'],
-			'LastName' => $row['LastName'],
-			'Title' => $row['Title']
-		  );
+// Connect to the database
+// connection String
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
+	{
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
 	}
-	 
+// get data and store in a json array
+$query = "SELECT EmployeeID, FirstName, LastName, Title FROM employees";
+if (isset($_POST['update']))
+	{
+	// UPDATE COMMAND
+
+	$query = "UPDATE employees SET FirstName=?, LastName=?, Title=? WHERE EmployeeID=?";
+	$result = $mysqli->prepare($query);
+	$result->bind_param('sssi', $_POST['FirstName'], $_POST['LastName'], $_POST['Title'], $_POST['EmployeeID']);
+	$res = $result->execute() or trigger_error($result->error, E_USER_ERROR);
+
+	echo $res;
+	
+	//echo $result;
+	}
+  else
+	{
+	// SELECT COMMAND
+	$result = $mysqli->prepare($query);
+	$result->execute();
+	/* bind result variables */
+	$result->bind_result($EmployeeID, $FirstName, $LastName, $Title);
+	/* fetch values */
+	while ($result->fetch())
+		{
+		$employees[] = array(
+			'EmployeeID' => $EmployeeID,
+			'FirstName' => $FirstName,
+			'LastName' => $LastName,
+			'Title' => $Title
+		);
+		}
 	echo json_encode($employees);
-}
+
+	}
+	
+$result->close();
+$mysqli->close();
+/* close connection */
 ?>

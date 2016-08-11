@@ -1,3 +1,3 @@
 ﻿<?php
-	echo $_POST["countries"];
+	echo $_POST["hiddenValue"];
 ?>

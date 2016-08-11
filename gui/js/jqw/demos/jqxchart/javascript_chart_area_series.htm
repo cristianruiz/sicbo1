@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Area Series Example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -27,7 +27,7 @@
             var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
             // prepare jqxChart settings
-var settings = {
+            var settings = {
                 title: "U.S. Stock Market Index Performance",
                 description: "NASDAQ Composite compared to S&P 500",
                 enableAnimations: true,
@@ -38,47 +38,37 @@ var settings = {
                 source: dataAdapter,
                 xAxis:
                     {
-                        textRotationAngle: 90,
                         dataField: 'Date',
-                        formatFunction: function (value) {
-                            return months[value.getMonth()] + '\'' + value.getFullYear().toString().substring(2);
-                        },
-                        toolTipFormatFunction: function (value) {
-                            return value.getDate() + '-' + months[value.getMonth()];
-                        },
-                        minValue: '01-01-2011',
-                        maxValue: '01-01-2012',
                         type: 'date',
                         baseUnit: 'month',
-                        showTickMarks: true,
-                        tickMarksInterval: 1,
-                        tickMarksColor: '#888888',
-                        unitInterval: 1,
-                        showGridLines: true,
-                        gridLinesInterval: 1,
-                        gridLinesColor: '#888888',
-                        valuesOnTicks: true
+                        minValue: new Date(2014, 0, 1),
+                        maxValue: new Date(2014, 11, 1),
+                        valuesOnTicks: true,
+                        labels: {
+                            angle: -45,
+                            rotationPoint: 'topright',
+                            offset: {x: 0, y: -15},
+                            formatFunction: function (value) {
+                                return months[value.getMonth()] + '\'' + value.getFullYear().toString().substring(2);
+                            },
+                        },
+                        toolTipFormatFunction: function (value) {
+                            return value.getDate() + '-' + months[value.getMonth()] + '-' + value.getFullYear();
+                        }
                     },
+                valueAxis:
+                {
+                    title: { text: 'Daily Closing Price<br>' }
+                },
                 colorScheme: 'scheme05',
                 seriesGroups:
                     [
                         {
                             type: 'area',
                             alignEndPointsWithIntervals: true,
-                            valueAxis:
-                            {
-                                unitInterval: 500,
-                                minValue: 0,
-                                maxValue: 3000,
-                                displayValueAxis: true,
-                                description: 'Daily Closing Price',
-                                //descriptionClass: 'css-class-name',
-                                axisSize: 'auto',
-                                tickMarksColor: '#888888'
-                            },
                             series: [
-                                    { dataField: 'NASDAQ', displayText: 'NASDAQ' },
-                                    { dataField: 'S&P 500', displayText: 'S&P 500' }
+                                    { dataField: 'NASDAQ', displayText: 'NASDAQ', opacity: 0.7 },
+                                    { dataField: 'S&P 500', displayText: 'S&P 500', opacity: 0.8 }
                                 ]
                         }
                     ]

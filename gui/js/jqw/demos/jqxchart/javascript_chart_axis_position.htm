@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Axis Position Example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -38,16 +38,19 @@
                 xAxis:
                     {
                         dataField: 'Year',
-                        showTickMarks: true,
-                        tickMarksInterval: 1,
-                        tickMarksColor: '#888888',
-                        unitInterval: 5,
-                        showGridLines: true,
-                        gridLinesInterval: 5,
-                        gridLinesColor: '#888888',
-                        //axisSize: 'auto',
                         minValue: 1947,
-                        maxValue: 2012
+                        maxValue: 2012,
+                        unitInterval: 5,
+                        tickMarks: {
+                            visible: true,
+                            interval: 1,
+                            dashStyle: '1,2'
+                        },
+                        gridLines: {
+                            visible: true,
+                            interval: 5,
+                            dashStyle: '1,3'
+                        }
                     },
                 colorScheme: 'scheme04',
                 seriesGroups:
@@ -58,8 +61,8 @@
                             {
                                 unitInterval: 20,
                                 maxValue: 400,
-                                description: 'U.S. Population (millions)',
-                                showGridLines: false
+                                title: { text: 'U.S. Population (millions)' },
+                                gridLines: { visible: false }
                             },
                             series: [
                                     { dataField: 'Population', displayText: 'Population' }
@@ -69,13 +72,16 @@
                             type: 'spline',
                             valueAxis:
                             {
+                                title: { text: 'Interest rate' },
+                                position: 'right',
                                 unitInterval: 0.01,
                                 maxValue: 0.2,
                                 visible: true,
-                                displayGridLines: false,
-                                position: 'right',
-                                description: 'Interest rate'
-                        },
+                                gridLines: { visible: false },
+                                labels: {
+                                    horizontalAlignment: 'left'
+                                }
+                            },
                             series: [
                                     { dataField: 'Rate', displayText: 'Interest Rate' }
                                 ]
@@ -84,10 +90,18 @@
                             type: 'spline',
                             valueAxis:
                             {
+                                title: { text: 'Index Value' },
+                                position: 'right',
                                 unitInterval: 20,
                                 maxValue: 200,
-                                position: 'right',
-                                description: 'Index Value'
+                                gridLines: { visible: false },
+                                labels: {
+                                    formatSettings:
+                                    {
+                                        decimalPlaces: 0
+                                    },
+                                    horizontalAlignment: 'left'
+                                }
                             },
                             series: [
                                     { dataField: 'HPI', displayText: 'Real Home Price Index' },

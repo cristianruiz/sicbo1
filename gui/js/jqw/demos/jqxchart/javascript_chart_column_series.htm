@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Column Series Example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
@@ -23,7 +23,7 @@
                 url: '../sampledata/gdp_dept_2010.txt'
             };
 
-            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error);} });
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
 
             // prepare jqxChart settings
             var settings = {
@@ -37,22 +37,23 @@
                 xAxis:
                     {
                         dataField: 'Country',
-                        showGridLines: true
+                        gridLines: { visible: true },
+                        valuesOnTicks: false
                     },
                 colorScheme: 'scheme01',
+                columnSeriesOverlap: false,
                 seriesGroups:
                     [
                         {
                             type: 'column',
-                            columnsGapPercent: 50,
                             valueAxis:
                             {
+                                visible: true,
                                 unitInterval: 5000,
-                                displayValueAxis: true,
-                                description: 'GDP & Debt per Capita($)'
+                                title: { text: 'GDP & Debt per Capita($)<br>' }
                             },
                             series: [
-                                    { dataField: 'GDP', displayText: 'GDP per Capita'},
+                                    { dataField: 'GDP', displayText: 'GDP per Capita' },
                                     { dataField: 'Debt', displayText: 'Debt per Capita' }
                                 ]
                         },
@@ -60,9 +61,12 @@
                             type: 'line',
                             valueAxis:
                             {
+                                visible: true,
+                                position: 'right',
                                 unitInterval: 10,
-                                displayValueAxis: false,
-                                description: 'Debt (% of GDP)'
+                                title: { text: 'Debt (% of GDP)' },
+                                gridLines: { visible: false },
+                                labels: { horizontalAlignment: 'left' }
                             },
                             series: [
                                     { dataField: 'DebtPercent', displayText: 'Debt (% of GDP)' }

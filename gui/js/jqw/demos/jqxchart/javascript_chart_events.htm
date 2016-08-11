@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Events Example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -29,11 +29,10 @@
                 titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
                 source: sampleData,
                 xAxis:
-                    {
-                        dataField: 'Day',
-                        showGridLines: false,
-                        type: 'basic'
-                    },
+                {
+                    dataField: 'Day',
+                    type: 'basic'
+                },
                 colorScheme: 'scheme04',
                 showToolTips: false,
                 enableAnimations: true,
@@ -46,12 +45,8 @@
                                 minValue: 0,
                                 maxValue: 100,
                                 unitInterval: 10,
-                                description: 'Time in minutes'
+                                title: { text: 'Time in minutes' }
                             },
-                            mouseover: myEventHandler,
-                            mouseout: myEventHandler,
-                            click: myEventHandler,
-
                             series: [
                                     { dataField: 'Keith', displayText: 'Keith' },
                                     { dataField: 'Erica', displayText: 'Erica' },
@@ -61,13 +56,21 @@
                     ]
             };
 
-            function myEventHandler(e) {
-                var eventData = '<div><b>Last Event: </b>' + e.event + '<b>, DataField: </b>' + e.serie.dataField + '<b>, Value: </b>' + e.elementValue + "</div>";
+            function myEventHandler(event) {
+                var eventData = '<div><b>Last Event: </b>' + event.type + '<b>, Serie DataField: </b>' + event.args.serie.dataField + '<b>, Value: </b>' + event.args.elementValue + "</div>";
+                if (event.type == 'toggle')
+                    eventData = '<div><b>Last Event: </b>' + event.type + '<b>, Serie DataField: </b>' + event.args.serie.dataField + '<b>, visible: </b>' + event.args.state + "</div>";
                 $('#eventText').html(eventData);
             };
 
             // select the chartContainer DIV element and render the chart.
             $('#chartContainer').jqxChart(settings);
+
+            $('#chartContainer').on('mouseleave mouseenter click toggle', function (event) {
+                if (event.args)
+                    myEventHandler(event); 
+                
+                });
         });
     </script>
 </head>

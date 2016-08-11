@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>In this example is demonstrated how to populate the jqxChart with data from MySQL Database</title> 
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-	<script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
 	<script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>	
 	<script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>	
@@ -39,29 +39,23 @@
 			    padding: { left: 5, top: 5, right: 50, bottom: 5 },
 			    titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
 			    source: dataAdapter,
-			    categoryAxis:
+			    xAxis:
 				{
 				    text: 'Category Axis',
 				    textRotationAngle: 0,
 				    dataField: 'OrderDate',
 				    type: 'date',
+				    baseUnit: 'month',
 				    formatFunction: function (value) {
 				        return $.jqx.dataFormat.formatdate(value, 'dd/MM/yyyy');
 				    },
-				    showTickMarks: true,
-				    tickMarksInterval: Math.round(dataAdapter.records.length / 6),
-				    tickMarksColor: '#888888',
-				    unitInterval: Math.round(dataAdapter.records.length / 6),
-				    showGridLines: true,
-				    gridLinesInterval: Math.round(dataAdapter.records.length / 6),
-				    gridLinesColor: '#888888',
-				    axisSize: 'auto'
+				    showTickMarks: true
 				},
 			    colorScheme: 'scheme05',
 			    seriesGroups:
 				[
 					{
-					    type: 'column',
+					    type: 'line',
 					    valueAxis:
 						{
 						    displayValueAxis: true,
@@ -90,28 +84,38 @@
 </html>
 <!--chartdata.php
 #Include the connect.php file
-include('connect.php');
-#Connect to the database
-//connection String
-$connect = mysql_connect($hostname, $username, $password)
-or die('Could not connect: ' . mysql_error());
-//Select The database
-$bool = mysql_select_db($database, $connect);
-if ($bool === False){
-	print "can't find $database";
-}
-	
-$query = "SELECT * FROM  `Invoices` ORDER BY OrderDate LIMIT 0 , 100";
-$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+include ('connect.php');
 
+// Connect to the database
+// connection String
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
+	{
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
+	}
 // get data and store in a json array
-while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+$from = 0;
+$to = 100;
+$query = "SELECT OrderDate, ProductName, Quantity FROM  invoices ORDER BY OrderDate LIMIT ?,?";
+$result = $mysqli->prepare($query);
+$result->bind_param('ii', $from, $to);
+$result->execute();
+/* bind result variables */
+$result->bind_result($OrderDate, $ProductName, $Quantity);
+/* fetch values */
+while ($result->fetch())
+	{
 	$orders[] = array(
-		'OrderDate' => $row['OrderDate'],
-		'ProductName' => $row['ProductName'],
-		'Quantity' => $row['Quantity']
-		);
-}
-  
+		'OrderDate' => $OrderDate,
+		'ProductName' => $ProductName,
+		'Quantity' => $Quantity
+	);
+	}
 echo json_encode($orders);
+/* close statement */
+$result->close();
+/* close connection */
+$mysqli->close();
 -->

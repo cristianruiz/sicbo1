@@ -5,8 +5,9 @@
     <title id='Description'>In this sample is illustrated how to create custom editors for jqxGrid. The "First Name" and "Last Name" columns use the jqxInput widget as a cell editor. The "Products" column
         use a jqxDropDownList widget with enabled Checkboxes  as an editor. The "Quantity" column's editor is jqxSlider.
     </title>
+	<meta name="description" content="jQuery Data Grid with custom cell editors. The example shows how to create cell editors" /> 	
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
@@ -132,7 +133,7 @@
                           editor.jqxDropDownList({
                               checkboxes: true, source: getEditorDataAdapter('productname'), displayMember: 'productname', valueMember: 'productname', width: width, height: height, 
                               selectionRenderer: function () {
-                                  return "Please Choose:";
+                                  return "<span style='top:4px; position: relative;'>Please Choose:</span>";
                               }
                           });
                       },
@@ -158,6 +159,7 @@
                      text: 'Quantity', width: 200, columntype: 'custom', datafield: 'quantity',
                      createeditor: function (row, cellvalue, editor, cellText, width, height) {
                          // construct the editor. 
+                         editor.css('margin-top', '2px');
                          editor.jqxSlider({ step: 1, mode: 'fixed', showTicks: false, min: 0, max: 30, width: width, height: height });
                      },
                      initeditor: function (row, cellvalue, editor, celltext, pressedkey) {

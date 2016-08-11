@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <title id='Description'>jqxTabs Fluid Size Example. The width and height of the Tabs in this demo are in Percentages.</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 minimum-scale=1" />
+    <meta name="description" content="Responsive Tabs Example. In this example, the Tabs is with fluid size" />
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../scripts/demos.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
@@ -14,13 +17,15 @@
         html, body {
             width: 100%;
             height: 100%;
-            padding: 0;
+            padding: 3px;
+            box-sizing: border-box;
             margin: 0;
         }
     </style>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#jqxTabs').jqxTabs({ height: '30%', width: '80%' });
+        $(document).ready(function ()
+        {
+            $('#jqxTabs').jqxTabs({ height: '100%', width: '100%' });
         });
     </script>
 </head>

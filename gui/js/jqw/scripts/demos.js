@@ -12,7 +12,31 @@
     }
 
     var theme = window.location.toString().substring(1 + themestart);
+    if (theme.indexOf('(') >= 0)
+    {
+        theme = theme.substring(1);
+    }
+    if (theme.indexOf(')') >= 0) {
+        theme = theme.substring(0, theme.indexOf(')'));
+    }
+
     var url = "../../jqwidgets/styles/jqx." + theme + '.css';
+    if (window.location.href.toString().indexOf("angularjs") >= 0) {
+        var loc = window.location.href.toString();
+        if (loc.indexOf('button') >= 0 ||
+        (loc.indexOf('treegrid') == -1 && loc.indexOf('grid') >= 0) ||
+        loc.indexOf('dropdownlist') >= 0 ||
+        loc.indexOf('combobox') >= 0 ||
+        loc.indexOf('datatable') >= 0 ||
+        loc.indexOf('listbox') >= 0 ||
+        loc.indexOf('tabs') >= 0 ||
+        (loc.indexOf('listmenu') == -1 && loc.indexOf('menu') >= 0) ||
+        loc.indexOf('calendar') >= 0 ||
+        loc.indexOf('datetimeinput') >= 0 ||
+        (loc.indexOf('chart') >= 0 && loc.indexOf('bulletchart') == -1)) {
+            url = "../../../jqwidgets/styles/jqx." + theme + '.css';
+        }
+    }
 
     if (document.createStyleSheet != undefined) {
         var hasStyle = false;
@@ -27,13 +51,24 @@
         }
     }
     else {
-        var link = $('<link rel="stylesheet" href="' + url + '" media="screen" />');
-        link[0].onload = function () {
-            if ($.jqx && $.jqx.ready) {
-                $.jqx.ready();
-            };
+        var hasStyle = false;
+        if (document.styleSheets) {
+            $.each(document.styleSheets, function (index, value) {
+                if (value.href != undefined && value.href.indexOf(theme) != -1) {
+                    hasStyle = true;
+                    return false;
+                }
+            });
         }
-        $(document).find('head').append(link);
+        if (!hasStyle) {
+            var link = $('<link rel="stylesheet" href="' + url + '" media="screen" />');
+            link[0].onload = function () {
+                if ($.jqx && $.jqx.ready) {
+                    $.jqx.ready();
+                };
+            }
+            $(document).find('head').append(link);
+        }
     }
     $.jqx = $.jqx || {};
     $.jqx.theme = theme;

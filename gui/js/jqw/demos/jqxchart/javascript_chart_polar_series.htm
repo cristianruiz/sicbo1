@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Polar Axis Example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -42,24 +42,26 @@
                 titlePadding: { left: 0, top: 0, right: 0, bottom: 5 },
                 source: dataAdapter,
                 xAxis:
-                    {
-                        dataField: 'Year',
-                        unitInterval: 10,
-                        maxValue: 2010,
-                        valuesOnTicks: true
-                    },
+                {
+                    dataField: 'Year',
+                    unitInterval: 10,
+                    maxValue: 2010,
+                    valuesOnTicks: true,
+                    labels: { autoRotate: true }
+                },
                 colorScheme: 'scheme01',
                 seriesGroups:
                     [
                         {
                             polar: true,
-                            startAngle: 0,
                             radius: 120,
                             type: 'splinearea',
                             valueAxis:
                             {
-                                description: 'Index Value',
-                                formatSettings: { decimalPlaces: 0 }
+                                labels: {
+                                    formatSettings: { decimalPlaces: 0 },
+                                    autoRotate: true
+                                }
                             },
                             series: [
                                     { dataField: 'HPI', displayText: 'Real Home Price Index', opacity: 0.7, lineWidth: 1, radius: 2, lineWidth: 2 },
@@ -82,6 +84,7 @@
             $('#sliderStartAngle').on('change', function (event) {
                 var value = event.args.value;
                 chart.seriesGroups[0].startAngle = value;
+                chart.seriesGroups[0].endAngle = value + 360;
                 chart.update();
             });
 

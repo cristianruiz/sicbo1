@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Crosshairs Example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -46,17 +46,16 @@
                         },
                         type: 'date',
                         baseUnit: 'month',
-                        showTickMarks: true,
-                        tickMarksInterval: 1,
-                        tickMarksColor: '#888888',
+                        minValue: '01-01-2014',
+                        maxValue: '01-01-2015',
                         unitInterval: 1,
-                        showGridLines: true,
-                        gridLinesInterval: 3,
-                        gridLinesColor: '#888888',
                         valuesOnTicks: true,
-                        minValue: '01-01-2011',
-                        maxValue: '01-01-2012',
-                        textRotationAngle: -45
+                        gridLines: { interval: 3 },
+                        labels: {
+                            angle: -45,
+                            rotationPoint: 'topright',
+                            offset: { x: 0, y: -25 }
+                        }
                     },
                 colorScheme: 'scheme01',
                 seriesGroups:
@@ -65,13 +64,7 @@
                             type: 'line',
                             valueAxis:
                             {
-                                unitInterval: 500,
-                                minValue: 0,
-                                maxValue: 3000,
-                                displayValueAxis: true,
-                                description: 'Daily Closing Price',
-                                axisSize: 'auto',
-                                tickMarksColor: '#888888'
+                                title: { text: 'Daily Closing Price<br><br>' }
                             },
                             series: [
                                     { dataField: 'S&P 500', displayText: 'S&P 500' },

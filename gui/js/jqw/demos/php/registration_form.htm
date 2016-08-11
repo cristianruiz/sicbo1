@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxvalidator.js"></script> 
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script> 
@@ -79,7 +79,8 @@
 			{ input: '#realNameInput', message: 'Real Name is required!', action: 'keyup, blur', rule: 'required' },
 			{ input: '#realNameInput', message: 'Your real name must contain only letters!', action: 'keyup', rule: 'notNumber' },
 			{ input: '#realNameInput', message: 'Your real name must be between 3 and 12 characters!', action: 'keyup', rule: 'length=3,12' },
-			{ input: '#birthInput', message: 'Your birth date must be between 1/1/1900 and 1/1/2012.', action: 'valuechanged', rule: function (input, commit) {
+			{
+			    input: '#birthInput', message: 'Your birth date must be between 1/1/1900 and 1/1/2012.', action: 'valueChanged', rule: function (input, commit) {
 				var date = $('#birthInput').jqxDateTimeInput('getDate');
 				$.ajax({
 				url: "registration.php",

@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>In this example is demonstrated how to create cascading ComboBox. The data source of the "Orders" Combobox is updated dynamically depending on the selected Customer.</title> 
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
@@ -72,8 +72,17 @@
 				$("#orders").jqxComboBox({ disabled: false, selectedIndex: -1});		
 				var value = event.args.item.value;
 				ordersSource.data = {CustomerID: value};
-				ordersAdapter = new $.jqx.dataAdapter(ordersSource);
-				$("#orders").jqxComboBox({source: ordersAdapter});
+				ordersAdapter = new $.jqx.dataAdapter(ordersSource, {
+				    beforeLoadComplete: function (records) {
+				        var filteredRecords = new Array();
+				        for (var i = 0; i < records.length; i++) {
+				            if (records[i].CustomerID == value)
+				                filteredRecords.push(records[i]);
+				        }
+				        return filteredRecords;
+				    }
+				});
+				$("#orders").jqxComboBox({ source: ordersAdapter, autoDropDownHeight: ordersAdapter.records.length > 10 ? false : true});
 			}
 		});   
 		

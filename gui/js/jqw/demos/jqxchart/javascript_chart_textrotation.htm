@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Axis Text Rotation Example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -24,20 +24,22 @@
             var settings = {
                 title: "Axis text rotation example",
                 description: "",
-                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                padding: { left: 5, top: 5, right: 20, bottom: 5 },
                 titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
                 source: sampleData,
                 xAxis:
+                {
+                    position: 'top',
+                    dataField: 'Day',
+                    labels:
                     {
-                        position: 'top',
-                        dataField: 'Day',
-                        showGridLines: true,
-                        textRotationAngle: 55,
-                        horizontalTextAlignment: 'right',
-                        verticalTextAlignment: 'center',
-                        textRotationPoint: 'right',
-                        textOffset: { x: 0, y: 2 }
-                    },
+                        angle: 55,
+                        horizontalAlignment: 'right',
+                        verticalAlignment: 'center',
+                        rotationPoint: 'right',
+                        offset: { x: 0, y: -5 }
+                    }
+                },
                 colorScheme: 'scheme04',
                 showToolTips: true,
                 enableAnimations: true,
@@ -49,12 +51,10 @@
                             orientation: 'horizontal',
                             valueAxis:
                             {
-                                position: 'right',
-                                textRotationAngle: 0,
                                 minValue: 0,
                                 maxValue: 100,
                                 unitInterval: 10,
-                                description: 'Time in minutes'
+                                position: 'right'
                             },
                             series: [
                                     { dataField: 'Keith', displayText: 'Keith' },

@@ -4,7 +4,7 @@
     <title id='Description'>In this demo, the Grid is used in a combination with the jqxDropDownButton
         widget.</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
@@ -16,7 +16,7 @@
     <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdropdownbutton.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script>
-    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>   
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
     <script type="text/javascript" src="../../scripts/demos.js"></script>
     <script type="text/javascript" src="generatedata.js"></script>
     <script type="text/javascript">
@@ -43,22 +43,25 @@
 
             var dataAdapter = new $.jqx.dataAdapter(source);
 
-            // initialize jqxGrid
-            $("#jqxdropdownbutton").jqxDropDownButton({ width: 150, height: 25});
             $("#jqxgrid").jqxGrid(
-            {
-                width: 550,
-                source: dataAdapter,
-                pageable: true,
-                autoheight: true,
-                columnsresize: true,
-                columns: [
-                  { text: 'First Name', columntype: 'textbox', datafield: 'firstname', width: 90 },
-                  { text: 'Last Name', datafield: 'lastname', columntype: 'textbox', width: 90 },
-                  { text: 'Product', columntype: 'dropdownlist', datafield: 'productname', width: 180 },
-                  { text: 'Quantity', datafield: 'quantity', width: 70, cellsalign: 'right' },
-                  { text: 'Price', datafield: 'price', cellsalign: 'right', cellsformat: 'c2' }
-                ]
+             {
+                 width: 550,
+                 source: dataAdapter,
+                 pageable: true,
+                 autoheight: true,
+                 columnsresize: true,
+                 columns: [
+                   { text: 'First Name', columntype: 'textbox', datafield: 'firstname', width: 90 },
+                   { text: 'Last Name', datafield: 'lastname', columntype: 'textbox', width: 90 },
+                   { text: 'Product', columntype: 'dropdownlist', datafield: 'productname', width: 180 },
+                   { text: 'Quantity', datafield: 'quantity', width: 70, cellsalign: 'right' },
+                   { text: 'Price', datafield: 'price', cellsalign: 'right', cellsformat: 'c2' }
+                 ]
+             });
+
+            // initialize jqxGrid
+            $("#jqxdropdownbutton").jqxDropDownButton({
+                width: 150, height: 25
             });
 
             $("#jqxgrid").on('rowselect', function (event) {
@@ -69,6 +72,7 @@
             });
 
             $("#jqxgrid").jqxGrid('selectrow', 0);
+
         });
     </script>
 </head>

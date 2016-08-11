@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Column Series with base-10 Logarithmic Axis</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -22,31 +22,34 @@
                 source: sampleData,
                 enableAnimations: true,
                 xAxis:
-                        {
-                            dataField: '',
-                            description: '',
-                            showGridLines: true,
-                            showTickMarks: true
-                        },
+                {
+                    dataField: '',
+                    title: { visible: false, text: '' },
+                    gridLines: { visible: true },
+                    tickMarks: { visible: true }
+                },
+                valueAxis: {
+                    logarithmicScale: true,
+                    logarithmicScaleBase: 10,
+                    baselineValue: 1,
+                    unitInterval: 1,
+                    title: { text: 'Value' },
+                    tickMarks: { interval: 1 },
+                    gridLines: { interval: 1 },
+                    labels: {
+                        formatSettings: { decimalPlaces: 1 },
+                        horizontalAlignment: 'right'
+                    }
+                },
+
                 seriesGroups:
                         [
                             {
-                            type: 'column',
-                            valueAxis: {
-                                description: 'Value',
-                                logarithmicScale: true,
-                                logarithmicScaleBase:10,
-                                baselineValue: 1,
-                                unitInterval: 1,
-                                tickMarksInterval: 1,
-                                gridLinesInterval: 1,
-                                formatSettings: { decimalPlaces: 1 },
-                                horizontalTextAlignment: 'right'
-                            },
-                            series: [
-                                        { dataField: 'a', displayText: 'A' },
-                                        { dataField: 'b', displayText: 'B' }
-                                    ]
+                                type: 'column',
+                                series: [
+                                    { dataField: 'a', displayText: 'A' },
+                                    { dataField: 'b', displayText: 'B' }
+                                ]
 
                             }
                         ]

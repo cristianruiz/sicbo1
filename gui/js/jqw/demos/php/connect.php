@@ -1,7 +1,7 @@
 <?php
 # FileName="connect.php"
-$hostname = "localhost";
-$database = "northwind";
-$username = "root";
+$hostname = "";
+$database = "";
+$username = "";
 $password = "";
 ?>

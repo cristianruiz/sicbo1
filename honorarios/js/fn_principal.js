@@ -3,17 +3,30 @@
  */
 var ano, mes=0;
 function buscar(){
+	var jqxhr = $.ajax( "../example.php" )
+	  .done(function() {
+	    alert( "success" );
+	  })
+	  .fail(function() {
+	    alert( "error" );
+	  })
+	  .always(function() {
+	    alert( "complete" );
+	  });
+	}
+
+function ___buscar(){
 	document.getElementById('lblstatus').innerHTML="hols";
 	var hilo = new newAjax();
     var url= "../controller/honorarios.php?action=estadoperiodo";
     hilo.open("GET",url,true);
-    console.log("abriendo");
+    console.log("abriendo stat: "+hilo.status);
     hilo.onreadystatechange=function(){
-        if (hilo.readyState == 1){
+        if (hilo.readyState == 0 || hilo.readyState == 2 || hilo.readyState == 3){
         	console.log("aki 1");
        	 document.getElementById('lblstatus').innerHTML="CArgandoa";
         }
-        if (hilo.readyState == 4){
+        if (hilo.readyState == 4 && hilo.status==200){
         	console.log("aki 2");
            /*jsonObject = JSON.parse(hilo.responseText);
 
@@ -23,7 +36,8 @@ function buscar(){
         } */
        	// alert("HOLA: "+hilo.responseText);
     }
-    hilo.send(null);
+        console.log("cerradno stat: "+hilo.status);
+    hilo.send();
     
     }
     console.log("HOLA loooooo");
@@ -93,11 +107,55 @@ $(document).ready(function () {
             selectedIndex: 0,
             valueMember: 'value'
         });
+            
+            
             $("#btnBuscar").jqxButton({ width: '80', height: '25'});
+            
+            $("#jqxLoader").jqxLoader({ width: 250, height: 150, autoOpen: false,text:"Buscando en SICBO" });
+             
             $("#btnBuscar").on('click', function () {
-                buscar();
+            	$('#jqxLoader').jqxLoader('open');
+            	var dat0 = new Object();
+            	dat0.action="honorariosmensual";
+            	dat0.ano=ano;
+            	dat0.mes=mes;
+            	var dataString=JSON.stringify(dat0);
+            	$.ajax({
+                    type: "GET",
+                    data: {parametros:dataString},
+                    dataType: "json",
+                    url: "../controller/honorarios.php",
+                    success: function (d) {
+                    	
+                        
+                        setTimeout(function () {
+                        	$('#jqxLoader').jqxLoader('close');
+                        	$('#cargando').html(d.res1);
+                        }, 2000); 
+                        
+                    }
+                });
             });
             
+           /* $("#btnBuscar").on('click', function () {
+            	$('#cargando').html('<i class="fa fa-cog fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>');
+            	
+            	$.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "../example.php",
+                    success: function (d) {
+                    	
+                        
+                        setTimeout(function () {
+                        	$('#cargando').html('');
+                        	$('#cargando').html(d.res1);
+                        }, 2000); 
+                        
+                    }
+                });
+            });
+            */
             $("#comboAno").on('change', function (event) {
             ano=event.args.item.value;           
             });

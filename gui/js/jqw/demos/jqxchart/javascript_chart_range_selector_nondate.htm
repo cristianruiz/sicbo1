@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Range Selector Example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -47,18 +47,18 @@
                 source: dataAdapter,
                 xAxis:
                     {
-                        minValue: 150,
+                        minValue: 175,
                         maxValue: 550,
                         flip: false,
-                        valuesOnTicks: false,
+                        valuesOnTicks: true,
                         rangeSelector: {
                             serieType: 'area',
-                            padding: { /*left: 0, right: 0,*/ top: 30, bottom: 0 },
+                            padding: { /*left: 0, right: 0,*/ top: 20, bottom: 0 },
                             // Uncomment the line below to render the selector in a separate container
                             //renderTo: $('#selectorContainer'),
                             backgroundColor: 'white',
-                            size: 150,
-                            showGridLines: false,
+                            size: 110,
+                            gridLines: {visible: false},
                         }
                     },
                 seriesGroups:
@@ -69,7 +69,7 @@
                             valueAxis:
                             {
                                 flip: false,
-                                description: 'Value<br><br>'
+                                title: {text: 'Value<br><br>'}
                             },
                             series: [
                                 { dataField: 'Close', lineWidth: 1, lineWidthSelected: 1 }

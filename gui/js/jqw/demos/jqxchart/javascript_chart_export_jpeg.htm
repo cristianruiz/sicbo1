@@ -1,14 +1,15 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title id='Description'>jqxChart Export to JPEG or PNG. In order to export the Chart you will need a browser which supports HTML5.</title>
+    <title id='Description'>jqxChart Export to JPEG, PNG or PDF. In order to export the Chart you will need a browser which supports HTML5.</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../scripts/demos.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.export.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -42,10 +43,9 @@
                 titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
                 source: dataAdapter,
                 xAxis:
-                    {
-                        dataField: 'Country',
-                        showGridLines: true
-                    },
+                {
+                    dataField: 'Country'
+                },
                 colorScheme: 'scheme01',
                 seriesGroups:
                     [
@@ -55,8 +55,7 @@
                             valueAxis:
                             {
                                 unitInterval: 5000,
-                                displayValueAxis: true,
-                                description: 'GDP & Debt per Capita($)'
+                                title: { text: 'GDP & Debt per Capita($)<br>' }
                             },
                             series: [
                                     { dataField: 'GDP', displayText: 'GDP per Capita' },
@@ -68,8 +67,9 @@
                             valueAxis:
                             {
                                 unitInterval: 10,
-                                displayValueAxis: false,
-                                description: 'Debt (% of GDP)'
+                                title: { text: 'Debt (% of GDP)<br>' },
+                                position: 'right',
+                                gridLines: { visible: false }
                             },
                             series: [
                                     { dataField: 'DebtPercent', displayText: 'Debt (% of GDP)' }
@@ -84,6 +84,7 @@
 
             $("#jpegButton").jqxButton({});
             $("#pngButton").jqxButton({});
+            $("#pdfButton").jqxButton({});
 
             $("#jpegButton").click(function () {
                 // call the export server to create a JPEG image
@@ -92,6 +93,10 @@
             $("#pngButton").click(function () {
                 // call the export server to create a PNG image
                 $('#chartContainer').jqxChart('saveAsPNG', 'myChart.png', getExportServer());
+            });
+            $("#pdfButton").click(function () {
+                // call the export server to create a PNG image
+                $('#chartContainer').jqxChart('saveAsPDF', 'myChart.pdf', getExportServer());
             });
         });
     </script>
@@ -104,6 +109,7 @@
             <div style='margin-top: 10px;'>
                 <input style='float: left;' id="jpegButton" type="button" value="Save As JPEG" />
                 <input style='float: left; margin-left: 5px;' id="pngButton" type="button" value="Save As PNG" />
+                <input style='float: left; margin-left: 5px;' id="pdfButton" type="button" value="Save As PDF" />
             </div>
         </div>
     </div>

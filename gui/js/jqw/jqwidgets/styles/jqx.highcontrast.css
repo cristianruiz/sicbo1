@@ -1,4 +1,4 @@
-﻿.jqx-widget-content-highcontrast{border-color: #000; background-color: #fff;}
+﻿.jqx-widget-content-highcontrast{color: #000; border-color: #000; background-color: #fff;}
 .jqx-fill-state-normal-highcontrast {color: #000;background-color: #fff;}
 .jqx-widget-header-highcontrast{color: #fff; border-color:#000; background-color:#000}
 .jqx-fill-state-hover-highcontrast{border-color:#000; color: #fff; background-color:#000}
@@ -63,6 +63,9 @@
 .jqx-icon-calendar-hover-highcontrast, .jqx-icon-calendar-pressed-highcontrast {
     background-image: url('images/icon-calendar-white.png');
 }
+.jqx-icon-time-highcontrast, .jqx-icon-time-hover-highcontrast, .jqx-icon-time-pressed-highcontrast {
+    background-image: url('images/icon-time-white.png');
+}
 .jqx-grid-cell-highcontrast.jqx-grid-cell-selected-highcontrast>.jqx-grid-group-expand-highcontrast,
 .jqx-grid-cell-highcontrast.jqx-grid-cell-hover-highcontrast>.jqx-grid-group-expand-highcontrast {
     background-image: url('images/icon-down-white.png');
@@ -115,4 +118,8 @@
 .jqx-icon-plus-highcontrast
 {
     background-image: url(images/plus_white.png);
+}
+.jqx-layout-highcontrast
+{
+    background-color: #000;
 }

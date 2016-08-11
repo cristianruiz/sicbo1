@@ -3,27 +3,35 @@
   include('connect.php');
   #Connect to the database
   //connection String
-  $connect = mysql_connect($hostname, $username, $password)
-  or die('Could not connect: ' . mysql_error());
-  //select database
-  mysql_select_db($database, $connect);
-  //Select The database
-  $bool = mysql_select_db($database, $connect);
-  if ($bool === False){
-	  print "can't find $database";
-  }
+
+$mysqli = new mysqli($hostname, $username, $password, $database);
+	/* check connection */
+	if (mysqli_connect_errno()) {
+		printf("Connect failed: %s\n", mysqli_connect_error());
+		exit();
+	}
+
   // get data and store in a json array
-  $query = "SELECT * FROM Employees";
-
-  $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-  while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+    $query = "SELECT EmployeeID, FirstName, LastName FROM Employees";
+	$result = $mysqli->prepare($query);
+	$result->execute();
+	
+	/* bind result variables */
+	$result->bind_result($EmployeeID, $FirstName, $LastName);
+	/* fetch values */
+	while ($result -> fetch()) {
 	  $employees[] = array(
-          'EmployeeID' => $row['EmployeeID'],
-          'FirstName' => $row['FirstName'],
-	        'LastName' => $row['LastName'],
-	        'Name' => $row['FirstName'] . " " . $row['LastName']
-        );
-  }
+          'EmployeeID' => $EmployeeID,
+          'FirstName' => $FirstName,
+	      'LastName' => $LastName,
+	      'Name' => $FirstName . " " . $LastName
+      );
+}	
 
-  echo json_encode($employees);
+echo json_encode($employees);
+
+	/* close statement */
+$result->close();
+	/* close connection */
+$mysqli->close();
 ?>

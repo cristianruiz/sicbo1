@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Themes Example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
@@ -109,6 +109,9 @@
             };
 
             var selectionTemplate = function (element, index) {
+                if (index < 0)
+                    return;
+
                 var colors = colorSchemes[index].colors;
                 var html = "";
                 for (var i = 0; i < colors.length; i++) {

@@ -3,15 +3,16 @@
 <head>
     <title id='Description'>jqxChart Printing.</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../scripts/demos.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
-    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            
+
             // prepare data source
             var source =
             {
@@ -36,11 +37,10 @@
                 padding: { left: 5, top: 5, right: 5, bottom: 5 },
                 titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
                 source: dataAdapter,
-                categoryAxis:
-                    {
-                        dataField: 'Country',
-                        showGridLines: true
-                    },
+                xAxis:
+                {
+                    dataField: 'Country'
+                },
                 colorScheme: 'scheme01',
                 seriesGroups:
                     [
@@ -50,8 +50,7 @@
                             valueAxis:
                             {
                                 unitInterval: 5000,
-                                displayValueAxis: true,
-                                description: 'GDP & Debt per Capita($)'
+                                title: { text: 'GDP & Debt per Capita($)<br>' }
                             },
                             series: [
                                     { dataField: 'GDP', displayText: 'GDP per Capita' },
@@ -63,8 +62,9 @@
                             valueAxis:
                             {
                                 unitInterval: 10,
-                                displayValueAxis: false,
-                                description: 'Debt (% of GDP)'
+                                title: { text: 'Debt (% of GDP)' },
+                                gridLines: { visible: false },
+                                position: 'right'
                             },
                             series: [
                                     { dataField: 'DebtPercent', displayText: 'Debt (% of GDP)' }
@@ -85,14 +85,19 @@
                     '<!DOCTYPE html>' +
                     '<html>' +
                     '<head>' +
-                    '<link rel="stylesheet" href="http://www.jqwidgets.com/jquery-widgets-demo/jqwidgets/styles/jqx.base.css" type="text/css" />' +
                     '<meta charset="utf-8" />' +
                     '<title>jQWidgets Chart</title>' +
                     '</head>' +
                     '<body>' + content + '</body></html>';
-                document.write(pageContent);
-                document.close();
-                newWindow.print();
+                try
+                {
+                    document.write(pageContent);
+                    document.close();
+                    newWindow.print();
+                    newWindow.close();
+                }
+                catch (error) {
+                }
             });
 
             $("#print").jqxButton({});

@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Column Series with Logarithmic Axis</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -22,29 +22,34 @@
                 source: sampleData,
                 enableAnimations: true,
                 xAxis:
-                        {
-                            dataField: '',
-                            description: '',
-                            showGridLines: true,
-                            showTickMarks: true
-                        },
+                {
+                    dataField: ''
+                },
+                valueAxis: {
+                    logarithmicScale: true,
+                    logarithmicScaleBase: 2,
+                    unitInterval: 1,
+                    title: { text: 'Value' },
+                    labels: {
+                        formatSettings: { decimalPlaces: 3 },
+                        horizontalAlignment: 'right'
+                    }
+                },
                 seriesGroups:
                         [
                             {
-                            type: 'column',
-                            valueAxis: {
-                                description: 'Value',
-                                logarithmicScale: true,
-                                logarithmicScaleBase: 2,
-                                unitInterval: 1,
-                                tickMarksInterval: 1,
-                                gridLinesInterval: 1,
-                                formatSettings: { decimalPlaces: 3 },
-                                horizontalTextAlignment: 'right'
-                            },
-                            series: [
+                                type: 'column',
+                                series: [
                                         { dataField: 'a', displayText: 'A' },
                                         { dataField: 'b', displayText: 'B' }
+                                    ]
+
+                            },
+                            {
+                                type: 'line',
+                                series: [
+                                        { dataField: 'a', displayText: 'A2' },
+                                        { dataField: 'b', displayText: 'B2' }
                                     ]
 
                             }

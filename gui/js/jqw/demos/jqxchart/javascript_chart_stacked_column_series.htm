@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Stacked Column Series Example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -33,31 +33,35 @@
                 xAxis:
                     {
                         dataField: 'Day',
-                        showTickMarks: true,
-                        tickMarksInterval: 1,
-                        tickMarksColor: '#888888',
                         unitInterval: 1,
-                        showGridLines: false,
-                        gridLinesInterval: 1,
-                        gridLinesColor: '#888888',
-                        axisSize: 'auto'
+                        axisSize: 'auto',
+                        tickMarks: {
+                            visible: true,
+                            interval: 1,
+                            color: '#BCBCBC'
+                        },
+                        gridLines: {
+                            visible: true,
+                            interval: 1,
+                            color: '#BCBCBC'
+                        }
                     },
+                valueAxis:
+                {
+                    unitInterval: 10,
+                    minValue: 0,
+                    maxValue: 120,
+                    title: { text: 'Time in minutes' },
+                    labels: { horizontalAlignment: 'right' },
+                    tickMarks: { color: '#BCBCBC' }
+                },
                 colorScheme: 'scheme06',
                 seriesGroups:
                     [
                         {
                             type: 'stackedcolumn',
-                            columnsGapPercent: 100,
-                            seriesGapPercent: 5,
-                            valueAxis:
-                            {
-                                unitInterval: 10,
-                                minValue: 0,
-                                maxValue: 120,
-                                displayValueAxis: true,
-                                description: 'Time in minutes',
-                                tickMarksColor: '#888888'
-                            },
+                            columnsGapPercent: 50,
+                            seriesGapPercent: 0,
                             series: [
                                     { dataField: 'Running', displayText: 'Running' },
                                     { dataField: 'Swimming', displayText: 'Swimming' },

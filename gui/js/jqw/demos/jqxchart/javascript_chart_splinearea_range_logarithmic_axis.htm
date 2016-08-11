@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Column Series with Logarithmic Axis</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -22,37 +22,32 @@
                 source: sampleData,
                 enableAnimations: true,
                 xAxis:
-                        {
-                            dataField: '',
-                            description: '',
-                            showTickMarks: true,
-                            valuesOnTicks: false,
-                            //gridLinesDashStyle: '2,2',
-                            //tickMarksDashStyle: '1,2',
-                            showGridLines: false
-                        },
+                {
+                    valuesOnTicks: false,
+                    gridLines: { visible: false }
+                },
+                valueAxis: {
+                    logarithmicScale: true,
+                    logarithmicScaleBase: 2,
+                    unitInterval: 1,
+                    flip: false,
+                    title: { text: 'Value' },
+                    labels: {
+                        formatSettings: { decimalPlaces: 3 },
+                        horizontalAlignment: 'right'
+                    },
+                    gridLines: { visible: false }
+                },
                 seriesGroups:
-                        [
-                            {
-                            type: 'splinerangearea',
-                            valueAxis: {
-                                flip: false,
-                                description: 'Value',
-                                logarithmicScale: true,
-                                logarithmicScaleBase: 2,
-                                unitInterval: 1,
-                                formatSettings: { decimalPlaces: 3 },
-                                horizontalTextAlignment: 'right',
-                                //gridLinesDashStyle: '2,2',
-                                //tickMarksDashStyle: '1,2',
-                                showGridLines: false
-                            },
-                            series: [
-                                        { dataFieldFrom: 'a', dataFieldTo: 'b', displayText: 'from A to B', opacity: 0.8, lineWidth: 1 }
-                                    ]
+                [
+                    {
+                        type: 'splinerangearea',
+                        series: [
+                                { dataFieldFrom: 'a', dataFieldTo: 'b', displayText: 'from A to B', opacity: 0.8, lineWidth: 1 }
+                            ]
 
-                            }
-                        ]
+                    }
+                ]
             };
 
             $('#chartContainer').jqxChart(settings);

@@ -6,7 +6,7 @@
                                       In the content you could put any html content." />
     <title id='Description'>You can use the jqxWindow to direct a user’s attention to a particular activity in your application, such as entering data or viewing information. Consider using a jqxWindow when you want greater customization, you want to block the user interface outside the window, or when you want to retrieve a DialogResult and other data from the popup window. jqxWindow can be displayed as a modal dialog window that blocks user interaction with the underlying user interface or as a standard window without blocking the web page's user interface.</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
@@ -51,7 +51,11 @@
 
             //Creating the demo window
             function _createWindow() {
+                var jqxWidget = $('#jqxWidget');
+                var offset = jqxWidget.offset();
+
                 $('#window').jqxWindow({
+                    position: { x: offset.left + 50, y: offset.top + 50} ,
                     showCollapseButton: true, maxHeight: 400, maxWidth: 700, minHeight: 200, minWidth: 200, height: 300, width: 500,
                     initContent: function () {
                         $('#tab').jqxTabs({ height: '100%', width:  '100%' });

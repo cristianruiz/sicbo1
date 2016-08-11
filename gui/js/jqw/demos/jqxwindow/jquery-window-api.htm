@@ -5,7 +5,7 @@
     <meta name="description" content="Show, Hide, Pin, Unpin or Open and Close the jqxWindow through its API functions." />
     <title id='Description'>Show, Hide, Pin, Unpin or Open and Close the jqxWindow through its API functions.</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../scripts/demos.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
@@ -77,7 +77,9 @@
             };
 
             function _createElements() {
-                $('#showWindowButton').jqxButton({ width: '80px'});
+                var mainDemoContainer = $('#mainDemoContainer');
+                var offset = mainDemoContainer.offset();
+                $('#showWindowButton').jqxButton({ width: '80px' });
                 $('#hideWindowButton').jqxButton({ width: '80px' });
                 $('#pinWindowButton').jqxButton({ width: '80px' });
                 $('#unpinWindowButton').jqxButton({ width: '80px' });
@@ -86,6 +88,7 @@
                 $('#customWindow').jqxWindow({  width: 400,
                     height: 110, resizable: false,
                     cancelButton: $('#cancelButton'),
+                    position: { x: offset.left + 50, y: offset.top + 50},
                     initContent: function () {
                         $('#searchTextButton').jqxButton({ width: '80px', disabled: true });
                         $('#cancelButton').jqxButton({ width: '80px', disabled: false });

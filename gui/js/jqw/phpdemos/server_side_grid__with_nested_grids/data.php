@@ -1,108 +1,136 @@
 <?php
-#Include the connect.php file
-include('connect.php');
-#Connect to the database
-//connection String
-$connect = mysql_connect($hostname, $username, $password)
-or die('Could not connect: ' . mysql_error());
-//Select The database
-$bool = mysql_select_db($database, $connect);
-if ($bool === False){
-	print "can't find $database";
-}
+// Include the connect.php file
+include ('connect.php');
+
+// Connect to the database
+// connection String
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
+	{
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
+	}
 // get data and store in a json array
-$query = "SELECT * FROM customers";
 if (isset($_GET['customerid']))
-{
+	{
 	$pagenum = $_GET['pagenum'];
 	$pagesize = $_GET['pagesize'];
+	$customerid = $_GET['customerid'];
 	$start = $pagenum * $pagesize;
-	$query = "SELECT SQL_CALC_FOUND_ROWS * FROM Orders WHERE CustomerID='" .$_GET['customerid'] . "'";
-	$query .= " LIMIT $start, $pagesize";
-	$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-	$sql = "SELECT FOUND_ROWS() AS `found_rows`;";
-	$rows = mysql_query($sql);
-	$rows = mysql_fetch_assoc($rows);
-	$total_rows = $rows['found_rows'];	
+	$query = "SELECT SQL_CALC_FOUND_ROWS OrderDate, ShippedDate, ShipName, ShipAddress, ShipCity, ShipCountry FROM orders  WHERE CustomerID=? LIMIT ?,?";
 	if (isset($_GET['sortdatafield']))
-	{
+		{
+		$sortfields = array(
+			"OrderDate",
+			"ShippedDate",
+			"ShipName",
+			"ShipAddress",
+			"ShipCity",
+			"ShipCountry"
+		);
 		$sortfield = $_GET['sortdatafield'];
 		$sortorder = $_GET['sortorder'];
-		
-		if ($sortfield != NULL)
-		{		
+		if (($sortfield != NULL) && (in_array($sortfield, $sortfields)))
+			{
 			if ($sortorder == "desc")
-			{
-				$query = "SELECT * FROM Orders WHERE CustomerID='" .$_GET['customerid'] . "' ORDER BY" . " " . $sortfield . " DESC LIMIT $start, $pagesize";
+				{
+				$query = "SELECT SQL_CALC_FOUND_ROWS OrderDate, ShippedDate, ShipName, ShipAddress, ShipCity, ShipCountry FROM orders  WHERE CustomerID=? ORDER BY " . $sortfield . " DESC LIMIT ?,?";
+				}
+			  else if ($sortorder == "asc")
+				{
+				$query = "SELECT SQL_CALC_FOUND_ROWS OrderDate, ShippedDate, ShipName, ShipAddress, ShipCity, ShipCountry FROM orders  WHERE CustomerID=? ORDER BY " . $sortfield . " ASC LIMIT ?,?";
+				}
 			}
-			else if ($sortorder == "asc")
-			{
-				$query = "SELECT * FROM Orders WHERE CustomerID='" .$_GET['customerid'] . "' ORDER BY" . " " . $sortfield . " ASC LIMIT $start, $pagesize";
-			}			
-			$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
 		}
-	}
-	// get data and store in a json array
-	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+	$result = $mysqli->prepare($query);
+	$result->bind_param('sii', $customerid, $start, $pagesize);
+	$result->execute();
+	/* bind result variables */
+	$result->bind_result($OrderDate, $ShippedDate, $ShipName, $ShipAddress, $ShipCity, $ShipCountry);
+	/* fetch values */
+	while ($result->fetch())
+		{
 		$orders[] = array(
-			'OrderDate' => $row['OrderDate'],
-			'ShippedDate' => $row['ShippedDate'],
-			'ShipName' => $row['ShipName'],
-			'ShipAddress' => $row['ShipAddress'],
-			'ShipCity' => $row['ShipCity'],
-			'ShipCountry' => $row['ShipCountry']
-		  );
-	}
-    $data[] = array(
-       'TotalRows' => $total_rows,
-	   'Rows' => $orders
-	);
-	echo json_encode($data);    	
-}
-else
-{
-	$pagenum = $_GET['pagenum'];
-	$pagesize = $_GET['pagesize'];
-	$start = $pagenum * $pagesize;
-	$query = "SELECT SQL_CALC_FOUND_ROWS * FROM Customers LIMIT $start, $pagesize";
-	$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-	$sql = "SELECT FOUND_ROWS() AS `found_rows`;";
-	$rows = mysql_query($sql);
-	$rows = mysql_fetch_assoc($rows);
-	$total_rows = $rows['found_rows'];
-	if (isset($_GET['sortdatafield']))
-	{
-		$sortfield = $_GET['sortdatafield'];
-		$sortorder = $_GET['sortorder'];
-		
-		if ($sortfield != NULL)
-		{		
-			if ($sortorder == "desc")
-			{
-				$query = "SELECT * FROM Customers ORDER BY" . " " . $sortfield . " DESC LIMIT $start, $pagesize";
-			}
-			else if ($sortorder == "asc")
-			{
-				$query = "SELECT * FROM Customers ORDER BY" . " " . $sortfield . " ASC LIMIT $start, $pagesize";
-			}			
-			$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+			'OrderDate' => $OrderDate,
+			'ShippedDate' => $ShippedDate,
+			'ShipName' => $ShipName,
+			'ShipAddress' => $ShipAddress,
+			'ShipCity' => $ShipCity,
+			'ShipCountry' => $ShipCountry
+		);
 		}
-	}
-	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-		$customers[] = array(
-			'CustomerID' => $row['CustomerID'],
-			'CompanyName' => $row['CompanyName'],
-			'ContactName' => $row['ContactName'],
-			'ContactTitle' => $row['ContactTitle'],
-			'Address' => $row['Address'],
-			'City' => $row['City'],
-			'Country' => $row['Country']
-		  );
-	}
-    $data[] = array(
-       'TotalRows' => $total_rows,
-	   'Rows' => $customers
+	$result = $mysqli->prepare("SELECT FOUND_ROWS()");
+	$result->execute();
+	$result->bind_result($total_rows);
+	$result->fetch();
+	$data[] = array(
+		'TotalRows' => $total_rows,
+		'Rows' => $orders
 	);
 	echo json_encode($data);
-}
+	}
+  else
+	{
+	$pagenum = $_GET['pagenum'];
+	$pagesize = $_GET['pagesize'];
+	$start = $pagenum * $pagesize;
+	$query = "SELECT SQL_CALC_FOUND_ROWS CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Country FROM customers LIMIT ?,?";
+	if (isset($_GET['sortdatafield']))
+		{
+		$sortfields = array(
+			"CustomerID",
+			"CompanyName",
+			"ContactName",
+			"ContactTitle",
+			"Address",
+			"City",
+			"Country"
+		);
+		$sortfield = $_GET['sortdatafield'];
+		$sortorder = $_GET['sortorder'];
+		if (($sortfield != NULL) && (in_array($sortfield, $sortfields)))
+			{
+			if ($sortorder == "desc")
+				{
+				$query = "SELECT SQL_CALC_FOUND_ROWS CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Country FROM customers ORDER BY " . $sortfield . " DESC LIMIT ?,?";
+				}
+			  else if ($sortorder == "asc")
+				{
+				$query = "SELECT SQL_CALC_FOUND_ROWS CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Country FROM customers ORDER BY " . $sortfield . " ASC LIMIT ?,?";
+				}
+			}
+		}
+	$result = $mysqli->prepare($query);
+	$result->bind_param('ii', $start, $pagesize);
+	$result->execute();
+	/* bind result variables */
+	$result->bind_result($CustomerID, $CompanyName, $ContactName, $ContactTitle, $Address, $City, $Country);
+	/* fetch values */
+	while ($result->fetch())
+		{
+		$customers[] = array(
+			'CustomerID' => $CustomerID,
+			'CompanyName' => $CompanyName,
+			'ContactName' => $ContactName,
+			'ContactTitle' => $ContactTitle,
+			'Address' => $Address,
+			'City' => $City,
+			'Country' => $Country
+		);
+		}
+	$result = $mysqli->prepare("SELECT FOUND_ROWS()");
+	$result->execute();
+	$result->bind_result($total_rows);
+	$result->fetch();
+	$data[] = array(
+		'TotalRows' => $total_rows,
+		'Rows' => $customers
+	);
+	echo json_encode($data);
+	}
+/* close statement */
+$result->close();
+/* close connection */
+$mysqli->close();
 ?>
