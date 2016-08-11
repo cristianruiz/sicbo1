@@ -3,9 +3,13 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 	var $mes;
 	var $ano;
 	var $periodo;
+	var $fecha;
 	public function hm_honorariosicbo($m,$a){
 		$this->ano=$a;
 		$this->mes=$m;
+		$sql= "select current_date()";
+		$sqlQuery = new SqlQuery($sql);
+		$fecha=$this->execute($sqlQuery);
 		switch ($this->mes) {
 			case 'ENERO':
 				$this->periodo='1'.$this->ano;
@@ -69,6 +73,7 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 		$r=$h->queryByPeriodo($this->periodo);
 		
 	}
+	
 	public function nuevoperiodo(){
 		$h= new HmHonorariossicboMySqlDAO();
 		$r=new HmHonorariossicbo();
