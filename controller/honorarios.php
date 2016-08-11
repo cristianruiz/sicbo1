@@ -9,14 +9,14 @@ switch ($action) {
 		$ano= $obj->ano;
 		
 		$h=new hm_honorariosicbo($mes, $ano);
-		
+		$n=$h->nuevoperiodo();
 		
 		$params= array("ano"=>$ano,"mes"=>$mes);
 		//print_r($params);
 		$client=new SoapClient('http://192.168.1.51:8080/cbows/admision?wsdl');
 		
 		//$salida= array("res1"=> $client->honorarios_pad($params)->return);
-		$salida= array("res1"=> $h->get_periodo());
+		$salida= array("res1"=> $n);
 		print(json_encode($salida));
 
 		break;
