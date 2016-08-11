@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>In this example is demonstrated how to populate the jqxComboBox with data from MySQL Database. Each item in the list has label and value fields. The label is displayed to the user. When you click on the Submit button, the selected item's value will be displayed.</title> 
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
@@ -54,7 +54,7 @@
     </script>
 </head>
 <body class='default'>
-   <form class="form" id="form" target="form-iframe"  method="post" action="list.php" style="font-size: 13px; font-family: Verdana; width: 650px;">
+   <form class="form" id="form" target="form-iframe"  method="post" action="combobox.php" style="font-size: 13px; font-family: Verdana; width: 650px;">
      <div name="list" id="combobox"></div>
    	 <input style="margin-top: 10px;" type="submit" value="Submit" id="sendButton" />
    </form>
@@ -65,37 +65,43 @@
 </html>
 <!--comboboxdata.php
 #Include the connect.php file
-include('connect.php');
-#Connect to the database
-//connection String
-$connect = mysql_connect($hostname, $username, $password)
-or die('Could not connect: ' . mysql_error());
-//select database
-mysql_select_db($database, $connect);
-//Select The database
-$bool = mysql_select_db($database, $connect);
-if ($bool === False){
-	print "can't find $database";
-}
+include ('connect.php');
+
+// Connect to the database
+// connection String
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
+	{
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
+	}
 // get data and store in a json array
-$query = "SELECT * FROM Customers";
-$from = 0; 
+$from = 0;
 $to = 30;
-$query .= " LIMIT ".$from.",".$to;
+$query = "SELECT CompanyName, ContactName, ContactTitle, Address, City FROM customers LIMIT ?,?";
+$result = $mysqli->prepare($query);
+$result->bind_param('ii', $from, $to);
+$result->execute();
+/* bind result variables */
+$result->bind_result($CompanyName, $ContactName, $ContactTitle, $Address, $City);
+/* fetch values */
+while ($result->fetch())
+	{
+	$orders[] = array(
+		'CompanyName' => $CompanyName,
+		'ContactName' => $ContactName,
+		'ContactTitle' => $ContactTitle,
+		'Address' => $Address,
+		'City' => $City
+	);
+	}
+echo json_encode($orders);
+/* close statement */
+$result->close();
+/* close connection */
+$mysqli->close();
 
-$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-	$customers[] = array(
-        'CompanyName' => $row['CompanyName'],
-        'ContactName' => $row['ContactName'],
-	'ContactTitle' => $row['ContactTitle'],
-	'Address' => $row['Address'],
-	'City' => $row['City']
-      );
-}
-
-echo json_encode($customers);
-
---list.php--
+--combobox.php--
 echo $_POST["list"];
 -->

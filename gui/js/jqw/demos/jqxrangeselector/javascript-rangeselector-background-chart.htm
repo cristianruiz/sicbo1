@@ -3,7 +3,7 @@
 <head>
     <title id="Description">RangeSelector - Chart as Background</title>
     <link type="text/css" rel="Stylesheet" href="../../jqwidgets/styles/jqx.base.css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxrangeselector.js"></script>
@@ -29,18 +29,20 @@
                 {
                     // create jqxRangeSelector.
                     $("#rangeSelector").jqxRangeSelector({
-                        width: 750, height: 200, min: 0, max: 11,
+                        width: 750, height: 200, min: 0, max: 12,
                         range: {from: 3, to: 9}, labelsOnTicks: false,
                         majorTicksInterval: 1, minorTicksInterval: 1,
                         labelsFormatFunction: function (data) {
                             if (records[data]) {
-                                return records[data].month;
+                                return "1 " + records[data].month;
                             }
+                            else return "31 " + records[data - 1].month;
                         },
                         markersFormatFunction: function (data) {
                             if (records[data]) {
-                                return records[data].month;
+                                return "1 " + records[data].month;
                             }
+                            else return "31 " + records[data - 1].month;
                         }
                     });
                 },
@@ -54,10 +56,10 @@
                 showBorderLine: false,
                 title: "",
                 description: "",
-                padding: { left: 0, top: 0, right: 0, bottom: 0 },
+                padding: { left: 5, top: 0, right: 0, bottom: 0 },
                 titlePadding: { left: 0, top: 0, right: 0, bottom: 0 },
                 source: dataAdapter,
-                categoryAxis:
+                xAxis:
                     {
                         text: 'Category Axis',
                         textRotationAngle: 0,
@@ -78,20 +80,19 @@
                 seriesGroups:
                     [
                         {
-                            type: 'column',
+                            type: 'line',
                             showLabels: false,
                             valueAxis:
                             {
                                 unitInterval: 5,
-                                displayValueAxis: false,
+                                visible: false,
                                 description: 'Temperature [C]',
-                                //descriptionClass: 'css-class-name',
                                 axisSize: 'auto',
                                 tickMarksColor: '#888888'
                             },
                             series: [
-                                    { dataField: 'max', displayText: 'Max Temperature' },
-                                    { dataField: 'min', displayText: 'Min Temperature' }
+                                    { dataField: 'max', lineColor: "green", displayText: 'Max Temperature' },
+                                    { dataField: 'min', lineColor: "red", displayText: 'Min Temperature' }
                             ]
                         }
                     ]
@@ -107,7 +108,7 @@
     <br /><label style="margin-left: 250px; font-size: 14px; font-weight: bold;">Climatological Information about Geneva</label>
     <div id="rangeSelector">
         <div id="jqxRangeSelectorContent">
-            <div id='jqxChart' style="width: 600px; height: 200px; position: relative; left: 0px; top: 0px;">
+            <div id='jqxChart' style="width: 750px; height: 200px; position: relative; left: 0px; top: 0px;">
             </div>
         </div>
     </div>

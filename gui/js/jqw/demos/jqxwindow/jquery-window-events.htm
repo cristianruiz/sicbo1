@@ -5,7 +5,7 @@
     <meta name="description" content="This demo demonstrates how to trigger some of the jqxWindow events like open, closed and moved." />
     <title id='Description'>This demo demonstrates how to trigger some of the jqxWindow events like open, closed and moved.</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../scripts/demos.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
@@ -51,7 +51,11 @@
             });
         }
         function createElements() {
+            var jqxWidget = $('#jqxWidget');
+            var offset = jqxWidget.offset();
+
             $('#eventWindow').jqxWindow({
+                position: { x: offset.left + 50, y: offset.top + 50} ,
                 maxHeight: 150, maxWidth: 280, minHeight: 30, minWidth: 250, height: 145, width: 270,
                 resizable: false, isModal: true, modalOpacity: 0.3,
                 okButton: $('#ok'), cancelButton: $('#cancel'),

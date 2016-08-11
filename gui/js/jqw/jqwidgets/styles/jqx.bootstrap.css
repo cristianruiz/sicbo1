@@ -293,9 +293,6 @@
 }
 
 .jqx-radiobutton-bootstrap {
-    -moz-border-radius: 100%;
-    -webkit-border-radius: 100%;
-    border-radius: 100%;
     background-repeat: no-repeat;
     background: none;
 }
@@ -807,7 +804,7 @@
 }
 
 input[type="text"].jqx-input-bootstrap, input[type="text"].jqx-widget-content-bootstrap, input[type="textarea"].jqx-widget-content-bootstrap, textarea.jqx-input-bootstrap {
-    padding-left: 1px !important;
+    padding-left: 0px !important;
 }
 
 input[type="text"].jqx-input-bootstrap:-moz-placeholder, input[type="text"].jqx-widget-content-bootstrap:-moz-placeholder, input[type="textarea"].jqx-widget-content-bootstrap:-moz-placeholder, textarea.jqx-input-bootstrap:-moz-placeholder {
@@ -823,7 +820,7 @@ input[type="text"].jqx-input-bootstrap:-ms-input-placeholder, input[type="text"]
 }
 
 input[type="password"].jqx-input-bootstrap, input[type="password"].jqx-widget-content-bootstrap, input[type="textarea"].jqx-widget-content-bootstrap, textarea.jqx-input-bootstrap {
-    padding-left: 1px !important;
+    padding-left: 0px !important;
 }
 
 input[type="password"].jqx-input-bootstrap:-moz-placeholder, input[type="password"].jqx-widget-content-bootstrap:-moz-placeholder, input[type="textarea"].jqx-widget-content-bootstrap:-moz-placeholder, textarea.jqx-input-bootstrap:-moz-placeholder {
@@ -920,4 +917,8 @@ input[type="password"].jqx-input-bootstrap:-ms-input-placeholder, input[type="pa
     background-image: url('images/icon-down-white.png');
     background-repeat: no-repeat;
     background-position: center;
+}
+.jqx-layout-bootstrap
+{
+    background-color: #cccccc;
 }

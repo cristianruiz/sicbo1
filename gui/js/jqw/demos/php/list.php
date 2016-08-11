@@ -1,3 +1,4 @@
 ﻿<?php
-	echo $_POST["list"];
+	echo $_POST["hiddenLabel"]."<br />";
+	echo $_POST["hiddenValue"];
 ?>

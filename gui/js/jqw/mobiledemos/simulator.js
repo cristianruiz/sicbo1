@@ -143,6 +143,10 @@
     if (hasParam != -1) {
         switch (id) {
             case "grid":
+            case "scheduler":
+            case "kanban":
+            case "layout":
+            case "dockinglayout":
             case "gauge":
             case "chart":
             case "menu":
@@ -153,6 +157,9 @@
             case "window":
             case "photoGallery":
             case "splitter":
+            case "popover":
+            case "draw":
+            case "ribbon":
             case "rangeSelector":
                 className += "-tablet";
                 break;
@@ -166,8 +173,11 @@
     return theme;
 }
 
-function initSimulator(id) {
+function initSimulator(id, settings) {
     if ($.jqx.mobile.isTouchDevice()) {        
+        if (id == "scheduler") {
+            $("#scheduler").jqxScheduler(settings);
+        }
         return;
     }
 
@@ -200,6 +210,9 @@ function initSimulator(id) {
         case "dropdownlist":
             $("#dropdownlist").jqxDropDownList('listBox').host.jqxListBox({ touchMode: true, keyboardNavigation: false });
             break;
+        case "adapter":
+            $("#jqxDropDownList").jqxDropDownList('listBox').host.jqxListBox({ touchMode: true, keyboardNavigation: false });
+            break;
         case "combobox":
             $("#combobox").jqxComboBox({ touchMode: true});
             break;
@@ -219,13 +232,17 @@ function initSimulator(id) {
             $("#grid").jqxGrid({ touchmode: true, keyboardnavigation: false, enablemousewheel: false });
             break;
         case "treeGrid":
-            $("#treeGrid").jqxTreeGrid({ touchMode: true, enableHover: false });
+            $("#treeGrid").jqxTreeGrid({ touchmode: true, enableHover: false });
             break;
         case "dataTable":
-            $("#dataTable").jqxDataTable({touchMode: true, enableHover: false});
+            $("#dataTable").jqxDataTable({touchmode: true, enableHover: false});
             break;
         case "panel":
             $("#panel").jqxPanel({ touchMode: true });
+            break;
+        case "scheduler":
+            settings.touchMode = true;
+            $("#scheduler").jqxScheduler(settings);
             break;
         case "editor":
             $("#editor").jqxEditor({ touchMode: true });

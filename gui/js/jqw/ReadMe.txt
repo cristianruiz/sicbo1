@@ -19,10 +19,12 @@
   styles/jqx.blackberry.css: Stylesheet for the Blackberry Theme
   styles/jqx.bootstrap.css: Stylesheet for the Bootstrap Theme
   styles/jqx.classic.css: Stylesheet for the Classic Theme
+  styles/jqx.dark.css: Stylesheet for the Dark Theme
   styles/jqx.darkblue.css: Stylesheet for the DarkBlue Theme
   styles/jqx.energyblue.css: Stylesheet for the EnergyBlue Theme
   styles/jqx.fresh.css: Stylesheet for the Fresh Theme
   styles/jqx.highcontrast.css: Stylesheet for the High Contrast Theme
+  styles/jqx.light.css: Stylesheet for the LightTheme
   styles/jqx.metro.css: Stylesheet for the Metro Theme
   styles/jqx.metrodark.css: Stylesheet for the Metro Dark Theme
   styles/jqx.mobile.css: Stylesheet for the Mobile Theme
@@ -44,23 +46,37 @@
   
   Files for individual widgets and plug-ins. Include depending on project needs:
 	
-  jqxbutton.js: Button, RepeatButton, SubmitButton & ToggleButton widgets
-  jqxbuttongroup.js: Button Group widget
-  jqxcalendar.js: impements Calendar widget
-  jqxchart.js: Chart widget
-  jqxcheckbox.js: CheckBox widget   
+  jqxangular.js: AngularJS integration plug-in
+  jqxbargauge.js: BarGauge widget
+  jqxbuttons.js: Button, RepeatButton, SubmitButton & ToggleButton widgets
+  jqxbulletchart.js: BulletChart widget
+  jqxbuttongroup.js: Button group widget
+  jqxcalendar.js: Calendar widget
   jqxcombobox.js: ComboBox widget
+  jqxcomplexinput.js: Complex Numbers TextBox widget
+  jqxchart.core.js: Chart widget's Core
+  jqxchart.rangeselector.js: Chart Range Selector
+  jqxchart.api.js: Chart API
+  jqxchart.annotations.js: Chart's annotations
+  jqxchart.waterfall.js: Waterfall Chart
+  jqxcheckbox.js: CheckBox widget
+  jqxdate.js: DateTime plug-in
+  jqxdata.js: Data Source plug-in
+  jqxdata.export.js: Data Export plug-in
+  jqxdatetimeinput.js: DateTimeInput widget
   jqxcolorpicker.js: Color Picker widget
-  jqxdata.js: Data Source plug-in  
-  jqxdata.export.js: Data export plug-in  
-  jqxdatatable.js DataTable widget.
-  jqxdropdownbutton.js: DropDownButton widget
-  jqxdatetimeinput.js: impements DateTimeInput widget
-  jqxdockpanel.js: DockPanel widget
-  jqxdropdownlist.js: DropDownList widget
+  jqxdatatable.js: DataTable widget
   jqxdocking.js: Docking widget
+  jqxdropdownbutton.js: DropDown Button widget
   jqxdragdrop.js: DragDrop plug-in
+  jqxdraw.js: Draw Plugin.
+  jqxdockpanel.js: DockPanel widget
+  jqxdockinglayout.js: Docking Layout widget
+  jqxdropdownlist.js: DropDownList widget
+  jqxeditor.js: Editor widget
   jqxexpander.js: Expander widget
+  jqxfileupload.js: FileUpload widget
+  jqxformattedinput.js: Binary, Octal, Hex TextBox widget
   jqxgrid.js: Grid widget
   jqxgrid.sort.js: Grid Sort plug-in
   jqxgrid.filter.js: Grid Filter plug-in
@@ -68,38 +84,50 @@
   jqxgrid.selection.js: Grid Selection plug-in
   jqxgrid.columnsresize.js: Grid Columns Resize plug-in
   jqxgrid.columnsreorder.js: Grid Columns Reorder plug-in
-  jqxgrid.pager.js: Grid paging plug-in
-  jqxgrid.edit.js: Grid edit plug-in
-  jqxgrid.aggregates.js: Grid aggregates plug-in
-  jqxgrid.export.js: Grid export plug-in
+  jqxgrid.pager.js: Grid Pager plug-in
+  jqxgrid.edit.js: Grid Editing plug-in
   jqxgrid.storage.js: Grid Save/Load state plug-in
-  jqxgauge.js: Gauge widget
-  jqxinput.js: Input widget
-  jqxknockout.js: Knockout Integration plug-in
+  jqxgrid.aggregates.js: Grid Aggregates plug-in
+  jqxgauge.js: Radial and Linear Gauge widget
+  jqxinput.js: TextBox widget
+  jqxknockout.js: Knockout integration plug-in
+  jqxknob.js: Knob widget
+  jqxkanban.js: Kanban widget
+  jqxlayout.js: Layout widget
   jqxlistbox.js: ListBox widget
-  jqxlistmenu.js: ListMenu widget
+  jqxloader.js: Loader widget
   jqxmaskedinput.js: Masked TextBox widget
   jqxmenu.js: Menu widget
   jqxnavigationbar.js: NavigationBar widget
+  jqxnavbar.js: NavBar widget
+  jqxnotification.js: Notification widget
   jqxnumberinput.js: NumberInput TextBox widget
   jqxpanel.js: Panel widget
+  jqxpopover.js: Popover widget
   jqxprogressbar.js: ProgressBar widget
-  jqxpasswordinput.js: Password widget
-  jqxresponse.js: Response plug-in  
+  jqxpasswordinput.js: Password input widget
   jqxrating.js: Rating widget
-  jqxrangeselector.js: Range Selector widget  
-  jqxradiobutton.js: RadioButton widget   
+  jqxradiobutton.js: RadioButton widget
+  jqxrangeselector.js: RangeSelector widget
+  jqxresponse.js: Response plug-in
+  jqxribbon.js: Ribbon widget
+  jqxresponsivepanel.js: Responsive Panel widget
   jqxswitchbutton.js: Switch Button widget
   jqxscrollbar.js: ScrollBar widget
-  jqxslider.js: Slider widget
-  jqxsplitter.js: Splitter widget
   jqxscrollview.js: ScrollView widget
+  jqxsplitter.js: Splitter widget
+  jqxslider.js: Slider widget
+  jqxscheduler.js: Scheduler widget
+  jqxscheduler.api.js: Scheduler API plugin
+  jqxsortable.js: Sortable plugin
   jqxtabs.js: Tabs widget
   jqxtree.js: Tree widget
+  jqxtagcloud.js: Tagcloud widget
   jqxtreemap.js: TreeMap widget
-  jqxtouch.js plug-in: which simlifies handling of touch events
+  jqxtreegrid.js: TreeGrid widget
+  jqxtoolbar.js: Toolbar widget
   jqxtooltip.js: ToolTip widget
-  jqxvalidator.js: Validator plug-in
+  jqxvalidator.js: Validation plug-in
   jqxwindow.js: Window widget
 
   File for all widgets and plug-ins:

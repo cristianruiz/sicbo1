@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <title id='Description'>Keyboard Navigation in jqxDataTable</title>
+	<meta name="description" content="JavaScript dataTable Keyboard Navigation" />   	    		
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
@@ -44,6 +45,12 @@
                     source: dataAdapter,                    
                     editable: true,
                     pageable: true,
+                    ready: function()
+                    {
+                        // focus jqxDataTable.
+                        $("#dataTable").jqxDataTable('focus');
+                        $("#dataTable").jqxDataTable('selectRow', 0);
+                    },
                     columns: [
                       { text: 'Ship Name', dataField: 'ShipName', width: 350, align: 'left', cellsAlign: 'left' },
                       { text: 'Freight', dataField: 'Freight', width: 180, align: 'right', cellsFormat: 'F2', cellsAlign: 'right' },
@@ -52,9 +59,6 @@
                       { text: 'Ship Country', dataField: 'ShipCountry', align: 'left', cellsAlign: 'left' }
                     ]
                 });
-
-                // focus jqxDataTable.
-                $("#dataTable").jqxDataTable('focus');
             });
         </script>
         <div id='jqxWidget' v>

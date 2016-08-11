@@ -1,4 +1,438 @@
 ﻿*********************************************
+* jQWidgets v4.1.2 Release, April-28-2016   *
+*********************************************
+
+What's New:
+
+9 new Interactive/Template demos
+
+What's Fixed:
+
+- Fixed an issue in jqxResponse regarding Microsoft Edge browser detection.
+- Fixed an issue in jqxKanban regarding the updateItem method when itemRenderer is implemented. 
+- Fixed an issue in jqxScheduler regarding the ICAL export after appointment is updated.
+- Fixed an issue in jqxScheduler regarding same Ids of rows and appointments.
+- Fixed an issue in jqxGrid regarding the rendering of textboxes in filter row.
+- Fixed an issue in jqxGrid regarding the handlekeyboardnavigation function. It's now called only if the key event is raised by jqxGrid or some of its inner HTML elements.
+- Fixed an issue in jqxGrid regarding the cell hover when there are pinned columns and horizontal bar was moved.
+- Fixed an issue in jqxListBox regarding the "render" method call.
+- Fixed an issue in jqxCalendar regarding the stepMonths property behavior.
+- Fixed an issue in jqxDropDownButton regarding the drop down's auto-closing behavior when there is another drop down widget inside it.
+
+Breaking Changes:
+
+- Added watermark in major widgets for non-commercial & evaluation versions. Non-commercial users may request a production build without the watermark by writing to sales@jqwidgets.com.
+- Renamed save-file.php to dataexport.php.
+
+*********************************************
+* jQWidgets v4.1.1 Release, March-28-2016   *
+*********************************************
+
+What's Fixed:
+
+- Fixed an issue in jqxDropDownList regarding autoDropDownHeight property.
+- Fixed an issue in jqxDockingLayout regarding the floating windows layout.
+- Fixed an issue in jqxBarGauge regarding the precision property.
+- Fixed an issue in jqxDataTable regarding the deleteRow method.
+- Fixed an issue in jqxScrollBar regarding its rendering in Chrome when the browser is ran on a PC with Touch screen.
+
+*********************************************
+* jQWidgets v4.1.0 Release, March-10-2016   *
+*********************************************
+
+What's New:
+
+- Kinetic Scrolling on Mobile Devices.
+- jqxBarGauge widget.
+- jqxChart x-Axis logarithmic scale support.
+- jqxChart new functions for mapping axis positions to values.
+- jqxChart support for custom grid lines, tick marks and labels.
+- Responsive Grid System in jqxResponse.
+- jqxDateTimeInput, jqxNumberInput, jqxSlider, jqxCalendar, jqxCheckBox, jqxRadioButton, jqxSwitchButton, jqxColorPicker can be initialized from Input tags.
+- Templates for jqxDateTimeInput, jqxComboBox, jqxDropDownList, jqxSlider, jqxProgressBar, jqxButtonGroup, jqxNumberInput, jqxFormattedInput, jqxComplexInput.
+- DropDown Alignment options for jqxDropDownList, jqxComboBox, jqxDropDownButton and jqxDateTimeInput.
+
+What's Improved:
+
+- Scrolling performance on Mobile Devices.
+- jqxGrid rendering and data binding performance.
+
+What's Fixed:
+
+- Fixed an issue in jqxScheduler regarding the appointmentClick and appointmentDoubleClick events in the agenda view.
+- Fixed an issue in jqxScheduler regarding the edit dialog in the agenda view.
+- Fixed an issue in jqxDropDownList regarding its Popup positioning.
+- Fixed an issue in jqxChart regarding range selector rendering.
+- Fixed an issue in jqxChart regarding range selector vertical rendering.
+- Fixed an issue in jqxRibbon regarding the visibility of scroll buttons not being updated when "removeAt" is called.
+- Fixed a jqxRibbon selection issue in the "addAt" method.
+- Fixed a rounding issue in jqxRangeSelector.
+- Fixed an issue in jqxLinearGauge regarding an incorrect layout when the orientation is horizontal and "scaleLength" is set.
+
+Breaking Changes:
+
+- Removed default sorting by grouped column in jqxGrid when grouping and paging are applied.
+ 
+*********************************************
+* jQWidgets v4.0.0 Release, Jan-27-2016     *
+*********************************************
+
+What's New:
+
+- jqxKanban widget.
+- jqxKnob widget.
+- jqxSortable plug-in.
+
+What's Improved:
+
+- jqxNumberInput null value support.
+
+What's Fixed:
+- Fixed an issue in jqxScheduler regarding the rendering of appointments in Day/Week view with duration less than a single time slot.
+- Fixed an issue in jqxScheduler regarding the rendering of appointments in Day/Week view with more than 1 day duration.
+- Fixed an issue in jqxScheduler regarding the edit dialog widgets visibility.
+- Fixed an issue in jqxScheduler regarding the edit dialog's location field.
+- Fixed an issue in jqxScheduler regarding the weekstart in recurrenceAppointments export.
+- Fixed an issue in jqxScheduler regarding the changedAppointments property.
+- Fixed an issue in jqxScheduler regarding the legends rendering after re-binding the scheduler.
+- Fixed an issue in jqxGrid regarding the grouping and row details expand/collapse state maintenance.
+- Fixed an issue in jqxGrid regarding the grouping when deferred scrolling is enabled.
+- Fixed an issue in jqxCore regarding IE7, IE8 browser support.
+- Fixed an issue in jqxData.Export regarding the export to PDF in Firefox.
+- Fixed an issue in jqxDockingLayout regarding drop overlays not being displayed after "loadLayout" is called.
+- Fixed an issue in jqxDockingLayout regarding docked floatGroups losing their content after "loadLayout" is called.
+- Fixed an issue in jqxTextArea regarding the use of jQuery's .val() method.
+- Fixed an issue in jqxTextArea with text alignment when "rtl" is set to true.
+- Fixed an issue in jqxRating regarding the positioning of "stars" in containers with overflow.
+- Fixed an issue in jqxNotification occurring due to the ids of inner elements being duplicated.
+- Fixed an issue in jqxLayout and jqxDockingLayout occurring when "height" is set to a percentage value.
+- Fixed an issue in jqxLayout and jqxDockingLayout regarding resizing occurring when "width" or "height" is set to a percentage value.
+- Fixed an issue in jqxDockingLayout regarding the content of some docked float groups being lost when "loadLayout" is called.
+- Fixed an issue in jqxBulletChart regarding the dynamic setting of the "ranges" property.
+- Fixed an issue in jqxValidator regarding the class "jqx-validator-error-element" not being added to textarea elements when "hintType" is set to "label".
+
+*********************************************
+* jQWidgets v3.9.1 Release, Oct-29-2015     *
+*********************************************
+
+What's New:
+
+- jqxScheduler Agenda View.
+- jqxScheduler ICalendar import/export.
+- jqxScheduler Export to Excel, PDF, JSON, XML, HTML, CSV, TSV.
+- jqxScheduler Appointments Exact Time rendering.
+- jqxScheduler Week Numbers display in Month View.
+- jqxDockingLayout method for dynamically adding floatGroups.
+
+What's Improved:
+
+- jqxGrid expand/collapse state maintenance when the Grid is grouped or row details are enabled.
+
+What's Fixed:
+
+- Fixed an issue in jqxGrid about best fit columns resizing when columns reorder is turned on.
+- Fixed an issue in jqxScheduler about legends bar rendering.
+- Fixed an issue in jqxScheduler which occurred when user tries to select multiple cells in the all days area.
+- Fixed an issue in jqxScheduler RTL Navigation through the toolbar.
+- Fixed an issue in jqxScheduler Resources binding through jqxDataAdapter.
+- Fixed an issue in jqxCalendar and jqxDateTimeInput firstDayOfWeek property issue.
+- Fixed an issue in jqxFileUpload which occured when uploadFile was called, but no files had been selected for upload.
+- Fixed an issue in jqxDockingLayout regarding initContent not being called for floatGroups.
+- Fixed an issue in jqxDockingLayout drop indicators show/hide issue related to mobile devices.
+
+*********************************************
+* jQWidgets v3.9.0 Release, Oct-09-2015     *
+*********************************************
+
+What's New:
+
+- jqxScheduler, jqxDockingLayout, jqxLayout, jqxTextArea, jqxTagCloud, jqxResponsivePanel, jqxPopover, jqxLoader widgets.
+- jqxGrid best fit columns resizing. End-users now can auto-resize columns by double clicking on the column header's right border.
+- jqxChart Pie and Donut slices expansion on selection.
+- jqxCalendar Restricted dates feature.
+- jqxRibbon Tabs reorder functionality.
+
+What's Improved:
+
+- jqxChart's labels positioning in Pie and Donut series.
+- jqxChart's default value axis number formatting.
+- jqxFormattedInput Select All with Ctrl+A.
+- jqxFormattedInput radix can now be changed through the dropdown even when the input is empty.
+
+
+What's Fixed:
+
+- Fixed an issue in jqxTreeGrid regarding the hierarchical checkboxes when Sorting is applied.
+- Fixed an issue in jqxGrid regarding the ever present row rendering when a column is pinned.
+- Fixed an issue in jqxGrid regarding the multiple cells advanced selection when columns width is in percentages.
+- Fixed an issue in jqxGrid regarding the excel filter for filtering date column.
+- Fixed an issue in jqxGrid regarding the initial column filter functionality when the filter is applied to numeric column and filter row is turned on.
+- Fixed an issue in jqxGrid regarding the save/load state of Date filter.
+- Fixed an issue in jqxGrid regarding the DateTimeInput editor's localization.
+- Fixed an issue in jqxDateTimeInput regarding the Tab key navigation in Firefox.
+- Fixed an issue in jqxDateTimeInput regarding date selection when closing the popup calendar by clicking on the calendar button.
+- Fixed an issue in jqxDateTimeInput regarding the rendering of the time popup after navigation through the calendar popup.
+- Fixed an issue in jqxChart value axis range display when all values are 0s.
+- Fixed an issue in jqxChart range selector layout issues.
+- Fixed an issue in jqxChart range selector mouseup outside of area event handling bug.
+- Fixed an issue in jqxChart range selector refresh issue when used with 'basic' type xAxis.
+- Fixed an issue in jqxChart about export to image with rangeselector.
+- Fixed an issue in jqxScrollBar about small scroll ranges layout.
+- Fixed an issue in jqxFileUpload regarding an "Access is denied" error in Internet Explorer 10.
+- Fixed an issue in jqxFormattedInput regarding the entering of numbers through the numeric keypad.
+- Fixed an issue in jqxComplexInput regarding the entering of numbers through the numeric keypad.
+- Fixed an issue in jqxRibbon when header items contain images or other non-text HTML elements.
+
+
+*********************************************
+* jQWidgets v3.8.2 Release, August-06-2015  *
+*********************************************
+
+What's New: 
+
+- Added Support for Microsoft Edge Web Browser.
+
+What's Fixed:
+
+- Fixed an issue in jqxGrid regarding the Checkbox column Toggle behavior.
+- Fixed an issue in jqxGrid regarding the deleterow method and editing after that.
+- Fixed an issue in jqxGrid regarding the validation popup's positioning when the editing is full row.
+- Fixed an issue in jqxGrid regarding the destroying of filter widgets on data source change.
+- Fixed an issue in jqxGrid regarding the cells rendering when custom filter is applied and removed dynamically through API.
+- Fixed an issue in jqxDateTimeInput regarding the switching of calendar views.
+- Fixed an issue in jqxDateTimeInput regarding the Time Popup inputs formatting.
+- Fixed an issue in jqxDateTimeInput regarding the Null dates handling.
+- Fixed an issue in jqxDateTimeInput regarding the Spin Buttons behavior in the Time Popup.
+- Fixed an issue in jqxRibbon regarding an incorrect class applied to the top and bottom scroll button arrows.
+- Fixed an issue in jqxSlider when the 'min' and 'max' properties are dynamically set.
+- Fixed an issue in jqxSwitchButton regarding the removal of event handlers.
+- Fixed an issue in jqxToolBar regarding its integration in a jqxSplitter panel.
+- Fixed an issue in jqxComplexInput regarding the methods getReal and getImaginary when the decimalNotation.
+- Fixed an issue in jqxAngular plugin regarding the Angular UI Router.
+- Fixed an issue in jqxNumberInput with Paste from browser's context menu.
+- Fixed an issue in jqxListBox regarding the checkItem, uncheckItem and indeterminateItem methods when Filter is applied.
+
+*********************************************
+* jQWidgets v3.8.1 Release, June-23-2015   *
+*********************************************
+
+What's New:
+
+- jqxDateTimeInput - Time popup.
+
+What's Improved:
+
+- jqxTreeGrid API. Added expandAll and collapseAll methods.
+- jqxChart Value axis automatic selection of optimal interval when all values are identical.
+- jqxNumberInput editing of negative numbers.
+- jqxFileUpload 'select' event is passed the selected file's size as an argument.
+
+What's Fixed:
+
+- Fixed an issue in jqxGrid about Virtual Columns Scrolling in IE7 and IE8.
+- Fixed an issue in jqxGrid about Virtual Columns Scrolling when Filtering is applied.
+- Fixed an issue in jqxGrid about rendering of cell contents of a pinned column when the Grid's horizontal scrollbar is moved and the "hidecolumn" method is called.
+- Fixed an issue in jqxGrid about the Validation popup positioning when the edit mode is full row.
+- Fixed an issue in jqxObservableArray about the unshift method.
+- Fixed an issue in jqxFileUpload regarding the use of the 'multipleFilesUpload' property in Internet Explorer 9 and earlier.
+- Fixed an issue in jqxFormattedInput when the value is an empty string.
+- Fixed an issue in jqxRibbon when 'mode' is set to 'popup' and the content section is over other elements.
+- Fixed an issue in jqxRibbon when setting 'width' and 'height' dynamically.
+
+*********************************************
+* jQWidgets v3.8.0 Release, April-27-2015   *
+*********************************************
+
+What's New:
+
+- jqxChart column series properties to render as Pyramid and Funnel charts.
+- jqxChart new tooltips property toolTipMoveDuration to control time required move the tooltip between items.
+- jqxChart localization support.
+- jqxGrid, jqxChart, jqxTreeGrid and jqxDataTable PDF Export.
+- jqxGrid Ever Present Row.
+- jqxGrid Filter Menu customization.
+
+What's Improved:
+
+- jqxChart tooltips positioning and style using tooltip arrows.
+- jqxChart  support for percentage radius in pie and donut series and polar/spider charts.
+- jqxChart automatic detection and parsing of date/time strings in different cultures.
+- jqxChart dateFormat property for xAxis values, tooltips and labels.
+- jqxGrid performance improvement which affects Grids with multiple columns. 
+- jqxGrid Grouping and Filtering API.
+- jqxAngular plugin improvement which allows dynamic compile of widgets through a function call.
+
+What's Fixed:
+
+- Fixed an issue in jqxGrid about resizing in RTL mode.
+- Fixed an issue in jqxGrid about clipboard handling in server paging mode.
+- Fixed an issue in jqxGrid regarding the Pager's rendering in RTL mode.
+- Fixed an issue in jqxDataTable regarding the setCellValue method when the column is sorted.
+- Fixed an issue in jqxDataTable regarding columns width on touch devices.
+- Fixed an issue in jqxComboBox regarding the getSelectedItem method when multiSelect mode is turned on.
+- Fixed an issue in jqxNumberInput regarding the behavior when the value is 0 and decimalDigits is set to 0.
+- Fixed an issue in jqxSwitchButotn regarding the dynamic changing of button's orientation.
+- Fixed an issue in jqxPasswordInput regarding the show password behavior on touch devices.
+- Fixed an issue in jqxEditor regarding the "change" event when "paste" is through mouse.
+- Fixed an issue in jqxPasswordInput password strength re-evaluation when setting the password with the val method.
+- Fixed an issue in jqxFileInput in Internet Explorer when the option "Include local directory path when uploading files to a server" is enabled.
+- Fixed an issue in jqxChart with custom colorFunction and range bars.
+- Fixed an issue in jqxChart with the lineWidth property of gridlines & tickmarks in spider charts.
+- Fixed an issue in jqxChart tooltips formatSettings on common y-axis.
+- Fixed an issue in jqxChart with tooltip hiding in some corner cases.
+- Fixed an issue in jqxChart with ticks overlapping text in polar chart.
+- Fixed an issue in jqxChart with columns overlap detection logic.
+- Fixed an issue in jqxChart with waterfall series conneting lines in horizontal chart orientation.
+- Fixed an issue in jqxChart with calling 'update' after previously loading an empty data set.
+- Fixed an issue in jqxChart in end point spline rendering in VML mode.
+- Fixed an issue in jqxChart in vertical text rendering in VML mode.
+
+Breaking Changes:
+
+- The default value of jqxChart's skipOverlappingPoints option is now set to false in column series
+
+*********************************************
+* jQWidgets v3.7.1 Release, Feb-25-2015     *
+*********************************************
+
+What's Fixed:
+
+- jqxChart Gradient fill style regression in IE9.
+- jqxChart linesEnabled property change issue with pie/donut series.
+- jqxChart handling of special characters in url.
+- jqxGrid filter menu issue.
+- jqxListBox issue about unselectIndex method.
+
+
+*********************************************
+* jQWidgets v3.7.0 Release, Feb-02-2015     *
+*********************************************
+
+What's New:
+
+- jqxRibbon widget.
+- jqxToolBar widget.
+- jqxNavBar widget.
+- jqxFileUpload widget.
+- jqxFormattedInput widget.
+- jqxComplexInput widget.
+- jqxChart Waterfall and stacked waterfall series.
+- jqxChart Support for common valueAxis.
+- jqxChart Spider axis support.
+- jqxChart Partial polar & spider chart support.
+- jqxChart Annotations.
+- jqxChart Color bands on xAxis.
+- jqxChart Color bands in polar and spider charts.
+- jqxChart Additional API functions.
+
+What's Improved:
+
+- jqxChart Axis padding feature.
+- jqxChart Additional labels styling properties.
+- jqxChart Support for conditional label colors.
+- jqxChart Range selector and chart refresh events.
+- jqxChart Improved columns spacing and padding calculation.
+- jqxChart 15 new examples.
+- jqxSlider mouse wheel behavior.
+
+What's Fixed:
+
+- Fixed an issue in jqxGrid regarding the Columns Hierarchy rendering when columns menu is turned off.
+- Fixed an issue in jqxGrid regarding the deffered scrolling vertical scrolling when paging is enabled.
+- Fixed an issue in jqxGrid regarding the keyboard navigation when paging is enabled.
+- Fixed an issue in jqxChart with multiple range selectors.
+- Fixed an issue in jqxChart Tooltips display on single point lines.
+- Fixed an issue in jqxChart Partial pie series angle recalculation when calling 'update'.
+- Fixed an issue in jqxChart Columns positioning issue when some data points are invalid.
+- Fixed an issue in jqxTooltip's close method.
+- Fixed an issue in jqxNumberInput regarding the spin behavior.
+- Fixed an issue in jqxTree regarding the drag and drop behavior.
+
+Breaking Changes:
+
+- Incorrectly typed property names will now raise errors. In previous versions, these properties were ignored.
+
+*********************************************
+* jQWidgets v3.6.0 Release, Nov-25-2014     *
+*********************************************
+
+What's New:
+
+- jqxChart OHLC series.
+- jqxChart Candlestick series.
+- jqxTreeGrid Three-State checkboxes.
+- jqxTreeGrid new Paging Mode.
+- jqxAngular new AMD module which allows automatic on demand loading of the required jQWidgets javascript files.
+- jqxMenu and jqxDocking keyboard navigation.
+- jqxSlider tooltips.
+- Observable Array function.
+
+What's Improved:
+
+- jqxChart Range selector mouse and touch handling.
+- jqxChart automatic calculation of unit interval in date/time series.
+- jqxChart improvements in spline rendering algorithm.
+- jqxChart improvements in rendering of column series on date/time axis.
+- jqxAngular's jqx-watch attribute now allows watching for changes in multiple members.
+
+What's Fixed:
+
+- Fixed an issue in jqxListBox, jqxComboBox and jqxDropDownList about the events handling when the widget is created from 'select' tag.
+- Fixed an issue in jqxDropDownList regarding the "getItemByValue" method.
+- Fixed an issue about the Clipboard operations and Selection in jqxGrid, jqxDataTable, jqxListBox and jqxTreeGrid when the widget is used on Mac OS.
+- Fixed an issue about the Clipboard Copy in jqxGrid when the data is sorted.
+- Fixed an issue in jqxKnockout about the Inputs and their events handling.
+- Fixed an issue in jqxGrid regarding the rendering after dynamically pinning and unpinning columns when the Grid has columns hierarchy.
+- Fixed an issue in jqxTreeGrid regarding the pinned columns feature in IE7.
+- Fixed an issue in jqxTreeGrid regarding the beginCellEdit method.
+- Fixed an issue in jqxDataTable regarding filter's rendering when columns resize and reorder features are enabled.
+- Fixed an issue in jqxCheckBox rendering in some themes when the boxSize is different than the default.
+- Fixed an issue in jqxChart regarding the DateTime series offset calculations.
+- Fixed an issue in jqxChart about Legend items spacing with custom layout.
+- Fixed an issue in jqxChart about Formatting error on xAxis text.
+- Fixed an issue in jqxChart about performance with date/time xAxis and milliseconds unit interval.
+- Fixed an issue in jqxChart about rounding with date/time xAxis and seconds unit interval.
+- Fixed an issue in jqxChart about spline rendering algorithm.
+- Fixed an issue in jqxChart about Range selector rendering bug when the min/max are out of range compared to source data.
+- Fixed an issue in jqxChart about Range selector resizing during series visibility toggle.
+
+
+Breaking Change:
+
+jqxAngular plug-in's jqx-data attribute is removed. Replace "data" in your code with the scope's member name.
+
+*********************************************
+* jQWidgets v3.5.0 Release, Sep-15-2014     *
+*********************************************
+
+What's New:
+
+- AngularJS Integration.
+- ASP .NET MVC Integration.
+- jqxNotification - new widget for displaying notifications and alerts.
+- jqxGrid filter row options.
+- jqxListBox, jqxDropDownList and jqxComboBox initialization from Select, UL or OL tags.
+- jqxChart Alternating background colors and opacity for x and y axes.
+- jqxChart Customizable symbol type in scatter and bubble series.
+- 70+ New Examples.
+
+What's Fixed:
+
+- Fixed an issue in jqxGrid regarding the toolbar's visibility when the Grid is displayed in a DropDownButton.
+- Fixed an issue in jqxGrid regarding the loading the state of a Grid with reordered columns.
+- Fixed an issue in jqxTreeGrid regarding the "addRow" method.
+- Fixed an issue in jqxNavigationBar regarding the insert method.
+- Fixed an issue in jqxNumberInput regarding the spin behavior in simple input mode when "digits" is set to 2.
+- Fixed an issue in jqxChart x-axis rendering performance in some conditions.
+- Fixed an issue in jqxChart ranges selector refresh.
+- Fixed an issue in jqxDateTimeInput regarding the raising of "change" and "valueChanged" event.
+
+Breaking changes:
+
+- jqxMaskedInput, jqxNumberInput, jqxScrollBar and jqxDateTimeInput - Renamed valuechanged to valueChanged.
+- jqxGrid - To keep the range selection of the DateTimeInput in the Filter Row, use "range" instead of "date", when you set the column's "filtertype" property. "date" can be used for single date filter.
+
+*********************************************
 * jQWidgets v3.4.0 Release, June-23-2014    *
 *********************************************
 What's New:

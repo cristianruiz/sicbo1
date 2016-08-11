@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart Stacked Line 100% Series Example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -37,41 +37,37 @@
                 titlePadding: { left: 10, top: 0, right: 0, bottom: 10 },
                 source: dataAdapter,
                 xAxis:
+                {
+                    type: 'date',
+                    baseUnit: 'day',
+                    textRotationAngle: 0,
+                    dataField: 'Date',
+                    labels:
                     {
-                        type: 'date',
-                        baseUnit: 'day',
-                        textRotationAngle: 0,
-                        dataField: 'Date',
                         formatFunction: function (value) {
                             return value.getDate();
-                        },
-                        toolTipFormatFunction: function (value) {
-                            return value.getDate() + '-' + months[value.getMonth()] + '-' + value.getFullYear();
-                        },
-                        showTickMarks: true,
-                        tickMarksInterval: 1,
-                        tickMarksColor: '#888888',
-                        unitInterval: 1,
-                        showGridLines: true,
-                        gridLinesInterval: 31,
-                        gridLinesColor: '#888888',
-                        valuesOnTicks: false
+                        }
                     },
+                    toolTipFormatFunction: function (value) {
+                        return value.getDate() + '-' + months[value.getMonth()] + '-' + value.getFullYear();
+                    },
+                    valuesOnTicks: false,
+                    gridLines: { interval: 31 }
+                },
+                valueAxis:
+                {
+                    title: { text: 'Daily Visits<br>' },
+                    labels: { horizontalAlignment: 'right' }
+                },
                 colorScheme: 'scheme04',
                 seriesGroups:
                     [
                         {
                             type: 'stackedline100',
-                            valueAxis:
-                            {
-                                unitInterval: 20,
-                                description: 'Daily Visits',
-                                tickMarksColor: '#888888'
-                            },
                             series: [
                                     { dataField: 'Referral', displayText: 'Referral Traffic' },
                                     { dataField: 'SearchPaid', displayText: 'Paid Search Traffic' },
-                                    { dataField: 'SearchNonPaid', displayText: 'Non-Paid Search Traffic' }
+                                    { dataField: 'SearchNonPaid', displayText: 'Organic Search Traffic' }
                                 ]
                         }
                     ]

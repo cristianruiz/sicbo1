@@ -1,49 +1,60 @@
 <?php
-	#Include the connect.php file
-	include('connect.php');
-	#Connect to the database
-	//connection String
-	$connect = mysql_connect($hostname, $username, $password)
-	or die('Could not connect: ' . mysql_error());
-	//Select The database
-	$bool = mysql_select_db($database, $connect);
-	if ($bool === False){
-	   print "can't find $database";
-	}
-	
-	$query = "SELECT * FROM Orders";
-	// sort data.
-	if (isset($_GET['sortdatafield']))
+// Include the connect.php file
+include ('connect.php');
+
+// Connect to the database
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
 	{
-		$sortfield = $_GET['sortdatafield'];
-		$sortorder = $_GET['sortorder'];
-		
-		if ($sortfield != NULL)
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
+	}
+// get data and store in a json array
+$query = "SELECT OrderDate, ShippedDate, ShipName, ShipAddress, ShipCity, ShipCountry FROM orders";
+if (isset($_GET['sortdatafield']))
+	{
+	$sortfields = array(
+		"OrderDate",
+		"ShippedDate",
+		"ShipName",
+		"ShipAddress",
+		"ShipCity",
+		"ShipCountry"
+	);
+	$sortfield = $_GET['sortdatafield'];
+	$sortorder = $_GET['sortorder'];
+	if (($sortfield != NULL) && (in_array($sortfield, $sortfields)))
 		{
-			if ($sortorder == "desc")
+		if ($sortorder == "desc")
 			{
-				$query = "SELECT * FROM Orders ORDER BY" . " " . $sortfield . " DESC";
+			$query = "SELECT OrderDate, ShippedDate, ShipName, ShipAddress, ShipCity, ShipCountry FROM orders ORDER BY " . $sortfield . " DESC";
 			}
-			else if ($sortorder == "asc")
+		  else if ($sortorder == "asc")
 			{
-				$query = "SELECT * FROM Orders ORDER BY" . " " . $sortfield . " ASC";
-			}			
+			$query = "SELECT OrderDate, ShippedDate, ShipName, ShipAddress, ShipCity, ShipCountry FROM orders ORDER BY " . $sortfield . " ASC";
+			}
 		}
 	}
-
-	$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-
-	// get data and store in a json array
-	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-		$orders[] = array(
-			'OrderDate' => $row['OrderDate'],
-			'ShippedDate' => $row['ShippedDate'],
-			'ShipName' => $row['ShipName'],
-			'ShipAddress' => $row['ShipAddress'],
-			'ShipCity' => $row['ShipCity'],
-			'ShipCountry' => $row['ShipCountry']
-		  );
+$result = $mysqli->prepare($query);
+$result->execute();
+/* bind result variables */
+$result->bind_result($OrderDate, $ShippedDate, $ShipName, $ShipAddress, $ShipCity, $ShipCountry);
+/* fetch values */
+while ($result->fetch())
+	{
+	$orders[] = array(
+		'OrderDate' => $OrderDate,
+		'ShippedDate' => $ShippedDate,
+		'ShipName' => $ShipName,
+		'ShipAddress' => $ShipAddress,
+		'ShipCity' => $ShipCity,
+		'ShipCountry' => $ShipCountry
+	);
 	}
-  
-	echo json_encode($orders);
+echo json_encode($orders);
+/* close statement */
+$result->close();
+/* close connection */
+$mysqli->close();
 ?>

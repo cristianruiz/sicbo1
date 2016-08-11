@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>Chart with Range Column Series</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
@@ -32,7 +32,7 @@
                 return '<DIV style="text-align:left"><b>Month: ' +
                         categoryValue + '</b><br />Min: ' +
                         dataItem.min + '°<br />Max: ' +
-                        dataItem.max + '°<br />Average: ' + 
+                        dataItem.max + '°<br />Average: ' +
                         dataItem.avg + '°</DIV>';
             };
 
@@ -46,49 +46,40 @@
                 titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
                 enableCrosshairs: true,
                 source: data,
-                xAxis:
-                    {
-                        textRotationAngle: 0,
-                        dataField: 'month',
-                        showTickMarks: true,
-                        tickMarksInterval: 1,
-                        tickMarksColor: '#888888',
-                        unitInterval: 1,
-                        showGridLines: true,
-                        gridLinesInterval: 3,
-                        gridLinesColor: '#888888'
-                    },
                 colorScheme: 'scheme05',
+                xAxis:
+                {
+                    dataField: 'month',
+                    unitInterval: 1,
+                    gridLines: {
+                        step: 3
+                    }
+                },
+                valueAxis:
+                {
+                    minValue: -5,
+                    maxValue: 30,
+                    unitInterval: 5,
+                    title: { text: 'Temperature [C]<br>' },
+                    labels: {
+                        horizontalAlignment: 'right',
+                        formatSettings: { sufix: '°' }
+                    }
+
+                },
                 seriesGroups:
                     [
                         {
                             type: 'rangecolumn',
-                            columnsGapPercent: 100,
+                            columnsGapPercent: 50,
                             toolTipFormatFunction: toolTipCustomFormatFn,
-                            valueAxis:
-                            {
-                                unitInterval: 5,
-                                displayValueAxis: true,
-                                description: 'Temperature [C]',
-                                axisSize: 'auto',
-                                tickMarksColor: '#888888',
-                                minValue: -5,
-                                maxValue: 30
-                            },
                             series: [
                                     { dataFieldTo: 'max', displayText: 'Temperature Range', dataFieldFrom: 'min', opacity: 1 }
-                                ]                        
+                                ]
                         },
                         {
                             type: 'spline',
                             toolTipFormatFunction: toolTipCustomFormatFn,
-                            valueAxis:
-                            {
-                                unitInterval: 5,
-                                displayValueAxis: false,
-                                minValue: -5,
-                                maxValue: 30
-                            },
                             series: [
                                     { dataField: 'avg', displayText: 'Average Temperature', opacity: 1, lineWidth: 2 }
                                 ]

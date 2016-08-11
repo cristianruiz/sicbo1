@@ -3,7 +3,7 @@
 <head>
 <title id='Description'>In this example is demonstrated how to bind jqxGrid to MySQL Database.</title>
 <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-<script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
 <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
 <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
@@ -56,34 +56,40 @@ $(document).ready(function () {
 </html>
 <!--grid_data.php
 	#Include the connect.php file
-	include('connect.php');
-	#Connect to the database
-	//connection String
-	$connect = mysql_connect($hostname, $username, $password)
-	or die('Could not connect: ' . mysql_error());
-	//select database
-	mysql_select_db($database, $connect);
-	//Select The database
-	$bool = mysql_select_db($database, $connect);
-	if ($bool === False){
-	print "can't find $database";
-	}
-	// get data and store in a json array
-	$query = "SELECT * FROM Customers";
-	$from = 0; 
-	$to = 30;
-	$query .= " LIMIT ".$from.",".$to;
+	include ('connect.php');
 
-	$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-	$customers[] = array(
-		'CompanyName' => $row['CompanyName'],
-		'ContactName' => $row['ContactName'],
-	'ContactTitle' => $row['ContactTitle'],
-	'Address' => $row['Address'],
-	'City' => $row['City']
-		);
+// Connect to the database
+// connection String
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
+	{
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
 	}
-
-	echo json_encode($customers);
+// get data and store in a json array
+$from = 0;
+$to = 30;
+$query = "SELECT CompanyName, ContactName, ContactTitle, Address, City FROM customers LIMIT ?,?";
+$result = $mysqli->prepare($query);
+$result->bind_param('ii', $from, $to);
+$result->execute();
+/* bind result variables */
+$result->bind_result($CompanyName, $ContactName, $ContactTitle, $Address, $City);
+/* fetch values */
+while ($result->fetch())
+	{
+	$orders[] = array(
+		'CompanyName' => $CompanyName,
+		'ContactName' => $ContactName,
+		'ContactTitle' => $ContactTitle,
+		'Address' => $Address,
+		'City' => $City
+	);
+	}
+echo json_encode($orders);
+/* close statement */
+$result->close();
+/* close connection */
+$mysqli->close();
 -->

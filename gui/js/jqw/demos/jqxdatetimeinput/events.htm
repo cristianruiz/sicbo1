@@ -7,7 +7,7 @@
     <title id='Description'>This demo demonstrates how to trigger the jqxCalendar's valuechanged
         and nextButtonClick and backButtonClick events.</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../scripts/demos.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
@@ -25,7 +25,7 @@
             $('#Events').css('border', 'none');
             $('#Events').jqxPanel({  height: '250px', width: '300px' });
 
-            $('#jqxDateTimeInput').on('valuechanged', function (event) {
+            $('#jqxDateTimeInput').on('valueChanged', function (event) {
                 $('#Events').jqxPanel('clearcontent');
                 var date = event.args.date;
                 $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">New Value: ' + date + '</div>');

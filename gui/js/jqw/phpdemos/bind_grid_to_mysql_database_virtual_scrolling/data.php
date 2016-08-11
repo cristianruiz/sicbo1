@@ -1,45 +1,53 @@
 <?php
-#Include the connect.php file
-include('connect.php');
-#Connect to the database
-//connection String
-$connect = mysql_connect($hostname, $username, $password)
-or die('Could not connect: ' . mysql_error());
-//select database
-mysql_select_db($database, $connect);
-//Select The database
-$bool = mysql_select_db($database, $connect);
-if ($bool === False){
-	print "can't find $database";
-}
-    // get first visible row.
-	$firstvisiblerow = $_GET['recordstartindex'];
-	// get the last visible row.
-	$lastvisiblerow = $_GET['recordendindex'];
-	$rowscount = $lastvisiblerow - $firstvisiblerow;
-	// build query.
-	$query = "SELECT SQL_CALC_FOUND_ROWS * FROM orders";
-	$query .= " LIMIT $firstvisiblerow, $rowscount";
-	$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-	$sql = "SELECT FOUND_ROWS() AS `found_rows`;";
-	$rows = mysql_query($sql);
-	$rows = mysql_fetch_assoc($rows);
-	$total_rows = $rows['found_rows'];	
-	// get data and store in a json array
-	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-		$orders[] = array(
-			'OrderID' => $row['OrderID'],
-			'OrderDate' => $row['OrderDate'],
-			'ShippedDate' => $row['ShippedDate'],
-			'ShipName' => $row['ShipName'],
-			'ShipAddress' => $row['ShipAddress'],
-			'ShipCity' => $row['ShipCity'],
-			'ShipCountry' => $row['ShipCountry']
-		  );
+// Include the connect.php file
+include ('connect.php');
+
+// Connect to the database
+// connection String
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
+	{
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
 	}
-    $data[] = array(
-       'TotalRows' => $total_rows,
-	   'Rows' => $orders
+// get first visible row.
+$firstvisiblerow = $_GET['recordstartindex'];
+// get the last visible row.
+$lastvisiblerow = $_GET['recordendindex'];
+$rowscount = 18;
+// build query.
+$query = "SELECT SQL_CALC_FOUND_ROWS OrderID, OrderDate, ShippedDate, ShipName, ShipAddress, ShipCity, ShipCountry FROM orders  LIMIT ?,?";
+$result = $mysqli->prepare($query);
+$result->bind_param('ii', $firstvisiblerow, $rowscount);
+$result->execute();
+// get data and store in a json array
+/* bind result variables */
+$result->bind_result($OrderID, $OrderDate, $ShippedDate, $ShipName, $ShipAddress, $ShipCity, $ShipCountry);
+/* fetch values */
+while ($result->fetch())
+	{
+	$orders[] = array(
+		'OrderID' => $OrderID,
+		'OrderDate' => $OrderDate,
+		'ShippedDate' => $ShippedDate,
+		'ShipName' => $ShipName,
+		'ShipAddress' => $ShipAddress,
+		'ShipCity' => $ShipCity,
+		'ShipCountry' => $ShipCountry
 	);
-	echo json_encode($data); 
+	}
+$result = $mysqli->prepare("SELECT FOUND_ROWS()");
+$result->execute();
+$result->bind_result($total_rows);
+$result->fetch();
+$data[] = array(
+	'TotalRows' => $total_rows,
+	'Rows' => $orders
+);
+echo json_encode($data);
+/* close statement */
+$result->close();
+/* close connection */
+$mysqli->close();
 ?>

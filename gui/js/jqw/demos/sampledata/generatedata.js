@@ -50,7 +50,7 @@
         row["total"] = price * quantity;
 
         var date = new Date();
-        date.setFullYear(2014, Math.floor(Math.random() * 11), Math.floor(Math.random() * 27));
+        date.setFullYear(2016, Math.floor(Math.random() * 11), Math.floor(Math.random() * 27));
         date.setHours(0, 0, 0, 0);
         row["date"] = date;
        
@@ -101,14 +101,14 @@ function generateordersdata(rowscount) {
         var date = new Date();
         var month = Math.floor(Math.random() * 11);
         var day = Math.floor(Math.random() * 27);
-        date.setFullYear(2014, month, day);
+        date.setFullYear(2016, month, day);
         date.setHours(0, 0, 0, 0);
         row["date"] = date;
         row["price"] = "";
         row["quantity"] = "";
         data.push(row);
 
-        var subRowsCount = 1+Math.round(Math.random() * 10);
+        var subRowsCount = 1+Math.round(Math.random() * 8);
         var t = 0;
         var q = 0;
         for (var j = 0; j < subRowsCount; j++) {
@@ -122,7 +122,7 @@ function generateordersdata(rowscount) {
             subRow["price"] = price;
             subRow["quantity"] = 1;
             var date = new Date();
-            date.setFullYear(2014, month, day);
+            date.setFullYear(2016, month, day);
             date.setHours(Math.floor(Math.random() * 23), Math.floor(Math.random() * 59), 0, 0);
             subRow["date"] = date;
             row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -279,4 +279,10 @@ function generatecarsdata() {
         data.push(row);
     }
     return data;
+}
+function generateappointments() {
+  
+}
+function generateData(rowscount) {
+    return generatedata(rowscount);
 }

@@ -1,33 +1,38 @@
 <?php
-#Include the connect.php file
-include('connect.php');
-#Connect to the database
-//connection String
-$connect = mysql_connect($hostname, $username, $password)
-or die('Could not connect: ' . mysql_error());
-//select database
-mysql_select_db($database, $connect);
-//Select The database
-$bool = mysql_select_db($database, $connect);
-if ($bool === False){
-	print "can't find $database";
-}
+// Include the connect.php file
+include ('connect.php');
+
+// Connect to the database
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
+	{
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
+	}
 // get data and store in a json array
-$query = "SELECT * FROM Customers";
-$from = 0; 
+$from = 0;
 $to = 30;
-$query .= " LIMIT ".$from.",".$to;
-
-$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+$query = "SELECT CompanyName, ContactName, ContactTitle, Address, City FROM customers LIMIT ?,?";
+$result = $mysqli->prepare($query);
+$result->bind_param('ii', $from, $to);
+$result->execute();
+/* bind result variables */
+$result->bind_result($CompanyName, $ContactName, $ContactTitle, $Address, $City);
+/* fetch values */
+while ($result->fetch())
+	{
 	$customers[] = array(
-        'CompanyName' => $row['CompanyName'],
-        'ContactName' => $row['ContactName'],
-	'ContactTitle' => $row['ContactTitle'],
-	'Address' => $row['Address'],
-	'City' => $row['City']
-      );
-}
-
+		'CompanyName' => $CompanyName,
+		'ContactName' => $ContactName,
+		'ContactTitle' => $ContactTitle,
+		'Address' => $Address,
+		'City' => $City
+	);
+	}
 echo json_encode($customers);
+/* close statement */
+$result->close();
+/* close connection */
+$mysqli->close();
 ?>

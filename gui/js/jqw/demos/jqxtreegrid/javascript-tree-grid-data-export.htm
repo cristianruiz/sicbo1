@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title id='Description'>With jqxTreeGrid, you can export your data to Excel, XML, CSV, TSV, JSON and HTML.</title>
+    <title id='Description'>With jqxTreeGrid, you can export your data to Excel, XML, CSV, TSV, JSON, PDF and HTML.</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
@@ -67,6 +67,7 @@
             $("#tsvExport").jqxButton();
             $("#htmlExport").jqxButton();
             $("#jsonExport").jqxButton();
+            $("#pdfExport").jqxButton();
 
             $("#excelExport").click(function () {
                 $("#treeGrid").jqxTreeGrid('exportData', 'xls');
@@ -85,6 +86,9 @@
             });
             $("#jsonExport").click(function () {
                 $("#treeGrid").jqxTreeGrid('exportData', 'json');
+            });
+            $("#pdfExport").click(function () {
+                $("#treeGrid").jqxTreeGrid('exportData', 'pdf');
             });
         });
     </script>
@@ -109,6 +113,9 @@
             <br />
             <br />
             <input type="button" value="Export to JSON" id='jsonExport' />
+        </div>
+        <div style='margin-left: 10px; float: left;'>
+            <input type="button" value="Export to PDF" id='pdfExport' />
         </div>
     </div>
 </body>

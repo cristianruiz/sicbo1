@@ -19,6 +19,8 @@
 		
 		<link rel="stylesheet" href="../gui/js/jqw/jqwidgets/styles/jqx.base.css" type="text/css" />
 		
+		<link rel="stylesheet" href="../gui/css/fontawesome/css/font-awesome.min.css" type="text/css" />
+		
 		
 	
 	</head>
@@ -27,7 +29,7 @@
 	<div class="container">
 	 <form class="form-inline" name="form1" method="post">
 	 	<div>
-	 		<p><h4>Orden de atenció</h4></p>
+	 		<p><h4>GENERACIÓN DE HONORARIOS PAD</h4></p>
 	 	</div>
 	 	<div class="panel panel-info">
 	 	  <div class="panel-body">
@@ -38,8 +40,15 @@
 		        <div class="form-group" id="comboMes"></div> 
 		        <label>Año:</label>
 		        <div class="form-group" id="comboAno"></div> 
-		    	<!--  <button type="button" class="btn btn-xs" >Buscar</button>-->
-		    	<input type="button" value="Buscar" id='btnBuscar' /> <br>
+		       <!--  <button type="button" class="btn btn-xs" >Buscar</button>  -->
+		       <input type="button" id="btnBuscar" value="Buscar" />
+		       
+		       <div id="jqxLoader"></div>
+		       
+		    	<div id="cargando"></div>
+		    	
+		    	
+		    	 <br>
 		    	<div class="form-group" id="grillaSicbo"></div>
 		        
 		    
@@ -72,6 +81,10 @@
  		
 	</div>
 	
+	
+	
+	
+	
 	<!-- jQuery -->
 		<script src="//code.jquery.com/jquery.js"></script>
 		<!-- Bootstrap JavaScript -->
@@ -96,9 +109,12 @@
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.sort.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.pager.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.grouping.js"></script>
+    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxloader.js"></script>
     	
 		<!-- ==============cruiz=============== -->
+		  <script type="text/javascript" src="../gui/js/util.js"></script> 
 		<script type="text/javascript" src="./js/fn_principal.js"></script>
+		
 		
 			<!-- CODIGO JS  -->
 		<script type="text/javascript">

@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>To switch the widget to a right-to-left representation, just enable a single property - "rtl". When this property is on, the widget itself is mirrored (the layout of its UI elements is reversed).</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../scripts/demos.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
@@ -11,8 +11,7 @@
     <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
     <style type="text/css">
-        .big-image
-        {
+        .big-image {
             float: left;
             margin-right: 15px;
             margin-bottom: 15px;
@@ -20,15 +19,15 @@
             background: #fff;
             padding: 3px;
         }
-        .important-text
-        {
+
+        .important-text {
             font-size: 13px;
             font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
             direction: rtl;
             text-align: right;
         }
-        .more-text
-        {
+
+        .more-text {
             font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
             direction: rtl;
             color: #444;
@@ -44,13 +43,16 @@
             });
         }
         function createElements() {
+            var jqxWidget = $('#jqxWidget');
+            var offset = jqxWidget.offset();
             $('#window').jqxWindow({
+                position: { x: offset.left + 50, y: offset.top + 50 },
                 rtl: true,
                 resizable: false,
                 width: 500,
                 height: 400
             });
-            $('#showWindowButton').jqxButton({  width: '100px' });
+            $('#showWindowButton').jqxButton({ width: '100px' });
         }
         $(document).ready(function () {
             addEventListeners();
@@ -70,7 +72,7 @@
                 <div style="direction: rtl;">
                     <img src="../../images/building_big.jpg" alt="" class="big-image" />
                     <div>
-                        <h3 style="text-align:right; direction:rtl;">30 St Mary Axe</h3>
+                        <h3 style="text-align: right; direction: rtl;">30 St Mary Axe</h3>
                         <p class="important-text">
                             the Swiss Re Building (colloquially referred to as the Gherkin), is a skyscraper
                             in London's main financial district, the City of London, completed in December 2003

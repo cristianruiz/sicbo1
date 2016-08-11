@@ -5,8 +5,9 @@
     <title id='Description'>In order to enter in edit mode, select a grid cell and start typing, "Click" or press the "F2" key. You 
     can also navigate through the cells using the keyboard arrows or with the "Tab" and "Shift + Tab" key combinations. To cancel the cell editing, press the "Esc" key. To save
     the changes press the "Enter" key or select another Grid cell. Pressing the 'Space' key when a checkbox cell is selected will toggle the check state.</title>
+	<meta name="description" content="jQuery Grid Cells editing. jQWidgets Grid supports multiple built-in cell editors like checkbox, dropdownlist, combobox, etc." /> 	
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
@@ -73,8 +74,8 @@
                              return true;
 
                           var year = value.getFullYear();
-                          if (year >= 2015) {
-                              return { result: false, message: "Ship Date should be before 1/1/2015" };
+                          if (year >= 2017) {
+                              return { result: false, message: "Ship Date should be before 1/1/2017" };
                           }
                           return true;
                       }

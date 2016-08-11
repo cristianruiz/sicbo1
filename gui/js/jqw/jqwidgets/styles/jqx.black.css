@@ -108,13 +108,16 @@ background: -o-linear-gradient(top, #db4200 0%,#902e00 4%,#7d2a01 19%,#531c03 44
 background: -ms-linear-gradient(top, #db4200 0%,#902e00 4%,#7d2a01 19%,#531c03 44%,#531c03 48%,#0f0906 52%,#221105 63%,#2b1705 67%,#592903 89%,#642e02 96%,#902e00 100%);
 background: linear-gradient(top, #db4200 0%,#902e00 4%,#7d2a01 19%,#531c03 44%,#531c03 48%,#0f0906 52%,#221105 63%,#2b1705 67%,#592903 89%,#642e02 96%,#902e00 100%);
 border-color:#262626; color:#fff}
-.jqx-fill-state-disabled-black {cursor: default; color: #fff; opacity: .55; filter:Alpha(Opacity=45);}
+.jqx-fill-state-disabled-black {cursor: default;  opacity: .55; filter:Alpha(Opacity=45);}
 
 .jqx-checkbox-check-checked-black{background:transparent url(images/check_white.png) left top no-repeat}
 .jqx-checkbox-check-indeterminate-black{background:transparent url(images/check_indeterminate_white.png) left top no-repeat}
 .jqx-grid-black, .jqx-grid-header-black, .jqx-grid-cell-black{border-color:#262626}
 .jqx-widget-black .jqx-grid-column-menubutton-black, .jqx-widget-black .jqx-grid-column-sortascbutton-black, .jqx-widget-black .jqx-grid-column-sortdescbutton-black, .jqx-widget-black .jqx-grid-column-filterbutton-black{border-color:#262626}
 .jqx-widget-black .jqx-grid-column-header-black{border-color:#262626}
+.jqx-calendar-cell-today-black {
+    color: #35353A;
+}
 .jqx-grid-bottomright-black, .jqx-panel-bottomright-black, .jqx-listbox-bottomright-black{background-color:#262626}
 .jqx-widget-black .jqx-grid-column-menubutton-black, .jqx-menu-vertical-black{background-color:#262626; border-color:#262626}
 .jqx-menu-vertical-black{background: #222; color:#fff;}
@@ -191,6 +194,10 @@ background: linear-gradient(top, #f87948 0%,#fb4e0b 4%,#f44501 11%,#e24000 19%,#
 .jqx-icon-calendar-black, .jqx-icon-calendar-hover-black, .jqx-icon-calendar-pressed-black {
     background-image: url('images/icon-calendar-white.png');
 }
+.jqx-icon-time-black, .jqx-icon-time-hover-black, .jqx-icon-time-pressed-black {
+    background-image: url('images/icon-time-white.png');
+}
+
 .jqx-icon-delete-black
 {
     background-image: url('images/icon-delete-white.png');
@@ -220,4 +227,27 @@ background: linear-gradient(top, #f87948 0%,#fb4e0b 4%,#f44501 11%,#e24000 19%,#
 }
 .jqx-editor-toolbar-icon-black {
     background: url('images/html_editor_white.png') no-repeat;
+}
+.jqx-layout-black
+{
+    background-color: #000;
+}
+.jqx-layout-pseudo-window-pin-icon-black
+{
+    background-image: url("images/pin-white.png");
+}
+.jqx-layout-pseudo-window-pinned-icon-black
+{
+    background-image: url("images/pinned-white.png");
+}
+.jqx-scheduler-month-cell-black, .jqx-scheduler-time-column-black, .jqx-scheduler-toolbar-black
+{
+    background: #35353A !important;
+    color: #fff  !important;
+}
+.jqx-widget-black .jqx-scheduler-middle-cell-black, .jqx-scheduler-middle-cell-black {
+    border-bottom-color: #35353A !important;
+}
+.jqx-kanban-item-black {
+    box-shadow:none;
 }

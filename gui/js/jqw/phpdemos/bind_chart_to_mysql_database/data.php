@@ -1,27 +1,37 @@
 <?php
-	#Include the connect.php file
-	include('connect.php');
-	#Connect to the database
-	//connection String
-	$connect = mysql_connect($hostname, $username, $password)
-	or die('Could not connect: ' . mysql_error());
-	//Select The database
-	$bool = mysql_select_db($database, $connect);
-	if ($bool === False){
-	   print "can't find $database";
-	}
-	
-	$query = "SELECT * FROM  `Invoices` ORDER BY OrderDate LIMIT 0 , 100";
-	$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+// Include the connect.php file
+include ('connect.php');
 
-	// get data and store in a json array
-	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-		$orders[] = array(
-			'OrderDate' => $row['OrderDate'],
-			'ProductName' => $row['ProductName'],
-			'Quantity' => $row['Quantity']
-		  );
+// Connect to the database
+// connection String
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
+	{
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
 	}
-  
-	echo json_encode($orders);
+// get data and store in a json array
+$from = 0;
+$to = 100;
+$query = "SELECT OrderDate, ProductName, Quantity FROM invoices ORDER BY OrderDate LIMIT ?, ?";
+$result = $mysqli->prepare($query);
+$result->bind_param('ii', $from, $to);
+$result->execute();
+/* bind result variables */
+$result->bind_result($OrderDate, $ProductName, $Quantity);
+/* fetch values */
+while ($result->fetch())
+	{
+	$orders[] = array(
+		'OrderDate' => $OrderDate,
+		'ProductName' => $ProductName,
+		'Quantity' => $Quantity
+	);
+	}
+echo json_encode($orders);
+/* close statement */
+$result->close();
+/* close connection */
+$mysqli->close();
 ?>

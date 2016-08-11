@@ -1,59 +1,64 @@
 <?php
-	#Include the connect.php file
-	include('connect.php');
-	#Connect to the database
-	//connection String
-	$connect = mysql_connect($hostname, $username, $password)
-	or die('Could not connect: ' . mysql_error());
-	//Select The database
-	$bool = mysql_select_db($database, $connect);
-	if ($bool === False){
-	   print "can't find $database";
-	}
+// Include the connect.php file
+include ('connect.php');
 
-	if (isset($_GET['update']))
+// Connect to the database
+$mysqli = new mysqli($hostname, $username, $password, $database);
+/* check connection */
+if (mysqli_connect_errno())
 	{
-		// UPDATE COMMAND 
-		$update_query = "UPDATE `Employees` SET `FirstName`='".$_GET['FirstName']."',
-		`LastName`='".$_GET['LastName']."',
-		`Title`='".$_GET['Title']."',
-		`Address`='".$_GET['Address']."',
-		`City`='".$_GET['City']."',
-		`Country`='".$_GET['Country']."',
-		`Notes`='".$_GET['Notes']."' WHERE `EmployeeID`='".$_GET['EmployeeID']."'";
-		 $result = mysql_query($update_query) or die("SQL Error 1: " . mysql_error());
-		 echo $result;
+	printf("Connect failed: %s\n", mysqli_connect_error());
+	exit();
 	}
-	else
+// $query = "SELECT EmployeeID, FirstName, LastName, Title, Address, City, Country, Notes FROM employees";
+if (isset($_GET['update']))
 	{
-		$pagenum = $_GET['pagenum'];
-		$pagesize = $_GET['pagesize'];
-		$start = $pagenum * $pagesize;
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM Employees LIMIT $start, $pagesize";
-
-		$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
-		$sql = "SELECT FOUND_ROWS() AS `found_rows`;";
-		$rows = mysql_query($sql);
-		$rows = mysql_fetch_assoc($rows);
-		$total_rows = $rows['found_rows'];
-		
-		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-			$employees[] = array(
-				'EmployeeID' => $row['EmployeeID'],
-				'FirstName' => $row['FirstName'],
-				'LastName' => $row['LastName'],
-				'Title' => $row['Title'],
-				'Address' => $row['Address'],
-				'City' => $row['City'],
-				'Country' => $row['Country'],
-				'Notes' => $row['Notes']
-			  );
-		}
-		 
-		$data[] = array(
-		   'TotalRows' => $total_rows,
-		   'Rows' => $employees
+	// UPDATE COMMAND
+	$query = "UPDATE `employees` SET `FirstName`=?, `LastName`=?, `Title`=?, `Address`=?, `City`=?, `Country`=?, `Notes`=? WHERE `EmployeeID`=?";
+	$result = $mysqli->prepare($query);
+	$result->bind_param('sssssssi', $_GET['FirstName'], $_GET['LastName'], $_GET['Title'], $_GET['Address'], $_GET['City'], $_GET['Country'], $_GET['Notes'], $_GET['EmployeeID']);
+	$res = $result->execute() or trigger_error($result->error, E_USER_ERROR);
+	// printf ("Updated Record has id %d.\n", $_GET['EmployeeID']);
+	echo $res;
+	}
+  else
+	{
+	// get data and store in a json array
+	$pagenum = $_GET['pagenum'];
+	$pagesize = $_GET['pagesize'];
+	$start = $pagenum * $pagesize;
+	$query = "SELECT SQL_CALC_FOUND_ROWS EmployeeID, FirstName, LastName, Title, Address, City, Country, Notes FROM employees LIMIT ?,?";
+	$result = $mysqli->prepare($query);
+	$result->bind_param('ii', $start, $pagesize);
+	$result->execute();
+	/* bind result variables */
+	$result->bind_result($EmployeeID, $FirstName, $LastName, $Title, $Address, $City, $Country, $Notes);
+	/* fetch values */
+	while ($result->fetch())
+		{
+		$employees[] = array(
+			'EmployeeID' => $EmployeeID,
+			'FirstName' => $FirstName,
+			'LastName' => $LastName,
+			'Title' => $Title,
+			'Address' => $Address,
+			'City' => $City,
+			'Country' => $Country,
+			'Notes' => $Notes
 		);
-		echo json_encode($data);
+		}
+	$result = $mysqli->prepare("SELECT FOUND_ROWS()");
+	$result->execute();
+	$result->bind_result($total_rows);
+	$result->fetch();
+	$data[] = array(
+		'TotalRows' => $total_rows,
+		'Rows' => $employees
+	);
+	echo json_encode($data);
+	$result->close();
 	}
+/* close statement */
+$mysqli->close();
+/* close connection */
 ?>

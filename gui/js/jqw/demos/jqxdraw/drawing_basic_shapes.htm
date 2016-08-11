@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxDraw - Basic shapes drawing example</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
@@ -61,10 +61,10 @@
 
             // add an event handler to the circle element
             var circleUp = renderer.circle(50, 450, 30, { fill: '#DEDEDE', stroke: '#777777' });
-            var pathUp = renderer.path("M 30,460 L 70,460, L 50, 430 Z", { fill: 'transparent', stroke: '#777777', 'stroke-width': 1 });
+            var pathUp = renderer.path("M30 460 L 70 460 L50 430 Z", { fill: 'transparent', stroke: '#777777', 'stroke-width': 1 });
 
             var circleDown = renderer.circle(120, 450, 30, { fill: '#DEDEDE', stroke: '#777777' });
-            var pathDown = renderer.path("M 100,440 L 140,440, L 120, 470 Z", { fill: 'transparent', stroke: '#777777', 'stroke-width': 1 });
+            var pathDown = renderer.path("M100 440 L 140 440 L120 470 Z", { fill: 'transparent', stroke: '#777777', 'stroke-width': 1 });
 
             renderer.text("Click these buttons:", 20, 390);
 
@@ -79,7 +79,6 @@
             renderer.on(pathDown, 'click', function () { moveCircle(false); });
 
             renderer.refresh();
-
         });
     </script>
 </head>

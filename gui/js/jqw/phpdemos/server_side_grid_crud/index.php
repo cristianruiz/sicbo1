@@ -154,8 +154,12 @@
 
             // create new row.
             $("#addrowbutton").bind('click', function () {
-                var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount;
-                var datarow = generaterow(rowscount + 1);
+				
+				var datainformation = $('#jqxgrid').jqxGrid('getdatainformation');
+				var rowscount = datainformation.rowscount - 1;
+				var data = $('#jqxgrid').jqxGrid('getrowdata', rowscount);
+				var lastId = data.EmployeeID;
+                var datarow = generaterow(lastId + 1);
 		         $("#jqxgrid").jqxGrid('addrow', null, datarow);
             });
 

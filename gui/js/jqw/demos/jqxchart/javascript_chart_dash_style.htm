@@ -3,7 +3,7 @@
 <head>
     <title id='Description'>jqxChart grid lines and tick marks dash style.</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxdraw.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxchart.core.js"></script>
@@ -27,17 +27,21 @@
                 showLegend: true,
                 enableAnimations: true,
                 padding: { left: 20, top: 5, right: 20, bottom: 5 },
-                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                titlePadding: { left: 10, top: 0, right: 0, bottom: 10 },
                 source: sampleData,
                 xAxis:
-                    {
-                        dataField: 'Country',
-                        showGridLines: true,
-                        gridLinesDashStyle: '2,2',
-                        tickMarksDashStyle: '2,2',
-                        tickMarksColor: 'grey',
-                        gridLinesColor: 'grey'
+                {
+                    dataField: 'Country',
+                    gridLines: {
+                        visible: true,
+                        dashStyle: '2,2',
+                        color: 'grey'
                     },
+                    tickMarks: {
+                        dashStyle: '2,2',
+                        color: 'grey'
+                    }
+                },
                 colorScheme: 'scheme02',
                 seriesGroups:
                     [
@@ -48,16 +52,21 @@
                             valueAxis:
                             {
                                 visible: true,
-                                description: '',
-                                unitInterval: 1,
                                 minValue: -5,
                                 maxValue: 10,
-                                formatSettings: { sufix: '%' },
-                                gridLinesDashStyle: '2,2',
-                                tickMarksDashStyle: '2,2',
-                                tickMarksColor: 'grey',
-                                gridLinesColor: 'grey'
-                                
+                                unitInterval: 1,
+                                labels: {
+                                    formatSettings: { sufix: '%' }
+                                },
+                                gridLines: {
+                                    dashStyle: '2,2',
+                                    color: 'grey'
+                                },
+                                tickMarks:
+                                {
+                                    dashStyle: '2,2',
+                                    color: 'grey'
+                                }
                             },
                             toolTipFormatSettings: { sufix: '%' },
                             series: [

@@ -105,6 +105,10 @@
 .jqx-grid-column-menubutton-metrodark {
     background-image: url('images/metro-icon-down-white.png');
  }
+.jqx-calendar-cell-today-metrodark {
+    color: #35353A;
+}
+
 .jqx-widget-metrodark .jqx-grid-cell-selected-metrodark, .jqx-grid-cell-selected-metrodark{ background-color:#007ACC; border-color: #007ACC; font-size: 12px;  color:#fff;}
 .jqx-widget-metrodark .jqx-grid-cell-hover-metrodark, .jqx-grid-cell-hover-metrodark{ background-color:#1C97EA; border-color: #1C97EA;}
  /*applied to the column's sort button when the sort order is ascending.*/
@@ -314,6 +318,9 @@
 .jqx-icon-calendar-metrodark, .jqx-icon-calendar-hover-metrodark, .jqx-icon-calendar-pressed-metrodark {
     background-image: url('images/icon-calendar-white.png');
 }
+.jqx-icon-time-metrodark, .jqx-icon-time-hover-metrodark, .jqx-icon-time-pressed-metrodark {
+    background-image: url('images/icon-time-white.png');
+}
 .jqx-icon-delete-metrodark
 {
     background-image: url('images/icon-delete-white.png');
@@ -343,4 +350,31 @@
 }
 .jqx-editor-toolbar-icon-metrodark {
     background: url('images/html_editor_white.png') no-repeat;
+}
+.jqx-layout-metrodark
+{
+    background-color: #35353A;
+}
+.jqx-layout-pseudo-window-pin-icon-metrodark
+{
+    background-image: url("images/pin-white.png");
+}
+.jqx-layout-pseudo-window-pinned-icon-metrodark
+{
+    background-image: url("images/pinned-white.png");
+}
+.jqx-scheduler-month-cell-metrodark, .jqx-scheduler-time-column-metrodark, .jqx-scheduler-toolbar-metrodark
+{
+    background: #35353A !important;
+    color: #fff  !important;
+}
+.jqx-widget-metrodark .jqx-scheduler-middle-cell-metrodark, .jqx-scheduler-middle-cell-metrodark {
+    border-bottom-color: #35353A !important;
+}
+.jqx-kanban-item-metrodark {
+    box-shadow:none;
+}
+
+.jqx-input-metrodark {
+    color: #fff;
 }

@@ -3,7 +3,7 @@
 <head>
 	<title id='Description'>In this sample is demonstrated how to get the values of the checked items. For example: US for United States, UK for United Kingdom.</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script> 
     <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script> 
@@ -256,6 +256,21 @@
 			];
 			
 			$("#countries").jqxListBox({ checkboxes: true, source: countries, height: 300, width: 250});
+			
+			$("#countries").bind('checkChange', function(event)
+				{
+					if (event.args)
+					{
+						  var checkedItems = "";
+						  var items = $("#countries").jqxListBox('getCheckedItems');
+						  $.each(items, function (index) {
+							  checkedItems += this.value + ", ";
+						  });
+
+						$("#hiddenValue").val(checkedItems);
+					}
+				});	
+		
         });
     </script>
 
@@ -265,6 +280,9 @@
 			<h3>Select Countries from the List</h3>
 		</div>
 		<div name="countries" id="countries"></div>
+
+		<input  type="hidden" id="hiddenLabel" name="hiddenLabel" value="" />
+		<input  type="hidden" id="hiddenValue" name="hiddenValue" value="" />
 		<input style="margin-top: 10px;" type="submit" value="Submit" id="sendButton" />
 	</form>
 </div>

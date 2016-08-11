@@ -5,7 +5,7 @@
     <meta name="description" content="jqxSlider represents a flexible jQuery Slider that lets the user select from a range of values by moving a thumb along a track. The widget is completely customizable in terms of appearance and offers numerous configuration options like mouse wheel and keyboard support, smooth or step-based slider and support for range sliders." />
     <title id='Description'>jqxSlider represents a flexible jQuery Slider that lets the user select from a range of values by moving a thumb along a track. The widget is completely customizable in terms of appearance and offers numerous configuration options like mouse wheel and keyboard support, smooth or step-based slider and support for range sliders.</title>
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
@@ -14,9 +14,33 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var counter = 0;
-            $('#redLevel').jqxSlider({ min: 0, max: 255, ticksFrequency: 25.5, value: 0, step: 25.5});
-            $('#greenLevel').jqxSlider({ min: 0, max: 255, ticksFrequency: 25.5, value: 0, step: 25.5});
-            $('#blueLevel').jqxSlider({ min: 0, max: 255, ticksFrequency: 25.5, value: 255, step: 25.5});
+            $('#redLevel').jqxSlider({
+                showTickLabels: true, tooltip: true, mode: "fixed", height: 60, min: 0, max: 255, ticksFrequency: 25.5, value: 0, step: 25.5,
+                tickLabelFormatFunction: function (value)
+                {
+                    if (value == 0) return value;
+                    if (value == 255) return value;
+                    return "";
+                }
+            });
+            $('#greenLevel').jqxSlider({
+                showTickLabels: true, tooltip: true, mode: "fixed", height: 60, min: 0, max: 255, ticksFrequency: 25.5, value: 0, step: 25.5,
+                tickLabelFormatFunction: function (value)
+                {
+                    if (value == 0) return value;
+                    if (value == 255) return value;
+                    return "";
+                }
+            });
+            $('#blueLevel').jqxSlider({
+                showTickLabels: true, tooltip: true, mode: "fixed", height: 60, min: 0, max: 255, ticksFrequency: 25.5, value: 255, step: 25.5,
+                tickLabelFormatFunction: function (value)
+                {
+                    if (value == 0) return value;
+                    if (value == 255) return value;
+                    return "";
+                }
+            });
 
             $('#redLevel').on('change', function (event) {
                 setColor();

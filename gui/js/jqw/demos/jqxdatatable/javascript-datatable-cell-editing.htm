@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <title id='Description'>DataTable Cell Editing. Double-click on a cell to begin edit.</title>
+	<meta name="description" content="JavaScript dataTable Cell Editing demo" />   	    		
     <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
     <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
@@ -66,7 +67,7 @@
                 source: dataAdapter,
                 pageable: true,
                 editable: true,
-                altrows: true,
+                altRows: true,
                 editSettings: { saveOnPageChange: true, saveOnBlur: true, saveOnSelectionChange: true, cancelOnEsc: true, saveOnEnter: true, editSingleCell: true, editOnDoubleClick: true, editOnF2: true },
                 pagerButtonsCount: 8,
                 columns: [
