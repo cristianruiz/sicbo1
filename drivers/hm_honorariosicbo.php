@@ -95,5 +95,6 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 			$h->insert($r);
 			return $r->idhonorario;
 		}
+		return 10;
 	}
 }
