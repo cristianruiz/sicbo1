@@ -112,11 +112,13 @@ class HmHonorariossicboMySqlDAO implements HmHonorariossicboDAO{
 	}
 
 	public function queryByPeriodo($value){
-		error_log("kiii");
+		
 		$sql = 'SELECT * FROM hm_honorariossicbo WHERE periodo = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($value);
-		return $this->getList($sqlQuery);
+		$res=$sqlQuery->setNumber($value);
+		error_log(print_r($res),true);
+		return $res;
+		//return $this->getList($sqlQuery);
 	}
 
 	public function queryByEstado($value){
