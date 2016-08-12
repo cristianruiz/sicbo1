@@ -6,7 +6,7 @@ class hm_detallehonorariossicbo extends HmDetallehonorariossicboMySqlDAO{
 		"NOMBREPAD":"Hiperplasia De La Prostata ","MEDICO":"GJURANOVIC SARDY MARKO ","NRO_FI":207103} */
 		$data = json_decode($datos,true);
 		print_r("HOLA<br>");
-		print_r($data);
+		//print_r($data);
 		$i=1;
 		foreach ($data as $dato){
 			print_r("dato $i: ");
