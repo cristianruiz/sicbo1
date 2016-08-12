@@ -77,16 +77,22 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 		$p= new HmHonorariossicboMySqlDAO();
 		error_log("en existeperiodo ");
 		$q= $p->queryByPeriodo($this->periodo);
-		
-		error_log("PER: ".print_r($q),true);
-		return 4;
+		//print_r($q[0]);
+		if ($q[0]->idhonorario >0)
+			return true;
+				else
+			return false;		
 		
 	}
 	
 	public function nuevoperiodo(){
 		//$i=$this->existeperiodo();
 		//error_log("AKI: ".$i);
-	
+	    if ($this->existeperiodo()){
+	    	$p= new HmHonorariossicboMySqlDAO();
+	    	$q= $p->queryByPeriodo($this->periodo);
+	    	return $q[0];
+	    } else {
 		$h= new HmHonorariossicboMySqlDAO();
 		$r=new HmHonorariossicbo();
 		$r->estado=1;
@@ -94,7 +100,7 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 		$r->periodo=$this->periodo;
 		$r->usuario='cruiz';
 		$h->insert($r);
-		return $r->idhonorario;
-		
+		return $r;
+	    }
 	}
 }
