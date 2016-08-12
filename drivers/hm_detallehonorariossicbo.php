@@ -9,10 +9,8 @@ class hm_detallehonorariossicbo extends HmDetallehonorariossicboMySqlDAO{
 		//print_r($data);
 		$i=1;
 		foreach ($data as $dato){
-			print_r("dato $i: ");
-			print_r($dato);
-			print_r("<br>");
-			$i++;
+			print_r($dato->PACIENTE);
+			
 		}
 		
 	}
