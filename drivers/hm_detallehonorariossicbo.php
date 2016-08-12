@@ -7,9 +7,12 @@ class hm_detallehonorariossicbo extends HmDetallehonorariossicboMySqlDAO{
 		$data = json_decode($datos,true);
 		print_r("HOLA<br>");
 		print_r($data);
+		$i=1;
 		foreach ($data as $dato){
+			print_r("dato $i: ");
 			print_r($dato);
 			print_r("<br>");
+			$i++;
 		}
 		
 	}
