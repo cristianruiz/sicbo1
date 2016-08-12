@@ -1,6 +1,7 @@
 <?php
 include('../include_dao.php');
 include('../drivers/hm_honorariosicbo.php');
+include('../drivers/hm_detallehonorariossicbo.php');
 $obj = json_decode($_GET["parametros"]);
 $action=$obj->action;
 switch ($action) {
