@@ -64,7 +64,7 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 				break;
 			
 		}
-		error_log("PERIODO A TRABAJAR: "+ $this->periodo);
+		error_log("PERIODO A TRABAJAR: ". $this->periodo);
 		
 		
 	}
