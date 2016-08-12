@@ -9,7 +9,8 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 		$this->mes=$m;
 		$sql= "select current_date() as fecha";
 		$sqlQuery = new SqlQuery($sql);
-		$f= $this->execute($sqlQuery);
+		$f= $this->getList($sqlQuery);
+		error_log("FECHA: ".print_r($f),true);
 		$this->fecha=$f[0]['fecha'];
 		
 		
