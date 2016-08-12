@@ -321,8 +321,17 @@ if (isset($_POST['btnEditaPac'])) {
                		</div>
             	</div>
 
-            	<div id="servicio-result">
-            		
+            	<div id="servicio-result" style="font-size: 10px;">
+            		<table id="detcargo" class="table table-hover">
+            		 <thead>
+            			<tr>
+            				<th>Codigo</th>
+            				<th>Cantidad</th>
+            				<th>P. Unitario</th>
+            				<th>Total</th>
+            			</tr>
+            		 </thead>	
+            		</table>
             	</div>
           </form>
         </div>
