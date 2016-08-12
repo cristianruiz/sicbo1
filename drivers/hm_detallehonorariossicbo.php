@@ -5,9 +5,10 @@ class hm_detallehonorariossicbo extends HmDetallehonorariossicboMySqlDAO{
 		"CANTIDAD":1,"FECHA":"2016-05-30","FUNCION":"1er CIRUJANO ","MONTO":221582,"RUT_MED":10220626,
 		"NOMBREPAD":"Hiperplasia De La Prostata ","MEDICO":"GJURANOVIC SARDY MARKO ","NRO_FI":207103} */
 		$data = json_decode($datos,true);
-		foreach ($data as $dato){
+		print_r($data);
+		/*foreach ($data as $dato){
 			error_log("dato");
-		}
+		}*/
 		
 	}
 }
