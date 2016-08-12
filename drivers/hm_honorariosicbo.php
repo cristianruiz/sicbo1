@@ -79,7 +79,7 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 		$h= new HmHonorariossicboMySqlDAO();
 		$r=new HmHonorariossicbo();
 		$r->estado=1;
-		$r->fecha=$fecha[0][0];
+		$r->fecha=$this->fecha[0][0];
 		$r->periodo=$this->periodo;
 		$r->usuario='cruiz';
 		
