@@ -219,23 +219,30 @@ $(document).keyup(function(e){
     if ($('#txtnrooa').is(":focus") && (e.keyCode == 13)) {
         var nrocargo = $('#txtnrooa').val();
         var cod_sec = $('#txtcodsec').val();
+        var tot = 0;
         $.ajax({
             type: "POST",
             url: '../common/dibuja_det_cargo.php',
-            data: {"nrocargo":nrocargo, 'cod_sec': cod_sec},
+            data: {'nrocargo':nrocargo, 'cod_sec': cod_sec},
 
             error: function(){
                 alert('Error petición ajax');
             },
             success: function(data){
+                $('#detcargo tbody').remove();
+                data = JSON.parse(data);
                  $.each(data, function(index, value){
-                        $('#servicio-result').append("<tr><td>" + value.codigodetalle + "</td><td>"+ value.cantidadentregada +"</td><td>"+ value.preciounitario +"</td></tr>");
-                    });
-                console.log(data);
+                    $('#detcargo').append("<tr><td>" + value.codigodetalle + "</td><td>"+ parseInt(value.cantidadentregada) +"</td><td>"+ value.preciounitario +'</td><td class="sum">'+parseInt(value.cantidadentregada)  * parseInt(value.preciounitario) +"</td></tr>");
+                    tot = tot + parseInt(value.preciounitario) * parseInt(value.cantidadentregada);
+                 });
+                 $('#detcargo').append('<tbody><tr><td></td>'+'<td></td>'+'<td></td>'+'<td class="total"><strong><h5>Total: $'+ tot+'</h5></strong></td></tr></tbody>')
+                 console.log(data);
             }
         });
     }
 });
+
+
 
 $(document).keyup(function(e){
     if ($('#txtcodsec').is(":focus") && (e.keyCode == 13)) {
