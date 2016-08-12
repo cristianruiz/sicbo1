@@ -74,7 +74,7 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 	public function existeperiodo(){
 		$h= new HmHonorariossicboMySqlDAO();
 		$r=$h->queryByPeriodo($this->periodo);
-		error_log($r,true);
+		error_log(print_r($r),true);
 		return 1;
 		
 	}
