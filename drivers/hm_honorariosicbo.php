@@ -7,11 +7,11 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 	public function hm_honorariosicbo($m,$a){
 		$this->ano=$a;
 		$this->mes=$m;
-		$sql= "select current_date() as f1";
+		$sql= "select current_date() as fecha";
 		$sqlQuery = new SqlQuery($sql);
 		$f= $this->execute($sqlQuery);
-		$this->fecha=$f[0]['f1'];
-		error_log("FECHA:  ".print_r($f,true));
+		$this->fecha=$f[0]['fecha'];
+		
 		
 		switch ($this->mes) {
 			case 'ENERO':
@@ -74,18 +74,25 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 	public function existeperiodo(){
 		$h= new HmHonorariossicboMySqlDAO();
 		$r=$h->queryByPeriodo($this->periodo);
+		error_log($r,true);
+		return 1;
 		
 	}
 	
 	public function nuevoperiodo(){
-		$h= new HmHonorariossicboMySqlDAO();
-		$r=new HmHonorariossicbo();
-		$r->estado=1;
-		$r->fecha=$this->fecha;
-		$r->periodo=$this->periodo;
-		$r->usuario='cruiz';
-		
-		$h->insert($r);
-		return $r->idhonorario;
+		$i= $this->existeperiodo();
+		if ($i>0){
+			return $i;
+			
+		} else {
+			$h= new HmHonorariossicboMySqlDAO();
+			$r=new HmHonorariossicbo();
+			$r->estado=1;
+			$r->fecha=$this->fecha;
+			$r->periodo=$this->periodo;
+			$r->usuario='cruiz';
+			$h->insert($r);
+			return $r->idhonorario;
+		}
 	}
 }
