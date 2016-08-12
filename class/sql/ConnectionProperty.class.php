@@ -6,8 +6,8 @@
  * @date: 27.11.2007
  */
 class ConnectionProperty{
-	private static $host = '192.168.1.136';
-	private static $user = 'cruiz';
+	private static $host = 'localhost';
+	private static $user = 'root';
 	private static $password = 'pepito1530';
 	private static $database = 'SICBONET';
 
