@@ -11,7 +11,7 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 		$sqlQuery = new SqlQuery($sql);
 		$f= $this->execute($sqlQuery);
 		$this->fecha=$f[0]->f1;
-		error_log("FECHA:  ".print_r($f));
+		error_log("FECHA:  ".print_r($f,true));
 		
 		switch ($this->mes) {
 			case 'ENERO':
