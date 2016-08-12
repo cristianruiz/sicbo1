@@ -10,6 +10,7 @@ include('drivers/hm_honorariosicbo.php');
 $h= new hm_honorariosicbo('JUNIO', 2016);
 
 print_r($h->get_periodo());
+$h->existeperiodo();
 
 
 
