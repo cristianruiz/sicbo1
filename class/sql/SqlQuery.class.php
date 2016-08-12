@@ -35,7 +35,8 @@ class SqlQuery{
 	 * @param String $value value to set
 	 */
 	public function set($value){
-		$value = mysql_real_escape_string($value);
+		//$value = mysql_real_escape_string($value);
+		$value=$value;
 		$this->params[$this->idx++] = "'".$value."'";
 	}
 	
