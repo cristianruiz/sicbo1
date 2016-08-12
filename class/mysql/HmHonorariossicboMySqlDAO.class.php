@@ -3,7 +3,7 @@
  * Class that operate on table 'hm_honorariossicbo'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2016-08-04 17:01
+ * @date: 2016-08-12 20:30
  */
 class HmHonorariossicboMySqlDAO implements HmHonorariossicboDAO{
 
@@ -112,16 +112,10 @@ class HmHonorariossicboMySqlDAO implements HmHonorariossicboDAO{
 	}
 
 	public function queryByPeriodo($value){
-		
 		$sql = 'SELECT * FROM hm_honorariossicbo WHERE periodo = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
-		
-		error_log("DENTRO");
-		$res=$this->getList($sqlQuery);
-		error_log(print_r($res),true);
-		return $res;
-		//return $this->getList($sqlQuery);
+		return $this->getList($sqlQuery);
 	}
 
 	public function queryByEstado($value){
