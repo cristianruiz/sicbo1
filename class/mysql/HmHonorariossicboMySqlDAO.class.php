@@ -116,6 +116,7 @@ class HmHonorariossicboMySqlDAO implements HmHonorariossicboDAO{
 		$sql = 'SELECT * FROM hm_honorariossicbo WHERE periodo = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$res=$sqlQuery->setNumber($value);
+		error_log("DENTRO");
 		error_log(print_r($res),true);
 		return $res;
 		//return $this->getList($sqlQuery);
