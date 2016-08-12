@@ -82,10 +82,7 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 	public function nuevoperiodo(){
 		$i= $this->existeperiodo();
 		error_log("AKI: ".$i);
-		if ($i>0){
-			return $i;
-			
-		} else {
+		
 			$h= new HmHonorariossicboMySqlDAO();
 			$r=new HmHonorariossicbo();
 			$r->estado=1;
@@ -94,7 +91,6 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 			$r->usuario='cruiz';
 			$h->insert($r);
 			return $r->idhonorario;
-		}
-		return 10;
+		
 	}
 }
