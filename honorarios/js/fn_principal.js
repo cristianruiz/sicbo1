@@ -129,10 +129,10 @@ $(document).ready(function () {
                     success: function (d) {
                     	
                         
-                        setTimeout(function () {
+                    //    setTimeout(function () {
                         	$('#jqxLoader').jqxLoader('close');
                         	$('#cargando').html(d.res1);
-                        }, 2000); 
+                     //   }, 2000); 
                         
                     }
                 });
