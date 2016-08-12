@@ -120,6 +120,7 @@ $(document).ready(function () {
             	dat0.ano=ano;
             	dat0.mes=mes;
             	var dataString=JSON.stringify(dat0);
+            	
             	$.ajax({
                     type: "GET",
                     data: {parametros:dataString},
@@ -128,10 +129,10 @@ $(document).ready(function () {
                     success: function (d) {
                     	
                         
-                        setTimeout(function () {
+                    //    setTimeout(function () {
                         	$('#jqxLoader').jqxLoader('close');
                         	$('#cargando').html(d.res1);
-                        }, 2000); 
+                     //   }, 2000); 
                         
                     }
                 });
