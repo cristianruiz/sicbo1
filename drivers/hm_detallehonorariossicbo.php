@@ -19,7 +19,7 @@ class hm_detallehonorariossicbo extends HmDetallehonorariossicboMySqlDAO{
 			$det->monto=$dato["MONTO"];
 			$det->nombrepad=$dato["NOMBREPAD"];
 			$det->nrofi=$dato["NRO_FI"];
-			$det->nrooa=$dato["56845"];
+			$det->nrooa=$dato["NRO_OA"];
 			$det->paciente=dato["PACIENTE"];
 			$det->periodo=$hon->periodo;
 			$det->rutmed=$dato["RUT_MED"];
