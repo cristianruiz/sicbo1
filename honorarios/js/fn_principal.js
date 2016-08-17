@@ -11,7 +11,7 @@ function cargagrilla(){
 	dat0.idhonorario=idhonorario;
 	
 	var dataString=JSON.stringify(dat0);
-	var url1="../common/honorarios.php?parametros="dataString;
+	var url1="../common/honorarios.php?parametros="+dataString;
     var source =
     {
         datatype: "json",
