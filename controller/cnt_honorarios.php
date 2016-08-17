@@ -47,7 +47,7 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 			);
 			array_push($ret,$f);
 		}
-		//error_log("RETORNO: ".print_r(json_encode($ret),true));
+		error_log("RETORNO: ".print_r(json_encode($ret),true));
 		return(json_encode($ret));
 	}
 	public function cargahonorarioconsolidaddo(){
