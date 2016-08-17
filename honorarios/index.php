@@ -104,6 +104,8 @@
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxdropdownlist.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxloader.js"></script>
+    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.selection.js"></script>
+    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.columnsresize.js"></script>
     	
 		<!-- ==============cruiz=============== -->
 		  <script type="text/javascript" src="../gui/js/util.js"></script> 
