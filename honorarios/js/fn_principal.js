@@ -28,18 +28,18 @@ function cargagrilla(){
     var dataAdapter = new $.jqx.dataAdapter(source);
     $("#jqxgrid").jqxGrid(
     {
-        width: 400,
+        width: 1000,
         source: dataAdapter,
         ready: function () {
             $("#jqxgrid").jqxGrid('hidecolumn', 'name');
         },
         columnsresize: true,
         columns: [
-            { text: 'RUT PROFESIONAL', datafield: 'rutmed', width: 50 },
-            { text: 'NOMBRE PROFESIONAL', datafield: 'medico', width: 250 },
-            { text: 'NOMBRE PAD', datafield: 'nombrepad', width: 180 },
-            { text: 'VALOR', datafield: 'total', width: 120 },
-            { text: '-', datafield: 'receptor', minwidth: 120 }
+            { text: 'RUT PROFESIONAL', datafield: 'rutmed', width: 150 },
+            { text: 'NOMBRE PROFESIONAL', datafield: 'medico', width: 300 },
+            { text: 'NOMBRE PAD', datafield: 'nombrepad', width: 300 },
+            { text: 'VALOR', datafield: 'total', width: 150 },
+            { text: '-', datafield: 'receptor', minwidth: 50 }
         ]
     }); 
 }
