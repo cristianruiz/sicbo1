@@ -80,7 +80,7 @@ $(document).ready(function () {
             	dat0.ano=ano;
             	dat0.mes=mes;
             	var dataString=JSON.stringify(dat0);
-            	
+            	console.log(dataString);
             	$.ajax({
                     type: "GET",
                     data: {parametros:dataString},
