@@ -6,9 +6,7 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 		$this->periodo=$p;
 		$this->idhonorariosicbo=$id;
 	}
-	public function hm_honorarioconsolidado($i){
-		$this->idhonorariosicbo=$i;
-	}
+	
 	public function getJSONHonorario(){
 		$sql="SELECT
 					t1.id,
