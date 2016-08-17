@@ -125,7 +125,7 @@ $(document).ready(function () {
                     type: "GET",
                     data: {parametros:dataString},
                     dataType: "json",
-                    url: "../controller/honorarios.php",
+                    url: "../common/honorarios.php",
                     success: function (d) {
                     	
                         
