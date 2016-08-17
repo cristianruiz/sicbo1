@@ -38,11 +38,11 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 		foreach($arr as &$t){
 			$f= array(
 					"id"=>$t["id"],
-					"rutmed"=>utf8_encode($t["rutmed"]),
+					"rutmed"=>($t["rutmed"]),
 					"medico"=>utf8_encode($t["medico"]),
 					"nombrepad"=>utf8_encode($t["nombrepad"]),
-					"total"=>utf8_encode($t["total"]),
-					"receptor"=>utf8_encode($t["receptor"])
+					"total"=>($t["total"]),
+					"receptor"=>($t["receptor"])
 					
 			);
 			array_push($ret,$f);
