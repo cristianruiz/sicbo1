@@ -39,7 +39,7 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 			$f= array(
 					"id"=>$t["id"],
 					"rutmed"=>($t["rutmed"]),
-					"medico"=>($t["medico"]),
+					"medico"=>utf8_encode($t["medico"]),
 					"nombrepad"=>utf8_encode($t["nombrepad"]),
 					"total"=>($t["total"]),
 					"receptor"=>($t["receptor"])
@@ -47,7 +47,7 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 			);
 			array_push($ret,$f);
 		}
-		error_log("RETORNO: ".json_encode($ret));
+		error_log("RETORNO: ".print_r(json_encode($ret),true));
 		return(json_encode($ret));
 	}
 	public function cargahonorarioconsolidaddo(){
