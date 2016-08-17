@@ -16,11 +16,11 @@ function cargagrilla(){
     {
         datatype: "json",
         datafields: [
-            { name: 'RUT PROFESIONAL'},
-            { name: 'NOMBRE PROFESIONAL'},
-            { name: 'NOMBRE PAD'},
-            { name: 'VALOR'},
-            { name: '-'},
+            { name: 'rutmed'},
+            { name: 'medico'},
+            { name: 'nombrepad'},
+            { name: 'total'},
+            { name: 'receptor'},
         ],
         id: 'id',
         url: url1
