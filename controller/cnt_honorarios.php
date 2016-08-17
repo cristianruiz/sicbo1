@@ -31,7 +31,9 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 					t1.id,
 					t2.rutver,
 					t2.nombrecompleto";
-		$arr=$this->execute($sql);$ret = Array();
+		
+		$sqlQuery=new SqlQuery($sql);
+		$arr=$this->execute($sqlQuery);$ret = Array();
 			
 		foreach($arr as &$t){
 			$f= array(
