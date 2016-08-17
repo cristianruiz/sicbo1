@@ -6,8 +6,13 @@ var idhonorario=0;
 
 
 function cargagrilla(){
-	var url1="../common/honorarios.php?action=listhonorarioconsolidado&idhonorario="+idhonorario;
-    var data =
+	var dat0 = new Object();
+	dat0.action="listhonorarioconsolidado";
+	dat0.idhonorario=idhonorario;
+	
+	var dataString=JSON.stringify(dat0);
+	var url1="../common/honorarios.php?parametros="dataString;
+    var source =
     {
         datatype: "json",
         datafields: [
@@ -93,6 +98,7 @@ $(document).ready(function () {
                         	$('#jqxLoader').jqxLoader('close');
                         	$('#cargando').html(d.res1);
                         	idhonorario=d.res1;
+                        	cargagrilla();
                      //   }, 2000); 
                         
                     }
