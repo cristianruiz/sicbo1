@@ -103,12 +103,6 @@
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxcombobox.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxdropdownlist.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.js"></script>
-    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.selection.js"></script>
-    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.columnsresize.js"></script>
-    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.filter.js"></script>
-    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.sort.js"></script>
-    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.pager.js"></script>
-    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.grouping.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxloader.js"></script>
     	
 		<!-- ==============cruiz=============== -->

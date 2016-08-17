@@ -2,83 +2,43 @@
  * 
  */
 var ano, mes=0;
-function buscar(){
-	var jqxhr = $.ajax( "../example.php" )
-	  .done(function() {
-	    alert( "success" );
-	  })
-	  .fail(function() {
-	    alert( "error" );
-	  })
-	  .always(function() {
-	    alert( "complete" );
-	  });
-	}
+var idhonorario=0;
 
-function ___buscar(){
-	document.getElementById('lblstatus').innerHTML="hols";
-	var hilo = new newAjax();
-    var url= "../controller/honorarios.php?action=estadoperiodo";
-    hilo.open("GET",url,true);
-    console.log("abriendo stat: "+hilo.status);
-    hilo.onreadystatechange=function(){
-        if (hilo.readyState == 0 || hilo.readyState == 2 || hilo.readyState == 3){
-        	console.log("aki 1");
-       	 document.getElementById('lblstatus').innerHTML="CArgandoa";
-        }
-        if (hilo.readyState == 4 && hilo.status==200){
-        	console.log("aki 2");
-           /*jsonObject = JSON.parse(hilo.responseText);
 
-           document.getElementById('td_conductor').innerHTML=jsonObject[0].nombre;
-            document.getElementById('td_colegio').innerHTML=jsonObject[0].colegio;
-
-        } */
-       	// alert("HOLA: "+hilo.responseText);
-    }
-        console.log("cerradno stat: "+hilo.status);
-    hilo.send();
-    
-    }
-    console.log("HOLA loooooo");
-}    
-function __buscar(){
-	document.getElementById('lblstatus').innedrHTML="";
-	 var hilo = new newAjax();
-     var url= "../controller/honorarios.php?action=estadoperiodo";
-     hilo.open("GET",url,true);
-     hilo.onreadystatechange=function(){
-         if (hilo.readyState == 1){
-        	 document.getElementById('lblstatus').innerHTML="CArgandoa";
-         }
-         if (hilo.readyState == 4){
-            /*jsonObject = JSON.parse(hilo.responseText);
-
-            document.getElementById('td_conductor').innerHTML=jsonObject[0].nombre;
-             document.getElementById('td_colegio').innerHTML=jsonObject[0].colegio;
-
-         } */
-        	 alert("HOLA: "+hilo.responseText);
-     }
-     hilo.send(null);
-}
-}
-function _buscar(){
-	var url="";
+function cargagrilla(){
+	var url1="../common/honorarios.php?action=listhonorarioconsolidado&idhonorario="+idhonorario;
     var data =
     {
         datatype: "json",
         datafields: [
-            { name: 'FECHADIGITACION'},
-            { name: 'PACIENTE'},
-            { name: 'CODIGO'},
-            { name: 'MEDICO'},
-            { name: 'PACIENTE'},
+            { name: 'RUT PROFESIONAL'},
+            { name: 'NOMBRE PROFESIONAL'},
+            { name: 'NOMBRE PAD'},
+            { name: 'VALOR'},
+            { name: '-'},
         ],
         id: 'id',
-        url: "beverages.txt"
+        url: url1
     };
+    var dataAdapter = new $.jqx.dataAdapter(source);
+    $("#jqxgrid").jqxGrid(
+    {
+        width: 400,
+        source: dataAdapter,
+        ready: function () {
+            $("#jqxgrid").jqxGrid('hidecolumn', 'name');
+        },
+        columnsresize: true,
+        columns: [
+            { text: 'RUT PROFESIONAL', datafield: 'rutmed', width: 50 },
+            { text: 'NOMBRE PROFESIONAL', datafield: 'medico', width: 250 },
+            { text: 'NOMBRE PAD', datafield: 'nombrepad', width: 180 },
+            { text: 'VALOR', datafield: 'total', width: 120 },
+            { text: '-', datafield: 'receptor', minwidth: 120 }
+        ]
+    }); 
 }
+
 $(document).ready(function () {
             var meses = [{text:'Enero', value:'ENERO'},{text:'Febrero', value:'FEBRERO'},{text:'Marzo', value:'MARZO'},
                          {text:'Abril', value:'ABRIL'},{text:'Mayo', value:'MAYO'},{text:'Junio', value:'JUNIO'},
@@ -132,6 +92,7 @@ $(document).ready(function () {
                     //    setTimeout(function () {
                         	$('#jqxLoader').jqxLoader('close');
                         	$('#cargando').html(d.res1);
+                        	idhonorario=d.res1;
                      //   }, 2000); 
                         
                     }

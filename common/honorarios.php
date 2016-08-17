@@ -1,6 +1,7 @@
 <?php
 include('../include_dao.php');
 include('../drivers/hm_honorariosicbo.php');
+include('../controller/cnt_honorarios.php');
 
 $obj = json_decode($_GET["parametros"]);
 $action=$obj->action;
@@ -18,6 +19,12 @@ switch ($action) {
 		print(json_encode($salida));
 
 		break;
+	case "listhonorarioconsolidado":
+		$idhonorario=$_GET["$idhonorario"];
+		$l= new hm_honorarioconsolidado($idhonorario);
+		print($l->getJSONHonorario());
+		break;
+		
 	case "estadoperiodo" :
 		error_log("llamando...");
 		print("OK");
