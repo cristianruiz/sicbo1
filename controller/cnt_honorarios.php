@@ -40,7 +40,7 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 					"id"=>$t["id"],
 					"rutmed"=>($t["rutmed"]),
 					"medico"=>($t["medico"]),
-					"nombrepad"=>($t["nombrepad"]),
+					"nombrepad"=>utf8_encode($t["nombrepad"]),
 					"total"=>($t["total"]),
 					"receptor"=>($t["receptor"])
 					
