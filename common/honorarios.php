@@ -20,7 +20,8 @@ switch ($action) {
 
 		break;
 	case "listhonorarioconsolidado":
-		$idhonorario=$_GET["$idhonorario"];
+		//$idhonorario=$_GET["$idhonorario"];
+		$idhonorario=$obj->idhonorario;
 		$l= new hm_honorarioconsolidado(1,$idhonorario);
 		print($l->getJSONHonorario());
 		break;
