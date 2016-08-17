@@ -49,7 +49,7 @@
 		    	
 		    	
 		    	 <br>
-		    	<div class="form-group" id="grillaSicbo"></div>
+		    	<div class="form-group" id="jqxgrid"></div>
 		        
 		    
 
