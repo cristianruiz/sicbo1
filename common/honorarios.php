@@ -1,7 +1,7 @@
 <?php
 include('../include_dao.php');
 include('../drivers/hm_honorariosicbo.php');
-include('../controller/cnt_honorarios.php');
+//include('../controller/cnt_honorarios.php');
 
 $obj = json_decode($_GET["parametros"]);
 $action=$obj->action;
