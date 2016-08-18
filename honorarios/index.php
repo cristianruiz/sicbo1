@@ -49,7 +49,7 @@
 		    	
 		    	
 		    	 <br>
-		    	<div class="form-group" id="grillaSicbo"></div>
+		    	<div class="form-group" id="jqxgrid"></div>
 		        
 		    
 
@@ -83,7 +83,63 @@
 	
 	
 	
+	<!--  MODAL FORMULARIO MAESTROS PERSONANATURAL/SOCIEDAD -->
 	
+	 <!-- Modal -->
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title" id="myModalLabel">Enviar solicitud de registros clícos</h4>
+             </div>
+             <div class="modal-body">
+
+                    <br/>
+
+                <div class="row">
+                  <div class="form-group">
+                      <div class="col-xs-3">
+                          Ficha
+                          <input id="Checkbox1" type="checkbox" />
+                      </div>
+                      <div class="col-md-6">
+                          Exán
+                          <input id="Checkbox2" type="checkbox" />
+                      </div>
+                  </div>
+              </div>
+
+             <br />
+
+                    <div class="row">
+                           <div class="form-group">
+                            <div class="col-lg-10">
+                    <!--   <asp:TextBox ID="txtcuerpo" runat="server" TextMode="MultiLine" Rows="4" Columns="70" class="form-control">
+                       </asp:TextBox> -->
+
+                      </div>
+                       </div>
+                    </div>
+
+                    <br/>
+          <div class="modal-footer">
+          <div class="col-xs-2">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+
+            <div class="col-xs-2">
+                 <!--     <asp:Button ID="btnenvia" runat="server" Text="Enviar" class="btn btn-info"  
+                    onclick="btnenvia_Click" /> -->
+            </div>
+           </div>
+
+           </div>
+         </div>
+       </div>
+    </div>
+	
+	<!--  //MODAL FORMULARIO MAESTROS PERSONANATURAL/SOCIEDAD -->
 	
 	<!-- jQuery -->
 		<script src="//code.jquery.com/jquery.js"></script>
@@ -103,13 +159,9 @@
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxcombobox.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxdropdownlist.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.js"></script>
+    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxloader.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.selection.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.columnsresize.js"></script>
-    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.filter.js"></script>
-    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.sort.js"></script>
-    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.pager.js"></script>
-    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.grouping.js"></script>
-    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxloader.js"></script>
     	
 		<!-- ==============cruiz=============== -->
 		  <script type="text/javascript" src="../gui/js/util.js"></script> 

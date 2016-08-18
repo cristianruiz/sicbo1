@@ -1,4 +1,6 @@
 <?php
+include('hm_detallehonorariossicbo.php');
+include('../controller/cnt_honorarios.php');
 class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 	var $mes;
 	var $ano;
@@ -85,7 +87,7 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 		
 	}
 	
-	public function nuevoperiodo(){
+	public function cargaperiodo(){
 		//$i=$this->existeperiodo();
 		//error_log("AKI: ".$i);
 	    if ($this->existeperiodo()){
@@ -100,6 +102,16 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 		$r->periodo=$this->periodo;
 		$r->usuario='cruiz';
 		$h->insert($r);
+		$params= array("ano"=>$this->ano,"mes"=>$this->mes);
+		
+		$client=new SoapClient('http://192.168.1.51:8080/cbows/admision?wsdl');
+		$deth=new hm_detallehonorariossicbo();
+		$deth->cargamensual($client->honorarios_pad($params)->return,$r);
+		//carga honorarios consolidados
+		$hc=new hm_honorarioconsolidado($r->periodo,$r->idhonorario);
+		$hc->cargahonorarioconsolidaddo();
+		//==============================
+		
 		return $r;
 	    }
 	}
