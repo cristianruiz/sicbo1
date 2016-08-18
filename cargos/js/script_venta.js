@@ -185,11 +185,13 @@ $(document).keyup(function (e){
     if ($("#txtnrooa").is(":focus") && (e.keyCode == 13)) {
         var nrocargo = $('#txtnrooa').val();
         var cod_sec = $('#txtcodsec').val();
+        var action = "cargo_cabecera";
+        //var dataString=JSON.stringify(datos);
 
         $.ajax({
             type: "POST",
             url: '../common/dibuja_cargo.php',                                                                               
-            data: {'nrocargo': nrocargo, 'cod_sec': cod_sec},
+            data: {nrocargo: nrocargo,cod_sec: cod_sec, action: action},
 
             error: function(){
                 alert("error peticion ajax");
@@ -219,11 +221,13 @@ $(document).keyup(function(e){
     if ($('#txtnrooa').is(":focus") && (e.keyCode == 13)) {
         var nrocargo = $('#txtnrooa').val();
         var cod_sec = $('#txtcodsec').val();
+        var action = "cargo_det";
         var tot = 0;
+
         $.ajax({
             type: "POST",
-            url: '../common/dibuja_det_cargo.php',
-            data: {'nrocargo':nrocargo, 'cod_sec': cod_sec},
+            url: '../common/dibuja_cargo.php',
+            data: {nrocargo: nrocargo, cod_sec: cod_sec, action: action},
 
             error: function(){
                 alert('Error petición ajax');
@@ -242,10 +246,18 @@ $(document).keyup(function(e){
     }
 });
 
-
-
 $(document).keyup(function(e){
     if ($('#txtcodsec').is(":focus") && (e.keyCode == 13)) {
         $('#txtnrooa').focus();
     }
 });
+
+$(document).ready(function(){
+    var objPac = new Object();
+    var rut = $('#txtRutNum2').val();
+    objPac.rut = rut.substr(0, -2);
+     
+    jQuery.post('../drivers/pacientes.php', {
+
+    });
+})
