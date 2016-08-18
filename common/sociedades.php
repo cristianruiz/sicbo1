@@ -3,6 +3,7 @@ include('../include_dao.php');
 
 
 $obj = json_decode($_GET["parametros"]);
+print_r($obj);
 $action=$obj->action;
 switch ($action) {
 	case "getall":
