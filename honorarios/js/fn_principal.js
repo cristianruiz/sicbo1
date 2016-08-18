@@ -6,6 +6,7 @@ var idhonorario=0;
 
 function GuardarPS(){
 	alert("HOLA");
+	$('#cargando').html("HADASASSASASSA");
 }
 function cargagrilla(){
 	var dat0 = new Object();
@@ -145,20 +146,20 @@ $(document).ready(function () {
             $("#rutver").jqxInput({placeHolder: "?", height: 25, width: 20, minLength: 1 });
             $("#nombre").jqxInput({placeHolder: "Nombre", height: 25, width: 400, minLength: 1 });
             $("#chkpn").jqxCheckBox({ width: 120, height: 25 });
-            $("#btnGuardarPN").jqxButton({ width: '80', height: '25'});
+            //$("#btnGuardarPN").jqxButton({ width: '80', height: '25'});
             $("#titulo").hide();
             $("#chkpn").on('change', function (event) {
                 var checked = event.args.checked;
                 if (checked){
-                	$("#btnGuardarPN").jqxButton({disabled:true});
+                	//$("#btnGuardarPN").jqxButton({disabled:true});
                 	$("#titulo").show();
                 } else {
-                	$("#btnGuardarPN").jqxButton({disabled:false});
+                	//$("#btnGuardarPN").jqxButton({disabled:false});
                 	$("#titulo").hide();
                 }
                 	
             });
             
-            $("#btnGuardarS").jqxButton({ width: '80', height: '25'});
+            //$("#btnGuardarS").jqxButton({ width: '80', height: '25'});
   });
             

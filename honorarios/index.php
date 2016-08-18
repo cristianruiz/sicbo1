@@ -52,28 +52,10 @@
 		    	<div class="form-group" id="jqxgrid"></div>
 		        
 		    
-
-		    
-		    
-		    
-		    
-		    
-		  </div></div></div>
+ </div></div></div>
 	    
 
-	    <div class="panel panel-info">
-	    	<div class="panel-body">
-	    		<div class="form-group">
-	    			<label>Centro Costo</label>
-	    			<input id="jqxInput" />
-	    			<label style="font-family: Verdana; font-size: 10px;">ex: Ana</label>
-         <div style="font-family: Verdana; font-size: 13px;" id='selectionlog'>
-        </div>
-	    			
-	    		</div>
-	    		
-	    	</div>
-	    </div>
+	    
 	</form>
  </div>	
 
@@ -131,7 +113,7 @@
                           <input id="chkpn" />
                       </div>
                       <div class="col-xs-2">
-                          <input type="button" id="btnGuardarPN" value="Guardar" />
+                          <!--  <input type="button" id="btnGuardarPN" value="Guardar" /> -->
                       </div>
                   </div>
               </div>
@@ -145,7 +127,7 @@
                             </div>
                             <div class="form-group">
                             <div class="col-xs-4">
-                            <input type="button" id="btnGuardarS" value="Guardar" />
+                            <!--  <input type="button" id="btnGuardarS" value="Guardar" /> -->
                             </div>
                        </div>
                     </div> </div>
@@ -156,8 +138,8 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div>
 
-            <div class="col-xs-2">ggg
-                 <button type="button" class="btn btn-default" data-dismiss="modal" onclick="GuardarPS()">Guardar</button>
+            <div class="col-xs-2">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="GuardarPS()">Guardar</button>
             </div>
            </div>
 
