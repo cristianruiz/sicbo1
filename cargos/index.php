@@ -6,7 +6,7 @@ include('../drivers/servicios.php');
 include('../drivers/pacientes.php');
 include('../drivers/ciudad.php');
 include('../controller/pacientes.php');
-include('../controller/cargos_controller.php');
+include('../controller/cnt_cargos.php');
 date_default_timezone_set("Chile/Continental");
 
 $med = new Medicos();
