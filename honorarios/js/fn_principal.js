@@ -42,6 +42,13 @@ function cargagrilla(){
             { text: '-', datafield: 'receptor', minwidth: 50 }
         ]
     }); 
+    $("#jqxgrid").bind('rowselect', function (event) {
+        var row = event.args.rowindex;
+        console.log("fila"+row);
+        $('#myModal').modal('toggle');
+        $('#myModal').modal('show');
+       // $('#myModal').modal('hide');
+    });
 }
 
 $(document).ready(function () {
