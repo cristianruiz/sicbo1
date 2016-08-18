@@ -8,6 +8,47 @@ function GuardarPS(){
 	alert("HOLA");
 	$('#cargando').html("HADASASSASASSA");
 }
+function cargagrillasociedades(){
+	var dat1 = new Object();
+	dat1.action="getall";
+	
+	
+	var dataString=JSON.stringify(dat1);
+	var url1="../common/sociedades.php?parametros="+dataString;
+    var source =
+    {
+        datatype: "json",
+        datafields: [
+            { name: 'rutsociedad'},
+            { name: 'razonsocial'},
+            { name: 'selec'},
+        ],
+        id: 'id',
+        url: url1
+    };
+    var dataAdapter = new $.jqx.dataAdapter(source);
+    $("#jqxgrid").jqxGrid(
+    {
+        width: 1000,
+        source: dataAdapter,
+        ready: function () {
+            $("#jqxgrid").jqxGrid('hidecolumn', 'name');
+        },
+        columnsresize: true,
+        columns: [
+            { text: 'RUT SOCIEDAD', datafield: 'rutsociedad', width: 100 },
+            { text: 'RAZON SOCIAL', datafield: 'razonsocial', width: 300 },
+            { text: '-', datafield: 'selec', width: 50 }
+        ]
+    }); 
+    $("#jqxgrid").bind('rowselect', function (event) {
+        var row = event.args.rowindex;
+        console.log("fila"+row);
+        $('#myModal').modal('toggle');
+        $('#myModal').modal('show');
+       // $('#myModal').modal('hide');
+    });
+}
 function cargagrilla(){
 	var dat0 = new Object();
 	dat0.action="listhonorarioconsolidado";

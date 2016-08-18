@@ -127,6 +127,7 @@
                             </div>
                             <div class="form-group">
                             <div class="col-xs-4">
+                            <div class="form-group" id="gridsociedades"></div>
                             <!--  <input type="button" id="btnGuardarS" value="Guardar" /> -->
                             </div>
                        </div>
