@@ -200,7 +200,7 @@ $(document).ready(function () {
                 }
                 	
             });
-            
+            cargagrillasociedades();
             //$("#btnGuardarS").jqxButton({ width: '80', height: '25'});
   });
             
