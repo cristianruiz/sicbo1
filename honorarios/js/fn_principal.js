@@ -4,7 +4,9 @@
 var ano, mes=0;
 var idhonorario=0;
 
-
+function GuardarPS(){
+	alert("HOLA");
+}
 function cargagrilla(){
 	var dat0 = new Object();
 	dat0.action="listhonorarioconsolidado";
@@ -139,6 +141,24 @@ $(document).ready(function () {
             });
             
             
-
+            $("#rutnum").jqxInput({placeHolder: "aasdads", height: 25, width: 80, minLength: 1 });
+            $("#rutver").jqxInput({placeHolder: "?", height: 25, width: 20, minLength: 1 });
+            $("#nombre").jqxInput({placeHolder: "Nombre", height: 25, width: 400, minLength: 1 });
+            $("#chkpn").jqxCheckBox({ width: 120, height: 25 });
+            $("#btnGuardarPN").jqxButton({ width: '80', height: '25'});
+            $("#titulo").hide();
+            $("#chkpn").on('change', function (event) {
+                var checked = event.args.checked;
+                if (checked){
+                	$("#btnGuardarPN").jqxButton({disabled:true});
+                	$("#titulo").show();
+                } else {
+                	$("#btnGuardarPN").jqxButton({disabled:false});
+                	$("#titulo").hide();
+                }
+                	
+            });
+            
+            $("#btnGuardarS").jqxButton({ width: '80', height: '25'});
   });
             
