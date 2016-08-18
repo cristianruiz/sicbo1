@@ -27,12 +27,12 @@ function cargagrillasociedades(){
         url: url1
     };
     var dataAdapter = new $.jqx.dataAdapter(source);
-    $("#jqxgrid").jqxGrid(
+    $("#gridsociedades").jqxGrid(
     {
         width: 1000,
         source: dataAdapter,
         ready: function () {
-            $("#jqxgrid").jqxGrid('hidecolumn', 'name');
+            $("#gridsociedades").jqxGrid('hidecolumn', 'name');
         },
         columnsresize: true,
         columns: [
@@ -41,13 +41,7 @@ function cargagrillasociedades(){
             { text: '-', datafield: 'selec', width: 50 }
         ]
     }); 
-    $("#jqxgrid").bind('rowselect', function (event) {
-        var row = event.args.rowindex;
-        console.log("fila"+row);
-        $('#myModal').modal('toggle');
-        $('#myModal').modal('show');
-       // $('#myModal').modal('hide');
-    });
+   
 }
 function cargagrilla(){
 	var dat0 = new Object();
