@@ -3,12 +3,14 @@ include('../include_dao.php');
 
 
 $obj = json_decode($_GET["parametros"]);
-print_r($obj);
+
 $action=$obj->action;
 switch ($action) {
 	case "getall":
 		$s = new HmSociedadMySqlDAO();
-		print(json_encode($s->queryAll()));
+		$arr=$s->queryAll();
+		print_r($arr);
+		//print(json_encode($arr));
 		break;
 	default:
 		break;
