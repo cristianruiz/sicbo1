@@ -6,12 +6,14 @@ class Serv extends MaeServiciosMySqlDAO{
 		$sqlQuery=new SqlQuery($sql);
 		
 
-		$arr=$this->execute($sqlQuery);$ret = Array();
+		$arr=$this->execute($sqlQuery);
+		$ret = Array();
 		 
 		foreach($arr as &$t){
 		 	$f= array(
 		 			"codigoservicio"=>$t["codigoservicio"],
-		 			"descripcion"=>utf8_encode($t["descripcion"]),
+		 			"descripcion"=>utf8_encode($t["descripcion"])
+		 			
 		 	);
 		 	array_push($ret,$f);
 		}
