@@ -29,7 +29,8 @@ function cargagrillasociedades(){
     var dataAdapter = new $.jqx.dataAdapter(source);
     $("#gridsociedades").jqxGrid(
     {
-        width: 1000,
+        width: 500,
+        height: 250,
         source: dataAdapter,
         ready: function () {
             $("#gridsociedades").jqxGrid('hidecolumn', 'name');
@@ -37,8 +38,8 @@ function cargagrillasociedades(){
         columnsresize: true,
         columns: [
             { text: 'RUT SOCIEDAD', datafield: 'rutsociedad', width: 100 },
-            { text: 'RAZON SOCIAL', datafield: 'razonsocial', width: 300 },
-            { text: '-', datafield: 'selec', width: 50 }
+            { text: 'RAZON SOCIAL', datafield: 'razonsocial', width: 350 },
+            { text: '-', datafield: 'selec', width: 50, columntype: 'checkbox',editable: true, resizable: false }
         ]
     }); 
    
@@ -67,6 +68,7 @@ function cargagrilla(){
     $("#jqxgrid").jqxGrid(
     {
         width: 1000,
+        
         source: dataAdapter,
         ready: function () {
             $("#jqxgrid").jqxGrid('hidecolumn', 'name');
@@ -183,14 +185,17 @@ $(document).ready(function () {
             $("#chkpn").jqxCheckBox({ width: 120, height: 25 });
             //$("#btnGuardarPN").jqxButton({ width: '80', height: '25'});
             $("#titulo").hide();
+            $("#titulo1").hide();
             $("#chkpn").on('change', function (event) {
                 var checked = event.args.checked;
                 if (checked){
                 	//$("#btnGuardarPN").jqxButton({disabled:true});
                 	$("#titulo").show();
+                	$("#titulo1").show();
                 } else {
                 	//$("#btnGuardarPN").jqxButton({disabled:false});
                 	$("#titulo").hide();
+                	$("#titulo1").hide();
                 }
                 	
             });

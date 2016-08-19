@@ -125,13 +125,17 @@
                             <div class="col-xs-4">
                             Seleccione Sociedad a la que pertenece
                             </div>
-                            <div class="form-group">
-                            <div class="col-xs-4">
-                            <div class="form-group" id="gridsociedades"></div>
-                            <!--  <input type="button" id="btnGuardarS" value="Guardar" /> -->
-                            </div>
+                            
                        </div>
                     </div> </div>
+                    
+                    <div class="row" id="titulo1">
+                    <div class="col-xs-4">
+                           <div class="form-group" id="gridsociedades">
+                    </div>       
+                    </div>
+                    </div>
+                    
 		 
                     <br/>
           <div class="modal-footer">

@@ -1,28 +1,27 @@
 <?php
 include('../include_dao.php');
-
+include('../drivers/sociedades.php');
 
 $obj = json_decode($_GET["parametros"]);
 
 $action=$obj->action;
 switch ($action) {
 	case "getall":
-		$s = new HmSociedadMySqlDAO();
-		$arr=$s->queryAll();
+		$s = new sociedad();
+		$arr=$s->getall();
 		$ret = Array();
-		print_r($arr);	
 		foreach($arr as &$t){
 			$f= array(
 					"id"=>$t->id,
 					"rutsociedad"=>$t->rutsociedad,
 					"razonsocial"=>utf8_encode($t->razonsocial),
-					"selec"=>"true"
+					"selec"=>"false"
 					
 			);
 			array_push($ret,$f);
 		}
 			
-		return(json_encode($ret));
+		print(json_encode($ret));
 		break;
 	default:
 		break;
