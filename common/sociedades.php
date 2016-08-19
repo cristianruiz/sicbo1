@@ -10,7 +10,7 @@ switch ($action) {
 		$s = new HmSociedadMySqlDAO();
 		$arr=$s->queryAll();
 		$ret = Array();
-			
+		print_r($arr);	
 		foreach($arr as &$t){
 			$f= array(
 					"id"=>$t->id,
