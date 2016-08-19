@@ -13,9 +13,9 @@ switch ($action) {
 			
 		foreach($arr as &$t){
 			$f= array(
-					"id"=>$t["id"],
-					"rutsociedad"=>($t["rutsociedad"]),
-					"razonsocial"=>utf8_encode($t["razonsocial"]),
+					"id"=>$t->id,
+					"rutsociedad"=>$t->rutsociedad,
+					"razonsocial"=>utf8_encode($t->razonsocial),
 					"selec"=>"true"
 					
 			);
