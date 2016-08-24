@@ -9,7 +9,7 @@ $action=$obj->action;
 switch ($action) {
 	case "cargadatospersonanatural":
 		$idhc = $obj->idhonorarioconsolidado;
-		$hc= new hm_honorarioconsolidado($p, $id);
+		print("idh".$idhc);
 	case "honorariosmensual":
 		$mes= $obj->mes;
 		$ano= $obj->ano;

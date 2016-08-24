@@ -3,7 +3,7 @@
  * Class that operate on table 'hm_honorarioconsolidado'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2016-08-12 20:30
+ * @date: 2016-08-24 17:04
  */
 class HmHonorarioconsolidadoMySqlDAO implements HmHonorarioconsolidadoDAO{
 
@@ -57,11 +57,14 @@ class HmHonorarioconsolidadoMySqlDAO implements HmHonorarioconsolidadoDAO{
  	 * @param HmHonorarioconsolidadoMySql hmHonorarioconsolidado
  	 */
 	public function insert($hmHonorarioconsolidado){
-		$sql = 'INSERT INTO hm_honorarioconsolidado (id_honorariosicbo, rutpersonatural) VALUES (?, ?)';
+		$sql = 'INSERT INTO hm_honorarioconsolidado (idhonorariosicbo, rutmed, formula, tiporeceptor, valor) VALUES (?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->setNumber($hmHonorarioconsolidado->idHonorariosicbo);
-		$sqlQuery->setNumber($hmHonorarioconsolidado->rutpersonatural);
+		$sqlQuery->setNumber($hmHonorarioconsolidado->idhonorariosicbo);
+		$sqlQuery->setNumber($hmHonorarioconsolidado->rutmed);
+		$sqlQuery->setNumber($hmHonorarioconsolidado->formula);
+		$sqlQuery->setNumber($hmHonorarioconsolidado->tiporeceptor);
+		$sqlQuery->setNumber($hmHonorarioconsolidado->valor);
 
 		$id = $this->executeInsert($sqlQuery);	
 		$hmHonorarioconsolidado->id = $id;
@@ -74,11 +77,14 @@ class HmHonorarioconsolidadoMySqlDAO implements HmHonorarioconsolidadoDAO{
  	 * @param HmHonorarioconsolidadoMySql hmHonorarioconsolidado
  	 */
 	public function update($hmHonorarioconsolidado){
-		$sql = 'UPDATE hm_honorarioconsolidado SET id_honorariosicbo = ?, rutpersonatural = ? WHERE id = ?';
+		$sql = 'UPDATE hm_honorarioconsolidado SET idhonorariosicbo = ?, rutmed = ?, formula = ?, tiporeceptor = ?, valor = ? WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->setNumber($hmHonorarioconsolidado->idHonorariosicbo);
-		$sqlQuery->setNumber($hmHonorarioconsolidado->rutpersonatural);
+		$sqlQuery->setNumber($hmHonorarioconsolidado->idhonorariosicbo);
+		$sqlQuery->setNumber($hmHonorarioconsolidado->rutmed);
+		$sqlQuery->setNumber($hmHonorarioconsolidado->formula);
+		$sqlQuery->setNumber($hmHonorarioconsolidado->tiporeceptor);
+		$sqlQuery->setNumber($hmHonorarioconsolidado->valor);
 
 		$sqlQuery->setNumber($hmHonorarioconsolidado->id);
 		return $this->executeUpdate($sqlQuery);
@@ -93,30 +99,72 @@ class HmHonorarioconsolidadoMySqlDAO implements HmHonorarioconsolidadoDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function queryByIdHonorariosicbo($value){
-		$sql = 'SELECT * FROM hm_honorarioconsolidado WHERE id_honorariosicbo = ?';
+	public function queryByIdhonorariosicbo($value){
+		$sql = 'SELECT * FROM hm_honorarioconsolidado WHERE idhonorariosicbo = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByRutpersonatural($value){
-		$sql = 'SELECT * FROM hm_honorarioconsolidado WHERE rutpersonatural = ?';
+	public function queryByRutmed($value){
+		$sql = 'SELECT * FROM hm_honorarioconsolidado WHERE rutmed = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByFormula($value){
+		$sql = 'SELECT * FROM hm_honorarioconsolidado WHERE formula = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByTiporeceptor($value){
+		$sql = 'SELECT * FROM hm_honorarioconsolidado WHERE tiporeceptor = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByValor($value){
+		$sql = 'SELECT * FROM hm_honorarioconsolidado WHERE valor = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
 
-	public function deleteByIdHonorariosicbo($value){
-		$sql = 'DELETE FROM hm_honorarioconsolidado WHERE id_honorariosicbo = ?';
+	public function deleteByIdhonorariosicbo($value){
+		$sql = 'DELETE FROM hm_honorarioconsolidado WHERE idhonorariosicbo = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByRutpersonatural($value){
-		$sql = 'DELETE FROM hm_honorarioconsolidado WHERE rutpersonatural = ?';
+	public function deleteByRutmed($value){
+		$sql = 'DELETE FROM hm_honorarioconsolidado WHERE rutmed = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByFormula($value){
+		$sql = 'DELETE FROM hm_honorarioconsolidado WHERE formula = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByTiporeceptor($value){
+		$sql = 'DELETE FROM hm_honorarioconsolidado WHERE tiporeceptor = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByValor($value){
+		$sql = 'DELETE FROM hm_honorarioconsolidado WHERE valor = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->executeUpdate($sqlQuery);
@@ -133,8 +181,11 @@ class HmHonorarioconsolidadoMySqlDAO implements HmHonorarioconsolidadoDAO{
 		$hmHonorarioconsolidado = new HmHonorarioconsolidado();
 		
 		$hmHonorarioconsolidado->id = $row['id'];
-		$hmHonorarioconsolidado->idHonorariosicbo = $row['id_honorariosicbo'];
-		$hmHonorarioconsolidado->rutpersonatural = $row['rutpersonatural'];
+		$hmHonorarioconsolidado->idhonorariosicbo = $row['idhonorariosicbo'];
+		$hmHonorarioconsolidado->rutmed = $row['rutmed'];
+		$hmHonorarioconsolidado->formula = $row['formula'];
+		$hmHonorarioconsolidado->tiporeceptor = $row['tiporeceptor'];
+		$hmHonorarioconsolidado->valor = $row['valor'];
 
 		return $hmHonorarioconsolidado;
 	}
