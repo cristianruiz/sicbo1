@@ -9,6 +9,7 @@ $obj = json_decode($_GET["parametros"]);
 $action=$obj->action;
 switch ($action) {
 	case "cargadatospersonanatural":
+		error_log("AKIIII");
 		$idhc = $obj->idhonorarioconsolidado;
 		$r=new drv_personanatural();
 		
