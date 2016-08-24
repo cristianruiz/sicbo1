@@ -25,7 +25,7 @@ function cargadatospersonanatural(){
         url: "../common/honorarios.php",
         success: function (d) {
         	$('#jqxLoader').jqxLoader('close');
-           
+           console.log("OK")
        
             
         }
