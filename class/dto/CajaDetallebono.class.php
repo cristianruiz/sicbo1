@@ -3,7 +3,7 @@
 	 * Object represents table 'caja_detallebono'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2016-08-24 17:04	 
+     	 * @date: 2016-08-24 21:12	 
 	 */
 	class CajaDetallebono{
 		

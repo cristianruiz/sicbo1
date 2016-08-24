@@ -9,9 +9,10 @@ class drv_personanatural extends HmPersonanaturalMySqlDAO{
 		$r=$dhm->load($idh);
 		
 		$d= new cnt_personanatural();
-		$noombre= $d->carganombredesdesicbo($r->rutmed);
+		$nombre= $d->carganombredesdesicbo($r->rutmed);
+		$this->rutproveedor=$r->rutmed;
 		return $nombre;
-		//$r=$dhm->load($idh);
+		
 				
 		
 	}

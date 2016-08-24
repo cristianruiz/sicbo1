@@ -5,13 +5,13 @@
  * @author: http://phpdao.com
  * @date: 2016-08-24 21:12
  */
-interface CajaDetalleboletaDAO{
+interface TarPreciosserviciosDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @Return CajaDetalleboleta 
+	 * @Return TarPreciosservicios 
 	 */
 	public function load($id);
 
@@ -28,49 +28,45 @@ interface CajaDetalleboletaDAO{
 	
 	/**
  	 * Delete record from table
- 	 * @param cajaDetalleboleta primary key
+ 	 * @param tarPreciosservicio primary key
  	 */
-	public function delete($iddetalleboleta);
+	public function delete($idprecioservicio);
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param CajaDetalleboleta cajaDetalleboleta
+ 	 * @param TarPreciosservicios tarPreciosservicio
  	 */
-	public function insert($cajaDetalleboleta);
+	public function insert($tarPreciosservicio);
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param CajaDetalleboleta cajaDetalleboleta
+ 	 * @param TarPreciosservicios tarPreciosservicio
  	 */
-	public function update($cajaDetalleboleta);	
+	public function update($tarPreciosservicio);	
 
 	/**
 	 * Delete all rows
 	 */
 	public function clean();
 
-	public function queryByCodigodetalle($value);
+	public function queryByCodigoservicio($value);
 
-	public function queryByGlosa($value);
-
-	public function queryByCantidad($value);
+	public function queryByIdconvenio($value);
 
 	public function queryByPreciounitario($value);
 
-	public function queryByNumeroboleta($value);
+	public function queryByVigente($value);
 
 
-	public function deleteByCodigodetalle($value);
+	public function deleteByCodigoservicio($value);
 
-	public function deleteByGlosa($value);
-
-	public function deleteByCantidad($value);
+	public function deleteByIdconvenio($value);
 
 	public function deleteByPreciounitario($value);
 
-	public function deleteByNumeroboleta($value);
+	public function deleteByVigente($value);
 
 
 }
