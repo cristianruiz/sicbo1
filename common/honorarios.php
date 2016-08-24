@@ -5,6 +5,7 @@ include('../drivers/drv_personanatural.php');
 //include('../controller/cnt_honorarios.php');
 
 $obj = json_decode($_GET["parametros"]);
+error_log(print_r($obj),true);
 $action=$obj->action;
 switch ($action) {
 	case "cargadatospersonanatural":
