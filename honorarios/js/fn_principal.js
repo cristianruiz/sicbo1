@@ -24,13 +24,8 @@ function cargadatospersonanatural(){
         dataType: "json",
         url: "../common/honorarios.php",
         success: function (d) {
-        	
-            
-        
-            	$('#jqxLoader').jqxLoader('close');
-            	$('#cargando').html(d.res1);
-            	idhonorario=d.res1;
-            	cargagrilla();
+        	$('#jqxLoader').jqxLoader('close');
+           
        
             
         }
