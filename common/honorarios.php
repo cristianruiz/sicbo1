@@ -1,7 +1,7 @@
 <?php
 include('../include_dao.php');
 include('../drivers/hm_honorariosicbo.php');
-include('../drivers/hm_personanatural.php');
+include('../drivers/drv_personanatural.php');
 //include('../controller/cnt_honorarios.php');
 
 $obj = json_decode($_GET["parametros"]);
@@ -10,9 +10,9 @@ $action=$obj->action;
 switch ($action) {
 	case "cargadatospersonanatural":
 		$idhc = $obj->idhonorarioconsolidado;
-		$r=new hm_personanatural();
+		$r=new drv_personanatural();
 		
-		print($r->cargadatosfromhonorariosicbo($idhc));
+		print_r($r->cargadatosfromhonorariosicbo($idhc));
 		break;
 	case "honorariosmensual":
 		$mes= $obj->mes;
