@@ -7,6 +7,9 @@ $obj = json_decode($_GET["parametros"]);
 //error_log(print_r($obj),true);
 $action=$obj->action;
 switch ($action) {
+	case "cargadatospersonanatural":
+		$idhc = $obj->idhonorarioconsolidado;
+		$hc= new hm_honorarioconsolidado($p, $id);
 	case "honorariosmensual":
 		$mes= $obj->mes;
 		$ano= $obj->ano;

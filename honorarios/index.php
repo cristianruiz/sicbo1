@@ -21,6 +21,8 @@
 		
 		<link rel="stylesheet" href="../gui/css/fontawesome/css/font-awesome.min.css" type="text/css" />
 		
+		<link rel="stylesheet" href="../gui/css/estilos.css" type="text/css" />
+		
 		
 	
 	</head>
@@ -130,11 +132,14 @@
                     </div> </div>
                     
                     <div class="row" id="titulo1">
-                    <div class="col-xs-4">
-                           <div class="form-group" id="gridsociedades">
-                    </div>       
-                    </div>
-                    </div>
+                           <div class="form-group">
+                            <div class="col-xs-4" >
+                            	<div  id="gridsociedades"></div>
+                            
+                            </div>
+                            
+                       </div>
+                    </div> 
                     
 		 
                     <br/>
@@ -144,7 +149,8 @@
             </div>
 
             <div class="col-xs-2">
-                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="GuardarPS()">Guardar</button>
+            	<input type="button" id="btnGuardarPS" value="Guardar"></div>
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal" onclick="GuardarPS()">Guardar</button> -->
             </div>
            </div>
 
@@ -176,7 +182,9 @@
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxloader.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.selection.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.columnsresize.js"></script>
+    	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.edit.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxcheckbox.js"></script>
+    	
     	
 		<!-- ==============cruiz=============== -->
 		  <script type="text/javascript" src="../gui/js/util.js"></script> 

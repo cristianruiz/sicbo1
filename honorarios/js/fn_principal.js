@@ -3,16 +3,60 @@
  */
 var ano, mes=0;
 var idhonorario=0;
+var selectedRowIndex=0; 
+var unselectedRowIndex=0;
+var idhonorarioconsolidado=0;
+var ruthonorarioconsolidado=0;
 
+
+function cargadatospersonanatural(){
+	console.log("DIGVER "+ruthonorarioconsolidado.slice(0,-2)+": "+$.calculaDigitoVerificador(ruthonorarioconsolidado.slice(0,-2)));
+	$('#jqxLoader').jqxLoader('open');
+	var dat0 = new Object();
+	dat0.action="cargadatospersonanatural";
+	dat0.idhonorarioconsolidado=idhonorarioconsolidado;
+	
+	var dataString=JSON.stringify(dat0);
+	console.log(dataString);
+	$.ajax({
+        type: "GET",
+        data: {parametros:dataString},
+        dataType: "json",
+        url: "../common/honorarios.php",
+        success: function (d) {
+        	
+            
+        
+            	$('#jqxLoader').jqxLoader('close');
+            	$('#cargando').html(d.res1);
+            	idhonorario=d.res1;
+            	cargagrilla();
+       
+            
+        }
+    });
+    
+	
+}
 function GuardarPS(){
-	alert("HOLA");
-	$('#cargando').html("HADASASSASASSA");
+	var dat0 = new Object();
+	dat0.action="guardaPS";
+	dat0.ano=ano;
+	dat0.mes=mes;
+	var dataString=JSON.stringify(dat0);
+	gridsociedades
+	console.log(dataString);
+	var rows = $("#gridsociedades").jqxGrid('selectedrowindexes');
+	for (var m = 0; m < rows.length; m++) {
+        var row = $("#gridsociedades").jqxGrid('getrowdata', rows[m]);
+        //selectedRecords[selectedRecords.length] = row;
+        console.log(row.razonsocial)
+	}
+
 }
 function cargagrillasociedades(){
 	var dat1 = new Object();
 	dat1.action="getall";
-	
-	
 	var dataString=JSON.stringify(dat1);
 	var url1="../common/sociedades.php?parametros="+dataString;
     var source =
@@ -21,7 +65,7 @@ function cargagrillasociedades(){
         datafields: [
             { name: 'rutsociedad'},
             { name: 'razonsocial'},
-            { name: 'selec'},
+            { name: 'selec',type:'bool'},
         ],
         id: 'id',
         url: url1
@@ -29,19 +73,42 @@ function cargagrillasociedades(){
     var dataAdapter = new $.jqx.dataAdapter(source);
     $("#gridsociedades").jqxGrid(
     {
-        width: 500,
+        width: 520,
         height: 250,
         source: dataAdapter,
+        editable: true,
+        selectionmode:'checkbox',
         ready: function () {
             $("#gridsociedades").jqxGrid('hidecolumn', 'name');
         },
         columnsresize: true,
+        
         columns: [
-            { text: 'RUT SOCIEDAD', datafield: 'rutsociedad', width: 100 },
-            { text: 'RAZON SOCIAL', datafield: 'razonsocial', width: 350 },
-            { text: '-', datafield: 'selec', width: 50, columntype: 'checkbox',editable: true, resizable: false }
+            { text: 'Rut Soc.', datafield: 'rutsociedad', width: 100,cellclassname: "smallFont" },
+            { text: 'Razon Social', datafield: 'razonsocial', width: 350,cellclassname: "smallFont" }
+           // { text: '-', datafield: 'selec', width: 50, columntype: 'checkbox',editable: false, resizable: false,cellclassname: "smallFont" }
         ]
     }); 
+    $("#gridsociedades").bind('rowselect', function (event) {
+    	$("#gridsociedades").jqxGrid('unselectrow', selectedRowIndex);
+         selectedRowIndex = event.args.rowindex;
+    });
+    $("#gridsociedades").bind('rowunselect', function (event) {
+        var unselectedRowIndex = event.args.rowindex;
+        selectedRowIndex=0;
+    });
+  /*  $("#gridsociedades").bind('cellendedit', function (event) {
+        if (event.args.value) {
+                $("#gridsociedades").jqxGrid('selectrow', event.args.rowindex);
+                //alert(event.args.rowindex);
+                var data = $('#gridsociedades').jqxGrid('getrowdata', event.args.rowindex);
+                //console.log(data.razonsocial);
+                //arreglo_docs_selected.push()
+        }       else {
+                $("#gridsociedades").jqxGrid('unselectrow', event.args.rowindex);
+                }
+        });*/
+    
    
 }
 function cargagrilla(){
@@ -55,6 +122,7 @@ function cargagrilla(){
     {
         datatype: "json",
         datafields: [
+            { name: 'id'},         
             { name: 'rutmed'},
             { name: 'medico'},
             { name: 'nombrepad'},
@@ -84,7 +152,13 @@ function cargagrilla(){
     }); 
     $("#jqxgrid").bind('rowselect', function (event) {
         var row = event.args.rowindex;
-        console.log("fila"+row);
+        //console.log("fila"+row);
+        var data = $('#jqxgrid').jqxGrid('getrowdata', event.args.rowindex);
+        console.log("Seleccionando: "+data.id);
+        idhonorarioconsolidado=data.id;
+        ruthonorarioconsolidado=data.rutmed;
+        cargadatospersonanatural();
+        
         $('#myModal').modal('toggle');
         $('#myModal').modal('show');
        // $('#myModal').modal('hide');
@@ -141,36 +215,17 @@ $(document).ready(function () {
                     success: function (d) {
                     	
                         
-                    //    setTimeout(function () {
+                    
                         	$('#jqxLoader').jqxLoader('close');
                         	$('#cargando').html(d.res1);
                         	idhonorario=d.res1;
                         	cargagrilla();
-                     //   }, 2000); 
+                   
                         
                     }
                 });
             });
-            
-           /* $("#btnBuscar").on('click', function () {
-            	$('#cargando').html('<i class="fa fa-cog fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>');
-            	
-            	$.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: "../example.php",
-                    success: function (d) {
-                    	
-                        
-                        setTimeout(function () {
-                        	$('#cargando').html('');
-                        	$('#cargando').html(d.res1);
-                        }, 2000); 
-                        
-                    }
-                });
-            });
-            */
+          
             $("#comboAno").on('change', function (event) {
             ano=event.args.item.value;           
             });
@@ -196,10 +251,12 @@ $(document).ready(function () {
                 	//$("#btnGuardarPN").jqxButton({disabled:false});
                 	$("#titulo").hide();
                 	$("#titulo1").hide();
-                }
-                	
+                }    	
             });
             cargagrillasociedades();
-            //$("#btnGuardarS").jqxButton({ width: '80', height: '25'});
+            $("#btnGuardarPS").jqxButton({ width: '80', height: '35'});
+            $("#btnGuardarPS").on('click', function () {
+            	GuardarPS();
+            });
   });
             
