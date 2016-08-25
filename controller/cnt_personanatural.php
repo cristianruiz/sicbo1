@@ -8,6 +8,7 @@ class cnt_personanatural extends HmPersonanaturalMySqlDAO{
 		print_r($sql."<br>");
 		$sqlQuery = new SqlQuery($sql);
 		$arr=$this->execute($sqlQuery);
+		error_log(print_r($arr,true));
 		print_r("MED: ".$arr->medico."<br>");
 		
 		return($arr["medico"]);
