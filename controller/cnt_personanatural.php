@@ -5,13 +5,11 @@ class cnt_personanatural extends HmPersonanaturalMySqlDAO{
 		from hm_detallehonorariossicbo
 			where rutmed='".$r."' 
 			order by iddetallehonorario desc limit 0,1";
-		print_r($sql."<br>");
+		//print_r($sql."<br>");
 		$sqlQuery = new SqlQuery($sql);
 		$arr=$this->execute($sqlQuery);
-		error_log(print_r($arr,true));
-		print_r("MED: ".$arr->medico."<br>");
 		
-		return($arr["medico"]);
+		return($arr[0]["medico"]);
 	}
 }
 ?>

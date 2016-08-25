@@ -25,8 +25,10 @@ function cargadatospersonanatural(){
         url: "../common/honorarios.php",
         success: function (d) {
         	$('#jqxLoader').jqxLoader('close');
-           console.log("OK")
-       
+           console.log(d);
+           $('#rutnum').val(d.rutmed);
+           $('#rutver').val($.calculaDigitoVerificador(ruthonorarioconsolidado.slice(0,-2)));
+           $('#nombre').val(d.nombre);
             
         }
     });

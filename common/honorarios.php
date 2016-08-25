@@ -13,7 +13,7 @@ switch ($action) {
 		$idhc = $obj->idhonorarioconsolidado;
 		$r=new drv_personanatural();
 		
-		print_r($r->cargadatosfromhonorariosicbo($idhc));
+		print_r(json_encode($r->cargadatosfromhonorariosicbo($idhc)));
 		break;
 	case "honorariosmensual":
 		$mes= $obj->mes;
