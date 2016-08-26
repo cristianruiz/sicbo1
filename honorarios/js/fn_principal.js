@@ -25,7 +25,8 @@ function cargadatospersonanatural(){
         url: "../common/honorarios.php",
         success: function (d) {
         	$('#jqxLoader').jqxLoader('close');
-           console.log(d);
+           //console.log(JSON.stringify(d));
+           //console.log(d["rutmed"]);
            $('#rutnum').val(d.rutmed);
            $('#rutver').val($.calculaDigitoVerificador(ruthonorarioconsolidado.slice(0,-2)));
            $('#nombre').val(d.nombre);
@@ -37,11 +38,42 @@ function cargadatospersonanatural(){
 }
 function GuardarPS(){
 	var dat0 = new Object();
+	dat0.action="guardapersonanatural"
+	dat0.rutnum=$('#rutnum').val()
+	dat0.rutver=$('#rutver').val()
+	dat0.checked = $('#chkpn').jqxCheckBox('checked');
+	if (dat0.checked) {
+		console.log("Si")
+		var row = $("#gridsociedades").jqxGrid('getrowdata', selectedRowIndex);
+		dat0.rutsociedad=row.rutsociedad
+		console.log("id sociedad: "+dat0.rutsociedad)
+	} else {
+		console.log("no")
+	}
+	var dataString=JSON.stringify(dat0);
+	
+	$.ajax({
+        type: "GET",
+        data: {parametros:dataString},
+        dataType: "json",
+        url: "../common/honorarios.php",
+        success: function (d) {
+        	console.log("RESULTADO"+d.res)
+            
+        }
+    });
+	
+	/*
+	toastr.info('Are you the 6 fingered man?')
+	toastr.error('Aasfdafqwdgfergwer')
+	*/
+	/*
+	var dat0 = new Object();
 	dat0.action="guardaPS";
 	dat0.ano=ano;
 	dat0.mes=mes;
 	var dataString=JSON.stringify(dat0);
-	gridsociedades
+	
 	console.log(dataString);
 	var rows = $("#gridsociedades").jqxGrid('selectedrowindexes');
 	for (var m = 0; m < rows.length; m++) {
@@ -49,7 +81,7 @@ function GuardarPS(){
         //selectedRecords[selectedRecords.length] = row;
         console.log(row.razonsocial)
 	}
-
+*/
 }
 function cargagrillasociedades(){
 	var dat1 = new Object();

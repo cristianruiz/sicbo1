@@ -21,6 +21,8 @@
 		
 		<link rel="stylesheet" href="../gui/css/fontawesome/css/font-awesome.min.css" type="text/css" />
 		
+		<link rel="stylesheet" href="../gui/css/toastr.css" type="text/css" />
+		
 		<link rel="stylesheet" href="../gui/css/estilos.css" type="text/css" />
 		
 		
@@ -185,6 +187,9 @@
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxgrid.edit.js"></script>
     	<script type="text/javascript" src="../gui/js/jqw/jqwidgets/jqxcheckbox.js"></script>
     	
+    	<!--  T O A S T R -->
+		
+    	<script type="text/javascript" src="../gui/js/toastr.min.js"></script>
     	
 		<!-- ==============cruiz=============== -->
 		  <script type="text/javascript" src="../gui/js/util.js"></script> 

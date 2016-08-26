@@ -8,12 +8,26 @@ $obj = json_decode($_GET["parametros"]);
 //error_log(print_r($obj),true);
 $action=$obj->action;
 switch ($action) {
+	case "guardapersonanatural":
+		$rutnum=$obj->rutnum;
+		$rutver=$obj->rutver;
+		$nombre=$obj->nombre;
+		$checked=$obj->checked;
+		$rutsociedad=$obj->rutsociedad;
+		$r=new drv_personanatural();
+		$r->guardapersonanatural($rutnum, $rutver, $nombre);
+		//$t=new Transaction();
+		$salida= array("res"=> "ok");
+		print(json_encode($salida));
+		break;
 	case "cargadatospersonanatural":
 		error_log("AKIIII");
 		$idhc = $obj->idhonorarioconsolidado;
 		$r=new drv_personanatural();
 		
 		print_r(json_encode($r->cargadatosfromhonorariosicbo($idhc)));
+		//$a=$r->cargadatosfromhonorariosicbo($idhc);
+		
 		break;
 	case "honorariosmensual":
 		$mes= $obj->mes;
