@@ -41,6 +41,7 @@ function GuardarPS(){
 	dat0.action="guardapersonanatural"
 	dat0.rutnum=$('#rutnum').val()
 	dat0.rutver=$('#rutver').val()
+	dat0.nombre=$('#nombre').val()
 	dat0.checked = $('#chkpn').jqxCheckBox('checked');
 	if (dat0.checked) {
 		console.log("Si")
