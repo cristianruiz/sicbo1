@@ -2,12 +2,14 @@
 include('../controller/cnt_personanatural.php');
 class drv_personanatural extends HmPersonanaturalMySqlDAO{
 	var $rutproveedor;
-	public function guardapersonanatural($rutmed,$rutver,$nombre){
+	public function guardapersonanatural($rutmed,$rutver,$nombre,$esreceptor,$vigente){
 		$pn=new HmPersonanaturalMySqlDAO();
 		$pno=new HmPersonanatural();
 		$pno->rutproveedor=$rutmed;
 		$pno->rutver=$rutver;
 		$pno->nombrecompleto=$nombre;
+		$pno->esreceptor=$esreceptor;
+		$pno->vigente=$vigente;
 		$pn->insert($pno);
 		if (($pno->id)>0){
 			return true;

@@ -14,10 +14,23 @@ switch ($action) {
 		$nombre=$obj->nombre;
 		$checked=$obj->checked;
 		$rutsociedad=$obj->rutsociedad;
+		$vigente=1;
+		if ($checked){
+			$esreceptor=0;
+		} else {
+			$esreceptor=1;
+		}
+		$t=new Transaction();
 		$r=new drv_personanatural();
-		$r->guardapersonanatural($rutnum, $rutver, $nombre);
-		//$t=new Transaction();
-		$salida= array("res"=> "ok");
+		if($r->guardapersonanatural($rutnum, $rutver, $nombre,$esreceptor,$vigente)){
+			$t->commit();
+			$salida= array("res"=>"OK" );
+		} else {
+			$t->rollback();
+			$salida= array("res"=>"NO" );
+		}
+		
+		
 		print(json_encode($salida));
 		break;
 	case "cargadatospersonanatural":
