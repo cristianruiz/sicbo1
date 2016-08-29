@@ -6,7 +6,14 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 		$this->periodo=$p;
 		$this->idhonorariosicbo=$id;
 	}
-	
+	public function actualizarecepcionhonorariomensual($rutnum,$esreceptor){
+		$sql="update hm_honorarioconsolidado set tiporeceptor=".$esreceptor."
+				where rutmed=".$rutnum." 
+				and idhonorariosicbo=".$this->idhonorariosicbo;
+		$sqlQuery = new SqlQuery($sql);
+		$numrows=$this->executeInsert($sqlQuery);
+		return $num_rows;
+	}
 	public function getJSONHonorario(){
 		$sql="SELECT
 					t1.id,

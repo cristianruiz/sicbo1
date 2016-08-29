@@ -2,13 +2,22 @@
 include('../controller/cnt_personanatural.php');
 class drv_personanatural extends HmPersonanaturalMySqlDAO{
 	var $rutproveedor;
-	public function actualizarecepcionhonorario($idhonorarioconsolidado,$esreceptor){
-		$h= new HmHonorarioconsolidadoMySqlDAO();
+	public function actualizarecepcionhonorariomensual($idhonorariosicbo,$rutnum,$esreceptor){
+		/*$h= new HmHonorarioconsolidadoMySqlDAO();
 		$ho= new HmHonorarioconsolidado();
 		$ho=$h->load($idhonorarioconsolidado);
 		$ho->tiporeceptor=$esreceptor;
 		$numrows=$h->update($ho);
-		print_r("NUMERO de filas actualizadas: ".$numrows);
+		print_r("NUMERO de filas actualizadas: ".$numrows);*/
+		$h = new hm_honorarioconsolidado(1,$idhonorariosicbo);
+		$numrows=$h->actualizarecepcionhonorariomensual($rutnum, $esreceptor);
+		if ($numrows>=0){
+			error_log("Se actualizaron ".$numrows." Registros");
+			return true;
+		} else {
+			return false;
+		}
+		
 		
 	}
 	public function guardapersonanatural($rutmed,$rutver,$nombre,$esreceptor,$vigente){

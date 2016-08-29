@@ -14,7 +14,7 @@ switch ($action) {
 		$nombre=$obj->nombre;
 		$checked=$obj->checked;
 		$rutsociedad=$obj->rutsociedad;
-		$idhonorarioconsolidado=$obj->idhonorarioconsolidado;
+		$idhonorario=$obj->idhonorario;
 		$error=false;
 		$vigente=1;
 		if ($checked){
@@ -35,7 +35,9 @@ switch ($action) {
 				$error=true;
 			}
 		}
-		$r->actualizarecepcionhonorario($idhonorarioconsolidado,$esreceptor);
+		if (!$r->actualizarecepcionhonorariomensual($idhonorariosicbo, $rutnum, $esreceptor)){
+			$error=true;
+		}
 		if ($error){
 			$t->rollback();
 			$salida= array("res"=>"NO" );
