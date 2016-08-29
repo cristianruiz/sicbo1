@@ -7,7 +7,8 @@ class drv_personanatural extends HmPersonanaturalMySqlDAO{
 		$ho= new HmHonorarioconsolidado();
 		$ho=$h->load($idhonorarioconsolidado);
 		$ho->tiporeceptor=$esreceptor;
-		$h->update($ho);
+		$numrows=$h->update($ho);
+		print_r("NUMERO de filas actualizadas: ".$numrows);
 		
 	}
 	public function guardapersonanatural($rutmed,$rutver,$nombre,$esreceptor,$vigente){

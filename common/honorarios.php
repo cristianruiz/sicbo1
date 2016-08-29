@@ -35,7 +35,7 @@ switch ($action) {
 				$error=true;
 			}
 		}
-		actualizarecepcionhonorario($idhonorarioconsolidado,$esreceptor);
+		$r->actualizarecepcionhonorario($idhonorarioconsolidado,$esreceptor);
 		if ($error){
 			$t->rollback();
 			$salida= array("res"=>"NO" );
