@@ -30,7 +30,7 @@ switch ($action) {
 			$salida= array("res"=>"NO" );
 		}*/
 		if ($checked){
-			if (!$r->guardasociedad($rutnum, $rutsociedad));{
+			if (!$r->guardasociedad($rutnum, $rutsociedad)){
 				$error=true;
 			}
 		}
