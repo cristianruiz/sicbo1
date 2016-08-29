@@ -38,7 +38,9 @@ function cargadatospersonanatural(){
 }
 function GuardarPS(){
 	var dat0 = new Object();
+	console.log("Hor consolidado: "+ idhonorarioconsolidado);
 	dat0.action="guardapersonanatural"
+	dat0.idhonorarioconsolidado=idhonorarioconsolidado;
 	dat0.rutnum=$('#rutnum').val()
 	dat0.rutver=$('#rutver').val()
 	dat0.nombre=$('#nombre').val()

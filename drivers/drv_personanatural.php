@@ -2,6 +2,14 @@
 include('../controller/cnt_personanatural.php');
 class drv_personanatural extends HmPersonanaturalMySqlDAO{
 	var $rutproveedor;
+	public function actualizarecepcionhonorario($idhonorarioconsolidado,$esreceptor){
+		$h= new HmHonorarioconsolidadoMySqlDAO();
+		$ho= new HmHonorarioconsolidado();
+		$ho=$h->load($idhonorarioconsolidado);
+		$ho->tiporeceptor=$esreceptor;
+		$h->update($ho);
+		
+	}
 	public function guardapersonanatural($rutmed,$rutver,$nombre,$esreceptor,$vigente){
 		$pn=new HmPersonanaturalMySqlDAO();
 		$pno=new HmPersonanatural();
@@ -16,6 +24,7 @@ class drv_personanatural extends HmPersonanaturalMySqlDAO{
 		} else {
 			return false;
 		}
+		
 		
 	}
 	public function guardasociedad($rutnum,$rutsociedad) {
