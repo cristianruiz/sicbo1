@@ -173,6 +173,10 @@
 	require_once('class/dto/TarGrupopaquete.class.php');
 	require_once('class/mysql/TarGrupopaqueteMySqlDAO.class.php');
 	require_once('class/mysql/ext/TarGrupopaqueteMySqlExtDAO.class.php');
+	require_once('class/dao/TarPreciosserviciosDAO.class.php');
+	require_once('class/dto/TarPreciosservicio.class.php');
+	require_once('class/mysql/TarPreciosserviciosMySqlDAO.class.php');
+	require_once('class/mysql/ext/TarPreciosserviciosMySqlExtDAO.class.php');
 	require_once('class/dao/TarSubgrupopaqueteDAO.class.php');
 	require_once('class/dto/TarSubgrupopaquete.class.php');
 	require_once('class/mysql/TarSubgrupopaqueteMySqlDAO.class.php');

@@ -3,13 +3,16 @@
 	 * Object represents table 'hm_honorarioconsolidado'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2016-08-12 20:30	 
+     	 * @date: 2016-08-24 21:12	 
 	 */
 	class HmHonorarioconsolidado{
 		
 		var $id;
-		var $idHonorariosicbo;
-		var $rutpersonatural;
+		var $idhonorariosicbo;
+		var $rutmed;
+		var $formula;
+		var $tiporeceptor;
+		var $valor;
 		
 	}
 ?>

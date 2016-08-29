@@ -295,6 +295,13 @@ class DAOFactory{
 	}
 
 	/**
+	 * @return TarPreciosserviciosDAO
+	 */
+	public static function getTarPreciosserviciosDAO(){
+		return new TarPreciosserviciosMySqlExtDAO();
+	}
+
+	/**
 	 * @return TarSubgrupopaqueteDAO
 	 */
 	public static function getTarSubgrupopaqueteDAO(){
