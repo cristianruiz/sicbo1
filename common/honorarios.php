@@ -14,6 +14,7 @@ switch ($action) {
 		$nombre=$obj->nombre;
 		$checked=$obj->checked;
 		$rutsociedad=$obj->rutsociedad;
+		$error=false;
 		$vigente=1;
 		if ($checked){
 			$esreceptor=0;
@@ -22,15 +23,25 @@ switch ($action) {
 		}
 		$t=new Transaction();
 		$r=new drv_personanatural();
-		if($r->guardapersonanatural($rutnum, $rutver, $nombre,$esreceptor,$vigente)){
-			$t->commit();
-			$salida= array("res"=>"OK" );
-		} else {
+		if(!$r->guardapersonanatural($rutnum, $rutver, $nombre,$esreceptor,$vigente)){
+			$error=true;
+		} /*else {
 			$t->rollback();
 			$salida= array("res"=>"NO" );
+		}*/
+		if ($checked){
+			if (!$r->guardasociedad($rutnum, $rutsociedad));{
+				$error=true;
+			}
 		}
-		
-		
+		if ($error){
+			$t->rollback();
+			$salida= array("res"=>"NO" );
+		} else {
+			$t->commit();
+			$salida=array("res"=>"OK");
+		}
+		//if (!$r->guardasociedad($rutnum, $rutsociedad))
 		print(json_encode($salida));
 		break;
 	case "cargadatospersonanatural":

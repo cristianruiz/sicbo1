@@ -19,6 +19,16 @@ class drv_personanatural extends HmPersonanaturalMySqlDAO{
 		
 	}
 	public function guardasociedad($rutnum,$rutsociedad) {
+		$soc= new HmSociosmiembrosMySqlDAO();
+		$soco= new HmSociosmiembro();
+		$soco->rutproveedor=$rutnum;
+		$soco->rutsociedad=$rutsociedad;
+		$soc->insert($soco);
+		if (($soco->id)>0){
+			return true;
+		} else {
+			return false;
+		}
 		
 	}
 	public function cargadatosfromhonorariosicbo($idh){
