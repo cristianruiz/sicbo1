@@ -23,6 +23,7 @@ class drv_personanatural extends HmPersonanaturalMySqlDAO{
 		$soco= new HmSociosmiembro();
 		$soco->rutproveedor=$rutnum;
 		$soco->rutsociedad=$rutsociedad;
+		error_log(print_r($soco,true));
 		$soc->insert($soco);
 		if (($soco->id)>0){
 			return true;
