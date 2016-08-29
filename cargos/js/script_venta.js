@@ -1,3 +1,6 @@
+$(document).ready(function () {
+
+});
 
 //Valida que se ingrese rut en panel admision paciente
 $(document).ready(function(){
@@ -15,6 +18,7 @@ $(document).ready(function(){
     
     if(valor_rut === ''){
       alert('Ingrese Rut.');
+
       $('#txtRutNum2').focus();
       return false;
     }else{
@@ -90,54 +94,6 @@ function checkRut(rut) {
 }
 //--------------------------------------------------------------------------------
 
-//*******AJAX BUSQUEDA PACIENTES*********
-$(document).ready(function(){
-    //getdeails será nuestra función para enviar la solicitud ajax
-    var getdetails = function(id){
-        return $.getJSON( "../common/dibuja_paciente.php", { "id" : id });
-    }
-    
-    //al hacer click sobre cualquier elemento que tenga el atributo data-user.....
-    $('[data-user]').click(function(e){
-        //Detenemos el comportamiento normal del evento click sobre el elemento clicado
-        e.preventDefault();
-        //Mostramos texto de que la solicitud está en curso
-        $("#response-container").html("<p>Buscando...</p>");
-        //this hace referencia al elemento que ha lanzado el evento click
-        //con el método .data('user') obtenemos el valor del atributo data-user de dicho elemento y lo pasamos a la función getdetails definida anteriormente
-        getdetails($(this).data('user'))
-        .done( function( response ) {
-            //done() es ejecutada cuándo se recibe la respuesta del servidor. response es el objeto JSON recibido
-            if( response.success ) {
-                
-                var output = "";
-                //recorremos cada usuario
-                $.each(response.data.users, function( key, value ) {
-                    //output += "<h2>Detalles del usuario " + value['ID'] + "</h2>";
-                    //recorremos los valores de cada usuario
-                    $.each( value, function ( userkey, uservalue) {
-                        //output += '<ul>';
-                        output += '<p>' + userkey + ': ' + uservalue + '</p>';
-                        //output += '</ul>';
-                    });
-                });
-                
-                //Actualizamos el HTML del elemento con id="#response-container"
-                $("#response-container").html(output);
-
-                var obj = JSON.parse(output);
-                $('#txtnomPac').attr('value', obj.output[1].uservalue);
-                
-                } else {
-                //response.success no es true
-                $("#response-container").html('' + response.data.message);
-            }
-        })
-        .fail(function( jqXHR, textStatus, errorThrown ) {
-            $("#response-container").html(". " +  textStatus);
-        });
-    });
-});
 //---------------------------------------------------------------------------
 
 $(document).ready(function(){
@@ -162,6 +118,11 @@ $(document).ready(function(){
 
 //------------------------------------------------------------------------
 
+/*---------------------Modal Secciones--------------- -------*/
+
+
+/*-----------------------------------------------------------*/
+
 //------------Evento al dar ENTER sobre txt cantidad de servicios---------
 $(document).keyup(function (e) {
     if ($("#txtCantServ").is(":focus") && (e.keyCode == 13)) {
@@ -169,9 +130,33 @@ $(document).keyup(function (e) {
 
         if (cant > 0) {
             $('#txtCantServ').val('');
-                console.log(cant);
-                $('#lblcant').text('Cantidad: '+ cant);
-                $('#jqxinput').focus();
+            console.log(cant);
+            $('#lblcant').text('Cantidad: '+ cant);
+            $('#jqxinput').focus();
+
+            var datos = new Array();
+            var cod = $('#codpres').text();
+            var cod1 = cod.substr(8,15);
+            var action = 'p_unit';
+            var nrocargo=$('#txtnrooa').val();
+            var cod_sec=$('#txtcodsec').val();
+
+            $.ajax({
+                type: "GET",
+                url: "../common/dibuja_cargo.php",
+                data: {codigo: cod1,nrocargo: nrocargo,cod_sec: cod_sec, action: action},
+
+                error: function () {
+                    alert('Error al consultar precio!');
+                },
+                success: function (data) {
+                    //data = JSON.parse(data);
+                    console.log(data);
+                }
+
+            });
+
+
             }else{
                 alert('Ingrese cantidad.');
             }
@@ -180,17 +165,77 @@ $(document).keyup(function (e) {
 
 //------------------------------------------------------------------------
 
+//-----------------BUSCAR NOMBRE DE PACIENTES----------------------------*/
+$(document).keyup(function (e) {
+    if ($("#txtRutNum3").is(":focus") && (e.keyCode == 13)) {
+        var rut = $('#txtRutNum3').val();
+        var nrocargo=$('#txtnrooa').val();
+        var cod_sec=$('#txtcodsec').val();
+        if (rut > 0){
+            var action = 'buscapac';
+
+            $.ajax({
+                type: "GET",
+                url: "../common/dibuja_cargo.php",
+                data: {action: action,rut: rut,nrocaro: nrocargo,cod_sec: cod_sec},
+                dataType: "json",
+
+                error: function () {
+                    $("#response-container").html('Error petición Ajax');
+                },
+                success: function (data) {
+                    if (data.length > 0){
+                        $("#response-container").html('Nombre: '+ data[0].apellidopaterno + ' '+ data[0].apellidomaterno + ' '+ data[0].nombre);
+                    }else{
+                        $("#response-container").html('Rut no encontrado.');
+                    }
+
+                }
+            });
+        }else {
+            alert('Ingrese Rut');
+        }
+
+    }
+});
+
+//------------ Enter sobre text codigo seccion--------------
+$(document).keyup(function(e){
+    if ($('#txtcodsec').is(":focus") && (e.keyCode == 13)) {
+        var nrocargo=$('#txtnrooa').val();
+        var cod_sec=$('#txtcodsec').val();
+        var codigo = $('#txtcodsec').val();
+        var action = "getNombreSec";
+
+        $.ajax({
+            type: "GET",
+            url: "../common/dibuja_cargo.php",
+            data: {codigo: codigo,action: action},
+
+            error: function () {
+                alert('Error peticion Ajax al traer nombre de seccion.');
+            },
+            success: function (data) {
+                console.log(data);
+                alert('ok');
+                $('#txtnrooa').focus();
+            }
+        });
+
+    }
+});
+
+
 //------------------Buscar cargo--------------------------------
 $(document).keyup(function (e){
     if ($("#txtnrooa").is(":focus") && (e.keyCode == 13)) {
-        var nrocargo = $('#txtnrooa').val();
-        var cod_sec = $('#txtcodsec').val();
-        var action = "cargo_cabecera";
-        //var dataString=JSON.stringify(datos);
+        var nrocargo=$('#txtnrooa').val();
+        var cod_sec=$('#txtcodsec').val();
+        var action="cargo_cabecera";
 
         $.ajax({
-            type: "POST",
-            url: '../common/dibuja_cargo.php',                                                                               
+            type: "GET",
+            url: "../common/dibuja_cargo.php",
             data: {nrocargo: nrocargo,cod_sec: cod_sec, action: action},
 
             error: function(){
@@ -215,49 +260,114 @@ $(document).keyup(function (e){
         });
     };
 });
-//------------------Busca detalle cargo-------------------------------
 
+
+//------------- DETALLE CARGO--------------------*/
 $(document).keyup(function(e){
     if ($('#txtnrooa').is(":focus") && (e.keyCode == 13)) {
-        var nrocargo = $('#txtnrooa').val();
-        var cod_sec = $('#txtcodsec').val();
-        var action = "cargo_det";
-        var tot = 0;
 
+        $('#jqxLoader').jqxLoader('open');
+        var action="cargo_det";
+        var nrocargo=$('#txtnrooa').val();
+        var cod_sec=$('#txtcodsec').val();
+
+        //$("#jqxLoader").jqxLoader({ width: 250, height: 150, autoOpen: false,text:"Buscando en SICBO" });
+
+        //console.log(dataString);
         $.ajax({
-            type: "POST",
-            url: '../common/dibuja_cargo.php',
-            data: {nrocargo: nrocargo, cod_sec: cod_sec, action: action},
-
-            error: function(){
-                alert('Error petición ajax');
-            },
-            success: function(data){
-                $('#detcargo tbody').remove();
-                data = JSON.parse(data);
-                 $.each(data, function(index, value){
-                    $('#detcargo').append("<tr><td>" + value.codigodetalle + "</td><td>"+ parseInt(value.cantidadentregada) +"</td><td>"+ value.preciounitario +'</td><td class="sum">'+parseInt(value.cantidadentregada)  * parseInt(value.preciounitario) +"</td></tr>");
-                    tot = tot + parseInt(value.preciounitario) * parseInt(value.cantidadentregada);
-                 });
-                 $('#detcargo').append('<tbody><tr><td></td>'+'<td></td>'+'<td></td>'+'<td class="total"><strong><h5>Total: $'+ tot+'</h5></strong></td></tr></tbody>')
-                 console.log(data);
+            type: "GET",
+            data: {action: action, nrocargo: nrocargo, cod_sec: cod_sec},
+            dataType: "json",
+            url: "../common/dibuja_cargo.php",
+            success: function (d) {
+                console.log(d);
+                $('#jqxLoader').jqxLoader('close');
+                cargagrilla();
             }
         });
     }
 });
 
-$(document).keyup(function(e){
-    if ($('#txtcodsec').is(":focus") && (e.keyCode == 13)) {
-        $('#txtnrooa').focus();
-    }
-});
 
+function cargagrilla(){
+
+    var action="cargo_det";
+    var nrocargo=$('#txtnrooa').val();
+    var cod_sec=$('#txtcodsec').val();
+
+    var url1="../common/dibuja_cargo.php";
+    var source =
+    {
+        data: {nrocargo: nrocargo,cod_sec: cod_sec,action: action},
+        datatype: "json",
+        datafields: [
+            { name: 'cantidadentregada',type:'integer'},
+            { name: 'codigodetalle'},
+            { name: 'nrocargo'},
+            { name: 'preciounitario'},
+            { name: 'total'},
+        ],
+        id: 'iddetalle',
+        url: url1
+    };
+    var dataAdapter = new $.jqx.dataAdapter(source);
+
+    $("#jqxgrid").jqxGrid(
+        {
+            width: 1000,
+            source: dataAdapter,
+            ready: function () {
+                $("#jqxgrid").jqxGrid('hidecolumn', 'nrocargo');
+            },
+            columnsresize: true,
+            columns: [
+                { text: 'CARGO', datafield: 'nrocargo', width: 100 },
+                { text: 'CODIGO', datafield: 'codigodetalle', width: 100 },
+                { text: 'CANTIDAD', datafield: 'cantidadentregada' , width: 100  },
+                { text: 'P. UNIT.', datafield: 'preciounitario', width: 150 },
+                { text: 'TOTAL', datafield: 'total', width: 100 },
+            ]
+        });
+    /*$("#jqxgrid").bind('rowselect', function (event) {
+        var row = event.args.rowindex;
+        console.log("fila"+row);
+        $('#myModal').modal('toggle');
+        $('#myModal').modal('show');
+        // $('#myModal').modal('hide');
+    });*/
+}
+/*-----------------------------------------------------------------------*/
+
+/*
 $(document).ready(function(){
-    var objPac = new Object();
-    var rut = $('#txtRutNum2').val();
-    objPac.rut = rut.substr(0, -2);
-     
-    jQuery.post('../drivers/pacientes.php', {
+    $('#btnokPac').click(function () {
+        var objPac = new Object();
+        var rut = $('#txtRutNum2').val();
+        objPac.rut = rut.substr(0, -2);
+        objPac.rutver = rut.substr(-1, 1);
+        objPac.nombre = $("#txtNomPac").val();
+        objPac.apat = $('#txtApat').val();
+        objPac.amat = $('#txtAmat').val();
+        objPac.fnac = $('#txtFnac').val();
+        objPac.dir = $('#txtDireccion').val();
+        objPac.tel = $('#txtTelefono').val();
+        objPac.mail = $('#txtEmail').val();
+        objPac.ciudad = $('#cboCiudad').val();
+        console.log(objPac);
 
+        jQuery.post('../drivers/pacientes/nuevoPaciente', {
+            datos: objPac;
+    }, function(data, textStatus{
+            if(data == 1){
+                alert('Paciente ha sido registrado');
+            }else {
+                alert('Error al guardar!');
+            }
+        }));
     });
-})
+});
+*/
+
+
+
+

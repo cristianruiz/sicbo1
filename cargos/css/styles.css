@@ -27,3 +27,22 @@ html{
 	font-size: 14px;
 	font-weight: bold;
 }
+
+.panel-margen {
+	margin-bottom: 5px;
+}
+
+.panel-body-margen{
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+#jqxgrid{
+	height: 50px;
+}
+
+br {
+
+	line-height: 15px;
+
+}
