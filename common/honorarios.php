@@ -35,7 +35,7 @@ switch ($action) {
 				$error=true;
 			}
 		}
-		if (!$r->actualizarecepcionhonorariomensual($idhonorariosicbo, $rutnum, $esreceptor)){
+		if (!$r->actualizarecepcionhonorariomensual($idhonorario, $rutnum, $esreceptor)){
 			$error=true;
 		}
 		if ($error){
