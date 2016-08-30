@@ -65,9 +65,10 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 			where t1.codigo=t2.codigoservicio and t1.periodo=".$this->periodo."
 			
 			group by t1.rutmed,t2.formula";*/
-		$sql="select t1.rutmed as rutmed ,t2.formula as formula,sum(t1.monto) as valor,
+		$sql="insert hm_honorarioconsolidado(rutmed,formula,valor,idhonorariosicbo,tiporeceptor) 
+			select t1.rutmed as rutmed ,t2.formula as formula,sum(t1.monto) as valor,
 			".$this->idhonorariosicbo." as idhonorariosicbo ,
-			ifnull(t3.esreceptor,1) as receptor
+			ifnull(t3.esreceptor,1) as tiporeceptor
 			from hm_detallehonorariossicbo t1 inner join hm_homocodigosformulas t2 on t1.codigo=t2.codigoservicio
             left  join hm_personanatural t3 on t1.rutmed=t3.rutproveedor
 			where   t1.periodo=".$this->periodo." 
