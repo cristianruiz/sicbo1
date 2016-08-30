@@ -17,7 +17,6 @@ $ciu = new Ciudad();
 $res_ciu = $ciu->getCiudades();
 
 
-
 /*
 //edita paciente
 if (isset($_POST['btnEditaPac'])) {
@@ -209,37 +208,34 @@ if (isset($_POST['btnEditaPac'])) {
                         	
              <form class="form-inline" name="form1" method="post">
 			 	
-						 	<div class="panel panel-info with-nav-tabs panel-margen">
-						 	  <div class="panel-body panel-body-margen">
+						 	<div class="panel panel-info with-nav-tabs">
+						 	  <div class="panel-body">
 							    <div class="form-group">
-									<button type="button" class="btn btn-primary fuente_btn input" data-toggle="modal" data-target="#myModal2">
-										<span class="glyphicon glyphicon-search">
-									</button>
 							    	<input type="text" id="txtcodsec" name="txtcodsec" placeholder="Sec." class="form-control input" style="width: 50px;" onkeypress="return isNumber(event)" ></input>
 							    	
 							    	&nbsp;
 
 							    	<input type="text" id="txtnrooa" name="txtnrooa" placeholder="Nro" class="form-control input" style="width: 50px;" onkeypress="return isNumber(event)"></input>
 							    </div>
-
+							    
+							    <button type="button" class="btn btn-primary fuente_btn input">Buscar</button>
 							    &nbsp;
 
 							    <div class="form-group">
-									<label id="lblsec"></label>
 							    	<label>Estado</label>
-							       <input type="text" class="form-control input" name="txtestado" disabled="true" style="width: 100px">
+							       <input type="text" class="form-control input" name="txtestado" disabled="true">
 							    </div>
 							    &nbsp;&nbsp;
 							    <div class="form-group">
 							    	<label>Fecha</label>
-							    	<input type="date" required id="txtfecha" name="txtfecha" class="form-control input" value="<?php echo date("Y-m-d"); ?>" style="width: 160px"></input>
+							    	<input type="date" required id="txtfecha" name="txtfecha" class="form-control input" value="<?php echo date("Y-m-d"); ?>"></input>
 							    	<input type="time" required id="txthora" name="txthora" class="form-control input" value="<?php echo date("H:i"); ?>"></input>
 							    </div>
 							  </div>
 						   </div>
 
-			    <div class="panel panel-info panel-margen">
-			    	<div class="panel-body panel-body-margen">
+			    <div class="panel panel-info">
+			    	<div class="panel-body">
 			    		<div class="form-group">
 			    			<label>Centro Costo</label>
 			    			<select id="cboCosto" name="cboCosto" class="form-control input fuente_btn">
@@ -251,7 +247,7 @@ if (isset($_POST['btnEditaPac'])) {
 			    			<select id="cboTipCuenta" name="cboTipCuenta" class="form-control input fuente_btn">
 			    				<option>TIPO CUENTA</option>
 			    			</select>
-			    			<input type="text" id="txtnroCta" name="txtnroCta" onkeypress="return isNumber(event)" placeholder="N° Cuenta" class="form-control input" style="width: 150px;"></input>
+			    			<input type="text" id="txtnroCta" name="txtnroCta" onkeypress="return isNumber(event)" placeholder="N° Cuenta" class="form-control input" style="width: 100px;"></input>
 			    		</div>
 			    		<br><br>
 			    		<div class="form-group">
@@ -266,7 +262,10 @@ if (isset($_POST['btnEditaPac'])) {
 
 			    			<input type="text" id="txtRutNum3" name="txtRutNum3"  onkeypress="return isNumber(event)" class="form-control input" maxlength="8" style="width: 130px;"></input>
 
+			    			<button data-user="" type="button" id="btnbuscaPac" name="btnbuscaPac" class="btn btn-primary input" >
+			    			<span class="glyphicon glyphicon-search"></span></button>
 			    			&nbsp;
+
 			    			<button type="button" class="btn btn-primary input fuente_btn" name="btnSinRut" id="btnSinRut">No tiene Rut</button>
 			    			&nbsp;
 			    			<div id="response-container" style="float: right;"></div>
@@ -276,8 +275,8 @@ if (isset($_POST['btnEditaPac'])) {
 			    </div>
 			    
 
-			    <div class="panel panel-info panel-margen">
-			    	<div class="panel-body panel-body-margen">
+			    <div class="panel panel-info">
+			    	<div class="panel-body">
 			    		<div class="form-group">
 			    		  <label>Financiador</label>
 			    		  <select name="cboFinan" id="cboFinan" class="form-control input fuente_btn">
@@ -302,7 +301,7 @@ if (isset($_POST['btnEditaPac'])) {
 			    </div>
 
 			    <div class="panel panel-info">
-			    	<div class="panel-body panel-body-margen">
+			    	<div class="panel-body">
 			    		<div class="row">
 			    			<div class="form-group">
 			    				<div class="form-group">
@@ -322,11 +321,18 @@ if (isset($_POST['btnEditaPac'])) {
                		</div>
             	</div>
 
-                 <div id="jqxLoader"></div>
-
-                 <div id="cargando"></div>
-
-                 <div class="form-group" id="jqxgrid"></div>
+            	<div id="servicio-result" style="font-size: 10px;">
+            		<table id="detcargo" class="table table-hover">
+            		 <thead>
+            			<tr>
+            				<th>Codigo</th>
+            				<th>Cantidad</th>
+            				<th>P. Unitario</th>
+            				<th>Total</th>
+            			</tr>
+            		 </thead>	
+            		</table>
+            	</div>
           </form>
         </div>
  </div>   
@@ -366,7 +372,14 @@ if (isset($_POST['btnEditaPac'])) {
 			 </div>
 
 			 <br>
-
+			 <div class="row">
+			 	<div class="col-lg-3">
+			 		<select id="cboRol" class="form-control">
+			 			<option value="1">Tratante</option>
+			 			<option value="2">Informante</option>
+			 		</select>
+			 	</div>
+			 </div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -374,28 +387,8 @@ if (isset($_POST['btnEditaPac'])) {
 	      </div>
 	    </div>
 	  </div>
-	</div>
-					<!-- Modal Seccion -->
-					<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									<h4 class="modal-title" id="myModalLabel">Elegir sección</h4>
-								</div>
-								<div class="modal-body">
-									<div class="row">
-										<div class="form-group">
-											<div class="col-lg-3">
-												<input type="text" name="jqxInput2" id="jqxInput2"/>
-											</div>
-
-										</div>
-									</div>
-							</div>
-						</div>
-					</div>
-
-					</body>
+	</div>	
+			
+</body>
 </html>
 </div>							
