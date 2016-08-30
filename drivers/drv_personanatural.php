@@ -8,7 +8,8 @@ class drv_personanatural extends HmPersonanaturalMySqlDAO{
 		$ho=$h->load($idhonorarioconsolidado);
 		$ho->tiporeceptor=$esreceptor;
 		$numrows=$h->update($ho);
-		print_r("NUMERO de filas actualizadas: ".$numrows);*/
+		print_r("NUMERO 
+		de filas actualizadas: ".$numrows);*/
 		$h = new hm_honorarioconsolidado(1,$idhonorariosicbo);
 		$numrows=$h->actualizarecepcionhonorariomensual($rutnum, $esreceptor);
 		if ($numrows>=0){
