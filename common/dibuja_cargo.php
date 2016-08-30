@@ -1,7 +1,7 @@
 <?php 
 include('../include_dao.php');
 include('../controller/cnt_cargos.php');
-include ('../drivers/servicios.php');
+include ('../drivers/drv_servicios.php');
 include ('../drivers/pacientes.php');
 include ('../controller/cnt_secciones.php');
 
@@ -14,7 +14,9 @@ switch ($action) {
 		$objCar = new Cargos_controller();
 		print_r($objCar->buscaCargo($nrooa,$cod_sec));
 		break;
-    case "p_unit":
+    case "getServicio":
+        $nrooa = $_GET["nrocargo"];
+        $cod_sec = $_GET["cod_sec"];
         $codigo = $_GET['codigo'];
         $objSrv = new Servicios();
         print_r($objSrv->getServByCod($codigo));

@@ -301,23 +301,27 @@ if (isset($_POST['btnEditaPac'])) {
 			    	</div>
 			    </div>
 
-			    <div class="panel panel-info">
+			    <div class="panel panel-info panel-margen">
 			    	<div class="panel-body panel-body-margen">
 			    		<div class="row">
-			    			<div class="form-group">
-			    				<div class="form-group">
-					    			<label>Servicio</label>
-					    			<input type="text" name="jqxinput" id="jqxInput" />
-					    			<label style="font-family: Verdana; font-size: 10px;">ej: Hemograma</label>
+
+							<div class="form-group">
+								&nbsp;&nbsp;
+								<button type="button" id="btnModalServ" class="btn btn-primary input fuente_btn" data-toggle="modal" data-target="#myModal3">
+									<span class="glyphicon glyphicon-search">
+								</button>
+
+								<input type="text" id="txtcodserv" name="txtcodserv" placeholder="Código" class="form-control input" style="width: 100px">
+
+								<input type="text" name="txtNomServ" id="txtNomServ" class="form-control input" style="width: 250px"/>
 
 					    			&nbsp;&nbsp;
-					    			<label>Cantidad</label>
-					    			<input type="text" id="txtCantServ" name="txtCantServ" onkeypress="return
-			    				 		isNumber(event)" class="form-control input" style="width: 60px;"></input>
-				        			<div style="font-family: Verdana; font-size: 13px;" id='selectionlog'></div>
-				        			<label id="lblcant"></label>
-	    						</div>
-			    			</div>
+								<input type="text" id="txtCantServ" name="txtCantServ" onkeypress="return
+			    			 		isNumber(event)" class="form-control input" style="width: 60px;" placeholder="Cant."></input>
+								<div style="font-family: Verdana; font-size: 13px;" id='selectionlog'></div>
+								<label id="lblcant"></label>
+							</div>
+
 			    		</div>	
                		</div>
             	</div>
@@ -392,10 +396,36 @@ if (isset($_POST['btnEditaPac'])) {
 
 										</div>
 									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 
-					</body>
+						<!-- Modal Buscador servicios -->
+						<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">Buscador de servicios</h4>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											<div class="form-group">
+												<div class="col-lg-3">
+													<input type="text" name="jqxInput" id="jqxInput"/>
+													<label style="font-family: Verdana; font-size: 10px;">ej: Hemograma</label>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+						</body>
 </html>
 </div>							

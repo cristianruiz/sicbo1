@@ -73,22 +73,27 @@
                 // Create a jqxInput
                 $("#jqxInput").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Servicios/Prestaciones:", displayMember: "descripcion", valueMember: "codigoservicio", width: 400, height: 25});
                 $("#jqxInput").on('select', function (event) {
-                if (event.args) {
-                    var item = event.args.item;
-                    if (item) {
-                    var valueelement = $("<div id='codpres'></div>");
-                    valueelement.text("Codigo: " + item.value);
-                    var labelelement = $("<div></div>");
-                    labelelement.text("Item: " + item.label);
+					$("#jqxInput").focus();
+					if (event.args) {
+						var item = event.args.item;
+						if (item) {
+							/*var valueelement = $("<div id='codpres'></div>");
+							valueelement.text("Codigo: " + item.value);
+							var labelelement = $("<div></div>");
+							labelelement.text("Item: " + item.label);
 
-                    $("#selectionlog").children().remove();
-                    $("#selectionlog").append(labelelement);
-                    $("#selectionlog").append(valueelement);
+							$("#selectionlog").children().remove();
+							$("#selectionlog").append(labelelement);
+							$("#selectionlog").append(valueelement);*/
 
-                    $('#jqxInput').val('');
-                    $('#txtCantServ').focus();
-                    }
-                }
+							$('#jqxInput').val('');
+							var nombre = item.label;
+							var codigo = item.value;
+							$('#txtNomServ').val(nombre);
+							$('#txtCantServ').focus();
+							$('#myModal3').modal('hide');
+						}
+					}
                 });
             });
             //---------------------------------------------------------------
@@ -111,9 +116,9 @@
 
                     // Create a jqxInput
                     $("#jqxInput2").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Secciones", displayMember: "descripcion", valueMember: "codigoseccion", width: 400, height: 25});
-                    $("#jqxInput2").on('select', function (event) {
+					$('#jqxInput2').focus();
+					$("#jqxInput2").on('select', function (event) {
                         if (event.args) {
-                            $('#jqxInput2').focus();
                             var item = event.args.item;
                             if (item) {
                                 $('#txtcodsec').val(item.value);
@@ -121,7 +126,7 @@
                                 $('#lblsec').text(nombre.substr(4,20)+'  ');
                                 $('#myModal2').modal('hide');
                                 $('#jqxInput2').val('');
-                                $('#txtnrooa').focus();
+                                //$('#txtnrooa').focus();
                             }
                         }
                     });

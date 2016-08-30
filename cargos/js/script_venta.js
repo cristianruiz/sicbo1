@@ -118,8 +118,38 @@ $(document).ready(function(){
 
 //------------------------------------------------------------------------
 
-/*---------------------Modal Secciones--------------- -------*/
+/*---------------------Textbox codigo servicios--------------- -------*/
+$(document).keyup(function (e) {
+    if($("#txtcodserv").is(":focus") && (e.keyCode == 13)) {
+        var nrocargo = $('#txtnrooa').val();
+        var cod_sec = $('#txtcodsec').val();
+        var cod_ser = $('#txtcodserv').val();
+        var action = "getServicio";
 
+        if(cod_ser > 0){
+            $.ajax({
+                type: "GET",
+                url: "../common/dibuja_cargo.php",
+                data: {nrocargo: nrocargo, cod_sec: cod_sec, action: action, codigo: cod_ser},
+
+                error: function () {
+                    alert('Error peticion Ajax al buscar Servicio.');
+                },
+                success: function (data) {
+                    if(data.length > 0){
+                        var parsedData = JSON.parse(data);
+                        $('#txtNomServ').val(parsedData.descripcion);
+                        $('#txtCantServ').focus();
+                    }else {
+                        alert('No hay datos');
+                    }
+                }
+            });
+        }else {
+            alert('Ingrese Código.');
+        }
+    }
+});
 
 /*-----------------------------------------------------------*/
 
@@ -134,32 +164,9 @@ $(document).keyup(function (e) {
             $('#lblcant').text('Cantidad: '+ cant);
             $('#jqxinput').focus();
 
-            var datos = new Array();
-            var cod = $('#codpres').text();
-            var cod1 = cod.substr(8,15);
-            var action = 'p_unit';
-            var nrocargo=$('#txtnrooa').val();
-            var cod_sec=$('#txtcodsec').val();
-
-            $.ajax({
-                type: "GET",
-                url: "../common/dibuja_cargo.php",
-                data: {codigo: cod1,nrocargo: nrocargo,cod_sec: cod_sec, action: action},
-
-                error: function () {
-                    alert('Error al consultar precio!');
-                },
-                success: function (data) {
-                    //data = JSON.parse(data);
-                    console.log(data);
-                }
-
-            });
-
-
-            }else{
-                alert('Ingrese cantidad.');
-            }
+        }else{
+            alert('Ingrese cantidad.');
+        }
     }
 });
 
@@ -189,7 +196,6 @@ $(document).keyup(function (e) {
                     }else{
                         $("#response-container").html('Rut no encontrado.');
                     }
-
                 }
             });
         }else {
