@@ -20,13 +20,4 @@ class Secc extends MaeSeccionesMySqlDAO{
         return(json_encode($ret));
     }
 
-    public function getNombreByCod($cod){
-        $sql = "select descripcion from mae_secciones WHERE  coddigoseccion=".$cod."";
-        $sqlQuery = new  SqlQuery($sql);
-
-        $res = $this->execute($sqlQuery);
-        $nom_sec = $res['descripcion'];
-        return $nom_sec;
-
-    }
 }

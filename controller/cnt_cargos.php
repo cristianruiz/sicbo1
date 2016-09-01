@@ -3,7 +3,7 @@ class Cargos_controller extends ZoaCargoMySqlDAO{
 
 	public function buscaCargo($nrooa,$cod_sec){
 		$hoy = getdate();
-		$mes = $hoy['mon']-2;
+		$mes = $hoy['mon']-3;
 		$periodo = $mes. $hoy['year'];
 
 		$sql = 'SELECT * FROM zoa_cargo where nrocargo='.$nrooa.' and periodo = '.$periodo.' and codigoseccion= '.$cod_sec.' ';
@@ -28,7 +28,7 @@ class Cargos_controller extends ZoaCargoMySqlDAO{
 
 	public function getDetCargo($nrooa,$cod_sec){
 		$hoy = getdate();
-		$mes = $hoy['mon']-2;
+		$mes = $hoy['mon']-3;
 		$periodo = $mes. $hoy['year'];
 
 		

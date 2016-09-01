@@ -7,15 +7,14 @@ include('../drivers/pacientes.php');
 include('../drivers/ciudad.php');
 include('../controller/pacientes.php');
 include('../controller/cnt_cargos.php');
+include ('../drivers/drv_financiador.php');
 date_default_timezone_set("Chile/Continental");
-
-$med = new Medicos();
-$col = 'apellido';
-$result = $med->getAll($col);
 
 $ciu = new Ciudad();
 $res_ciu = $ciu->getCiudades();
 
+$objFin = new  Financiador();
+$res_fin = $objFin->getAll();
 
 
 /*
@@ -281,11 +280,10 @@ if (isset($_POST['btnEditaPac'])) {
 			    		<div class="form-group">
 			    		  <label>Financiador</label>
 			    		  <select name="cboFinan" id="cboFinan" class="form-control input fuente_btn">
-			    		  	<option>FONASA</option>
-			    		  	<option>PARTICULAR</option>
-			    		  	<option>COLMENA</option>
+			    		  	<?php foreach ($res_fin as $item){
+			    		  		echo '<option value="'.$item->codigofinanciador.'">'.$item->nombrefinanciador.'</option>';
+							}  ?>
 			    		  </select>
-
 			    		  &nbsp;
 			    		  <label>Arancel</label>
 			    		  <select name="cboArancel" id="cboArancel" class="form-control input fuente_btn">
@@ -295,7 +293,7 @@ if (isset($_POST['btnEditaPac'])) {
 			    		  </select>	
 
 			    		  &nbsp;&nbsp;
-			    		  <button type="button" id="btnMedicos" class="btn btn-primary input fuente_btn" data-toggle="modal" data-target="#myModal">Médicos</button>
+			    		  <button type="button" id="btnMedicos" class="btn btn-primary input fuente_btn" data-toggle="modal" data-target="#myModal">Profesionales</button>
 						  <input type="text" id="txtNomMed" name="txtNomMed" class="form-control input" disabled="true"></input>
 			    		</div>
 			    	</div>
@@ -311,7 +309,8 @@ if (isset($_POST['btnEditaPac'])) {
 									<span class="glyphicon glyphicon-search">
 								</button>
 
-								<input type="text" id="txtcodserv" name="txtcodserv" placeholder="Código" class="form-control input" style="width: 100px">
+								<input type="text" id="txtcodserv" name="txtcodserv" placeholder="Código" onkeypress="return
+			    			 		isNumber(event)" class="form-control input" style="width: 100px">
 
 								<input type="text" name="txtNomServ" id="txtNomServ" class="form-control input" style="width: 250px"/>
 
@@ -334,7 +333,7 @@ if (isset($_POST['btnEditaPac'])) {
           </form>
         </div>
  </div>   
-  <!-- Modal -->
+  <!-- Modal profesionales -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
@@ -346,9 +345,10 @@ if (isset($_POST['btnEditaPac'])) {
 	        <div class="row">
 			  <div class="form-group">
 				<div class="col-lg-3">
-					<input type="text" id="txtNomMed2" name="txtNomMed2" class="form-control" placeholder="Nombre medico"></input>
-				</div>
+					<div id="cboRolProf"></div>
 
+				</div>
+				  <br>
 			  </div>
 			 </div>
 
@@ -357,12 +357,7 @@ if (isset($_POST['btnEditaPac'])) {
 			 <div class="row">
 			  	<div class="form-group">
 			  	 <div class="col-lg-3">
-			  		<SELECT NAME="toppings" MULTIPLE style="width: 200px;" class="form-control col-lg-3"> 
-			  		 <?php foreach ($result as $item) {
-			  		 	echo '<option value="'.$item->rutnum.'">'.$item->apellido.' '.$item->nombre.'</option>';
-			  		 } ?>
-			  		 
-			  		</SELECT>
+					 <input type="text" id="jqxInput3" name="jqxInput3"/>
 
 			  	</div>
 			  	

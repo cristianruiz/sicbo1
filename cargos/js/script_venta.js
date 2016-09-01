@@ -208,26 +208,30 @@ $(document).keyup(function (e) {
 //------------ Enter sobre text codigo seccion--------------
 $(document).keyup(function(e){
     if ($('#txtcodsec').is(":focus") && (e.keyCode == 13)) {
-        var nrocargo=$('#txtnrooa').val();
-        var cod_sec=$('#txtcodsec').val();
-        var codigo = $('#txtcodsec').val();
+        var nrocargo = $('#txtnrooa').val();
+        var cod_sec = $('#txtcodsec').val();
         var action = "getNombreSec";
 
         $.ajax({
             type: "GET",
             url: "../common/dibuja_cargo.php",
-            data: {codigo: codigo,action: action},
+            data: {cod_sec: cod_sec,action: action,nrocargo: nrocargo},
 
             error: function () {
                 alert('Error peticion Ajax al traer nombre de seccion.');
             },
             success: function (data) {
-                console.log(data);
-                alert('ok');
-                $('#txtnrooa').focus();
+                if(data.length > 0){
+                    var parsedData = JSON.parse(data);
+                    $('#lblsec').text(parsedData.descripcion);
+                    $('#txtnrooa').focus();
+
+                }else {
+                    alert('Código se sección no encontrado.');
+                    $('#lblsec').val('');
+                }
             }
         });
-
     }
 });
 
@@ -344,6 +348,19 @@ function cargagrilla(){
 }
 /*-----------------------------------------------------------------------*/
 
+$(document).ready(function () {
+    var rol = [{text:'Médico tratante', value: 1},{text: 'Médico informante', value: 2},{text: 'Tecnólogo', value: 3}];
+
+    $("#cboRolProf").jqxComboBox({
+        source: rol,
+        theme: 'highcontrast',
+        width: '150px',
+        height: '20px',
+        displayMember: 'text',
+        selectedIndex: 0,
+        valueMember: 'value'
+    });
+});
 /*
 $(document).ready(function(){
     $('#btnokPac').click(function () {

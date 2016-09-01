@@ -14,7 +14,6 @@
 
 		<link rel="stylesheet" type="text/css" href="css/style_tabMenu.css">
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
-		<link rel="stylesheet" type="text/css" href="css/toastr.css">
 
 		<link rel="stylesheet" href="../gui/js/jqw/jqwidgets/styles/jqx.base.css" type="text/css" />
 
@@ -50,13 +49,15 @@
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
+		<script type="text/javascript" src="../gui/js/toastr.min.js"></script>
         <script type="text/javascript" src="./js/script_venta.js"></script>
 		<![endif]-->
 
 		<script type="text/javascript">
                 //--------AUTOCOMPLETAR  BUSCADOR DE SERVICIOS----------------------------------
             $(document).ready(function () {
-                var url = "../common/dibuja_servicios_json.php";
+            	var action = 'buscaServ';
+                var url = "../common/buscadores.php?action="+action;
 
                 // prepare the data
                 var source =
@@ -100,7 +101,8 @@
 
                 //------------Buscador de secciones--------------------------
                 $(document).ready(function () {
-                    var url = "../common/dibuja_secciones_json.php";
+					var action = 'buscaSec';
+                    var url = "../common/buscadores.php?action="+action;
 
                     // prepare the data
                     var source =
@@ -110,7 +112,8 @@
                             { name: 'codigoseccion' },
                             { name: 'descripcion' }
                         ],
-                        url: url
+                        url: url,
+						action: action
                     };
                     var dataAdapter = new $.jqx.dataAdapter(source);
 
@@ -131,6 +134,38 @@
                         }
                     });
                 });
+
+				//------------Buscador de profesionales--------------------------
+				$(document).ready(function () {
+					var action = 'buscaProf';
+					var url = "../common/buscadores.php?action="+action;
+
+					// prepare the data
+					var source =
+					{
+						datatype: "json",
+						datafields: [
+							{ name: 'rutnum' },
+							{ name: 'fullname' }
+						],
+						url: url
+
+					};
+					var dataAdapter = new $.jqx.dataAdapter(source);
+
+					// Create a jqxInput
+					$("#jqxInput3").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Profesionales", displayMember: "fullname", valueMember: "rutnum", width: 400, height: 25});
+					$("#jqxInput3").focus();
+					$("#jqxInput3").on('select', function (event) {
+						if (event.args) {
+							var item = event.args.item;
+							if (item) {
+								var nombre = item.label;
+								console.log(nombre);
+							}
+						}
+					});
+				});
 
 		</script>
 			
