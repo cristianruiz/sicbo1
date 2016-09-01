@@ -154,14 +154,34 @@
 					var dataAdapter = new $.jqx.dataAdapter(source);
 
 					// Create a jqxInput
-					$("#jqxInput3").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Profesionales", displayMember: "fullname", valueMember: "rutnum", width: 400, height: 25});
+					$("#jqxInput3").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Profesionales", displayMember: "fullname", valueMember: "rutnum", width: 200, height: 25});
 					$("#jqxInput3").focus();
 					$("#jqxInput3").on('select', function (event) {
 						if (event.args) {
 							var item = event.args.item;
 							if (item) {
+								var rutprof = item.value;
 								var nombre = item.label;
-								console.log(nombre);
+								var codprof1 = $('#cboRolProf').val();
+								switch (codprof1){
+									case 1:
+										$('#ruttra').val(rutprof);
+										$('#txtMedtra').val(nombre);
+										break;
+									case 2:
+										$('#rutminf').val(rutprof);
+										$('#txtmedInf').val(nombre);
+										break;
+									case 3:
+										$('#ruttecno').val(rutprof);
+										$('#txttecnologo').val(nombre);
+										break;
+									default:
+										break;
+								}
+
+								console.log(nombre+rutprof);
+								$("#jqxInput3").val('');
 							}
 						}
 					});

@@ -313,6 +313,7 @@ function cargagrilla(){
         datafields: [
             { name: 'cantidadentregada',type:'integer'},
             { name: 'codigodetalle'},
+            { name: 'descripcion'},
             { name: 'nrocargo'},
             { name: 'preciounitario'},
             { name: 'total'},
@@ -324,17 +325,19 @@ function cargagrilla(){
 
     $("#jqxgrid").jqxGrid(
         {
-            width: 1000,
+            //width: 900,
+            height: 400,
             source: dataAdapter,
             ready: function () {
                 $("#jqxgrid").jqxGrid('hidecolumn', 'nrocargo');
             },
             columnsresize: true,
             columns: [
-                { text: 'CARGO', datafield: 'nrocargo', width: 100 },
+                { text: 'CARGO', datafield: 'nrocargo', width: 60 },
                 { text: 'CODIGO', datafield: 'codigodetalle', width: 100 },
-                { text: 'CANTIDAD', datafield: 'cantidadentregada' , width: 100  },
-                { text: 'P. UNIT.', datafield: 'preciounitario', width: 150 },
+                { text: 'DESCRIPCION', datafield: 'descripcion', width: 520},
+                { text: 'CANTIDAD', datafield: 'cantidadentregada' , width: 80  },
+                { text: 'P. UNITARIO', datafield: 'preciounitario', width: 100 },
                 { text: 'TOTAL', datafield: 'total', width: 100 },
             ]
         });
@@ -349,6 +352,7 @@ function cargagrilla(){
 /*-----------------------------------------------------------------------*/
 
 $(document).ready(function () {
+    var codrol=1;
     var rol = [{text:'Médico tratante', value: 1},{text: 'Médico informante', value: 2},{text: 'Tecnólogo', value: 3}];
 
     $("#cboRolProf").jqxComboBox({
@@ -360,6 +364,17 @@ $(document).ready(function () {
         selectedIndex: 0,
         valueMember: 'value'
     });
+
+    $("#cboRolProf").on('change', function (event) {
+        codrol=event.args.item.value;
+        $('#jqxInput3').focus();
+    });
+
+    if ($('#btnModalOk').on("click", function () {
+        //var rutprof = $('#jqxInput3').val();
+        var rutmtra = $('#ruttra').val();
+        console.log(rutmtra);
+    }));
 });
 /*
 $(document).ready(function(){
