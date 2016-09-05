@@ -33,8 +33,9 @@ class Cargos_controller extends ZoaCargoMySqlDAO{
 
 		
 		$sql = 'SELECT *,cantidadentregada * preciounitario as total,b.descripcion 
-                FROM zoa_detallecargo a, mae_servicios b 
-                where nrocargo='.$nrooa.' and periodo = '.$periodo.' and codigoseccion = '.$cod_sec.' and a.codigodetalle=b.codigoservicio ';
+                FROM zoa_detallecargo a
+                LEFT JOIN mae_servicios b ON a.codigodetalle=b.codigoservicio
+                where nrocargo='.$nrooa.' and periodo = '.$periodo.' and codigoseccion = '.$cod_sec.' ';
 		$sqlQuery = new SqlQuery($sql);
 		$arr=$this->execute($sqlQuery);$ret = Array();
 		 

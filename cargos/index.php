@@ -314,6 +314,7 @@ if (isset($_POST['btnEditaPac'])) {
 
 								<input type="text" name="txtNomServ" id="txtNomServ" class="form-control input" style="width: 250px"/>
 
+								<input type="text" id="txtprecio" name="txtprecio" class="form-control input">
 					    			&nbsp;&nbsp;
 								<input type="text" id="txtCantServ" name="txtCantServ" onkeypress="return
 			    			 		isNumber(event)" class="form-control input" style="width: 60px;" placeholder="Cant."></input>

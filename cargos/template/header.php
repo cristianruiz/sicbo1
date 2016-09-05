@@ -90,6 +90,7 @@
 							$('#jqxInput').val('');
 							var nombre = item.label;
 							var codigo = item.value;
+							$('#txtcodserv').val(codigo);
 							$('#txtNomServ').val(nombre);
 							$('#txtCantServ').focus();
 							$('#myModal3').modal('hide');
