@@ -3,15 +3,15 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2016-08-24 21:12
+ * @date: 2016-09-05 21:20
  */
-interface MaeMedicosDAO{
+interface MaeMedicos2DAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @Return MaeMedicos 
+	 * @Return MaeMedicos2 
 	 */
 	public function load($id);
 
@@ -28,23 +28,23 @@ interface MaeMedicosDAO{
 	
 	/**
  	 * Delete record from table
- 	 * @param maeMedico primary key
+ 	 * @param maeMedicos2 primary key
  	 */
 	public function delete($rutnum);
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param MaeMedicos maeMedico
+ 	 * @param MaeMedicos2 maeMedicos2
  	 */
-	public function insert($maeMedico);
+	public function insert($maeMedicos2);
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param MaeMedicos maeMedico
+ 	 * @param MaeMedicos2 maeMedicos2
  	 */
-	public function update($maeMedico);	
+	public function update($maeMedicos2);	
 
 	/**
 	 * Delete all rows

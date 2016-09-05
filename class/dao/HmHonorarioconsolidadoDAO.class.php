@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2016-08-24 21:12
+ * @date: 2016-09-05 21:20
  */
 interface HmHonorarioconsolidadoDAO{
 
@@ -61,6 +61,10 @@ interface HmHonorarioconsolidadoDAO{
 
 	public function queryByValor($value);
 
+	public function queryByRutrazonsocial($value);
+
+	public function queryByNombrerazonsocial($value);
+
 
 	public function deleteByIdhonorariosicbo($value);
 
@@ -71,6 +75,10 @@ interface HmHonorarioconsolidadoDAO{
 	public function deleteByTiporeceptor($value);
 
 	public function deleteByValor($value);
+
+	public function deleteByRutrazonsocial($value);
+
+	public function deleteByNombrerazonsocial($value);
 
 
 }
