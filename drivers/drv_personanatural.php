@@ -71,6 +71,24 @@ class drv_personanatural extends HmPersonanaturalMySqlDAO{
 				
 		
 	}
+	public function resethonconsolidado_pn_soc($id){
+		$error=false;
+		$dhm=new HmHonorarioconsolidadoMySqlDAO();
+		$r = new HmHonorarioconsolidado();
+		$t=new Transaction();
+		$r=$dhm->load($id);
+		$r->tiporeceptor=1;
+		$dhm->update($r);
+		$hsmdao=new HmSociosmiembrosMySqlDAO();
+		$hsmdao->deleteByRutproveedor($r->rutmed);
+		$hmpndao= new HmPersonanaturalMySqlDAO();
+		$hmpndao->deleteByRutproveedor($r->rutmed);
+		$t->commit();
+		$error=true;
+		return $error;
+		
+		
+	}
 }
 
 ?>

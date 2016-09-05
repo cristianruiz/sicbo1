@@ -46,7 +46,7 @@
 		        <div class="form-group" id="comboAno"></div> 
 		       <!--  <button type="button" class="btn btn-xs" >Buscar</button>  -->
 		       <input type="button" id="btnBuscar" value="Buscar" />
-		       
+		       <input type="button" id="btnExcel" value="Excel" />
 		       <div id="jqxLoader"></div>
 		       
 		    	<div id="cargando"></div>
@@ -158,10 +158,46 @@
 
            </div>
          </div>
-       </div>
-    </div>
+       
 	
 	<!--  //MODAL FORMULARIO MAESTROS PERSONANATURAL/SOCIEDAD -->
+	
+	
+	<!--  MODAL MODIFICAR RECEPTOR -->
+	
+	 <!-- Modal -->
+       <div class="modal fade" id="frmModReceptor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title" id="myModalLabel">MODIFICACION DATOS RECEPTOR</h4>
+             </div>
+             <div class="modal-body">
+Desea Modificar los datos de : 
+                    <br/>
+                    <div id="lblNombreamodificar" ></div>
+
+             </div>  
+             
+          <div class="modal-footer">
+          <div class="form-group"> 
+          <div class="col-xs-2">
+                <button type="button" class="btn btn-default" data-dismiss="modal">CANCELAR</button>
+            </div>
+           
+            <div class="col-xs-3">
+            	<input type="button" id="btnAceptaModifica" value="ACEPTAR"></div>
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal" onclick="GuardarPS()">Guardar</button> -->
+            </div>
+           </div>
+			</div>
+           </div>
+         </div>
+
+    
+	
+	<!--  //MODAL DIALOGO MODIFICAR RECEPTOR -->
 	
 	<!-- jQuery -->
 		<script src="//code.jquery.com/jquery.js"></script>
