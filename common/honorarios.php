@@ -49,6 +49,7 @@ switch ($action) {
 		print(json_encode($salida));
 		break;
 	case "cargadatospersonanatural":
+		
 		error_log("AKIIII");
 		$idhc = $obj->idhonorarioconsolidado;
 		$r=new drv_personanatural();
@@ -56,6 +57,20 @@ switch ($action) {
 		print_r(json_encode($r->cargadatosfromhonorariosicbo($idhc)));
 		//$a=$r->cargadatosfromhonorariosicbo($idhc);
 		
+		break;
+	case "deldatospersonanatural":
+		error_reporting(E_ALL);
+		ini_set('display_errors', TRUE);
+		ini_set('display_startup_errors', TRUE);
+		$idhonorararioconsolidado=$obj->idhonorarioconsolidado;
+		$p= new drv_personanatural();
+		if ($p->resethonconsolidado_pn_soc($idhonorararioconsolidado)){
+			$salida= array("res"=> "OK");
+		} else {
+			$salida= array("res"=> "ERROR");
+		}
+		
+		print(json_encode($salida));
 		break;
 	case "honorariosmensual":
 		$mes= $obj->mes;
@@ -71,6 +86,7 @@ switch ($action) {
 
 		break;
 	case "listhonorarioconsolidado":
+		
 		//$idhonorario=$_GET["$idhonorario"];
 		$idhonorario=$obj->idhonorario;
 		$l= new hm_honorarioconsolidado(1,$idhonorario);
@@ -80,6 +96,75 @@ switch ($action) {
 	case "estadoperiodo" :
 		error_log("llamando...");
 		print("OK");
+		break;
+	case "excel":
+		//error_reporting(E_ALL);
+		//ini_set('display_errors', TRUE);
+		//ini_set('display_startup_errors', TRUE);
+		date_default_timezone_set('Europe/London');
+		
+		if (PHP_SAPI == 'cli')
+			die('This example should only be run from a Web Browser');
+		
+			/** Include PHPExcel */
+		require_once('../tools/xls/PHPExcel.php');
+		$objPHPExcel = new PHPExcel();
+		
+		// Set document properties
+		$objPHPExcel->getProperties()->setCreator("Cristian Ruiz")
+		->setLastModifiedBy("Maarten Balliauw")
+		->setTitle("Office 2007 XLSX Test Document")
+		->setSubject("Office 2007 XLSX Test Document")
+		->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+		->setKeywords("office 2007 openxml php")
+		->setCategory("Test result file");
+		
+		// Add some data
+		$objPHPExcel->setActiveSheetIndex(0)
+		->setCellValue('A1', 'RUT RECEPTOR')
+		->setCellValue('B1', 'FORMULA')
+		->setCellValue('C1', 'MONTO');
+		// Miscellaneous glyphs, UTF-8
+		$idhonorario=$obj->idhonorario;
+		$c=new hm_honorarioconsolidado(1,$idhonorario);
+		$arr=$c->dsetexcelformula();
+		$i=2;
+		foreach($arr as &$t){
+			$objPHPExcel->setActiveSheetIndex(0)
+			->setCellValue('A'.$i, $t["receptorhonorario"])
+			->setCellValue('B'.$i, $t["formula"])
+			->setCellValue('C'.$i, $t["total"]);
+			$i++;
+		}
+			
+			
+		
+		$objPHPExcel->getActiveSheet()->setTitle('Reporte');
+		
+		
+		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+		$objPHPExcel->setActiveSheetIndex(0);
+		
+		
+		// Redirect output to a client’s web browser (Excel5)
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="honorario.xls"');
+		header('Cache-Control: max-age=0');
+		// If you're serving to IE 9, then the following may be needed
+		header('Cache-Control: max-age=1');
+		
+		// If you're serving to IE over SSL, then the following may be needed
+		header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+		header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		header ('Pragma: public'); // HTTP/1.0
+		
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+		$objWriter->save('php://output');
+		exit;
+		/*$salida=array("res1"=>"OK");
+		
+		print(json_encode($salida));*/
 		break;
 	default:
 		break;
