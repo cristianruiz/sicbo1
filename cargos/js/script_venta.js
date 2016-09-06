@@ -189,7 +189,6 @@ $(function() {
             var cant = $('#txtCantServ').val();
             var punit = $('#txtprecio').val();
             if (cant > 0) {
-                $('#txtCantServ').val('');
 
                 var codigo = $('#txtcodserv').val();
                 var nombre = $('#txtNomServ').val();
@@ -213,14 +212,108 @@ $(function() {
 
                 // Actualizar el data source
                 $("#jqxgrid").jqxGrid({ source: source });
+
+                $('#txtcodserv').val('');
+                $('#txtNomServ').val('');
+                $('#txtprecio').val('');
+                $('#txtCantServ').val('');
+                $('#txtcodserv').focus();
             }else{
                 alert('Ingrese cantidad.');
             }
         }
     });
+
+    // delete row.
+    $("#btnEliminaServ").bind('click', function () {
+        var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
+        var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount;
+        if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+            var id = $("#jqxgrid").jqxGrid('getrowid', selectedrowindex);
+            var commit = $("#jqxgrid").jqxGrid('deleterow', id);
+            $('#txtcodserv').focus();
+        }
+    });
 });
 
 //------------------------------------------------------------------------
+
+//------------Evento al dar ENTER sobre txt cantidad de INSUMOS---------
+
+    $(function() {
+        // Declaración del datasource
+        var dataGrilla = [];
+
+        var source = {
+            localdata: dataGrilla,
+            datatype: "array"
+        };
+
+        // Creación del widget
+        $("#jqxgrid2").jqxGrid({
+            width: 900,
+            source: source,
+            height: 200,
+            columns: [
+                { text: 'CODIGO', datafield: 'colcodigos', width: 100 },
+                { text: 'DESCRIPCION', datafield: 'colnombres', cellsformat: 'D',width: 500 },
+                { text: 'CANTIDAD', datafield: 'colcantidades', width: 80 },
+                { text: 'PRECIO', datafield: 'colprecios', width: 80, cellsalign: 'right' },
+                { text: 'TOTAL', datafield: 'coltotales', width: 100, cellsalign: 'right', cellsformat: 'c2' },
+            ]
+        });
+
+        $(document).keyup(function (e) {
+            if ($("#txtCantIns").is(":focus") && (e.keyCode == 13)) {
+                var cant = $('#txtCantIns').val();
+                var punit = $('#txtprecioIns').val();
+                if (cant > 0) {
+
+                    var codigo = $('#txtcodins').val();
+                    var nombre = $('#txtNomIns').val();
+                    var total = punit * cant;
+
+                    var codigos = [codigo];
+                    var nombres = [nombre];
+                    var cantidades = [cant];
+                    var precios = [punit];
+                    var totales = [total];
+
+                    var row = {};
+                    row.colcodigos = codigos;
+                    row.colnombres = nombres;
+                    row.colcantidades = cantidades;
+                    row.colprecios = precios;
+                    row.coltotales = totales;
+                    dataGrilla.push(row);
+
+                    console.log(dataGrilla);
+
+                    // Actualizar el data source
+                    $("#jqxgrid2").jqxGrid({ source: source });
+
+                    $('#txtcodins').val('');
+                    $('#txtNomIns').val('');
+                    $('#txtprecioins').val('');
+                    $('#txtCantIns').val('');
+                    $('#txtcodins').focus();
+                }else{
+                    alert('Ingrese cantidad.');
+                }
+            }
+        });
+
+        // delete row.
+        $("#btnEliminaIns").bind('click', function () {
+            var selectedrowindex = $("#jqxgrid2").jqxGrid('getselectedrowindex');
+            var rowscount = $("#jqxgrid2").jqxGrid('getdatainformation').rowscount;
+            if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+                var id = $("#jqxgrid2").jqxGrid('getrowid', selectedrowindex);
+                var commit = $("#jqxgrid2").jqxGrid('deleterow', id);
+                $('#txtcodins').focus();
+            }
+        });
+    });
 
 //-----------------BUSCAR NOMBRE DE PACIENTES----------------------------*/
 $(document).keyup(function (e) {
@@ -448,35 +541,7 @@ $(document).on('show.bs.modal','#myModal2', function () {
     $('#jqxInput2').focus();
 
 });
-/*
-$(document).ready(function(){
-    $('#btnokPac').click(function () {
-        var objPac = new Object();
-        var rut = $('#txtRutNum2').val();
-        objPac.rut = rut.substr(0, -2);
-        objPac.rutver = rut.substr(-1, 1);
-        objPac.nombre = $("#txtNomPac").val();
-        objPac.apat = $('#txtApat').val();
-        objPac.amat = $('#txtAmat').val();
-        objPac.fnac = $('#txtFnac').val();
-        objPac.dir = $('#txtDireccion').val();
-        objPac.tel = $('#txtTelefono').val();
-        objPac.mail = $('#txtEmail').val();
-        objPac.ciudad = $('#cboCiudad').val();
-        console.log(objPac);
 
-        jQuery.post('../drivers/pacientes/nuevoPaciente', {
-            datos: objPac;
-    }, function(data, textStatus{
-            if(data == 1){
-                alert('Paciente ha sido registrado');
-            }else {
-                alert('Error al guardar!');
-            }
-        }));
-    });
-});
-*/
 
 
 

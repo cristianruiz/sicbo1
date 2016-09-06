@@ -188,6 +188,43 @@
 					});
 				});
 
+				//--------AUTOCOMPLETAR  BUSCADOR DE INSUMOS----------------------------------
+				$(document).ready(function () {
+					var action = 'buscaInsumo';
+					var url = "../common/buscadores.php?action="+action;
+
+					// prepare the data
+					var source =
+					{
+						datatype: "json",
+						datafields: [
+							{ name: 'codigoinsumo' },
+							{ name: 'descripcion' }
+						],
+						url: url
+					};
+					var dataAdapter = new $.jqx.dataAdapter(source);
+
+					// Create a jqxInput
+					$("#jqxInput4").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Insumos:", displayMember: "descripcion", valueMember: "codigoinsumo", width: 400, height: 25});
+					$("#jqxInput4").on('select', function (event) {
+						$("#jqxInput4").focus();
+						if (event.args) {
+							var item = event.args.item;
+							if (item) {
+
+								$('#jqxInput4').val('');
+								var nombre = item.label;
+								var codigo = item.value;
+								$('#txtcodins').val(codigo);
+								$('#txtNomIns').val(nombre);
+								$('#txtCantIns').focus();
+								$('#myModal4').modal('hide');
+							}
+						}
+					});
+				});
+
 		</script>
 			
 	</head>

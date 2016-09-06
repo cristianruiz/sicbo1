@@ -6,7 +6,9 @@ class Cargos_controller extends ZoaCargoMySqlDAO{
 		$mes = $hoy['mon']-3;
 		$periodo = $mes. $hoy['year'];
 
-		$sql = 'SELECT * FROM zoa_cargo where nrocargo='.$nrooa.' and periodo = '.$periodo.' and codigoseccion= '.$cod_sec.' ';
+		$sql = 'SELECT * FROM zoa_cargo a
+                         LEFT JOIN mae_paciente b ON a.rutpaciente=b.rutpaciente
+                        where a.nrocargo='.$nrooa.' and a.periodo = '.$periodo.' and a.codigoseccion= '.$cod_sec.' ';
 		$sqlQuery = new SqlQuery($sql);
 		$arr=$this->execute($sqlQuery);$ret = Array();
 		 

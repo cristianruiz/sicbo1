@@ -3,6 +3,7 @@ include('../include_dao.php');
 include ('../controller/cnt_medicos.php');
 include('../controller/cnt_secciones.php');
 include('../controller/servicios.php');
+include ('../drivers/drv_insumos.php');
 
 $action = $_REQUEST['action'];
 
@@ -18,6 +19,11 @@ switch ($action){
     case  "buscaServ":
         $srv= new Serv();
         print_r($srv->json_buscador_servicios());
+        break;
+    case  "buscaInsumo":
+        $objIns = new Insumos();
+        print_r($objIns->getAll());
+        break;
     default:
         break;
 }
