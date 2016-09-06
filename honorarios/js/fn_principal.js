@@ -253,8 +253,8 @@ function cargagrilla(){
 $(document).ready(function () {
             var meses = [{text:'Enero', value:'ENERO'},{text:'Febrero', value:'FEBRERO'},{text:'Marzo', value:'MARZO'},
                          {text:'Abril', value:'ABRIL'},{text:'Mayo', value:'MAYO'},{text:'Junio', value:'JUNIO'},
-                         {text:'Julio', value:'JULIO'},{text:'Agosto', value:8},{text:'Septiembre', value:9},
-                         {text:'Octubre', value:10},{text:'Noviembre', value:11},{text:'Diciembre', value:12}];
+                         {text:'Julio', value:'JULIO'},{text:'Agosto', value:'AGOSTO'},{text:'Septiembre', value:'SEPTIEMBRE'},
+                         {text:'Octubre', value:'OCTUBRE'},{text:'Noviembre', value:'NOVIEMBRE'},{text:'Diciembre', value:'DICIEMBRE'}];
 
             $("#comboMes").jqxComboBox({
             source: meses,

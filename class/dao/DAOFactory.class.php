@@ -183,10 +183,10 @@ class DAOFactory{
 	}
 
 	/**
-	 * @return MaeMedicosDAO
+	 * @return MaeMedicos2DAO
 	 */
-	public static function getMaeMedicosDAO(){
-		return new MaeMedicosMySqlExtDAO();
+	public static function getMaeMedicos2DAO(){
+		return new MaeMedicos2MySqlExtDAO();
 	}
 
 	/**
