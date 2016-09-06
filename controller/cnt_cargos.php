@@ -32,7 +32,10 @@ class Cargos_controller extends ZoaCargoMySqlDAO{
 		$periodo = $mes. $hoy['year'];
 
 		
-		$sql = 'SELECT *,cantidadentregada * preciounitario as total FROM zoa_detallecargo  where nrocargo='.$nrooa.' and periodo = '.$periodo.' and codigoseccion = '.$cod_sec.' ';
+		$sql = 'SELECT *,cantidadentregada * preciounitario as total,b.descripcion 
+                FROM zoa_detallecargo a
+                LEFT JOIN mae_servicios b ON a.codigodetalle=b.codigoservicio
+                where nrocargo='.$nrooa.' and periodo = '.$periodo.' and codigoseccion = '.$cod_sec.' ';
 		$sqlQuery = new SqlQuery($sql);
 		$arr=$this->execute($sqlQuery);$ret = Array();
 		 
@@ -44,6 +47,7 @@ class Cargos_controller extends ZoaCargoMySqlDAO{
 		 			"cantidadentregada"=>$t["cantidadentregada"],
                     "iddetalle"=>$t["iddetalle"],
                     "total"=>$t["total"],
+                    "descripcion"=>$t["descripcion"],
 		 	);
 		 	array_push($ret,$f);
 		 }

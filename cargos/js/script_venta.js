@@ -139,7 +139,7 @@ $(document).keyup(function (e) {
                     if(data.length > 0){
                         var parsedData = JSON.parse(data);
                         $('#txtNomServ').val(parsedData.descripcion);
-                        $('#txtCantServ').focus();
+                        $('#txtprecio').focus();
                     }else {
                         alert('No hay datos');
                     }
@@ -153,21 +153,71 @@ $(document).keyup(function (e) {
 
 /*-----------------------------------------------------------*/
 
-//------------Evento al dar ENTER sobre txt cantidad de servicios---------
 $(document).keyup(function (e) {
-    if ($("#txtCantServ").is(":focus") && (e.keyCode == 13)) {
-        var cant = $('#txtCantServ').val();
-
-        if (cant > 0) {
-            $('#txtCantServ').val('');
-            console.log(cant);
-            $('#lblcant').text('Cantidad: '+ cant);
-            $('#jqxinput').focus();
-
-        }else{
-            alert('Ingrese cantidad.');
-        }
+    if ($("#txtprecio").is(":focus") && (e.keyCode == 13)) {
+        $('#txtCantServ').focus();
     }
+});
+
+//------------Evento al dar ENTER sobre txt cantidad de servicios---------
+
+$(function() {
+    // Declaración del datasource
+    var dataGrilla = [];
+
+    var source = {
+        localdata: dataGrilla,
+        datatype: "array"
+    };
+
+    // Creación del widget
+    $("#jqxgrid").jqxGrid({
+        width: 900,
+        source: source,
+        height: 200,
+        columns: [
+            { text: 'CODIGO', datafield: 'colcodigos', width: 100 },
+            { text: 'DESCRIPCION', datafield: 'colnombres', cellsformat: 'D',width: 500 },
+            { text: 'CANTIDAD', datafield: 'colcantidades', width: 80 },
+            { text: 'PRECIO', datafield: 'colprecios', width: 80, cellsalign: 'right' },
+            { text: 'TOTAL', datafield: 'coltotales', width: 100, cellsalign: 'right', cellsformat: 'c2' },
+        ]
+    });
+
+    $(document).keyup(function (e) {
+        if ($("#txtCantServ").is(":focus") && (e.keyCode == 13)) {
+            var cant = $('#txtCantServ').val();
+            var punit = $('#txtprecio').val();
+            if (cant > 0) {
+                $('#txtCantServ').val('');
+
+                var codigo = $('#txtcodserv').val();
+                var nombre = $('#txtNomServ').val();
+                var total = punit * cant;
+
+                var codigos = [codigo];
+                var nombres = [nombre];
+                var cantidades = [cant];
+                var precios = [punit];
+                var totales = [total];
+
+                var row = {};
+                row.colcodigos = codigos;
+                row.colnombres = nombres;
+                row.colcantidades = cantidades;
+                row.colprecios = precios;
+                row.coltotales = totales;
+                dataGrilla.push(row);
+
+                console.log(dataGrilla);
+
+                // Actualizar el data source
+                $("#jqxgrid").jqxGrid({ source: source });
+            }else{
+                alert('Ingrese cantidad.');
+            }
+        }
+    });
 });
 
 //------------------------------------------------------------------------
@@ -208,30 +258,39 @@ $(document).keyup(function (e) {
 //------------ Enter sobre text codigo seccion--------------
 $(document).keyup(function(e){
     if ($('#txtcodsec').is(":focus") && (e.keyCode == 13)) {
+
         var nrocargo = $('#txtnrooa').val();
         var cod_sec = $('#txtcodsec').val();
         var action = "getNombreSec";
 
-        $.ajax({
-            type: "GET",
-            url: "../common/dibuja_cargo.php",
-            data: {cod_sec: cod_sec,action: action,nrocargo: nrocargo},
+        if (cod_sec > 1){
+            $.ajax({
+                type: "GET",
+                url: "../common/dibuja_cargo.php",
+                data: {cod_sec: cod_sec,action: action,nrocargo: nrocargo},
 
-            error: function () {
-                alert('Error peticion Ajax al traer nombre de seccion.');
-            },
-            success: function (data) {
-                if(data.length > 0){
-                    var parsedData = JSON.parse(data);
-                    $('#lblsec').text(parsedData.descripcion);
-                    $('#txtnrooa').focus();
+                error: function () {
+                    alert('Error peticion Ajax al traer nombre de seccion.');
+                },
+                success: function (data) {
 
-                }else {
-                    alert('Código se sección no encontrado.');
-                    $('#lblsec').val('');
+                    if(data.length > 0){
+                        var parsedData = JSON.parse(data);
+                        console.log(parsedData);
+                        $('#lblsec').text(parsedData.descripcion);
+                        $('#txtnrooa').focus();
+
+                    }else {
+                        alert('Código se sección no encontrado.');
+                        $('#lblsec').val('');
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            alert('Ingrese código de sección!');
+            $('#txtnrooa').val('');
+        }
+
     }
 });
 
@@ -243,31 +302,35 @@ $(document).keyup(function (e){
         var cod_sec=$('#txtcodsec').val();
         var action="cargo_cabecera";
 
-        $.ajax({
-            type: "GET",
-            url: "../common/dibuja_cargo.php",
-            data: {nrocargo: nrocargo,cod_sec: cod_sec, action: action},
+        if (nrocargo > 0){
+            $.ajax({
+                type: "GET",
+                url: "../common/dibuja_cargo.php",
+                data: {nrocargo: nrocargo,cod_sec: cod_sec, action: action},
 
-            error: function(){
-                alert("error peticion ajax");
-            },
-            success: function(data){
-                //$('#response-container').append(data);
-                data = JSON.parse(data);
-                if (data.length > 0) {
-                    $('#txtnroCta').val(data[0].nroficha);
-                    $('#txtRutNum3').val(data[0].rutpaciente);
-                    
-                }else{
-                    data = [];
-                    $('#txtnroCta').val('');
-                    $('#txtRutNum3').val('');
-                    alert('No hay datos.');
-                    $('#txtnrooa').focus();
+                error: function(){
+                    alert("error peticion ajax");
+                },
+                success: function(data){
+                    //$('#response-container').append(data);
+                    data = JSON.parse(data);
+                    if (data.length > 0) {
+                        $('#txtnroCta').val(data[0].nroficha);
+                        $('#txtRutNum3').val(data[0].rutpaciente);
+
+                    }else{
+                        data = [];
+                        $('#txtnroCta').val('');
+                        $('#txtRutNum3').val('');
+                        alert('No hay datos.');
+                        $('#txtnrooa').focus();
+                    }
+                    console.log(data);
                 }
-                console.log(data);
-            }
-        });
+            });
+        }else{
+            alert('Ingrese nro de cargo!');
+        }
     };
 });
 
@@ -275,26 +338,28 @@ $(document).keyup(function (e){
 //------------- DETALLE CARGO--------------------*/
 $(document).keyup(function(e){
     if ($('#txtnrooa').is(":focus") && (e.keyCode == 13)) {
-
-        $('#jqxLoader').jqxLoader('open');
         var action="cargo_det";
         var nrocargo=$('#txtnrooa').val();
         var cod_sec=$('#txtcodsec').val();
 
-        //$("#jqxLoader").jqxLoader({ width: 250, height: 150, autoOpen: false,text:"Buscando en SICBO" });
+        if (nrocargo > 0){
+            $('#jqxLoader').jqxLoader('open');
 
-        //console.log(dataString);
-        $.ajax({
-            type: "GET",
-            data: {action: action, nrocargo: nrocargo, cod_sec: cod_sec},
-            dataType: "json",
-            url: "../common/dibuja_cargo.php",
-            success: function (d) {
-                console.log(d);
-                $('#jqxLoader').jqxLoader('close');
-                cargagrilla();
-            }
-        });
+            //$("#jqxLoader").jqxLoader({ width: 250, height: 150, autoOpen: false,text:"Buscando en SICBO" });
+
+            //console.log(dataString);
+            $.ajax({
+                type: "GET",
+                data: {action: action, nrocargo: nrocargo, cod_sec: cod_sec},
+                dataType: "json",
+                url: "../common/dibuja_cargo.php",
+                success: function (d) {
+                    console.log(d);
+                    $('#jqxLoader').jqxLoader('close');
+                    cargagrilla();
+                }
+            });
+        }
     }
 });
 
@@ -313,6 +378,7 @@ function cargagrilla(){
         datafields: [
             { name: 'cantidadentregada',type:'integer'},
             { name: 'codigodetalle'},
+            { name: 'descripcion'},
             { name: 'nrocargo'},
             { name: 'preciounitario'},
             { name: 'total'},
@@ -324,17 +390,19 @@ function cargagrilla(){
 
     $("#jqxgrid").jqxGrid(
         {
-            width: 1000,
+            width: 900,
+            height: 200,
             source: dataAdapter,
             ready: function () {
                 $("#jqxgrid").jqxGrid('hidecolumn', 'nrocargo');
             },
             columnsresize: true,
             columns: [
-                { text: 'CARGO', datafield: 'nrocargo', width: 100 },
+
                 { text: 'CODIGO', datafield: 'codigodetalle', width: 100 },
-                { text: 'CANTIDAD', datafield: 'cantidadentregada' , width: 100  },
-                { text: 'P. UNIT.', datafield: 'preciounitario', width: 150 },
+                { text: 'DESCRIPCION', datafield: 'descripcion', width: 500},
+                { text: 'CANTIDAD', datafield: 'cantidadentregada' , width: 80  },
+                { text: 'P. UNITARIO', datafield: 'preciounitario', width: 100 },
                 { text: 'TOTAL', datafield: 'total', width: 100 },
             ]
         });
@@ -349,6 +417,7 @@ function cargagrilla(){
 /*-----------------------------------------------------------------------*/
 
 $(document).ready(function () {
+    var codrol=1;
     var rol = [{text:'Médico tratante', value: 1},{text: 'Médico informante', value: 2},{text: 'Tecnólogo', value: 3}];
 
     $("#cboRolProf").jqxComboBox({
@@ -360,6 +429,24 @@ $(document).ready(function () {
         selectedIndex: 0,
         valueMember: 'value'
     });
+
+    $("#cboRolProf").on('change', function (event) {
+        codrol=event.args.item.value;
+        $('#jqxInput3').focus();
+    });
+
+    if ($('#btnModalOk').on("click", function () {
+        //var rutprof = $('#jqxInput3').val();
+        var rutmtra = $('#ruttra').val();
+        console.log(rutmtra);
+    }));
+
+
+});
+
+$(document).on('show.bs.modal','#myModal2', function () {
+    $('#jqxInput2').focus();
+
 });
 /*
 $(document).ready(function(){

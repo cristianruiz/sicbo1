@@ -314,6 +314,7 @@ if (isset($_POST['btnEditaPac'])) {
 
 								<input type="text" name="txtNomServ" id="txtNomServ" class="form-control input" style="width: 250px"/>
 
+								<input type="text" id="txtprecio" name="txtprecio" class="form-control input">
 					    			&nbsp;&nbsp;
 								<input type="text" id="txtCantServ" name="txtCantServ" onkeypress="return
 			    			 		isNumber(event)" class="form-control input" style="width: 60px;" placeholder="Cant."></input>
@@ -343,23 +344,35 @@ if (isset($_POST['btnEditaPac'])) {
 	      </div>
 	      <div class="modal-body">
 	        <div class="row">
-			  <div class="form-group">
-				<div class="col-lg-3">
-					<div id="cboRolProf"></div>
 
-				</div>
-				  <br>
-			  </div>
+
+					<div id="cboRolProf" style="margin-right: 0px;"></div>
+
+
+					  &nbsp;&nbsp;
+					  <input type="text" id="jqxInput3" name="jqxInput3"/>
+
 			 </div>
 
 			<br>
 
 			 <div class="row">
 			  	<div class="form-group">
-			  	 <div class="col-lg-3">
-					 <input type="text" id="jqxInput3" name="jqxInput3"/>
-
-			  	</div>
+					<div class="col-xs-4">
+						Tratante
+						<input type="hidden" name="ruttra" id="ruttra">
+						<input type="text" id="txtMedtra" class="form-control input">
+					</div>
+					<div class="col-xs-4">
+							Informante
+						<input type="hidden" name="rutminf" id="rutminf">
+						<input type="text" id="txtmedInf" class="form-control input">
+					</div>
+					<div class="col-xs-4">
+						Tecnólogo
+						<input type="hidden" name="ruttecno" id="ruttecno">
+						<input type="text" id="txttecnologo" class="form-control input">
+					</div>
 			  	
 			   </div>
 			 </div>
