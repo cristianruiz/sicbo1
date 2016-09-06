@@ -299,9 +299,9 @@ if (isset($_POST['btnEditaPac'])) {
 			    	</div>
 			    </div>
 
-			    <div class="panel panel-info panel-margen">
+			    <div class="panel panel-info panel-margen" style="height: 40px">
 			    	<div class="panel-body panel-body-margen">
-			    		<div class="row">
+			    		<div class="row panel-body-margen">
 
 							<div class="form-group">
 								&nbsp;&nbsp;
@@ -314,12 +314,17 @@ if (isset($_POST['btnEditaPac'])) {
 
 								<input type="text" name="txtNomServ" id="txtNomServ" class="form-control input" style="width: 250px"/>
 
-								<input type="text" id="txtprecio" name="txtprecio" class="form-control input">
+								<input type="text" id="txtprecio" name="txtprecio" class="form-control input" style="width: 80px"/>
 					    			&nbsp;&nbsp;
 								<input type="text" id="txtCantServ" name="txtCantServ" onkeypress="return
-			    			 		isNumber(event)" class="form-control input" style="width: 60px;" placeholder="Cant."></input>
+			    			 		isNumber(event)" class="form-control input" style="width: 60px;" placeholder="Cant."/>
+
+                                <button type="button" id="btnEliminaServ" class="btn btn-primary input">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                                &nbsp;&nbsp;
+                                <label>Servicios</label>
 								<div style="font-family: Verdana; font-size: 13px;" id='selectionlog'></div>
-								<label id="lblcant"></label>
 							</div>
 
 			    		</div>	
@@ -331,6 +336,42 @@ if (isset($_POST['btnEditaPac'])) {
                  <div id="cargando"></div>
 
                  <div class="form-group" id="jqxgrid"></div>
+
+				 <br><br>
+
+				 <div class="panel panel-info panel-margen" style="height: 40px">
+					 <div class="panel-body panel-body-margen" style="padding-left: 25px;">
+						 <div class="row panel-body-margen">
+							 <div class="form-group">
+								 <button type="button" id="btnModalIns" class="btn btn-primary input fuente_btn" data-toggle="modal" data-target="#myModal4">
+									<span class="glyphicon glyphicon-search">
+								 </button>
+
+								 <input type="text" id="txtcodins" name="txtcodins" placeholder="Código" onkeypress="return
+			    			 		isNumber(event)" class="form-control input" style="width: 100px">
+
+								 <input type="text" name="txtNomIns" id="txtNomIns" class="form-control input" style="width: 250px"/>
+
+								 <input type="text" id="txtprecioIns" name="txtprecioIns" class="form-control input" style="width: 80px"/>
+								 &nbsp;&nbsp;
+								 <input type="text" id="txtCantIns" name="txtCantIns" onkeypress="return
+			    			 		isNumber(event)" class="form-control input" style="width: 60px;" placeholder="Cant."/>
+
+								 <button type="button" id="btnEliminaIns" class="btn btn-primary input">
+									 <span class="glyphicon glyphicon-remove"></span>
+								 </button>
+								 &nbsp;&nbsp;
+								 <label>Insumos</label>
+							 </div>
+						 </div>
+					 </div>
+				 </div>
+
+				 <div id="jqxLoader2"></div>
+
+				 <div id="cargando2"></div>
+
+				 <div class="form-group" id="jqxgrid2"></div>
           </form>
         </div>
  </div>   
@@ -431,6 +472,29 @@ if (isset($_POST['btnEditaPac'])) {
 								</div>
 							</div>
 						</div>
+
+					<!-- Modal Buscador Insumos -->
+					<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Buscador de Insumos</h4>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="form-group">
+											<div class="col-lg-3">
+												<input type="text" name="jqxInput4" id="jqxInput4"/>
+												<label style="font-family: Verdana; font-size: 10px;">ej: Paracetamol</label>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 
 
