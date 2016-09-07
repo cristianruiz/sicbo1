@@ -1,20 +1,20 @@
 <?php
 /**
- * Class that operate on table 'mae_medicos2'. Database Mysql.
+ * Class that operate on table 'mae_medicos'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2016-09-05 21:20
+ * @date: 2016-09-07 17:12
  */
-class MaeMedicos2MySqlDAO implements MaeMedicos2DAO{
+class MaeMedicosMySqlDAO implements MaeMedicosDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @return MaeMedicos2MySql 
+	 * @return MaeMedicosMySql 
 	 */
 	public function load($id){
-		$sql = 'SELECT * FROM mae_medicos2 WHERE rutnum = ?';
+		$sql = 'SELECT * FROM mae_medicos WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->getRow($sqlQuery);
@@ -24,7 +24,7 @@ class MaeMedicos2MySqlDAO implements MaeMedicos2DAO{
 	 * Get all records from table
 	 */
 	public function queryAll(){
-		$sql = 'SELECT * FROM mae_medicos2';
+		$sql = 'SELECT * FROM mae_medicos';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
@@ -35,64 +35,66 @@ class MaeMedicos2MySqlDAO implements MaeMedicos2DAO{
 	 * @param $orderColumn column name
 	 */
 	public function queryAllOrderBy($orderColumn){
-		$sql = 'SELECT * FROM mae_medicos2 ORDER BY '.$orderColumn;
+		$sql = 'SELECT * FROM mae_medicos ORDER BY '.$orderColumn;
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
 	
 	/**
  	 * Delete record from table
- 	 * @param maeMedicos2 primary key
+ 	 * @param maeMedico primary key
  	 */
-	public function delete($rutnum){
-		$sql = 'DELETE FROM mae_medicos2 WHERE rutnum = ?';
+	public function delete($id){
+		$sql = 'DELETE FROM mae_medicos WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($rutnum);
+		$sqlQuery->setNumber($id);
 		return $this->executeUpdate($sqlQuery);
 	}
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param MaeMedicos2MySql maeMedicos2
+ 	 * @param MaeMedicosMySql maeMedico
  	 */
-	public function insert($maeMedicos2){
-		$sql = 'INSERT INTO mae_medicos2 (rutver, fullname, direccion, telefono, coidigociudad, nombre, apellido, codigoespecialidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+	public function insert($maeMedico){
+		$sql = 'INSERT INTO mae_medicos (rutnum, rutver, fullname, direccion, telefono, coidigociudad, nombre, apellido, codigoespecialidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($maeMedicos2->rutver);
-		$sqlQuery->set($maeMedicos2->fullname);
-		$sqlQuery->set($maeMedicos2->direccion);
-		$sqlQuery->set($maeMedicos2->telefono);
-		$sqlQuery->set($maeMedicos2->coidigociudad);
-		$sqlQuery->set($maeMedicos2->nombre);
-		$sqlQuery->set($maeMedicos2->apellido);
-		$sqlQuery->setNumber($maeMedicos2->codigoespecialidad);
+		$sqlQuery->setNumber($maeMedico->rutnum);
+		$sqlQuery->set($maeMedico->rutver);
+		$sqlQuery->set($maeMedico->fullname);
+		$sqlQuery->set($maeMedico->direccion);
+		$sqlQuery->set($maeMedico->telefono);
+		$sqlQuery->set($maeMedico->coidigociudad);
+		$sqlQuery->set($maeMedico->nombre);
+		$sqlQuery->set($maeMedico->apellido);
+		$sqlQuery->setNumber($maeMedico->codigoespecialidad);
 
 		$id = $this->executeInsert($sqlQuery);	
-		$maeMedicos2->rutnum = $id;
+		$maeMedico->id = $id;
 		return $id;
 	}
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param MaeMedicos2MySql maeMedicos2
+ 	 * @param MaeMedicosMySql maeMedico
  	 */
-	public function update($maeMedicos2){
-		$sql = 'UPDATE mae_medicos2 SET rutver = ?, fullname = ?, direccion = ?, telefono = ?, coidigociudad = ?, nombre = ?, apellido = ?, codigoespecialidad = ? WHERE rutnum = ?';
+	public function update($maeMedico){
+		$sql = 'UPDATE mae_medicos SET rutnum = ?, rutver = ?, fullname = ?, direccion = ?, telefono = ?, coidigociudad = ?, nombre = ?, apellido = ?, codigoespecialidad = ? WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($maeMedicos2->rutver);
-		$sqlQuery->set($maeMedicos2->fullname);
-		$sqlQuery->set($maeMedicos2->direccion);
-		$sqlQuery->set($maeMedicos2->telefono);
-		$sqlQuery->set($maeMedicos2->coidigociudad);
-		$sqlQuery->set($maeMedicos2->nombre);
-		$sqlQuery->set($maeMedicos2->apellido);
-		$sqlQuery->setNumber($maeMedicos2->codigoespecialidad);
+		$sqlQuery->setNumber($maeMedico->rutnum);
+		$sqlQuery->set($maeMedico->rutver);
+		$sqlQuery->set($maeMedico->fullname);
+		$sqlQuery->set($maeMedico->direccion);
+		$sqlQuery->set($maeMedico->telefono);
+		$sqlQuery->set($maeMedico->coidigociudad);
+		$sqlQuery->set($maeMedico->nombre);
+		$sqlQuery->set($maeMedico->apellido);
+		$sqlQuery->setNumber($maeMedico->codigoespecialidad);
 
-		$sqlQuery->setNumber($maeMedicos2->rutnum);
+		$sqlQuery->setNumber($maeMedico->id);
 		return $this->executeUpdate($sqlQuery);
 	}
 
@@ -100,119 +102,133 @@ class MaeMedicos2MySqlDAO implements MaeMedicos2DAO{
  	 * Delete all rows
  	 */
 	public function clean(){
-		$sql = 'DELETE FROM mae_medicos2';
+		$sql = 'DELETE FROM mae_medicos';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->executeUpdate($sqlQuery);
 	}
 
+	public function queryByRutnum($value){
+		$sql = 'SELECT * FROM mae_medicos WHERE rutnum = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
 	public function queryByRutver($value){
-		$sql = 'SELECT * FROM mae_medicos2 WHERE rutver = ?';
+		$sql = 'SELECT * FROM mae_medicos WHERE rutver = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByFullname($value){
-		$sql = 'SELECT * FROM mae_medicos2 WHERE fullname = ?';
+		$sql = 'SELECT * FROM mae_medicos WHERE fullname = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByDireccion($value){
-		$sql = 'SELECT * FROM mae_medicos2 WHERE direccion = ?';
+		$sql = 'SELECT * FROM mae_medicos WHERE direccion = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByTelefono($value){
-		$sql = 'SELECT * FROM mae_medicos2 WHERE telefono = ?';
+		$sql = 'SELECT * FROM mae_medicos WHERE telefono = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByCoidigociudad($value){
-		$sql = 'SELECT * FROM mae_medicos2 WHERE coidigociudad = ?';
+		$sql = 'SELECT * FROM mae_medicos WHERE coidigociudad = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByNombre($value){
-		$sql = 'SELECT * FROM mae_medicos2 WHERE nombre = ?';
+		$sql = 'SELECT * FROM mae_medicos WHERE nombre = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByApellido($value){
-		$sql = 'SELECT * FROM mae_medicos2 WHERE apellido = ?';
+		$sql = 'SELECT * FROM mae_medicos WHERE apellido = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
 
 	public function queryByCodigoespecialidad($value){
-		$sql = 'SELECT * FROM mae_medicos2 WHERE codigoespecialidad = ?';
+		$sql = 'SELECT * FROM mae_medicos WHERE codigoespecialidad = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
 
+	public function deleteByRutnum($value){
+		$sql = 'DELETE FROM mae_medicos WHERE rutnum = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
 	public function deleteByRutver($value){
-		$sql = 'DELETE FROM mae_medicos2 WHERE rutver = ?';
+		$sql = 'DELETE FROM mae_medicos WHERE rutver = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
 	public function deleteByFullname($value){
-		$sql = 'DELETE FROM mae_medicos2 WHERE fullname = ?';
+		$sql = 'DELETE FROM mae_medicos WHERE fullname = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
 	public function deleteByDireccion($value){
-		$sql = 'DELETE FROM mae_medicos2 WHERE direccion = ?';
+		$sql = 'DELETE FROM mae_medicos WHERE direccion = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
 	public function deleteByTelefono($value){
-		$sql = 'DELETE FROM mae_medicos2 WHERE telefono = ?';
+		$sql = 'DELETE FROM mae_medicos WHERE telefono = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
 	public function deleteByCoidigociudad($value){
-		$sql = 'DELETE FROM mae_medicos2 WHERE coidigociudad = ?';
+		$sql = 'DELETE FROM mae_medicos WHERE coidigociudad = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
 	public function deleteByNombre($value){
-		$sql = 'DELETE FROM mae_medicos2 WHERE nombre = ?';
+		$sql = 'DELETE FROM mae_medicos WHERE nombre = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
 	public function deleteByApellido($value){
-		$sql = 'DELETE FROM mae_medicos2 WHERE apellido = ?';
+		$sql = 'DELETE FROM mae_medicos WHERE apellido = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
 	public function deleteByCodigoespecialidad($value){
-		$sql = 'DELETE FROM mae_medicos2 WHERE codigoespecialidad = ?';
+		$sql = 'DELETE FROM mae_medicos WHERE codigoespecialidad = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->executeUpdate($sqlQuery);
@@ -223,22 +239,23 @@ class MaeMedicos2MySqlDAO implements MaeMedicos2DAO{
 	/**
 	 * Read row
 	 *
-	 * @return MaeMedicos2MySql 
+	 * @return MaeMedicosMySql 
 	 */
 	protected function readRow($row){
-		$maeMedicos2 = new MaeMedicos2();
+		$maeMedico = new MaeMedico();
 		
-		$maeMedicos2->rutnum = $row['rutnum'];
-		$maeMedicos2->rutver = $row['rutver'];
-		$maeMedicos2->fullname = $row['fullname'];
-		$maeMedicos2->direccion = $row['direccion'];
-		$maeMedicos2->telefono = $row['telefono'];
-		$maeMedicos2->coidigociudad = $row['coidigociudad'];
-		$maeMedicos2->nombre = $row['nombre'];
-		$maeMedicos2->apellido = $row['apellido'];
-		$maeMedicos2->codigoespecialidad = $row['codigoespecialidad'];
+		$maeMedico->id = $row['id'];
+		$maeMedico->rutnum = $row['rutnum'];
+		$maeMedico->rutver = $row['rutver'];
+		$maeMedico->fullname = $row['fullname'];
+		$maeMedico->direccion = $row['direccion'];
+		$maeMedico->telefono = $row['telefono'];
+		$maeMedico->coidigociudad = $row['coidigociudad'];
+		$maeMedico->nombre = $row['nombre'];
+		$maeMedico->apellido = $row['apellido'];
+		$maeMedico->codigoespecialidad = $row['codigoespecialidad'];
 
-		return $maeMedicos2;
+		return $maeMedico;
 	}
 	
 	protected function getList($sqlQuery){
@@ -253,7 +270,7 @@ class MaeMedicos2MySqlDAO implements MaeMedicos2DAO{
 	/**
 	 * Get row
 	 *
-	 * @return MaeMedicos2MySql 
+	 * @return MaeMedicosMySql 
 	 */
 	protected function getRow($sqlQuery){
 		$tab = QueryExecutor::execute($sqlQuery);

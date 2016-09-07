@@ -109,10 +109,14 @@
 	require_once('class/dto/MaeInsumo.class.php');
 	require_once('class/mysql/MaeInsumosMySqlDAO.class.php');
 	require_once('class/mysql/ext/MaeInsumosMySqlExtDAO.class.php');
-	require_once('class/dao/MaeMedicos2DAO.class.php');
-	require_once('class/dto/MaeMedicos2.class.php');
-	require_once('class/mysql/MaeMedicos2MySqlDAO.class.php');
-	require_once('class/mysql/ext/MaeMedicos2MySqlExtDAO.class.php');
+	require_once('class/dao/MaeInsumos2DAO.class.php');
+	require_once('class/dto/MaeInsumos2.class.php');
+	require_once('class/mysql/MaeInsumos2MySqlDAO.class.php');
+	require_once('class/mysql/ext/MaeInsumos2MySqlExtDAO.class.php');
+	require_once('class/dao/MaeMedicosDAO.class.php');
+	require_once('class/dto/MaeMedico.class.php');
+	require_once('class/mysql/MaeMedicosMySqlDAO.class.php');
+	require_once('class/mysql/ext/MaeMedicosMySqlExtDAO.class.php');
 	require_once('class/dao/MaePacienteDAO.class.php');
 	require_once('class/dto/MaePaciente.class.php');
 	require_once('class/mysql/MaePacienteMySqlDAO.class.php');

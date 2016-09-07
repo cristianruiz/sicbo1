@@ -1,13 +1,14 @@
 <?php
 	/**
-	 * Object represents table 'mae_medicos2'
+	 * Object represents table 'mae_medicos'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2016-09-05 21:20	 
+     	 * @date: 2016-09-07 17:12	 
 	 */
-	class MaeMedicos2{
+	class MaeMedico{
 		
-		var $rutnum;
+		var $id;
+		var $rutnum;
 		var $rutver;
 		var $fullname;
 		var $direccion;

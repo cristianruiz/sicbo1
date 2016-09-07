@@ -5,13 +5,13 @@
  * @author: http://phpdao.com
  * @date: 2016-09-07 17:12
  */
-interface MaeInsumosDAO{
+interface MaeInsumos2DAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @Return MaeInsumos 
+	 * @Return MaeInsumos2 
 	 */
 	public function load($id);
 
@@ -28,23 +28,23 @@ interface MaeInsumosDAO{
 	
 	/**
  	 * Delete record from table
- 	 * @param maeInsumo primary key
+ 	 * @param maeInsumos2 primary key
  	 */
 	public function delete($codigoinsumo);
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param MaeInsumos maeInsumo
+ 	 * @param MaeInsumos2 maeInsumos2
  	 */
-	public function insert($maeInsumo);
+	public function insert($maeInsumos2);
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param MaeInsumos maeInsumo
+ 	 * @param MaeInsumos2 maeInsumos2
  	 */
-	public function update($maeInsumo);	
+	public function update($maeInsumos2);	
 
 	/**
 	 * Delete all rows

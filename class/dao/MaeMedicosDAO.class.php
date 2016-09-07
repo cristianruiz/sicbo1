@@ -3,15 +3,15 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2016-09-05 21:20
+ * @date: 2016-09-07 17:12
  */
-interface MaeMedicos2DAO{
+interface MaeMedicosDAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @Return MaeMedicos2 
+	 * @Return MaeMedicos 
 	 */
 	public function load($id);
 
@@ -28,28 +28,30 @@ interface MaeMedicos2DAO{
 	
 	/**
  	 * Delete record from table
- 	 * @param maeMedicos2 primary key
+ 	 * @param maeMedico primary key
  	 */
-	public function delete($rutnum);
+	public function delete($id);
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param MaeMedicos2 maeMedicos2
+ 	 * @param MaeMedicos maeMedico
  	 */
-	public function insert($maeMedicos2);
+	public function insert($maeMedico);
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param MaeMedicos2 maeMedicos2
+ 	 * @param MaeMedicos maeMedico
  	 */
-	public function update($maeMedicos2);	
+	public function update($maeMedico);	
 
 	/**
 	 * Delete all rows
 	 */
 	public function clean();
+
+	public function queryByRutnum($value);
 
 	public function queryByRutver($value);
 
@@ -67,6 +69,8 @@ interface MaeMedicos2DAO{
 
 	public function queryByCodigoespecialidad($value);
 
+
+	public function deleteByRutnum($value);
 
 	public function deleteByRutver($value);
 

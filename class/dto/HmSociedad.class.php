@@ -3,7 +3,7 @@
 	 * Object represents table 'hm_sociedad'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2016-09-05 21:20	 
+     	 * @date: 2016-09-07 17:12	 
 	 */
 	class HmSociedad{
 		
