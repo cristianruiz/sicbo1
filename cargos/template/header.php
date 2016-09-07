@@ -56,8 +56,8 @@
 		<script type="text/javascript">
                 //--------AUTOCOMPLETAR  BUSCADOR DE SERVICIOS----------------------------------
             $(document).ready(function () {
-            	var action = 'buscaServ';
-                var url = "../common/buscadores.php?action="+action;
+            	var action = "buscaServ";
+                var url = "../common/oa_autocompletadores.php?action="+action;
 
                 // prepare the data
                 var source =
@@ -103,7 +103,7 @@
                 //------------Buscador de secciones--------------------------
                 $(document).ready(function () {
 					var action = 'buscaSec';
-                    var url = "../common/buscadores.php?action="+action;
+                    var url = "../common/oa_autocompletadores.php?action="+action;
 
                     // prepare the data
                     var source =
@@ -139,7 +139,7 @@
 				//------------Buscador de profesionales--------------------------
 				$(document).ready(function () {
 					var action = 'buscaProf';
-					var url = "../common/buscadores.php?action="+action;
+					var url = "../common/oa_autocompletadores.php?action="+action;
 
 					// prepare the data
 					var source =
@@ -191,7 +191,7 @@
 				//--------AUTOCOMPLETAR  BUSCADOR DE INSUMOS----------------------------------
 				$(document).ready(function () {
 					var action = 'buscaInsumo';
-					var url = "../common/buscadores.php?action="+action;
+					var url = "../common/oa_autocompletadores.php?action="+action;
 
 					// prepare the data
 					var source =

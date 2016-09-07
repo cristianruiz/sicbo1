@@ -5,6 +5,7 @@ include ('../drivers/drv_servicios.php');
 include ('../drivers/pacientes.php');
 include ('../controller/cnt_secciones.php');
 include ('../drivers/drv_secciones.php');
+include ('../drivers/drv_insumos.php');
 
 $action = $_GET["action"];
 
@@ -32,6 +33,14 @@ switch ($action) {
         $codigo = $_GET["cod_sec"];
         $objSec = new Secciones();
         print_r($objSec->getByCodigo($codigo));
+        break;
+    case "getNombreInsumo";
+        $nrooa = $_GET["nrocargo"];
+        $codigo = $_GET["cod_sec"];
+        $codIns = $_GET["codigoInsumo"];
+        $objIns = new Insumos();
+        print_r($objIns->getByCodigo($codIns));
+        break;
 	default:
         $nrooa = $_GET["nrocargo"];
         $cod_sec = $_GET["cod_sec"];

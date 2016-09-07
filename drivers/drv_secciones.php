@@ -2,9 +2,9 @@
 class Secciones extends MaeSeccionesMySqlDAO{
 
     public function getAll(){
-        $objSec = new MaeSeccionesMySqlDAO();
-        $res = $objSec->queryAll();
-        return $res;
+        $objSe = new MaeSeccionesMySqlDAO();
+        $res = $objSe->queryAll();
+        return(json_encode($res));
     }
 
     public  function  getByCodigo($codigo){

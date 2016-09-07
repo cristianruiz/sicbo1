@@ -1,6 +1,3 @@
-$(document).ready(function () {
-
-});
 
 //Valida que se ingrese rut en panel admision paciente
 $(document).ready(function(){
@@ -117,7 +114,7 @@ $(document).ready(function(){
 });
 
 //------------------------------------------------------------------------
-
+/*
 /*---------------------Textbox codigo servicios--------------- -------*/
 $(document).keyup(function (e) {
     if($("#txtcodserv").is(":focus") && (e.keyCode == 13)) {
@@ -240,6 +237,38 @@ $(function() {
 
 //------------Evento al dar ENTER sobre txt cantidad de INSUMOS---------
 
+$(document).keyup(function (e) {
+    if($("#txtcodins").is(":focus") && (e.keyCode == 13)) {
+        var nrocargo = $('#txtnrooa').val();
+        var cod_sec = $('#txtcodsec').val();
+        var cod_ser = $('#txtcodins').val();
+        var action = "getNombreInsumo";
+
+        if(cod_ser > 0){
+            $.ajax({
+                type: "GET",
+                url: "../common/dibuja_cargo.php",
+                data: {nrocargo: nrocargo, cod_sec: cod_sec, action: action, codigo: cod_ser},
+
+                error: function () {
+                    alert('Error peticion Ajax al buscar Servicio.');
+                },
+                success: function (data) {
+                    if(data.length > 0){
+                        var parsedData = JSON.parse(data);
+                        $('#txtNomIns').val(parsedData.descripcion);
+                        $('#txtprecioins').focus();
+                    }else {
+                        alert('No hay datos');
+                    }
+                }
+            });
+        }else {
+            alert('Ingrese Código.');
+        }
+    }
+});
+
     $(function() {
         // Declaración del datasource
         var dataGrilla = [];
@@ -294,7 +323,7 @@ $(function() {
 
                     $('#txtcodins').val('');
                     $('#txtNomIns').val('');
-                    $('#txtprecioins').val('');
+                    $('#txtprecioIns').val('');
                     $('#txtCantIns').val('');
                     $('#txtcodins').focus();
                 }else{
@@ -541,8 +570,3 @@ $(document).on('show.bs.modal','#myModal2', function () {
     $('#jqxInput2').focus();
 
 });
-
-
-
-
-
