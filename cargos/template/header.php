@@ -20,14 +20,18 @@
 		<link rel="stylesheet" href="../gui/js/jqw/jqwidgets/styles/jqx.base.css" type="text/css" />
 
 		<link rel="stylesheet" href="../gui/css/fontawesome/css/font-awesome.min.css" type="text/css" />
+		<link rel="stylesheet" href="../gui/css/toastr.css" type="text/css" />
+
+		<! JQUERY ALERT -->
+		<link rel="stylesheet" href="../gui/js/jquery-confirm/css/jquery-confirm.css" type="text/css">
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-		<scrip src="js/toastr.js"></scrip>
 
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 		<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+		<script type="text/javascript" src="../gui/js/toastr.min.js"></script>
 
 		<!--  REFERENCIAS AL FRAMEWORK JQW -->
 		<script type="text/javascript" src="../gui/js/jqw/scripts/demos.js"></script>
@@ -51,6 +55,9 @@
 
 		<script type="text/javascript" src="../gui/js/toastr.min.js"></script>
         <script type="text/javascript" src="./js/script_venta.js"></script>
+
+		<! JQUERY ALERT -->
+		<script type="text/javascript" src="../gui/js/jquery-confirm/js/jquery-confirm.js"></script>
 		<![endif]-->
 
 		<script type="text/javascript">

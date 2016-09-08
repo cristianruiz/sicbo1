@@ -56,4 +56,28 @@ class Cargos_controller extends ZoaCargoMySqlDAO{
 		 
 		 return(json_encode($ret)); 
 	}
+
+	public function getDetInsumos($nrooa,$cod_sec){
+	    $periodo = 62016;
+        $sql = 'SELECT a.*,b.descripcion
+                FROM oa_detalleinsumo a
+                LEFT  JOIN mae_insumos b ON a.codigoinsumo=b.codigoinsumo
+                WHERE periodo= '.$periodo.' AND nrocargo='.$nrooa.' AND codigoseccion='.$cod_sec.' ';
+        $sqlQuery = new  SqlQuery($sql);
+        $arr = $this->execute($sqlQuery);$ret = Array();
+
+        foreach ($arr as $t) {
+            $f = array(
+                "nrocargo"=>$t["nrocargo"],
+                "codigoinsumo"=>$t["codigoinsumo"],
+                "preciounitario"=>$t["preciounitario"],
+                "cantidadentregada"=>$t["cantidadentregada"],
+                "iddetalle"=>$t["iddetalle"],
+                "total"=>$t["total"],
+                "descripcion"=>$t["descripcion"],
+            );
+            array_push($ret,$f);
+        }
+        return(json_encode($ret));
+    }
 }

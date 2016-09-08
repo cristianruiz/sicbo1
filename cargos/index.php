@@ -225,12 +225,12 @@ if (isset($_POST['btnEditaPac'])) {
 
 							    <div class="form-group">
 									<label id="lblsec"></label>
-							    	<label>Estado</label>
+							    	<label style="font-weight: normal">Estado</label>
 							       <input type="text" class="form-control input" name="txtestado" disabled="true" style="width: 100px">
 							    </div>
 							    &nbsp;&nbsp;
 							    <div class="form-group">
-							    	<label>Fecha</label>
+							    	<label style="font-weight: normal">Fecha</label>
 							    	<input type="date" required id="txtfecha" name="txtfecha" class="form-control input" value="<?php echo date("Y-m-d"); ?>" style="width: 160px"></input>
 							    	<input type="time" required id="txthora" name="txthora" class="form-control input" value="<?php echo date("H:i"); ?>"></input>
 							    </div>
@@ -240,7 +240,7 @@ if (isset($_POST['btnEditaPac'])) {
 			    <div class="panel panel-info panel-margen">
 			    	<div class="panel-body panel-body-margen">
 			    		<div class="form-group">
-			    			<label>Centro Costo</label>
+			    			<label style="font-weight: normal">Centro Costo</label>
 			    			<select id="cboCosto" name="cboCosto" class="form-control input fuente_btn">
 			    				<option>LABORATORIO</option>
 			    				<option>KINE</option>
@@ -254,14 +254,14 @@ if (isset($_POST['btnEditaPac'])) {
 			    		</div>
 			    		<br><br>
 			    		<div class="form-group">
-			    			<label>Clasificación</label>
+			    			<label style="font-weight: normal">Clasificación</label>
 			    			<select name="cboClasifica" id="cboClasifica" class="form-control input fuente_btn">
 			    				<option>PACIENTE</option>
 			    			</select>
 			    			
 			    			&nbsp;&nbsp;
 
-			    			<label>Run Paciente</label>
+			    			<label style="font-weight: normal">Run Paciente</label>
 
 			    			<input type="text" id="txtRutNum3" name="txtRutNum3"  onkeypress="return isNumber(event)" class="form-control input" maxlength="8" style="width: 130px;"></input>
 
@@ -278,14 +278,14 @@ if (isset($_POST['btnEditaPac'])) {
 			    <div class="panel panel-info panel-margen">
 			    	<div class="panel-body panel-body-margen">
 			    		<div class="form-group">
-			    		  <label>Financiador</label>
+			    		  <label style="font-weight: normal">Financiador</label>
 			    		  <select name="cboFinan" id="cboFinan" class="form-control input fuente_btn">
 			    		  	<?php foreach ($res_fin as $item){
 			    		  		echo '<option value="'.$item->codigofinanciador.'">'.$item->nombrefinanciador.'</option>';
 							}  ?>
 			    		  </select>
 			    		  &nbsp;
-			    		  <label>Arancel</label>
+			    		  <label style="font-weight: normal">Arancel</label>
 			    		  <select name="cboArancel" id="cboArancel" class="form-control input fuente_btn">
 			    		  	<option>PLAN 1</option>
 			    		  	<option>PLAN 2</option>
@@ -309,7 +309,7 @@ if (isset($_POST['btnEditaPac'])) {
 									<span class="glyphicon glyphicon-search">
 								</button>
 
-								<input type="text" id="txtcodserv" name="txtcodserv" placeholder="Código" onkeypress="return
+								<input type="text" id="txtcodserv" name="txtcodserv" placeholder="Código Ser" onkeypress="return
 			    			 		isNumber(event)" class="form-control input" style="width: 100px">
 
 								<input type="text" name="txtNomServ" id="txtNomServ" class="form-control input" style="width: 250px"/>
@@ -319,7 +319,7 @@ if (isset($_POST['btnEditaPac'])) {
 								<input type="text" id="txtCantServ" name="txtCantServ" onkeypress="return
 			    			 		isNumber(event)" class="form-control input" style="width: 60px;" placeholder="Cant."/>
 
-                                <button type="button" id="btnEliminaServ" class="btn btn-primary input">
+                                <button type="button" id="btnEliminaServ" class="btn btn-danger input fuente_btn">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
                                 &nbsp;&nbsp;
@@ -347,7 +347,7 @@ if (isset($_POST['btnEditaPac'])) {
 									<span class="glyphicon glyphicon-search">
 								 </button>
 
-								 <input type="text" id="txtcodins" name="txtcodins" placeholder="Código" onkeypress="return
+								 <input type="text" id="txtcodins" name="txtcodins" placeholder="Código Ins" onkeypress="return
 			    			 		isNumber(event)" class="form-control input" style="width: 100px">
 
 								 <input type="text" name="txtNomIns" id="txtNomIns" class="form-control input" style="width: 250px"/>
@@ -357,7 +357,7 @@ if (isset($_POST['btnEditaPac'])) {
 								 <input type="text" id="txtCantIns" name="txtCantIns" onkeypress="return
 			    			 		isNumber(event)" class="form-control input" style="width: 60px;" placeholder="Cant."/>
 
-								 <button type="button" id="btnEliminaIns" class="btn btn-primary input">
+								 <button type="button" id="btnEliminaIns" class="btn btn-danger input fuente_btn">
 									 <span class="glyphicon glyphicon-remove"></span>
 								 </button>
 								 &nbsp;&nbsp;
@@ -372,6 +372,27 @@ if (isset($_POST['btnEditaPac'])) {
 				 <div id="cargando2"></div>
 
 				 <div class="form-group" id="jqxgrid2"></div>
+				 <br><br>
+
+				 <div class="row" style="float: right; margin-right: 205px">
+					 <div class="form-group">
+						 <button type="button" id="btnAnula" class="btn btn-danger input fuente_btn confirm">Anular
+							 <span class="glyphicon glyphicon-remove"></span>
+						 </button>
+
+						 <button type="button" id="btnImprime" class="btn btn-primary input fuente_btn">Imprimir
+							 <span class="glyphicon glyphicon-print"></span>
+						 </button>
+
+						 <button type="button" id="btnValorizaCargo" class="btn btn-primary input fuente_btn">Valorizar
+							 <span class="glyphicon glyphicon-usd"></span>
+						 </button>
+
+						 <button type="button" id="btnGuargaCargo" class="btn btn-primary input fuente_btn">Grabar
+							 <span class="glyphicon glyphicon-ok"></span>
+						 </button>
+					 </div>
+				 </div>
           </form>
         </div>
  </div>   

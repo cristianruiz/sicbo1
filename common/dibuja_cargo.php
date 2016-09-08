@@ -19,7 +19,7 @@ switch ($action) {
     case "getServicio":
         $nrooa = $_GET["nrocargo"];
         $cod_sec = $_GET["cod_sec"];
-        $codigo = $_GET['codigo'];
+        $codigo = $_GET["codigo"];
         $objSrv = new Servicios();
         print_r($objSrv->getServByCod($codigo));
         break;
@@ -37,9 +37,15 @@ switch ($action) {
     case "getNombreInsumo";
         $nrooa = $_GET["nrocargo"];
         $codigo = $_GET["cod_sec"];
-        $codIns = $_GET["codigoInsumo"];
+        $codIns = $_GET["codigo"];
         $objIns = new Insumos();
-        print_r($objIns->getByCodigo($codIns));
+        print_r($objIns->getInsByCodigo($codIns));
+        break;
+    case "getDetInsumos":
+        $nrooa = $_GET["nrocargo"];
+        $cod_sec = $_GET["cod_sec"];
+        $objIns2 = new Cargos_controller();
+        print_r($objIns2->getDetInsumos($nrooa,$cod_sec));
         break;
 	default:
         $nrooa = $_GET["nrocargo"];
@@ -47,5 +53,5 @@ switch ($action) {
         $objDet = new Cargos_controller();
         $det = $objDet->getDetCargo($nrooa,$cod_sec);
         print_r($det);
-		break;
+        break;
 }
