@@ -1,6 +1,3 @@
-$(document).ready(function () {
-
-});
 
 //Valida que se ingrese rut en panel admision paciente
 $(document).ready(function(){
@@ -17,7 +14,7 @@ $(document).ready(function(){
     valor_rut = valor_input.val();
     
     if(valor_rut === ''){
-      alert('Ingrese Rut.');
+      toastr.warning('Ingrese Rut');
 
       $('#txtRutNum2').focus();
       return false;
@@ -30,7 +27,7 @@ $(document).ready(function(){
 });
 //-------------------------------------------------------------------------
 function guarda_pac(){
-	alert("Paciente fue registrado!");
+	toastr.success('Paciente registrado exitosamente');
 }
 
 
@@ -141,12 +138,12 @@ $(document).keyup(function (e) {
                         $('#txtNomServ').val(parsedData.descripcion);
                         $('#txtprecio').focus();
                     }else {
-                        alert('No hay datos');
+                        toastr.info('No hay datos');
                     }
                 }
             });
         }else {
-            alert('Ingrese Código.');
+            toastr.warning('Ingrese código de servicio');
         }
     }
 });
@@ -177,7 +174,7 @@ $(function() {
         height: 200,
         columns: [
             { text: 'CODIGO', datafield: 'colcodigos', width: 100 },
-            { text: 'DESCRIPCION', datafield: 'colnombres', cellsformat: 'D',width: 500 },
+            { text: 'PRESTACION', datafield: 'colnombres', cellsformat: 'D',width: 500 },
             { text: 'CANTIDAD', datafield: 'colcantidades', width: 80 },
             { text: 'PRECIO', datafield: 'colprecios', width: 80, cellsalign: 'right' },
             { text: 'TOTAL', datafield: 'coltotales', width: 100, cellsalign: 'right', cellsformat: 'c2' },
@@ -219,7 +216,7 @@ $(function() {
                 $('#txtCantServ').val('');
                 $('#txtcodserv').focus();
             }else{
-                alert('Ingrese cantidad.');
+                toastr.warning('Ingrese cantidad.');
             }
         }
     });
@@ -236,10 +233,52 @@ $(function() {
     });
 });
 
-//------------------------------------------------------------------------
+//----------------------------------------------------------------------
 
-//------------Evento al dar ENTER sobre txt cantidad de INSUMOS---------
+//------------Evento al dar ENTER sobre txt codigo de INSUMOS---------
 
+$(document).keyup(function (e) {
+    if($("#txtcodins").is(":focus") && (e.keyCode == 13)) {
+        var nrocargo = $('#txtnrooa').val();
+        var cod_sec = $('#txtcodsec').val();
+        var cod_ins = $('#txtcodins').val();
+        var action = "getNombreInsumo";
+
+        if(cod_ins > 0){
+            $.ajax({
+                type: "GET",
+                url: "../common/dibuja_cargo.php",
+                data: {nrocargo: nrocargo, cod_sec: cod_sec, action: action, codigo: cod_ins},
+
+                error: function () {
+                    alert('Error peticion Ajax al buscar Insumo.');
+                },
+                success: function (data) {
+                    if(data.length > 0){
+                        var parsedData = JSON.parse(data);
+                        $('#txtNomIns').val(parsedData.descripcion);
+                        $('#txtprecioIns').focus();
+                    }else {
+                        toastr.warning('No hay datos');
+                    }
+                }
+            });
+        }else {
+            toastr.warning('Ingrese Código de Insumo.');
+        }
+    }
+});
+
+// - - - -  TXT PRECIO INSUMO - - - -
+
+$(document).keyup(function (e) {
+    if ($("#txtprecioIns").is(":focus") && (e.keyCode == 13)) {
+        $('#txtCantIns').focus();
+    }
+});
+
+
+//txt cantidad insumos- - - - - - -  - - - - - -
     $(function() {
         // Declaración del datasource
         var dataGrilla = [];
@@ -256,7 +295,7 @@ $(function() {
             height: 200,
             columns: [
                 { text: 'CODIGO', datafield: 'colcodigos', width: 100 },
-                { text: 'DESCRIPCION', datafield: 'colnombres', cellsformat: 'D',width: 500 },
+                { text: 'INSUMO', datafield: 'colnombres', cellsformat: 'D',width: 500 },
                 { text: 'CANTIDAD', datafield: 'colcantidades', width: 80 },
                 { text: 'PRECIO', datafield: 'colprecios', width: 80, cellsalign: 'right' },
                 { text: 'TOTAL', datafield: 'coltotales', width: 100, cellsalign: 'right', cellsformat: 'c2' },
@@ -294,7 +333,7 @@ $(function() {
 
                     $('#txtcodins').val('');
                     $('#txtNomIns').val('');
-                    $('#txtprecioins').val('');
+                    $('#txtprecioIns').val('');
                     $('#txtCantIns').val('');
                     $('#txtcodins').focus();
                 }else{
@@ -342,7 +381,7 @@ $(document).keyup(function (e) {
                 }
             });
         }else {
-            alert('Ingrese Rut');
+            toastr.warning('Ingrese Rut del paciente');
         }
 
     }
@@ -374,13 +413,13 @@ $(document).keyup(function(e){
                         $('#txtnrooa').focus();
 
                     }else {
-                        alert('Código se sección no encontrado.');
+                        toastr.info('Código se sección no encontrado.');
                         $('#lblsec').val('');
                     }
                 }
             });
         }else{
-            alert('Ingrese código de sección!');
+            toastr.warning('Ingrese código de sección!');
             $('#txtnrooa').val('');
         }
 
@@ -415,14 +454,14 @@ $(document).keyup(function (e){
                         data = [];
                         $('#txtnroCta').val('');
                         $('#txtRutNum3').val('');
-                        alert('No hay datos.');
+                        toastr.info('No hay datos.');
                         $('#txtnrooa').focus();
                     }
                     console.log(data);
                 }
             });
         }else{
-            alert('Ingrese nro de cargo!');
+            toastr.warning('Ingrese nro de cargo!');
         }
     };
 });
@@ -542,7 +581,42 @@ $(document).on('show.bs.modal','#myModal2', function () {
 
 });
 
+//S E C C I O N  B O T O N E S   I N F E R I O R E S
 
+$(document).ready(function () {
+    $('#btnGuargaCargo').on("click",function () {
+        toastr.success('Cargo guardado!');
+    });
+/*
+    $('#btnAnula').on('click',function () {
+        confConfirm();
+        $.confirm({
+            title: 'Anulación de cargos',
+            content: 'Seguro que desesa anular el cargo?',
+            confirm: function(){
+                console.log('Anulado!');
+            },
+            cancel: function(){
+                console.log('Cancelado!');
+            }
+        });
+    });*/
 
-
+    $(".confirm").confirm({
+        content: "Seguro que desea anular el cargo?",
+        title: "Anulacion de cargos",
+        confirm: function(button) {
+            toastr.info('Cargo fue anulado');
+        },
+        cancel: function(button) {
+            // nothing to do
+        },
+        confirmButton: "Si",
+        cancelButton: "No",
+        post: true,
+        confirmButtonClass: "btn-danger",
+        cancelButtonClass: "btn-default",
+        dialogClass: "modal-dialog modal-lg" // Bootstrap classes for large modal
+    });
+});
 

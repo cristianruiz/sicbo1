@@ -5,4 +5,10 @@ class Insumos extends MaeInsumosMySqlDAO{
         $res = $ins->queryAll();
         return(json_encode($res));
     }
+
+    public function getInsByCodigo($codigo){
+        $ins = new  Insumos();
+        $res = $ins->load($codigo);
+        return(json_encode($res));
+    }
 }

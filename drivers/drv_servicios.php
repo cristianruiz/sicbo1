@@ -4,7 +4,7 @@ class Servicios extends ZoaServiciosMySqlDAO{
 		$datos = new ZoaServiciosMySqlDAO();
 		$res = $datos->queryAll();
 
-		return $res;
+		return(json_encode($res));
 	}
 
 	public function getServByCod($cod){

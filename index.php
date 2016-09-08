@@ -89,8 +89,7 @@
 			<!-- CODIGO JS  -->
 		<script type="text/javascript">
             $(document).ready(function () {
-                
-
+				var action = 'buscaServ';
                 var url = "common/dibuja_servicios_json.php";
 
                 // prepare the data
