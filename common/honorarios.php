@@ -34,8 +34,18 @@ switch ($action) {
 			if (!$r->guardasociedad($rutnum, $rutsociedad)){
 				$error=true;
 			}
+			$s = new sociedad();
+			$rutrazonsocial=$rutsociedad;
+			$nombrerazonsocial=$s->getnombrerazonsocial($rutsociedad);
+		} {
+			$rutrazonsocial=$rutnum;
+			$nombrerazonsocial=$nombre;
 		}
-		if (!$r->actualizarecepcionhonorariomensual($idhonorario, $rutnum, $esreceptor)){
+		
+		
+		
+		
+		if (!$r->actualizarecepcionhonorariomensual($idhonorario, $rutnum, $esreceptor,$rutrazonsocial,$nombrerazonsocial)){
 			$error=true;
 		}
 		if ($error){

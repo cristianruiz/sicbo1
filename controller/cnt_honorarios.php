@@ -6,8 +6,9 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 		$this->periodo=$p;
 		$this->idhonorariosicbo=$id;
 	}
-	public function actualizarecepcionhonorariomensual($rutnum,$esreceptor){
-		$sql="update hm_honorarioconsolidado set tiporeceptor=".$esreceptor."
+	public function actualizarecepcionhonorariomensual($rutnum,$esreceptor,$rutrazonsocial,$nombrerazonsocial){
+		$sql="update hm_honorarioconsolidado set tiporeceptor=".$esreceptor.",
+				rutrazonsocial=".$rutrazonsocial.",nombrerazonsocial=".$nombrerazonsocial." 
 				where rutmed=".$rutnum." 
 				and idhonorariosicbo=".$this->idhonorariosicbo;
 		$sqlQuery = new SqlQuery($sql);
@@ -72,6 +73,9 @@ GROUP BY
 		return(json_encode($ret));
 	}
 	public function cargahonorarioconsolidaddo(){
+		error_reporting(E_ALL);
+		ini_set('display_errors', TRUE);
+		ini_set('display_startup_errors', TRUE);
 		/*$sql="insert hm_honorarioconsolidado(rutmed,formula,valor,idhonorariosicbo)
 			select t1.rutmed as rutmed ,t2.formula as formula,sum(t1.monto) as valor,
 			".$this->idhonorariosicbo." as idhonorariosicbo 
@@ -79,7 +83,7 @@ GROUP BY
 			where t1.codigo=t2.codigoservicio and t1.periodo=".$this->periodo."
 			
 			group by t1.rutmed,t2.formula";*/
-		$sql="insert hm_honorarioconsolidado(rutmed,formula,valor,idhonorariosicbo,tiporeceptor) 
+		/*$sql="insert hm_honorarioconsolidado(rutmed,formula,valor,idhonorariosicbo,tiporeceptor) 
 			select t1.rutmed as rutmed ,t2.formula as formula,sum(t1.monto) as valor,
 			".$this->idhonorariosicbo." as idhonorariosicbo ,
 			ifnull(t3.esreceptor,1) as tiporeceptor
@@ -88,13 +92,43 @@ GROUP BY
 			where   t1.periodo=".$this->periodo." 
 			and t1.rutmed<>81949100
 			
-			group by t1.rutmed,t2.formula,t3.esreceptor";
+			group by t1.rutmed,t2.formula,t3.esreceptor";*/
+		
+		$sql="insert hm_honorarioconsolidado(rutmed,formula,valor,idhonorariosicbo,tiporeceptor,rutrazonsocial,nombrerazonsocial)
+			select t1.rutmed as rutmed ,t2.formula as formula,sum(t1.monto) as valor,
+			".$this->idhonorariosicbo." as idhonorariosicbo ,
+			ifnull(t3.esreceptor,1) as tiporeceptor,
+			
+			case t3.esreceptor
+			when 1 then t3.rutproveedor
+				when 0 then w.rutsociedad
+				else '0'
+			
+			end as rutrazonsocial,
+			case t3.esreceptor
+			when 1 then t3.nombrecompleto
+				when 0 then w.razonsocial
+				else 'ASIGNAR'
+			
+			end as nombrerazonsocial
+			from hm_detallehonorariossicbo t1 inner join hm_homocodigosformulas t2 on t1.codigo=t2.codigoservicio
+            left  join hm_personanatural t3 on t1.rutmed=t3.rutproveedor
+			left join 		(select r1.rutsociedad,r1.razonsocial,r2.rutproveedor
+							from hm_sociedad r1 inner join hm_sociosmiembros r2 
+							on r1.rutsociedad=r2.rutsociedad )  w on t1.rutmed=w.rutproveedor
+			where    t1.periodo=".$this->periodo." and t1.rutmed<>81949100
+group by t1.rutmed,t2.formula,t3.esreceptor,rutrazonsocial,nombrerazonsocial";	
 		$sqlQuery = new SqlQuery($sql);
+		try{
 		$numrows=$this->executeInsert($sqlQuery);
-		return $num_rows;
+		} catch(Exception $e){
+			print_r("ERROR:".$e->getMessage());
+			$numrows=0;
+		}
+		return $numrows;
 	}
 	public function dsetexcelformula(){
-		$sql="select ifnull(x.receptorhonorario,'FALTA INFORMACION') as receptorhonorario,x.formula as formula,sum(x.valor) as total
+		/*$sql="select ifnull(x.receptorhonorario,'FALTA INFORMACION') as receptorhonorario,x.formula as formula,sum(x.valor) as total
  from 
 
 (
@@ -144,7 +178,11 @@ GROUP BY
 	w.rutsociedad
 
 ) x
-group by x.receptorhonorario,x.formula";
+group by x.receptorhonorario,x.formula";*/
+		$sql="select rutrazonsocial,formula,sum(valor)
+from hm_honorarioconsolidado
+where idhonorariosicbo=".$this->idhonorariosicbo."
+group by rutrazonsocial,formula";
 		$sqlQuery=new SqlQuery($sql);
 		$arr=$this->execute($sqlQuery);
 		return $arr;

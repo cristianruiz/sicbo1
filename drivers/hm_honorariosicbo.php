@@ -90,6 +90,8 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 	public function cargaperiodo(){
 		//$i=$this->existeperiodo();
 		//error_log("AKI: ".$i);
+		$t= new Transaction();
+		$error=false;
 	    if ($this->existeperiodo()){
 	    	$p= new HmHonorariossicboMySqlDAO();
 	    	$q= $p->queryByPeriodo($this->periodo);
@@ -109,7 +111,15 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 		$deth->cargamensual($client->honorarios_pad($params)->return,$r);
 		//carga honorarios consolidados
 		$hc=new hm_honorarioconsolidado($r->periodo,$r->idhonorario);
-		$hc->cargahonorarioconsolidaddo();
+		$num_rows=$hc->cargahonorarioconsolidaddo();
+		if($num_rows==0) $error=true;
+		if($error) {
+			$t->rollback();
+			$r->idhonorario=0;
+		}
+		else {
+			$t->commit();
+		}
 		//==============================
 		
 		return $r;
