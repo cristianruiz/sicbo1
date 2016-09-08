@@ -6,7 +6,7 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 		$this->periodo=$p;
 		$this->idhonorariosicbo=$id;
 	}
-	public function actualizarecepcionhonorariomensual($rutnum,$esreceptor,$rutrazonsocial,$nombrerazonsocial){
+	public function actualizarecepcionhonorariomensual($idhonorario,$rutnum,$esreceptor,$rutrazonsocial,$nombrerazonsocial){
 		$sql="update hm_honorarioconsolidado set tiporeceptor=".$esreceptor.",
 				rutrazonsocial=".$rutrazonsocial.",nombrerazonsocial=".$nombrerazonsocial." 
 				where rutmed=".$rutnum." 
