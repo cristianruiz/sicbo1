@@ -9,7 +9,7 @@ class sociedad extends HmSociedadMySqlDAO{
 		$rer=$this->queryByRutsociedad($rut);
 		error_log("rerrrr");
 		error_log(print_r($rer,true));
-		return $rer->razonsocial;
+		return $rer[0]->razonsocial;
 	}
 	
 }
