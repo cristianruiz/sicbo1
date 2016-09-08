@@ -35,6 +35,7 @@ switch ($action) {
 			if (!$r->guardasociedad($rutnum, $rutsociedad)){
 				$error=true;
 			}
+			print_r("RUT SOCIEDAD: ".$rutsociedad);
 			$s = new sociedad();
 			$rutrazonsocial=$rutsociedad;
 			$nombrerazonsocial=$s->getnombrerazonsocial($rutsociedad);
