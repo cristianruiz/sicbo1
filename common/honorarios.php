@@ -2,6 +2,7 @@
 include('../include_dao.php');
 include('../drivers/hm_honorariosicbo.php');
 include('../drivers/drv_personanatural.php');
+include('../drivers/sociedades.php');
 //include('../controller/cnt_honorarios.php');
 
 $obj = json_decode($_GET["parametros"]);
