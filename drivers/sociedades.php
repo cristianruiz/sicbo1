@@ -8,7 +8,7 @@ class sociedad extends HmSociedadMySqlDAO{
 		
 		$r=$this->queryByRutsociedad($rut);
 		$rer=$r[0];
-		error_log("RAZON SOCIAL: ".$r->razonsocial);
+		error_log("RAZON SOCIAL: ".$rer->razonsocial);
 		return $rer->razonsocial;
 	}
 	
