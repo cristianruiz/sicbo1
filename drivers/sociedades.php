@@ -6,10 +6,10 @@ class sociedad extends HmSociedadMySqlDAO{
 	function getnombrerazonsocial($rut){
 		$rer=new HmSociedad();
 		
-		$rer=$this->queryByRutsociedad($rut);
-		error_log("rerrrr");
-		error_log(print_r($rer,true));
-		return $rer[0]->razonsocial;
+		$r=$this->queryByRutsociedad($rut);
+		$rer=$r[0];
+		error_log("RAZON SOCIAL: ".$r->razonsocial);
+		return $rer->razonsocial;
 	}
 	
 }
