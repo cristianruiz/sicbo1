@@ -9,6 +9,9 @@ var unselectedRowIndex=0;
 var idhonorarioconsolidado=0;
 var ruthonorarioconsolidado=0;
 
+function modificaPS(){
+	console.log("Modificando");
+}
 function eliminaPS(){
 	$("#jqxLoader").jqxLoader({text:"Restaurando Informacion..." });
 	$('#jqxLoader').jqxLoader('open');
@@ -82,7 +85,7 @@ function GuardarPS(){
 		console.log("no")
 	}
 	var dataString=JSON.stringify(dat0);
-	
+	console.log(dataString);
 	$.ajax({
         type: "GET",
         data: {parametros:dataString},
@@ -373,7 +376,7 @@ $(document).ready(function () {
             //  M O D A L   M O D I F I C A C I O N     
             $("#btnAceptaModifica").jqxButton({ width: '80', height: '35'});
             $("#btnAceptaModifica").on('click', function () {
-            	eliminaPS();
+            	modificaPS();
             });
             
             

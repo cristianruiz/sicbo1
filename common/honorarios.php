@@ -10,6 +10,9 @@ $obj = json_decode($_GET["parametros"]);
 $action=$obj->action;
 switch ($action) {
 	case "guardapersonanatural":
+		error_reporting(E_ALL);
+		ini_set('display_errors', TRUE);
+		ini_set('display_startup_errors', TRUE);
 		$rutnum=$obj->rutnum;
 		$rutver=$obj->rutver;
 		$nombre=$obj->nombre;
@@ -47,7 +50,7 @@ switch ($action) {
 		
 		
 		
-		if (!$r->actualizarecepcionhonorariomensual($idhonorario, $rutnum, $esreceptor,$rutrazonsocial,$nombrerazonsocial)){
+		if (!$r->actualizarecepcionhonorariomensual( $idhonorario,$rutnum, $esreceptor,$rutrazonsocial,$nombrerazonsocial)){
 			$error=true;
 		}
 		if ($error){

@@ -6,9 +6,9 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 		$this->periodo=$p;
 		$this->idhonorariosicbo=$id;
 	}
-	public function actualizarecepcionhonorariomensual($idhonorario,$rutnum,$esreceptor,$rutrazonsocial,$nombrerazonsocial){
+	public function actualizahonorariomensual($rutnum,$esreceptor,$rutrazonsocial,$nombrerazonsocial){
 		$sql="update hm_honorarioconsolidado set tiporeceptor=".$esreceptor.",
-				rutrazonsocial=".$rutrazonsocial.",nombrerazonsocial=".$nombrerazonsocial." 
+				rutrazonsocial=".$rutrazonsocial.",nombrerazonsocial='".$nombrerazonsocial."'  
 				where rutmed=".$rutnum." 
 				and idhonorariosicbo=".$this->idhonorariosicbo;
 		$sqlQuery = new SqlQuery($sql);
@@ -16,7 +16,7 @@ class hm_honorarioconsolidado extends HmHonorarioconsolidadoMySqlDAO{
 		return $num_rows;
 	}
 	public function getJSONHonorario(){
-		$sql="SELECT
+		/*$sql="SELECT
 	t1.id,
 	concat(
 		t1.rutmed,
@@ -51,7 +51,24 @@ GROUP BY
 	t1.id,
 	t2.rutver,
 	t2.nombrecompleto,
-	w.razonsocial";
+	w.razonsocial";*/
+		$sql="select t1.id,concat(
+		t1.rutmed,
+		'-',
+		IFNULL(t2.rutver, '?')
+	)AS rutmed,
+	IFNULL(t2.nombrecompleto, '-')AS medico,
+GROUP_CONCAT(
+		DISTINCT(trim(t3.descripcionsicbo))SEPARATOR ','
+	)AS nombrepad,
+t1.valor AS total,
+t1.tiporeceptor AS receptor,
+t1.nombrerazonsocial as razonsocial
+from hm_honorarioconsolidado t1
+LEFT JOIN hm_personanatural t2 ON t1.rutmed = t2.rutproveedor
+INNER JOIN hm_homocodigosformulas t3 ON t1.formula = t3.formula
+where t1.idhonorariosicbo=".$this->idhonorariosicbo."
+group by t1.id ,t2.rutver,t2.nombrecompleto";
 		
 		$sqlQuery=new SqlQuery($sql);
 		$arr=$this->execute($sqlQuery);$ret = Array();

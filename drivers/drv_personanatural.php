@@ -2,7 +2,7 @@
 include('../controller/cnt_personanatural.php');
 class drv_personanatural extends HmPersonanaturalMySqlDAO{
 	var $rutproveedor;
-	public function actualizarecepcionhonorariomensual($idhonorariosicbo,$rutnum,$esreceptor){
+	public function actualizarecepcionhonorariomensual($idhonorariosicbo,$rutnum,$esreceptor,$rutrazonsocial,$nombrerazonsocial){
 		/*$h= new HmHonorarioconsolidadoMySqlDAO();
 		$ho= new HmHonorarioconsolidado();
 		$ho=$h->load($idhonorarioconsolidado);
@@ -11,7 +11,7 @@ class drv_personanatural extends HmPersonanaturalMySqlDAO{
 		print_r("NUMERO 
 		de filas actualizadas: ".$numrows);*/
 		$h = new hm_honorarioconsolidado(1,$idhonorariosicbo);
-		$numrows=$h->actualizarecepcionhonorariomensual($rutnum, $esreceptor);
+		$numrows=$h->actualizahonorariomensual($rutnum, $esreceptor,$rutrazonsocial,$nombrerazonsocial);
 		if ($numrows>=0){
 			error_log("Se actualizaron ".$numrows." Registros");
 			return true;
