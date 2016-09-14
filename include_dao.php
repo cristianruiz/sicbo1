@@ -9,6 +9,10 @@
 	require_once('class/core/ArrayList.class.php');
 	require_once('class/dao/DAOFactory.class.php');
  	
+	require_once('class/dao/ULTOADAO.class.php');
+	require_once('class/dto/ULTOA.class.php');
+	require_once('class/mysql/ULTOAMySqlDAO.class.php');
+	require_once('class/mysql/ext/ULTOAMySqlExtDAO.class.php');
 	require_once('class/dao/CajaBoletaDAO.class.php');
 	require_once('class/dto/CajaBoleta.class.php');
 	require_once('class/mysql/CajaBoletaMySqlDAO.class.php');

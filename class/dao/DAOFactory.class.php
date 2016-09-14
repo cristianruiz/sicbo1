@@ -8,6 +8,13 @@
 class DAOFactory{
 	
 	/**
+	 * @return ULTOADAO
+	 */
+	public static function getULTOADAO(){
+		return new ULTOAMySqlExtDAO();
+	}
+
+	/**
 	 * @return CajaBoletaDAO
 	 */
 	public static function getCajaBoletaDAO(){

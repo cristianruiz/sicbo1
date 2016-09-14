@@ -1,20 +1,20 @@
 <?php
 /**
- * Class that operate on table 'hm_honorariossicbo'. Database Mysql.
+ * Class that operate on table 'ULT_OA'. Database Mysql.
  *
  * @author: http://phpdao.com
  * @date: 2016-09-14 18:02
  */
-class HmHonorariossicboMySqlDAO implements HmHonorariossicboDAO{
+class ULTOAMySqlDAO implements ULTOADAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @return HmHonorariossicboMySql 
+	 * @return ULTOAMySql 
 	 */
 	public function load($id){
-		$sql = 'SELECT * FROM hm_honorariossicbo WHERE idhonorario = ?';
+		$sql = 'SELECT * FROM ULT_OA WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($id);
 		return $this->getRow($sqlQuery);
@@ -24,7 +24,7 @@ class HmHonorariossicboMySqlDAO implements HmHonorariossicboDAO{
 	 * Get all records from table
 	 */
 	public function queryAll(){
-		$sql = 'SELECT * FROM hm_honorariossicbo';
+		$sql = 'SELECT * FROM ULT_OA';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
@@ -35,56 +35,58 @@ class HmHonorariossicboMySqlDAO implements HmHonorariossicboDAO{
 	 * @param $orderColumn column name
 	 */
 	public function queryAllOrderBy($orderColumn){
-		$sql = 'SELECT * FROM hm_honorariossicbo ORDER BY '.$orderColumn;
+		$sql = 'SELECT * FROM ULT_OA ORDER BY '.$orderColumn;
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
 	
 	/**
  	 * Delete record from table
- 	 * @param hmHonorariossicbo primary key
+ 	 * @param uLTOA primary key
  	 */
-	public function delete($idhonorario){
-		$sql = 'DELETE FROM hm_honorariossicbo WHERE idhonorario = ?';
+	public function delete($id){
+		$sql = 'DELETE FROM ULT_OA WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($idhonorario);
+		$sqlQuery->setNumber($id);
 		return $this->executeUpdate($sqlQuery);
 	}
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param HmHonorariossicboMySql hmHonorariossicbo
+ 	 * @param ULTOAMySql uLTOA
  	 */
-	public function insert($hmHonorariossicbo){
-		$sql = 'INSERT INTO hm_honorariossicbo (fecha, usuario, periodo, estado) VALUES (?, ?, ?, ?)';
+	public function insert($uLTOA){
+		$sql = 'INSERT INTO ULT_OA (ADM, SEC, MES, ANO, NUMERO) VALUES (?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($hmHonorariossicbo->fecha);
-		$sqlQuery->set($hmHonorariossicbo->usuario);
-		$sqlQuery->setNumber($hmHonorariossicbo->periodo);
-		$sqlQuery->setNumber($hmHonorariossicbo->estado);
+		$sqlQuery->setNumber($uLTOA->aDM);
+		$sqlQuery->setNumber($uLTOA->sEC);
+		$sqlQuery->setNumber($uLTOA->mES);
+		$sqlQuery->setNumber($uLTOA->aNO);
+		$sqlQuery->setNumber($uLTOA->nUMERO);
 
 		$id = $this->executeInsert($sqlQuery);	
-		$hmHonorariossicbo->idhonorario = $id;
+		$uLTOA->id = $id;
 		return $id;
 	}
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param HmHonorariossicboMySql hmHonorariossicbo
+ 	 * @param ULTOAMySql uLTOA
  	 */
-	public function update($hmHonorariossicbo){
-		$sql = 'UPDATE hm_honorariossicbo SET fecha = ?, usuario = ?, periodo = ?, estado = ? WHERE idhonorario = ?';
+	public function update($uLTOA){
+		$sql = 'UPDATE ULT_OA SET ADM = ?, SEC = ?, MES = ?, ANO = ?, NUMERO = ? WHERE id = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
-		$sqlQuery->set($hmHonorariossicbo->fecha);
-		$sqlQuery->set($hmHonorariossicbo->usuario);
-		$sqlQuery->setNumber($hmHonorariossicbo->periodo);
-		$sqlQuery->setNumber($hmHonorariossicbo->estado);
+		$sqlQuery->setNumber($uLTOA->aDM);
+		$sqlQuery->setNumber($uLTOA->sEC);
+		$sqlQuery->setNumber($uLTOA->mES);
+		$sqlQuery->setNumber($uLTOA->aNO);
+		$sqlQuery->setNumber($uLTOA->nUMERO);
 
-		$sqlQuery->setNumber($hmHonorariossicbo->idhonorario);
+		$sqlQuery->setNumber($uLTOA->id);
 		return $this->executeUpdate($sqlQuery);
 	}
 
@@ -92,63 +94,77 @@ class HmHonorariossicboMySqlDAO implements HmHonorariossicboDAO{
  	 * Delete all rows
  	 */
 	public function clean(){
-		$sql = 'DELETE FROM hm_honorariossicbo';
+		$sql = 'DELETE FROM ULT_OA';
 		$sqlQuery = new SqlQuery($sql);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function queryByFecha($value){
-		$sql = 'SELECT * FROM hm_honorariossicbo WHERE fecha = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->getList($sqlQuery);
-	}
-
-	public function queryByUsuario($value){
-		$sql = 'SELECT * FROM hm_honorariossicbo WHERE usuario = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->getList($sqlQuery);
-	}
-
-	public function queryByPeriodo($value){
-		$sql = 'SELECT * FROM hm_honorariossicbo WHERE periodo = ?';
+	public function queryByADM($value){
+		$sql = 'SELECT * FROM ULT_OA WHERE ADM = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
-	public function queryByEstado($value){
-		$sql = 'SELECT * FROM hm_honorariossicbo WHERE estado = ?';
+	public function queryBySEC($value){
+		$sql = 'SELECT * FROM ULT_OA WHERE SEC = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByMES($value){
+		$sql = 'SELECT * FROM ULT_OA WHERE MES = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByANO($value){
+		$sql = 'SELECT * FROM ULT_OA WHERE ANO = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByNUMERO($value){
+		$sql = 'SELECT * FROM ULT_OA WHERE NUMERO = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
 
-	public function deleteByFecha($value){
-		$sql = 'DELETE FROM hm_honorariossicbo WHERE fecha = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->executeUpdate($sqlQuery);
-	}
-
-	public function deleteByUsuario($value){
-		$sql = 'DELETE FROM hm_honorariossicbo WHERE usuario = ?';
-		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
-		return $this->executeUpdate($sqlQuery);
-	}
-
-	public function deleteByPeriodo($value){
-		$sql = 'DELETE FROM hm_honorariossicbo WHERE periodo = ?';
+	public function deleteByADM($value){
+		$sql = 'DELETE FROM ULT_OA WHERE ADM = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 
-	public function deleteByEstado($value){
-		$sql = 'DELETE FROM hm_honorariossicbo WHERE estado = ?';
+	public function deleteBySEC($value){
+		$sql = 'DELETE FROM ULT_OA WHERE SEC = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByMES($value){
+		$sql = 'DELETE FROM ULT_OA WHERE MES = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByANO($value){
+		$sql = 'DELETE FROM ULT_OA WHERE ANO = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByNUMERO($value){
+		$sql = 'DELETE FROM ULT_OA WHERE NUMERO = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->executeUpdate($sqlQuery);
@@ -159,18 +175,19 @@ class HmHonorariossicboMySqlDAO implements HmHonorariossicboDAO{
 	/**
 	 * Read row
 	 *
-	 * @return HmHonorariossicboMySql 
+	 * @return ULTOAMySql 
 	 */
 	protected function readRow($row){
-		$hmHonorariossicbo = new HmHonorariossicbo();
+		$uLTOA = new ULTOA();
 		
-		$hmHonorariossicbo->idhonorario = $row['idhonorario'];
-		$hmHonorariossicbo->fecha = $row['fecha'];
-		$hmHonorariossicbo->usuario = $row['usuario'];
-		$hmHonorariossicbo->periodo = $row['periodo'];
-		$hmHonorariossicbo->estado = $row['estado'];
+		$uLTOA->aDM = $row['ADM'];
+		$uLTOA->sEC = $row['SEC'];
+		$uLTOA->mES = $row['MES'];
+		$uLTOA->aNO = $row['ANO'];
+		$uLTOA->nUMERO = $row['NUMERO'];
+		$uLTOA->id = $row['id'];
 
-		return $hmHonorariossicbo;
+		return $uLTOA;
 	}
 	
 	protected function getList($sqlQuery){
@@ -185,7 +202,7 @@ class HmHonorariossicboMySqlDAO implements HmHonorariossicboDAO{
 	/**
 	 * Get row
 	 *
-	 * @return HmHonorariossicboMySql 
+	 * @return ULTOAMySql 
 	 */
 	protected function getRow($sqlQuery){
 		$tab = QueryExecutor::execute($sqlQuery);

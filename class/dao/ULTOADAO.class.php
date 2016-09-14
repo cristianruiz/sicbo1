@@ -5,13 +5,13 @@
  * @author: http://phpdao.com
  * @date: 2016-09-14 18:02
  */
-interface MaeBancosDAO{
+interface ULTOADAO{
 
 	/**
 	 * Get Domain object by primry key
 	 *
 	 * @param String $id primary key
-	 * @Return MaeBancos 
+	 * @Return ULTOA 
 	 */
 	public function load($id);
 
@@ -28,37 +28,49 @@ interface MaeBancosDAO{
 	
 	/**
  	 * Delete record from table
- 	 * @param maeBanco primary key
+ 	 * @param uLTOA primary key
  	 */
-	public function delete($idbanco);
+	public function delete($id);
 	
 	/**
  	 * Insert record to table
  	 *
- 	 * @param MaeBancos maeBanco
+ 	 * @param ULTOA uLTOA
  	 */
-	public function insert($maeBanco);
+	public function insert($uLTOA);
 	
 	/**
  	 * Update record in table
  	 *
- 	 * @param MaeBancos maeBanco
+ 	 * @param ULTOA uLTOA
  	 */
-	public function update($maeBanco);	
+	public function update($uLTOA);	
 
 	/**
 	 * Delete all rows
 	 */
 	public function clean();
 
-	public function queryByNombrebanco($value);
+	public function queryByADM($value);
 
-	public function queryByAbreviatura($value);
+	public function queryBySEC($value);
+
+	public function queryByMES($value);
+
+	public function queryByANO($value);
+
+	public function queryByNUMERO($value);
 
 
-	public function deleteByNombrebanco($value);
+	public function deleteByADM($value);
 
-	public function deleteByAbreviatura($value);
+	public function deleteBySEC($value);
+
+	public function deleteByMES($value);
+
+	public function deleteByANO($value);
+
+	public function deleteByNUMERO($value);
 
 
 }
