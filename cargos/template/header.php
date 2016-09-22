@@ -31,7 +31,6 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 		<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
-		<script type="text/javascript" src="../gui/js/toastr.min.js"></script>
 
 		<!--  REFERENCIAS AL FRAMEWORK JQW -->
 		<script type="text/javascript" src="../gui/js/jqw/scripts/demos.js"></script>
@@ -55,6 +54,7 @@
 
 		<script type="text/javascript" src="../gui/js/toastr.min.js"></script>
         <script type="text/javascript" src="./js/script_venta.js"></script>
+		<script type="text/javascript" src="./js/adm_paciente.js"></script>
 
 		<! JQUERY ALERT -->
 		<script type="text/javascript" src="../gui/js/jquery-confirm/js/jquery-confirm.js"></script>
@@ -145,9 +145,9 @@
 
 				//------------Buscador de profesionales--------------------------
 				$(document).ready(function () {
+
 					var action = 'buscaProf';
 					var url = "../common/oa_autocompletadores.php?action="+action;
-
 					// prepare the data
 					var source =
 					{
@@ -160,27 +160,31 @@
 
 					};
 					var dataAdapter = new $.jqx.dataAdapter(source);
-
+					var codprof1 = $('#cboRolProf').val();
 					// Create a jqxInput
 					$("#jqxInput3").jqxInput({ source: dataAdapter, placeHolder: "Busqueda de Profesionales", displayMember: "fullname", valueMember: "rutnum", width: 200, height: 25});
 					$("#jqxInput3").focus();
 					$("#jqxInput3").on('select', function (event) {
+
 						if (event.args) {
 							var item = event.args.item;
 							if (item) {
 								var rutprof = item.value;
 								var nombre = item.label;
-								var codprof1 = $('#cboRolProf').val();
+
 								switch (codprof1){
 									case 1:
 										$('#ruttra').val(rutprof);
 										$('#txtMedtra').val(nombre);
+										console.log(codprof1);
 										break;
 									case 2:
+										console.log(codprof1);
 										$('#rutminf').val(rutprof);
 										$('#txtmedInf').val(nombre);
 										break;
 									case 3:
+										console.log(codprof1);
 										$('#ruttecno').val(rutprof);
 										$('#txttecnologo').val(nombre);
 										break;

@@ -1,29 +1,29 @@
 
 //Valida que se ingrese rut en panel admision paciente
 $(document).ready(function(){
-  
-  var boton_rut;
-  
-  boton_rut = $('#btnokPac');
-  
-  boton_rut.on('click', function(){
-    
-     var valor_input, valor_rut;
-    
-    valor_input = $('#txtRutNum2');
-    valor_rut = valor_input.val();
-    
-    if(valor_rut === ''){
-      toastr.warning('Ingrese Rut');
 
-      $('#txtRutNum2').focus();
-      return false;
-    }else{
-    	return true;
-    }
-    
-  }); 
-  
+    var boton_rut;
+
+    boton_rut = $('#btnokPac');
+
+    boton_rut.on('click', function(){
+
+        var valor_input, valor_rut;
+
+        valor_input = $('#txtRutNum2');
+        valor_rut = valor_input.val();
+
+        if(valor_rut === ''){
+            toastr.warning('Ingrese Rut');
+
+            $('#txtRutNum2').focus();
+            return false;
+        }else{
+            return true;
+        }
+
+    });
+
 });
 //-------------------------------------------------------------------------
 function guarda_pac(){
@@ -277,7 +277,6 @@ $(document).keyup(function (e) {
     }
 });
 
-
 //txt cantidad insumos- - - - - - -  - - - - - -
     $(function() {
         // Declaración del datasource
@@ -408,7 +407,7 @@ $(document).keyup(function(e){
 
                     if(data.length > 0){
                         var parsedData = JSON.parse(data);
-                        console.log(parsedData);
+                        //console.log(parsedData);
                         $('#lblsec').text(parsedData.descripcion);
                         $('#txtnrooa').focus();
 
@@ -477,24 +476,94 @@ $(document).keyup(function(e){
         if (nrocargo > 0){
             $('#jqxLoader').jqxLoader('open');
 
-            //$("#jqxLoader").jqxLoader({ width: 250, height: 150, autoOpen: false,text:"Buscando en SICBO" });
+            $("#jqxLoader").jqxLoader({ width: 250, height: 150, autoOpen: false,text:"Buscando en SICBO" });
 
-            //console.log(dataString);
             $.ajax({
                 type: "GET",
                 data: {action: action, nrocargo: nrocargo, cod_sec: cod_sec},
                 dataType: "json",
                 url: "../common/dibuja_cargo.php",
                 success: function (d) {
-                    console.log(d);
+                    //console.log(d);
                     $('#jqxLoader').jqxLoader('close');
                     cargagrilla();
                 }
             });
+
+            //GRILLA DETALLE INSUMOS
+            cargaInsumos();
         }
     }
 });
 
+function cargaInsumos(){
+    var action="getDetInsumos";
+    var nrocargo=$('#txtnrooa').val();
+    var cod_sec=$('#txtcodsec').val();
+
+    $.ajax({
+        type: "GET",
+        data: {action: action, nrocargo: nrocargo, cod_sec: cod_sec},
+        //dataType: "json",
+        url: "../common/dibuja_cargo.php",
+        success: function (d2) {
+            console.log(d2);
+            //$('#jqxLoader').jqxLoader('close');
+            cargagrillaInsumos();
+        }
+    });
+}
+
+function cargagrillaInsumos(){
+
+    var action="getDetInsumos";
+    var nrocargo=$('#txtnrooa').val();
+    var cod_sec=$('#txtcodsec').val();
+
+    var url1="../common/dibuja_cargo.php";
+    var source =
+    {
+        data: {nrocargo: nrocargo,cod_sec: cod_sec,action: action},
+        datatype: "json",
+        datafields: [
+            { name: 'cantidadentregada',type:'integer'},
+            { name: 'codigodetalle'},
+            { name: 'descripcion'},
+            { name: 'nrocargo'},
+            { name: 'preciounitario'},
+            { name: 'total'},
+        ],
+        id: 'iddetalle',
+        url: url1
+    };
+    var dataAdapter = new $.jqx.dataAdapter(source);
+
+    $("#jqxgrid2").jqxGrid(
+        {
+            width: 900,
+            height: 200,
+            source: dataAdapter,
+            ready: function () {
+                $("#jqxgrid").jqxGrid('hidecolumn', 'nrocargo');
+            },
+            columnsresize: true,
+            columns: [
+
+                { text: 'CODIGO', datafield: 'codigodetalle', width: 100 },
+                { text: 'INSUMO', datafield: 'descripcion', width: 500},
+                { text: 'CANTIDAD', datafield: 'cantidadentregada' , width: 80  },
+                { text: 'P. UNITARIO', datafield: 'preciounitario', width: 100 },
+                { text: 'TOTAL', datafield: 'total', width: 100 },
+            ]
+        });
+    /*$("#jqxgrid").bind('rowselect', function (event) {
+     var row = event.args.rowindex;
+     console.log("fila"+row);
+     $('#myModal').modal('toggle');
+     $('#myModal').modal('show');
+     // $('#myModal').modal('hide');
+     });*/
+}
 
 function cargagrilla(){
 
@@ -532,7 +601,7 @@ function cargagrilla(){
             columns: [
 
                 { text: 'CODIGO', datafield: 'codigodetalle', width: 100 },
-                { text: 'DESCRIPCION', datafield: 'descripcion', width: 500},
+                { text: 'PRESTACION', datafield: 'descripcion', width: 500},
                 { text: 'CANTIDAD', datafield: 'cantidadentregada' , width: 80  },
                 { text: 'P. UNITARIO', datafield: 'preciounitario', width: 100 },
                 { text: 'TOTAL', datafield: 'total', width: 100 },
@@ -549,21 +618,12 @@ function cargagrilla(){
 /*-----------------------------------------------------------------------*/
 
 $(document).ready(function () {
-    var codrol=1;
-    var rol = [{text:'Médico tratante', value: 1},{text: 'Médico informante', value: 2},{text: 'Tecnólogo', value: 3}];
+    var codrol = 1;
+    var codfin;
 
-    $("#cboRolProf").jqxComboBox({
-        source: rol,
-        theme: 'highcontrast',
-        width: '150px',
-        height: '20px',
-        displayMember: 'text',
-        selectedIndex: 0,
-        valueMember: 'value'
-    });
-
+    //MODAL PROFESIONALES
     $("#cboRolProf").on('change', function (event) {
-        codrol=event.args.item.value;
+        codrol = $('#cboRolProf').val();
         $('#jqxInput3').focus();
     });
 
@@ -573,35 +633,94 @@ $(document).ready(function () {
         console.log(rutmtra);
     }));
 
-
-});
-
-$(document).on('show.bs.modal','#myModal2', function () {
-    $('#jqxInput2').focus();
-
-});
-
-//S E C C I O N  B O T O N E S   I N F E R I O R E S
-
-$(document).ready(function () {
-    $('#btnGuargaCargo').on("click",function () {
-        toastr.success('Cargo guardado!');
+    $('#cboFinan').change(function () {
+        codfin = $('#cboFinan').val();
+        alert(codfin);
     });
-/*
-    $('#btnAnula').on('click',function () {
-        confConfirm();
-        $.confirm({
-            title: 'Anulación de cargos',
-            content: 'Seguro que desesa anular el cargo?',
-            confirm: function(){
-                console.log('Anulado!');
-            },
-            cancel: function(){
-                console.log('Cancelado!');
-            }
-        });
-    });*/
+//});
 
+
+// - - - S E C C I O N  B O T O N E S   I N F E R I O R E S- - -  - - -  -
+
+//obtiene ultimo nro de cargo por seccion
+    $('#btnGuargaCargo').on("click",function () {
+        //toastr.success('Cargo guardado!');
+        var cod_sec = $('#txtcodsec').val();
+        var fecha = new Date;
+        var ano = fecha.getFullYear();
+        var mes = parseInt(fecha.getMonth())+2;
+        var globalData;
+        var ultimo;
+        var nuevo;
+        var nroNuevo;
+        var id;
+
+        $.ajax({
+            type: 'GET',
+            data: {action: 'buscaUltimo', cod_sec: cod_sec,mes: mes, ano: ano,nuevo:0},
+            url: '../common/oa_cargo.php',
+            //dataType: 'json',
+            success: function (data) {
+                var parsedData = JSON.parse(data);
+                globalData = parsedData;
+                if (parsedData.length > 0) {
+                    //console.log(parsedData);
+                    ultimo = parsedData[0].NUMERO;
+                    nuevo = parseInt(ultimo)+1;
+                    id = parsedData[0].id;
+
+                    alert('el ID es: '+ id + 'El ultimo cargo es: '+ultimo + 'El NUEVO cargo es: '+nuevo);
+                    updUltimo();
+
+                }else {
+                    console.log('es primer cargo del mes');
+                    insertUlt_oa();
+                }
+
+            },
+            error: function () {
+                alert('Error peticion Ajax al consultar tabla UTL_OA');
+            }
+        }).done(function () {
+            window.nuevo = nuevo;
+            nroNuevo = window.nuevo;
+            window.id = id;
+            id=window.id;
+        });
+
+        function updUltimo() {
+            $.ajax({
+                type: 'GET',
+                data: {action: 'updUltimo',nuevo: nuevo,id:id},
+                url: '../common/oa_cargo.php',
+                success: function (d) {
+                    console.log(d);
+                },
+                error: function () {
+                    alert('error ajax');
+                }
+            });
+        }
+
+        function insertUlt_oa() {
+
+            $.ajax({
+                type: 'GET',
+                data: {action: 'insertUltimo', cod_sec: cod_sec,mes: mes, ano: ano, nuevo:nuevo},
+                url: '../common/oa_cargo.php',
+                success: function () {
+                    alert('Se agrego nuevo registro');
+                },
+                error: function () {
+                    alert('Error peticion Ajax al actualizar ULT_OA.');
+                }
+            });
+        }
+    });
+
+
+
+    //- - - - - boton anular - - - - - - - -  - - - - - - - -
     $(".confirm").confirm({
         content: "Seguro que desea anular el cargo?",
         title: "Anulacion de cargos",
@@ -618,5 +737,31 @@ $(document).ready(function () {
         cancelButtonClass: "btn-default",
         dialogClass: "modal-dialog modal-lg" // Bootstrap classes for large modal
     });
+    //- - - - - - - - - - -  - - - - - - - - - - - - - - -- - - - - - - -
+
+    $('#btnokPac').on('click',function () {
+        //alert('ok');
+        var data = $('#form2').serializeArray();
+
+        $.ajax({
+            type: 'POST',
+            url: '../common/oa_cargo.php',
+            data: data,
+            dataType: 'json',
+            success: function () {
+                toastr.success('Paciente fue guardado');
+            },
+            error: function () {
+                toastr.error('Error al guardar paciente');
+            }
+        });
+
+        console.log(data);
+    });
+});
+
+$(document).on('show.bs.modal','#myModal2', function () {
+    $('#jqxInput2').focus();
+
 });
 

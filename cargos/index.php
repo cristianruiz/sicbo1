@@ -157,7 +157,7 @@ if (isset($_POST['btnEditaPac'])) {
                         	<?php 
                         		//Guarda nuevo paciente
 
-								if (isset($_POST["btnokPac"])) {
+								/*if (isset($_POST["btnokPac"])) {
 																		
 									$rutnum = substr($_POST['txtRutNum2'], 0, -2);
 									$pac = new Pac();
@@ -197,7 +197,7 @@ if (isset($_POST['btnEditaPac'])) {
 											echo "<script>alert('El rut ya está registrado.')</script>";
 											echo "<script>$('#txtRutNum2').focus();</script>";
 										}									
-									}
+									}*/
                         	 ?>
 
                 </div>
@@ -281,7 +281,7 @@ if (isset($_POST['btnEditaPac'])) {
 			    		  <label style="font-weight: normal">Financiador</label>
 			    		  <select name="cboFinan" id="cboFinan" class="form-control input fuente_btn">
 			    		  	<?php foreach ($res_fin as $item){
-			    		  		echo '<option value="'.$item->codigofinanciador.'">'.$item->nombrefinanciador.'</option>';
+			    		  		echo '<option value="'.$item->rutfinanciador.'">'.$item->nombrefinanciador.'</option>';
 							}  ?>
 			    		  </select>
 			    		  &nbsp;
@@ -402,16 +402,19 @@ if (isset($_POST['btnEditaPac'])) {
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Lista de médicos</h4>
+	        <h4 class="modal-title" id="myModalLabel">Buscador de profesionales</h4>
 	      </div>
 	      <div class="modal-body">
 	        <div class="row">
+				<div class="col-xs-4">
+					<select id="cboRolProf" name="cboRolProf" class="form-control input">
+						<option value="1">Medico Tratante</option>
+						<option value="2">Medico Informante</option>
+						<option value="3">Tecnólogo</option>
+					</select>
+				</div>
 
-
-					<div id="cboRolProf" style="margin-right: 0px;"></div>
-
-
-					  &nbsp;&nbsp;
+					  &nbsp;
 					  <input type="text" id="jqxInput3" name="jqxInput3"/>
 
 			 </div>
@@ -428,7 +431,7 @@ if (isset($_POST['btnEditaPac'])) {
 					<div class="col-xs-4">
 							Informante
 						<input type="hidden" name="rutminf" id="rutminf">
-						<input type="text" id="txtmedInf" class="form-control input">
+						<input type="text" id="txtmedInf" name="txtmedInf" class="form-control input">
 					</div>
 					<div class="col-xs-4">
 						Tecnólogo

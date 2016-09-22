@@ -9,6 +9,7 @@ class Pacientes extends MaePacienteMySqlDAO
 	}
 
 	public function editaPaciente($pac){
+	    print_r($pac);
 		$objPac = new MaePacienteMySqlDAO();
 		$id = $objPac->update($pac);
 	}

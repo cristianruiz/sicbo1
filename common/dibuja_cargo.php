@@ -47,11 +47,13 @@ switch ($action) {
         $objIns2 = new Cargos_controller();
         print_r($objIns2->getDetInsumos($nrooa,$cod_sec));
         break;
-	default:
+    case "cargo_det":
         $nrooa = $_GET["nrocargo"];
         $cod_sec = $_GET["cod_sec"];
         $objDet = new Cargos_controller();
         $det = $objDet->getDetCargo($nrooa,$cod_sec);
         print_r($det);
+        break;
+    default:
         break;
 }
