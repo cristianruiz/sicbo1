@@ -81,4 +81,25 @@ class Cargos_controller extends ZoaCargoMySqlDAO{
         return(json_encode($ret));
     }
 
+    public function insertCab_oa($cod_sec,$nro_oa,$periodo,$fecha,$nro_fi,$hora,$minuto,$rut_fin,$rut_pac,$tipo_pac,$tipo,$tipo_pag,$idtoth){
+        error_reporting(E_ALL);
+        ini_set('display_errors', TRUE);
+        ini_set('display_startup_errors', TRUE);
+
+        $sql = 'INSERT INTO zoa_cargo(codigoseccion,nrocargo,periodo,fecha,nroficha,hora,minuto
+                                      rutfinanciador,rutpaciente,tipopaciente,tipo
+                                      tipopago,idtoth)
+                       VALUES ('.$cod_sec.','.$nro_oa.','.$periodo.','.$fecha.','.$nro_fi.','.$hora.','.$minuto.'
+                                '.$rut_fin.','.$rut_pac.','.$tipo_pac.','.$tipo.','.$tipo_pag.','.$idtoth.') ';
+
+        $sqlQuery = new  SqlQuery($sql);
+
+        if ($this->execute($sqlQuery)){
+            echo 'Todo bien';
+        }else{
+            echo 'mal';
+        }
+
+    }
+
 }

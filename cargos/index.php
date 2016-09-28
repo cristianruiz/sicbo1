@@ -250,7 +250,7 @@ if (isset($_POST['btnEditaPac'])) {
 			    			<select id="cboTipCuenta" name="cboTipCuenta" class="form-control input fuente_btn">
 			    				<option>TIPO CUENTA</option>
 			    			</select>
-			    			<input type="text" id="txtnroCta" name="txtnroCta" onkeypress="return isNumber(event)" placeholder="N° Cuenta" class="form-control input" style="width: 150px;"></input>
+			    			<input type="text" id="txtnroCta" name="txtnroCta" onkeypress="return isNumber(event)" value="0" placeholder="N° Cuenta" class="form-control input" style="width: 150px;"></input>
 			    		</div>
 			    		<br><br>
 			    		<div class="form-group">

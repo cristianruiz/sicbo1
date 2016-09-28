@@ -17,7 +17,9 @@ class Ult_oa extends ULTOAMySqlDAO{
         $ult->mES = $mes;
         $ult->aNO = $ano;
         $ult->nUMERO = $numero;
+
         $utlMy->insert($ult);
+
         if (($ult->id)>0){
             return true;
         } else {

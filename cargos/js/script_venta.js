@@ -635,7 +635,7 @@ $(document).ready(function () {
 
     $('#cboFinan').change(function () {
         codfin = $('#cboFinan').val();
-        alert(codfin);
+        //alert(codfin);
     });
 //});
 
@@ -645,15 +645,28 @@ $(document).ready(function () {
 //obtiene ultimo nro de cargo por seccion
     $('#btnGuargaCargo').on("click",function () {
         //toastr.success('Cargo guardado!');
-        var cod_sec = $('#txtcodsec').val();
+        var cod_sec = parseInt($('#txtcodsec').val());
         var fecha = new Date;
         var ano = fecha.getFullYear();
-        var mes = parseInt(fecha.getMonth())+2;
+        var mes = parseInt(fecha.getMonth())+1;
         var globalData;
         var ultimo;
         var nuevo;
         var nroNuevo;
         var id;
+        var periodo = parseInt(mes.toString()+ ano.toString());
+        var hora = fecha.getHours();
+        var minuto = fecha.getMinutes();
+        var nrofi = $('#txtnroCta').val();
+        var rutfin = $('#cboFinan').val();
+        var rutpac = $('#txtRutNum3').val();
+        var tipopac = 0;
+        var tipo = 'AH';
+        var tipopago = 'CBO';
+        var idtoth = 0;
+        var fecha2 = $('#txtfecha').val();
+        var action2 = 'grabaCargo'
+        //console.log(perido);
 
         $.ajax({
             type: 'GET',
@@ -671,6 +684,7 @@ $(document).ready(function () {
 
                     alert('el ID es: '+ id + 'El ultimo cargo es: '+ultimo + 'El NUEVO cargo es: '+nuevo);
                     updUltimo();
+                    grabaCabecera();
 
                 }else {
                     console.log('es primer cargo del mes');
@@ -686,6 +700,8 @@ $(document).ready(function () {
             nroNuevo = window.nuevo;
             window.id = id;
             id=window.id;
+            var arreglo = [action2,cod_sec,nuevo,periodo,fecha2,nrofi,hora,minuto,rutfin,rutpac,tipopac,tipo,tipopago,idtoth];
+            console.log(arreglo);
         });
 
         function updUltimo() {
@@ -716,8 +732,24 @@ $(document).ready(function () {
                 }
             });
         }
-    });
 
+        //- - - funcion que guarda la CABECERA DEL CARGO - - -
+
+        function grabaCabecera() {
+
+            $.ajax({
+                type: 'GET',
+                data: {action:action2,cod_sec:cod_sec,nro_oa:nuevo,periodo:periodo,fecha:fecha2,nro_fi:nrofi,hora:hora,min:minuto,rut_fin:rutfin,rut_pac:rutpac,tipo_pac:tipopac,tipo:tipo,tipo_pago:tipopago,idtoth:idtoth},
+                url: '../common/oa_cargo.php',
+                success: function () {
+                    toastr.success('Cargo guardado exitosamente');
+                },
+                error: function () {
+                    toastr.error('Error al guardar cargo');
+                }
+            });
+        }
+    });
 
 
     //- - - - - boton anular - - - - - - - -  - - - - - - - -
@@ -739,12 +771,13 @@ $(document).ready(function () {
     });
     //- - - - - - - - - - -  - - - - - - - - - - - - - - -- - - - - - - -
 
+    //- - - - Guardar paciente - - - - - -
     $('#btnokPac').on('click',function () {
         //alert('ok');
         var data = $('#form2').serializeArray();
 
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '../common/oa_cargo.php',
             data: data,
             dataType: 'json',
