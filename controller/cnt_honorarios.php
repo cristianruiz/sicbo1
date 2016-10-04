@@ -196,7 +196,7 @@ GROUP BY
 
 ) x
 group by x.receptorhonorario,x.formula";*/
-		$sql="select rutrazonsocial,formula,sum(valor)
+		$sql="select rutrazonsocial as receptorhonorario,formula,sum(valor) as total 
 from hm_honorarioconsolidado
 where idhonorariosicbo=".$this->idhonorariosicbo."
 group by rutrazonsocial,formula";
