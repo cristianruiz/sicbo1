@@ -4,7 +4,22 @@ include('../drivers/hm_honorariosicbo.php');
 include('../drivers/drv_personanatural.php');
 include('../drivers/sociedades.php');
 //include('../controller/cnt_honorarios.php');
-
+function agregar_dv($_rol) {
+	/* Bonus: remuevo los ceros del comienzo. */
+	while($_rol[0] == "0") {
+		$_rol = substr($_rol, 1);
+	}
+	$factor = 2;
+	$suma = 0;
+	for($i = strlen($_rol) - 1; $i >= 0; $i--) {
+		$suma += $factor * $_rol[$i];
+		$factor = $factor % 7 == 0 ? 2 : $factor + 1;
+	}
+	$dv = 11 - $suma % 11;
+	/* Por alguna razón me daba que 11 % 11 = 11. Esto lo resuelve. */
+	$dv = $dv == 11 ? 0 : ($dv == 10 ? "K" : $dv);
+	return $_rol . "-" . $dv;
+}
 $obj = json_decode($_GET["parametros"]);
 //error_log(print_r($obj),true);
 $action=$obj->action;
@@ -146,7 +161,7 @@ switch ($action) {
 		$i=2;
 		foreach($arr as &$t){
 			$objPHPExcel->setActiveSheetIndex(0)
-			->setCellValue('A'.$i, $t["receptorhonorario"])
+			->setCellValue('A'.$i, agregar_dv($t["receptorhonorario"]))
 			->setCellValue('B'.$i, $t["formula"])
 			->setCellValue('C'.$i, $t["total"]);
 			$i++;

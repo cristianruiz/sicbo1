@@ -50,7 +50,7 @@ class hm_honorariosicbo extends HmHonorariossicboMySqlDAO{
 			
 				break;
 			case 'SEPTIEMBRE':
-				$this->periodo='10'.$this->ano;
+				$this->periodo='9'.$this->ano;
 					
 				break;
 			case 'OCTUBRE':
