@@ -4,6 +4,7 @@ include ('../drivers/pacientes.php');
 include ('../controller/cnt_ult_oa.php');
 include ('../drivers/drv_ult_oa.php');
 include ('../drivers/drv_oa.php');
+include ('../controller/cnt_cargos.php');
 
 $p = new  MaePaciente();
 $objPac = new  Pacientes();
@@ -38,10 +39,6 @@ switch ($action){
         $res = $objUoa->insertUltimo($cod_sec,$mes,$ano,$nroNuevo);
         break;
     case 'grabaCargo':
-        error_reporting(E_ALL);
-        ini_set('display_errors', TRUE);
-        ini_set('display_startup_errors', TRUE);
-
         $cod_sec = $_GET['cod_sec'];
         $nro_oa = $_GET['nro_oa'];
         $periodo = $_GET['periodo'];
@@ -56,9 +53,32 @@ switch ($action){
         $tipo_pago = $_GET['tipo_pago'];
         $idtoth = $_GET['idtoth'];
         $objOa = new  O_a();
-        $res = $objOa->insertCabecera($cod_sec,$nro_oa,$periodo,$fecha,$nro_fi,$hora,$minuto,$rut_fin,$rut_pac,$tipo_pac,$tipo,$tipo_pago,$idtoth);
-        //$objCargo = new  Cargos_controller();
-        //$res = $objCargo->insertCab_oa($cod_sec,$nro_oa,$periodo,$fecha,$nro_fi,$hora,$minuto,$rut_fin,$rut_pac,$tipo_pac,$tipo,$tipo_pago,$idtoth);
+        //$res = $objOa->insertCabecera($cod_sec,$nro_oa,$periodo,$fecha,$nro_fi,$hora,$minuto,$rut_fin,$rut_pac,$tipo_pac,$tipo,$tipo_pago,$idtoth);
+        echo $objOa->insertCabecera($cod_sec,$nro_oa,$periodo,$fecha,$nro_fi,$hora,$minuto,$rut_fin,$rut_pac,$tipo_pac,$tipo,$tipo_pago,$idtoth);
+        break;
+    case 'grabaDet_ins':
+        error_reporting(E_ALL);
+        ini_set('display_errors', TRUE);
+        ini_set('display_startup_errors', TRUE);
+
+        $cod_sec = $_GET['cod_sec'];
+        $nro_oa = $_GET['nro_oa'];
+        $periodo = $_GET['periodo'];
+        $cod_det = $_GET['cod_det'];
+        $tipo_det = $_GET['tipo_det'];
+        $punit = $_GET['p_unit'];
+        $cant = $_GET['cantidad'];
+        $recargo = $_GET['recargo'];
+        $folio = $_GET['folio'];
+        $objOa2 = new O_a();
+        $res2 = $objOa2->insertDetSer($cod_sec,$nro_oa,$periodo,$cod_det,$tipo_det,$punit,$cant,$recargo,$folio);
+        break;
+    case 'buscaFolio':
+        $cod_sec = $_GET['cod_sec'];
+        $nro_oa = $_GET['nro_oa'];
+        $periodo = $_GET['periodo'];
+        $objOa3 = new Cargos_controller();
+        echo $objOa3->getFolio($cod_sec,$nro_oa,$periodo);
         break;
     default:
         break;

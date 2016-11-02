@@ -81,6 +81,23 @@ class Cargos_controller extends ZoaCargoMySqlDAO{
         return(json_encode($ret));
     }
 
+    public function getFolio($cod_sec,$nro_oa,$periodo){
+
+        $sql = ' SELECT * FROM zoa_cargo WHERE codigoseccion='.$cod_sec.' AND nrocargo='.$nro_oa.' AND periodo='.$periodo.' ';
+        $sqlQuery = new  SqlQuery($sql);
+
+        $arr = $this->execute($sqlQuery);$ret = Array();
+
+        foreach ($arr as $t) {
+            $f = array(
+                'folio'=>$t['folio']
+            );
+            array_push($ret,$f);
+        }
+        //echo json_encode($ret);
+        return(json_encode($ret));
+    }
+
     public function insertCab_oa($cod_sec,$nro_oa,$periodo,$fecha,$nro_fi,$hora,$minuto,$rut_fin,$rut_pac,$tipo_pac,$tipo,$tipo_pag,$idtoth){
         error_reporting(E_ALL);
         ini_set('display_errors', TRUE);
@@ -99,7 +116,5 @@ class Cargos_controller extends ZoaCargoMySqlDAO{
         }else{
             echo 'mal';
         }
-
     }
-
 }

@@ -18,15 +18,16 @@ class O_a extends ZoaCargoMySqlDAO{
         $oa->idtoth = $idtoth;
 
         $oaMy->insert($oa);
-
         if (($oa->folio)>0){
-            return true;
+            $folio = $oa->folio;
+            return $folio;
         } else {
-            return false;
+            //return false;
+            return(print_r('mal'));
         }
     }
 
-    public function insertDetalle($cod_sec,$nro_oa,$periodo,$cod_det,$tipo_det,$p_unit,$cantidad,$recargo,$folio_cargo){
+    public function insertDetSer($cod_sec,$nro_oa,$periodo,$cod_det,$tipo_det,$p_unit,$cantidad,$recargo,$folio_cargo){
         $oa_det = new  ZoaDetallecargo();
         $oa_detMy = new  ZoaDetallecargoMySqlDAO();
         $oa_det->codigoseccion = $cod_sec;
@@ -47,4 +48,5 @@ class O_a extends ZoaCargoMySqlDAO{
             return false;
         }
     }
+
 }

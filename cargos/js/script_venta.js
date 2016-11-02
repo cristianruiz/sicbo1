@@ -91,30 +91,6 @@ function checkRut(rut) {
 }
 //--------------------------------------------------------------------------------
 
-//---------------------------------------------------------------------------
-
-$(document).ready(function(){
-    $('#btnbuscaPac').on("click",function(){
-        var valor = $('#txtRutNum3').val();
-        var boton = $('#btnbuscaPac');
-        boton.data('user', valor);
-        resultado.text(boton.data('user'));
-    });
-});
-
-//---------------------------------------------------------------------------
-
-//-------------Evento al dar boton aceptar en modal medicos-------------------
-$(document).ready(function(){
-    $('#btnModalOk').on("click",function() {
-        var medico = $('#txtNomMed2').val();
-        $('#txtNomMed').val(medico);
-        $('#myModal').modal('hide');
-    }); 
-});
-
-//------------------------------------------------------------------------
-
 /*---------------------Textbox codigo servicios--------------- -------*/
 $(document).keyup(function (e) {
     if($("#txtcodserv").is(":focus") && (e.keyCode == 13)) {
@@ -157,7 +133,7 @@ $(document).keyup(function (e) {
 });
 
 //------------Evento al dar ENTER sobre txt cantidad de servicios---------
-
+/*
 $(function() {
     // Declaración del datasource
     var dataGrilla = [];
@@ -232,7 +208,7 @@ $(function() {
         }
     });
 });
-
+*/
 //----------------------------------------------------------------------
 
 //------------Evento al dar ENTER sobre txt codigo de INSUMOS---------
@@ -620,6 +596,8 @@ function cargagrilla(){
 $(document).ready(function () {
     var codrol = 1;
     var codfin;
+    var dataGrilla = [];
+    var row2 = {};
 
     //MODAL PROFESIONALES
     $("#cboRolProf").on('change', function (event) {
@@ -637,7 +615,90 @@ $(document).ready(function () {
         codfin = $('#cboFinan').val();
         //alert(codfin);
     });
-//});
+
+    $(document).keyup(function (e) {
+        if ($("#txtprecio").is(":focus") && (e.keyCode == 13)) {
+            $('#txtCantServ').focus();
+        }
+    });
+
+//------------Evento al dar ENTER sobre txt cantidad de servicios---------
+
+    $(function() {
+        // Declaración del datasource
+        //var dataGrilla = [];
+
+        var source = {
+            localdata: dataGrilla,
+            datatype: "array"
+        };
+
+        // Creación del widget
+        $("#jqxgrid").jqxGrid({
+            width: 900,
+            source: source,
+            height: 200,
+            columns: [
+                { text: 'CODIGO', datafield: 'colcodigos', width: 100 },
+                { text: 'PRESTACION', datafield: 'colnombres', cellsformat: 'D',width: 500 },
+                { text: 'CANTIDAD', datafield: 'colcantidades', width: 80 },
+                { text: 'PRECIO', datafield: 'colprecios', width: 80, cellsalign: 'right' },
+                { text: 'TOTAL', datafield: 'coltotales', width: 100, cellsalign: 'right', cellsformat: 'c2' },
+            ]
+        });
+
+        $(document).keyup(function (e) {
+            if ($("#txtCantServ").is(":focus") && (e.keyCode == 13)) {
+                var cant = $('#txtCantServ').val();
+                var punit = $('#txtprecio').val();
+                if (cant > 0) {
+
+                    var codigo = $('#txtcodserv').val();
+                    var nombre = $('#txtNomServ').val();
+                    var total = punit * cant;
+
+                    var codigos = [codigo];
+                    var nombres = [nombre];
+                    var cantidades = [cant];
+                    var precios = [punit];
+                    var totales = [total];
+
+                    var row = {};
+                    row.colcodigos = codigos;
+                    row.colnombres = nombres;
+                    row.colcantidades = cantidades;
+                    row.colprecios = precios;
+                    row.coltotales = totales;
+                    dataGrilla.push(row);
+                    row2=row;
+
+                    //console.log(dataGrilla);
+
+                    // Actualizar el data source
+                    $("#jqxgrid").jqxGrid({ source: source });
+
+                    $('#txtcodserv').val('');
+                    $('#txtNomServ').val('');
+                    $('#txtprecio').val('');
+                    $('#txtCantServ').val('');
+                    $('#txtcodserv').focus();
+                }else{
+                    //toastr.warning('Ingrese cantidad.');
+                }
+            }
+        });
+
+        // delete row.
+        $("#btnEliminaServ").bind('click', function () {
+            var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
+            var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount;
+            if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+                var id = $("#jqxgrid").jqxGrid('getrowid', selectedrowindex);
+                var commit = $("#jqxgrid").jqxGrid('deleterow', id);
+                $('#txtcodserv').focus();
+            }
+        });
+    });
 
 
 // - - - S E C C I O N  B O T O N E S   I N F E R I O R E S- - -  - - -  -
@@ -657,7 +718,14 @@ $(document).ready(function () {
         var periodo = parseInt(mes.toString()+ ano.toString());
         var hora = fecha.getHours();
         var minuto = fecha.getMinutes();
-        var nrofi = $('#txtnroCta').val();
+        var nrofi;
+
+        if ($('#txtnroCta').val('')){
+            nrofi = 0;
+        }else {
+            nrofi = $('#txtnroCta').val();
+        }
+
         var rutfin = $('#cboFinan').val();
         var rutpac = $('#txtRutNum3').val();
         var tipopac = 0;
@@ -666,7 +734,18 @@ $(document).ready(function () {
         var idtoth = 0;
         var fecha2 = $('#txtfecha').val();
         var action2 = 'grabaCargo'
-        //console.log(perido);
+        var tipoI = 'II';
+        var folio;
+        var folio2;
+        var item2;
+        var parsedDat;
+        var p_unit_ins = 0;
+        var cant_ins = 0;
+        var cod_det_ins2 = 0;
+        var arr = [];
+        var parsedCod = 0;
+        var parsedCant = 0;
+        var parsedPrecio = 0;
 
         $.ajax({
             type: 'GET',
@@ -682,13 +761,17 @@ $(document).ready(function () {
                     nuevo = parseInt(ultimo)+1;
                     id = parsedData[0].id;
 
-                    alert('el ID es: '+ id + 'El ultimo cargo es: '+ultimo + 'El NUEVO cargo es: '+nuevo);
+                    //alert('el ID es: '+ id + 'El ultimo cargo es: '+ultimo + 'El NUEVO cargo es: '+nuevo);
                     updUltimo();
                     grabaCabecera();
+                    //getFolio();
+                    //grabaDetServ();
 
                 }else {
                     console.log('es primer cargo del mes');
                     insertUlt_oa();
+                    nuevo = 1;
+                    grabaCabecera();
                 }
 
             },
@@ -700,8 +783,6 @@ $(document).ready(function () {
             nroNuevo = window.nuevo;
             window.id = id;
             id=window.id;
-            var arreglo = [action2,cod_sec,nuevo,periodo,fecha2,nrofi,hora,minuto,rutfin,rutpac,tipopac,tipo,tipopago,idtoth];
-            console.log(arreglo);
         });
 
         function updUltimo() {
@@ -725,7 +806,7 @@ $(document).ready(function () {
                 data: {action: 'insertUltimo', cod_sec: cod_sec,mes: mes, ano: ano, nuevo:nuevo},
                 url: '../common/oa_cargo.php',
                 success: function () {
-                    alert('Se agrego nuevo registro');
+                    //alert('Se agrego nuevo registro');
                 },
                 error: function () {
                     alert('Error peticion Ajax al actualizar ULT_OA.');
@@ -741,12 +822,42 @@ $(document).ready(function () {
                 type: 'GET',
                 data: {action:action2,cod_sec:cod_sec,nro_oa:nuevo,periodo:periodo,fecha:fecha2,nro_fi:nrofi,hora:hora,min:minuto,rut_fin:rutfin,rut_pac:rutpac,tipo_pac:tipopac,tipo:tipo,tipo_pago:tipopago,idtoth:idtoth},
                 url: '../common/oa_cargo.php',
-                success: function () {
-                    toastr.success('Cargo guardado exitosamente');
+                success: function (da) {
+                    folio = da;
                 },
                 error: function () {
                     toastr.error('Error al guardar cargo');
                 }
+            }).done(function () {
+                window.folio = folio;
+                folio2 = window.folio;
+
+                var i = 0;
+
+                for(var arreglo in dataGrilla) {
+                    cod_det_ins2 = dataGrilla[i].colcodigos;
+                    cant_ins = dataGrilla[i].colcantidades;
+                    p_unit_ins = dataGrilla[i].colprecios;
+                    console.log(arreglo);
+                    parsedCod = parseInt(cod_det_ins2);
+                    parsedCant = parseInt(cant_ins);
+                    parsedPrecio = parseInt(p_unit_ins);
+
+                    $.ajax({
+                        type: 'GET',
+                        data: {action: 'grabaDet_ins',cod_sec:cod_sec,nro_oa:nuevo,periodo:periodo,cod_det: parsedCod,tipo_det:tipoI,p_unit: parsedPrecio,cantidad: parsedCant,recargo:0,folio:window.folio},
+                        url: '../common/oa_cargo.php',
+                        success: function () {
+                            //toastr.success('Detalle guardado ok');
+                        },
+                        error: function () {
+                            toastr.error('Error al guardar detalle servicios');
+                        }
+                    });
+                    i++;
+
+                }
+                toastr.success('Cargo guardado exitosamente');
             });
         }
     });
@@ -791,7 +902,31 @@ $(document).ready(function () {
 
         console.log(data);
     });
-});
+
+    $('#btnImprime').on("click",function () {
+        console.log(row);
+    });
+
+    //---------------------------------------------------------------------------
+
+    $('#btnbuscaPac').on("click",function(){
+        var valor = $('#txtRutNum3').val();
+        var boton = $('#btnbuscaPac');
+        boton.data('user', valor);
+        resultado.text(boton.data('user'));
+    });
+
+
+//-------------Evento al dar boton aceptar en modal medicos-------------------
+
+    $('#btnModalOk').on("click",function() {
+        var medico = $('#txtNomMed2').val();
+        $('#txtNomMed').val(medico);
+        $('#myModal').modal('hide');
+    });
+
+
+}); // - - -  Fin document READY
 
 $(document).on('show.bs.modal','#myModal2', function () {
     $('#jqxInput2').focus();
