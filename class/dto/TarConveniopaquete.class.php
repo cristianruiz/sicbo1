@@ -1,14 +1,0 @@
-<?php
-	/**
-	 * Object represents table 'tar_conveniopaquete'
-	 *
-     	 * @author: http://phpdao.com
-     	 * @date: 2016-09-14 18:02	 
-	 */
-	class TarConveniopaquete{
-		
-		var $idgrupopaquete;
-		var $idconvenio;
-		
-	}
-?>
