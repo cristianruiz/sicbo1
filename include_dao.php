@@ -145,6 +145,10 @@
 	require_once('class/dto/OaCargo.class.php');
 	require_once('class/mysql/OaCargoMySqlDAO.class.php');
 	require_once('class/mysql/ext/OaCargoMySqlExtDAO.class.php');
+	require_once('class/dao/OaCargoprofesionalesDAO.class.php');
+	require_once('class/dto/OaCargoprofesionale.class.php');
+	require_once('class/mysql/OaCargoprofesionalesMySqlDAO.class.php');
+	require_once('class/mysql/ext/OaCargoprofesionalesMySqlExtDAO.class.php');
 	require_once('class/dao/OaDetalleinsumosDAO.class.php');
 	require_once('class/dto/OaDetalleinsumo.class.php');
 	require_once('class/mysql/OaDetalleinsumosMySqlDAO.class.php');
