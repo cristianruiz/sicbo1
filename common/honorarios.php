@@ -149,6 +149,7 @@ switch ($action) {
 		->setKeywords("office 2007 openxml php")
 		->setCategory("Test result file");
 		
+		
 		// Add some data
 		$objPHPExcel->setActiveSheetIndex(0)
 		->setCellValue('A1', 'RUT RECEPTOR')
@@ -169,7 +170,15 @@ switch ($action) {
 			
 			
 		
-		$objPHPExcel->getActiveSheet()->setTitle('Reporte');
+		$objPHPExcel->getActiveSheet()->setTitle('Folio');
+		
+		//planilla con impto
+		$objPHPExcel->createSheet(1);
+		$objPHPExcel->setActiveSheetIndex(1)
+		->setCellValue('A1', "holaaa");
+		$objPHPExcel->getActiveSheet()->setTitle('PLANILLA C.IMPTO');
+		//==================
+		
 		
 		
 		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
